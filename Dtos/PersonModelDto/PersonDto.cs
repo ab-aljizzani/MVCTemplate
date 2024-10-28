@@ -1,10 +1,11 @@
 using System;
+using ClinicApi.Data.PersonalImagesModelDto;
+using ClinicApi.Dtos.Entity;
 
-namespace ClinicApi.Models.PersonModel;
+namespace ClinicApi.Dtos.PersonModelDto;
 
-public class Person
+public class PersonDto
 {
-    public int Id { get; set; }
     public string NationalId { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;
     public string FullArabicName { get; set; } = string.Empty;

@@ -1,6 +1,7 @@
 using System;
 using ClinicApi.Services.Entity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 namespace ClinicApi.Data;
 
 public class TokenRoles
@@ -13,6 +14,7 @@ public class TokenRoles
     }
     public Dictionary<string, object> GetRoleToken()
     {
+
         var userClaims = _httpContextAccessor.HttpContext?.User.Claims.ToList();
         var userRoleType = userClaims.Select(u => u.Type).ToList();
         var userRoleValue = userClaims.Select(u => u.Value).ToList();
@@ -22,5 +24,6 @@ public class TokenRoles
             newTokenRole.Add(userRoleType[i], userRoleValue[i]);
         }
         return newTokenRole;
+
     }
 }

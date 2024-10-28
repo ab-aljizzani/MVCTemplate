@@ -3,6 +3,7 @@ using AutoMapper;
 using ClinicApi.Data.PersonalImagesModelDto;
 using ClinicApi.Dtos.Entity;
 using ClinicApi.Dtos.PersonalImagesModelDto;
+using ClinicApi.Dtos.PersonModelDto;
 using ClinicApi.Dtos.PortalUserDto;
 using ClinicApi.Dtos.RoleDto;
 using ClinicApi.Dtos.RoleDto.Update;
@@ -10,6 +11,7 @@ using ClinicApi.Dtos.ZoneModelDto;
 using ClinicApi.Dtos.ZoneModelDto.Update;
 using ClinicApi.Models.Entity;
 using ClinicApi.Models.PersonalImagesModel;
+using ClinicApi.Models.PersonModel;
 using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.Role;
 using ClinicApi.Models.ZoneModel;
@@ -23,10 +25,10 @@ public class AutoMapperProfile : Profile
         CreateMap<Entity, GetEntityDto>();
         CreateMap<AddEntityDto, Entity>();
         CreateMap<UpdateEntityDto, Entity>();
-        CreateMap<AddDepartmentDto, Department>();
+
         CreateMap<AddDepartmentDto, Department>();
         CreateMap<UpdateDepartmentDot, Department>();
-        // CreateMap<AddEntityDto, Entity>();
+
         CreateMap<Department, AddDepartmentDto>();
         CreateMap<Department, DepartmentDto>();
 
@@ -44,8 +46,9 @@ public class AutoMapperProfile : Profile
         CreateMap<PersonalImg, PersonalImgDto>();
         CreateMap<PersonalImgDto, PersonalImg>();
         CreateMap<UpdatePersonalImgDto, PersonalImg>();
-        // CreateMap<EntityType, AddEntityTypeDto>();
-        // CreateMap<AddEntityTypeDto, EntityType>();
 
+        CreateMap<Person, PersonDto>();
+        CreateMap<PersonDto, Person>();
+        CreateMap<UpdatePersonDto, Person>();
     }
 }

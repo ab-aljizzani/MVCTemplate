@@ -1,8 +1,8 @@
 using System;
 
-namespace ClinicApi.Models.PersonModel;
+namespace ClinicApi.Dtos.PersonModelDto;
 
-public class Person
+public class UpdatePersonDto
 {
     public int Id { get; set; }
     public string NationalId { get; set; } = string.Empty;

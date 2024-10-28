@@ -1,0 +1,57 @@
+using ClinicApi.Data;
+using ClinicApi.Dtos.PersonModelDto;
+using ClinicApi.Services.PersonServices;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace ClinicApi.Controllers
+{
+    [Authorize]
+    [Route("api/[controller]")]
+    [ApiController]
+    public class PersonController : ControllerBase
+    {
+        private readonly IPersonService _personSerice;
+        private readonly TokenRoles _tokenRoles;
+        public PersonController(IPersonService personSerice, TokenRoles tokenRoles)
+        {
+            _personSerice = personSerice;
+            _tokenRoles = tokenRoles;
+        }
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<PersonDto>>> Get()
+        {
+            return Ok(await _personSerice.GetAllPerson());
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PersonDto>> GetSingle(int id)
+        {
+            return Ok(await _personSerice.GetPersonByID(id));
+        }
+        [HttpPost]
+        public async Task<ActionResult<List<PersonDto>>> AddnewPerson(PersonDto newPerson)
+        {
+            var userEntity = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "EntityID");
+            if (int.Parse(userEntity.Value.ToString()) != newPerson.EntityId)
+                return BadRequest("Person Entity Must Match With Your Entity");
+            return Ok(await _personSerice.AddNewPerson(newPerson));
+        }
+        [HttpPut]
+        public async Task<ActionResult<PersonDto>> UpdatePerson(UpdatePersonDto updatePerson)
+        {
+            var userEntity = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "EntityID");
+            if (int.Parse(userEntity.Value.ToString()) != updatePerson.EntityId)
+                return BadRequest("Person Entity Must Match With Your Entity");
+            var response = await _personSerice.UpdatePerson(updatePerson);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<PersonDto>> DeletePerson(int id)
+        {
+            return Ok(await _personSerice.DeletePerson(id));
+        }
+    }
+}
