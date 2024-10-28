@@ -14,11 +14,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Models\Entity\Department.cs" />
-    <Compile Include="Models\Entity\Entity.cs" />
-    <Compile Include="Models\PortalUser\PortalUser.cs" />
-    <Compile Include="Models\Reponse\ServiceResponse.cs" />
-    <Compile Include="Models\Role\Role.cs" />
+    <Compile Include="Models\EntityModel\Department.cs" />
+    <Compile Include="Models\EntityModel\Entity.cs" />
+    <Compile Include="Models\PersonalImagesModel\PersonalImg.cs" />
+    <Compile Include="Models\PersonModel\Person.cs" />
+    <Compile Include="Models\PortalUserModel\PortalUser.cs" />
+    <Compile Include="Models\ReponseModel\ServiceResponse.cs" />
+    <Compile Include="Models\RoleModel\Role.cs" />
+    <Compile Include="Models\ZoneModel\Zone.cs" />
   </ItemGroup>
 
   <ItemGroup>

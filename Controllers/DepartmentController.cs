@@ -1,9 +1,11 @@
 using System.Security.Claims;
+using ClinicApi.Data;
 using ClinicApi.Dtos.Entity;
 using ClinicApi.Services.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ClinicApi.Controllers
 {
@@ -13,10 +15,12 @@ namespace ClinicApi.Controllers
     public class DepartmentController : ControllerBase
     {
         private readonly IEntityService _entityService;
+        private readonly TokenRoles _tokenRoles;
 
-        public DepartmentController(IEntityService entityService)
+        public DepartmentController(IEntityService entityService, TokenRoles tokenRoles)
         {
             _entityService = entityService;
+            _tokenRoles = tokenRoles;
         }
         [HttpGet("GetAll")]
         public async Task<ActionResult<List<DepartmentDto>>> Get()
@@ -28,17 +32,12 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _entityService.GetDepartmentByID(id));
         }
-        [HttpGet]
-        public ActionResult<string> GetUserRoles()
-        {
-            var userClaims = User.FindAll(ClaimTypes.Role);
-            var userRole = userClaims.Select(u => u.ValueType).ToList();
-            return Ok(userRole);
-        }
         [HttpPost]
         public async Task<ActionResult<List<GetEntityDto>>> AddNewDepartment(AddDepartmentDto newDepartment)
         {
-            // if(GetUserRoles().)
+            var userEntity = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "EntityID");
+            if (int.Parse(userEntity.Value.ToString()) != newDepartment.EntityId)
+                return BadRequest("Entity Must Be The Same As You");
             return Ok(await _entityService.AddNewDepartment(newDepartment));
         }
         [HttpPut]

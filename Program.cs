@@ -1,7 +1,9 @@
 
 using ClinicApi.Data;
 using ClinicApi.Services.Entity;
+using ClinicApi.Services.PersonalImagesServices;
 using ClinicApi.Services.RoleServices;
+using ClinicApi.Services.ZoneServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -37,6 +39,8 @@ namespace ClinicApi
             builder.Services.AddScoped<IEntityService, EntityService>();
             builder.Services.AddScoped<IRoleService, RoleService>();
             builder.Services.AddScoped<IAuthRepositery, AuthRepositery>();
+            builder.Services.AddScoped<IZoneSerice, ZoneService>();
+            builder.Services.AddScoped<IPersonalImages, PersonalImages>();
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters

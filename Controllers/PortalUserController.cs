@@ -14,13 +14,11 @@ namespace ClinicApi.Controllers
     {
         private readonly IAuthRepositery _authRepo;
         private readonly IMapper _mapper;
-        private readonly DataContext _context;
 
-        public PortalUserController(IAuthRepositery authRepo, IMapper mapper, DataContext context)
+        public PortalUserController(IAuthRepositery authRepo, IMapper mapper)
         {
             _authRepo = authRepo;
             _mapper = mapper;
-            _context = context;
         }
         [HttpPost("Login")]
         public async Task<ActionResult<ServiceResponse<int>>> Login(LoginDto request)

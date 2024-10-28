@@ -18,6 +18,4 @@ public interface IEntityService
     Task<ServiceResponse<List<GetEntityDto>>> AddNewDepartment(AddDepartmentDto newDepartment);
     Task<ServiceResponse<GetEntityDto>> UpdateDepartment(UpdateDepartmentDot updateDepartment);
     Task<ServiceResponse<GetEntityDto>> DeleteDepartment(int id);
-
-    // bool UserAuth();
 }

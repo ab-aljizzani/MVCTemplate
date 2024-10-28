@@ -91,14 +91,13 @@ public class AuthRepositery : IAuthRepositery
     {
         var claims = new List<Claim>{
                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
-                new Claim(ClaimTypes.Name,user.Username),
-                new Claim(ClaimTypes.Role,user.UserType.ToString()),
-                new Claim(ClaimTypes.Name,user.EntityId.ToString()),
-                new Claim(ClaimTypes.Role,user.RoleId.ToString()),
-                new Claim(ClaimTypes.Name,user.LastLogin.ToString()),
-                new Claim(ClaimTypes.Name,user.PasswordExpires.ToString()),
-                new Claim(ClaimTypes.Name,user.Status),
-                new Claim(ClaimTypes.Role,user.Status),
+                new Claim("Username",user.Username),
+                new Claim("UserType",user.UserType.ToString()),
+                new Claim("EntityID",user.EntityId.ToString()),
+                new Claim("RoleId",user.RoleId.ToString()),
+                new Claim("LastLogin",user.LastLogin.ToString()),
+                new Claim("PasswordExpire",user.PasswordExpires.ToString()),
+                new Claim("Status",user.Status),
             };
         var appSettingsToken = _configuration.GetSection("AppSettings:Token").Value;
         if (appSettingsToken is null)

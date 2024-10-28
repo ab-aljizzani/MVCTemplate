@@ -32,13 +32,6 @@ public class EntityService : IEntityService
         var serviceResponse = new ServiceResponse<List<GetEntityDto>>();
         try
         {
-            // if (UserAuth() == false)
-            // {
-            //     serviceResponse.Success = false;
-            //     serviceResponse.Message = "User Not Authed";
-            // }
-            // else
-            // {
             var entity = await _context.Entity.FirstOrDefaultAsync(d => d.Id == newDepartment.EntityId);
             if (entity is null)
             {
@@ -49,7 +42,6 @@ public class EntityService : IEntityService
             var department = _mapper.Map<Department>(newDepartment);
             _context.Department.Add(department);
             await _context.SaveChangesAsync();
-            // }
         }
         catch (Exception ex)
         {
@@ -205,17 +197,4 @@ public class EntityService : IEntityService
         return serviceResponse;
     }
 
-    // public int GetUserId() => int.Parse(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-    // // public int GetUserRole() => int.Parse(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Name)!);
-    // public string GetUserType() => _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Name)!;
-    // public int GetUserEntityId() => int.Parse(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Name)!);
-    // public bool GetUserPassExpire() => bool.Parse(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Name)!);
-    // public string GetUserStatus() => _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Name)!;
-    // public bool UserAuth()
-    // {
-    //     var user = _context.PortalUser.FirstOrDefaultAsync(u => u.Id == GetUserId() && u.PasswordExpires == false && u.RoleId == GetUserRole() && u.EntityId == GetUserEntityId());
-    //     if (user != null)
-    //         return true;
-    //     return false;
-    // }
 }
