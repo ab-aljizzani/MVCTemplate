@@ -15,11 +15,13 @@ public class AuthRepositery : IAuthRepositery
 {
     private readonly DataContext _context;
     private readonly IConfiguration _configuration;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public AuthRepositery(DataContext context, IConfiguration configuration)
+    public AuthRepositery(DataContext context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
     {
         _context = context;
         _configuration = configuration;
+        _httpContextAccessor = httpContextAccessor;
     }
     public async Task<ServiceResponse<string>> Login(string username, string password)
     {
@@ -89,7 +91,14 @@ public class AuthRepositery : IAuthRepositery
     {
         var claims = new List<Claim>{
                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
-                new Claim(ClaimTypes.Name,user.Username)
+                new Claim(ClaimTypes.Name,user.Username),
+                new Claim(ClaimTypes.Role,user.UserType.ToString()),
+                new Claim(ClaimTypes.Name,user.EntityId.ToString()),
+                new Claim(ClaimTypes.Role,user.RoleId.ToString()),
+                new Claim(ClaimTypes.Name,user.LastLogin.ToString()),
+                new Claim(ClaimTypes.Name,user.PasswordExpires.ToString()),
+                new Claim(ClaimTypes.Name,user.Status),
+                new Claim(ClaimTypes.Role,user.Status),
             };
         var appSettingsToken = _configuration.GetSection("AppSettings:Token").Value;
         if (appSettingsToken is null)
@@ -110,4 +119,5 @@ public class AuthRepositery : IAuthRepositery
         return tokenHandler.WriteToken(token);
 
     }
+
 }

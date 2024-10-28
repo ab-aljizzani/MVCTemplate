@@ -1,3 +1,4 @@
+using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.PortalUserDto;
 using ClinicApi.Models.PortalUser;
@@ -12,10 +13,14 @@ namespace ClinicApi.Controllers
     public class PortalUserController : ControllerBase
     {
         private readonly IAuthRepositery _authRepo;
+        private readonly IMapper _mapper;
+        private readonly DataContext _context;
 
-        public PortalUserController(IAuthRepositery authRepo)
+        public PortalUserController(IAuthRepositery authRepo, IMapper mapper, DataContext context)
         {
             _authRepo = authRepo;
+            _mapper = mapper;
+            _context = context;
         }
         [HttpPost("Login")]
         public async Task<ActionResult<ServiceResponse<int>>> Login(LoginDto request)
@@ -30,18 +35,8 @@ namespace ClinicApi.Controllers
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<int>>> Register(PortalUserDto request)
         {
-            var response = await _authRepo.Register(new PortalUser
-            {
-                Username = request.Username,
-                UserType = request.UserType,
-                RoleId = request.RoleId,
-                Email = request.Email,
-                DateOfBirth = DateTime.Now,
-                PhoneNumber = request.PhoneNumber,
-                CreatedUser = DateTime.Now,
-                LoginAttemp = request.LoginAttemp,
-                UserExpires = request.UserExpires
-            }, request.Password);
+            var user = _mapper.Map<PortalUser>(request);
+            var response = await _authRepo.Register(user, request.Password);
             if (!response.Success)
             {
                 return BadRequest(response);

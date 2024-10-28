@@ -29,6 +29,7 @@ public class AutoMapperProfile : Profile
         CreateMap<UpdateRoleDto, Role>();
 
         CreateMap<PortalUser, PortalUserDto>();
+        CreateMap<PortalUserDto, PortalUser>();
         // CreateMap<EntityType, AddEntityTypeDto>();
         // CreateMap<AddEntityTypeDto, EntityType>();
 

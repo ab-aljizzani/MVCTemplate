@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using ClinicApi.Dtos.Entity;
 using ClinicApi.Services.Entity;
 using Microsoft.AspNetCore.Authorization;
@@ -27,9 +28,17 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _entityService.GetDepartmentByID(id));
         }
+        [HttpGet]
+        public ActionResult<string> GetUserRoles()
+        {
+            var userClaims = User.FindAll(ClaimTypes.Role);
+            var userRole = userClaims.Select(u => u.ValueType).ToList();
+            return Ok(userRole);
+        }
         [HttpPost]
         public async Task<ActionResult<List<GetEntityDto>>> AddNewDepartment(AddDepartmentDto newDepartment)
         {
+            // if(GetUserRoles().)
             return Ok(await _entityService.AddNewDepartment(newDepartment));
         }
         [HttpPut]

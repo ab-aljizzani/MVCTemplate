@@ -1,4 +1,7 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Reflection.Metadata.Ecma335;
+using System.Security.Claims;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.Entity;
@@ -6,6 +9,7 @@ using ClinicApi.Models.Entity;
 using ClinicApi.Models.Reponse;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace ClinicApi.Services.Entity;
 
@@ -13,18 +17,28 @@ public class EntityService : IEntityService
 {
     private readonly IMapper _mapper;
     private readonly DataContext _context;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public EntityService(IMapper mapper, DataContext context)
+    public EntityService(IMapper mapper, DataContext context, IHttpContextAccessor httpContextAccessor)
     {
         _mapper = mapper;
         _context = context;
+        _httpContextAccessor = httpContextAccessor;
     }
+
 
     public async Task<ServiceResponse<List<GetEntityDto>>> AddNewDepartment(AddDepartmentDto newDepartment)
     {
         var serviceResponse = new ServiceResponse<List<GetEntityDto>>();
         try
         {
+            // if (UserAuth() == false)
+            // {
+            //     serviceResponse.Success = false;
+            //     serviceResponse.Message = "User Not Authed";
+            // }
+            // else
+            // {
             var entity = await _context.Entity.FirstOrDefaultAsync(d => d.Id == newDepartment.EntityId);
             if (entity is null)
             {
@@ -35,6 +49,7 @@ public class EntityService : IEntityService
             var department = _mapper.Map<Department>(newDepartment);
             _context.Department.Add(department);
             await _context.SaveChangesAsync();
+            // }
         }
         catch (Exception ex)
         {
@@ -47,6 +62,7 @@ public class EntityService : IEntityService
     public async Task<ServiceResponse<List<GetEntityDto>>> AddNewEntity(AddEntityDto newEntity)
     {
         var serviceResponse = new ServiceResponse<List<GetEntityDto>>();
+
         var entity = _mapper.Map<Models.Entity.Entity>(newEntity);
         _context.Entity.Add(entity);
         _context.SaveChanges();
@@ -189,5 +205,17 @@ public class EntityService : IEntityService
         return serviceResponse;
     }
 
-
+    // public int GetUserId() => int.Parse(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+    // // public int GetUserRole() => int.Parse(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Name)!);
+    // public string GetUserType() => _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Name)!;
+    // public int GetUserEntityId() => int.Parse(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Name)!);
+    // public bool GetUserPassExpire() => bool.Parse(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Name)!);
+    // public string GetUserStatus() => _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Name)!;
+    // public bool UserAuth()
+    // {
+    //     var user = _context.PortalUser.FirstOrDefaultAsync(u => u.Id == GetUserId() && u.PasswordExpires == false && u.RoleId == GetUserRole() && u.EntityId == GetUserEntityId());
+    //     if (user != null)
+    //         return true;
+    //     return false;
+    // }
 }

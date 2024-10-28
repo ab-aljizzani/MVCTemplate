@@ -47,6 +47,7 @@ namespace ClinicApi
         ValidateAudience = false
     };
 });
+            builder.Services.AddHttpContextAccessor();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
