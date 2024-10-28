@@ -6,10 +6,7 @@ using ClinicApi.Dtos.PersonalImagesModelDto;
 using ClinicApi.Models.PersonalImagesModel;
 using ClinicApi.Models.Reponse;
 using Microsoft.EntityFrameworkCore;
-using System.IO;
-using System.Web;
-using System.Net.Http;
-using System.Net.Http.Headers;
+
 
 namespace ClinicApi.Services.PersonalImagesServices;
 
