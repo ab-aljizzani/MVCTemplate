@@ -24,6 +24,12 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _personSerice.GetAllPerson());
         }
+        [HttpGet("GetCount")]
+        public async Task<ActionResult<PersonDto>> GetCount()
+        {
+            var userEntity = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "EntityID");
+            return Ok(await _personSerice.GetPersonCountByEntityID(int.Parse(userEntity.Value.ToString())));
+        }
         [HttpGet("{id}")]
         public async Task<ActionResult<PersonDto>> GetSingle(int id)
         {

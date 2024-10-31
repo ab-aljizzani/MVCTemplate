@@ -1,6 +1,7 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using AutoMapper;
 using ClinicApi.Data;
@@ -137,6 +138,18 @@ public class EntityService : IEntityService
         }
         serviceResponse.Data = _mapper.Map<DepartmentDto>(dbContext);
         return serviceResponse;
+    }
+    public async Task<string> GetDepartmentCountByEntityID(int id)
+    {
+        var serviceResponse = new ServiceResponse<int>();
+        var dbContext = await _context.Department.Include(e => e.Entity).Where(e => e.EntityId == id).ToListAsync();
+        var count = dbContext.Count();
+        if (dbContext is null)
+        {
+            throw new Exception($"The Id '{id}'Is Not Founde...");
+        }
+
+        return count.ToString();
     }
 
     public async Task<ServiceResponse<GetEntityDto>> GetEntityByID(int id)

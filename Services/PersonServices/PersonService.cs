@@ -69,7 +69,17 @@ public class PersonService : IPersonService
         serviceResponse.Data = _mapper.Map<PersonDto>(dbContext);
         return serviceResponse;
     }
+    public async Task<string> GetPersonCountByEntityID(int id)
+    {
+        var dbContext = await _context.Person.Where(e => e.EntityId == id).ToListAsync();
+        var count = dbContext.Count();
+        if (dbContext is null)
+        {
+            throw new Exception($"The Id '{id}'Is Not Founde...");
+        }
 
+        return count.ToString();
+    }
     public async Task<ServiceResponse<PersonDto>> UpdatePerson(UpdatePersonDto updatePerson)
     {
         var serviceResponse = new ServiceResponse<PersonDto>();

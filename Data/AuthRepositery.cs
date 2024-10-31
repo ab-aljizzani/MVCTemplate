@@ -26,7 +26,7 @@ public class AuthRepositery : IAuthRepositery
     public async Task<ServiceResponse<string>> Login(string username, string password)
     {
         var response = new ServiceResponse<string>();
-        var user = await _context.PortalUser.FirstOrDefaultAsync(u => u.Username.ToLower().Equals(username.ToLower()));
+        var user = await _context.PortalUser.Include(u => u.Entity).FirstOrDefaultAsync(u => u.Username.ToLower().Equals(username.ToLower()));
         if (user is null)
         {
             response.Success = false;
@@ -89,11 +89,13 @@ public class AuthRepositery : IAuthRepositery
     }
     private string CreateToken(PortalUser user)
     {
+
         var claims = new List<Claim>{
                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
                 new Claim("Username",user.Username),
                 new Claim("UserType",user.UserType.ToString()),
                 new Claim("EntityID",user.EntityId.ToString()),
+                new Claim("Entity",user.Entity.EntityName.ToString()),
                 new Claim("RoleId",user.RoleId.ToString()),
                 new Claim("LastLogin",user.LastLogin.ToString()),
                 new Claim("PasswordExpire",user.PasswordExpires.ToString()),

@@ -28,7 +28,7 @@ namespace ClinicApi.Controllers
             {
                 return BadRequest(response);
             }
-            return Ok(response);
+            return Ok(response.Data);
         }
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<int>>> Register(PortalUserDto request)

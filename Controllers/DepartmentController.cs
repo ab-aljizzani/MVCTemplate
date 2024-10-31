@@ -32,6 +32,12 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _entityService.GetDepartmentByID(id));
         }
+        [HttpGet("GetCount")]
+        public async Task<ActionResult<DepartmentDto>> GetCount()
+        {
+            var userEntity = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "EntityID");
+            return Ok(await _entityService.GetDepartmentCountByEntityID(int.Parse(userEntity.Value.ToString())));
+        }
         [HttpPost]
         public async Task<ActionResult<List<GetEntityDto>>> AddNewDepartment(AddDepartmentDto newDepartment)
         {

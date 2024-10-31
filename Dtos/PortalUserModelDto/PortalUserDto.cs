@@ -1,5 +1,6 @@
 using System;
 using ClinicApi.Dtos.RoleDto;
+using ClinicApi.Models.Entity;
 
 namespace ClinicApi.Dtos.PortalUserDto;
 
@@ -12,6 +13,7 @@ public class PortalUserDto
     public DateTime DateOfBirth { get; set; }
     public string PhoneNumber { get; set; } = string.Empty;
     public string UserType { get; set; } = string.Empty;
+    public Models.Entity.Entity? Entity { get; set; }
     public int EntityId { get; set; }
     public int RoleId { get; set; }
     public string LoginAttemp { get; set; } = string.Empty;

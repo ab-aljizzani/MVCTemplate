@@ -1,4 +1,5 @@
 using System;
+using ClinicApi.Models.Entity;
 using ClinicApi.Models.Role;
 
 namespace ClinicApi.Models.PortalUser;
@@ -14,6 +15,7 @@ public class PortalUser
     public DateTime DateOfBirth { get; set; }
     public string PhoneNumber { get; set; } = string.Empty;
     public string UserType { get; set; } = string.Empty;
+    public Models.Entity.Entity? Entity { get; set; }
     public int EntityId { get; set; }
     public int RoleId { get; set; }
     public string LoginAttemp { get; set; } = string.Empty;
