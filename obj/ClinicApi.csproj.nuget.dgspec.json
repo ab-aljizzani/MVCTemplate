@@ -66,6 +66,10 @@
               "target": "Package",
               "version": "[8.0.10, )"
             },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.10, )"
@@ -87,6 +91,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "Stardust.Aadb2c.AuthenticationFilter": {
+              "target": "Package",
+              "version": "[2.5.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

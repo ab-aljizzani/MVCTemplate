@@ -139,6 +139,13 @@ public class EntityService : IEntityService
         serviceResponse.Data = _mapper.Map<DepartmentDto>(dbContext);
         return serviceResponse;
     }
+    public async Task<ServiceResponse<List<DepartmentDto>>> GetDepartmentByEntityID(int id)
+    {
+        var serviceResponse = new ServiceResponse<List<DepartmentDto>>();
+        var dbContext = await _context.Entity.Include(e => e.Departments).ToListAsync();
+        serviceResponse.Data = dbContext.Select(e => _mapper.Map<DepartmentDto>(e)).Where(w => w.EntityId == id).ToList();
+        return serviceResponse;
+    }
     public async Task<string> GetDepartmentCountByEntityID(int id)
     {
         var serviceResponse = new ServiceResponse<int>();

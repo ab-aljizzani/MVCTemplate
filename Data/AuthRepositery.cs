@@ -4,6 +4,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
+using ClinicApi.Dtos.PortalUserDto;
+using ClinicApi.Dtos.PortalUserModelDto.Update;
+using ClinicApi.Models.Entity;
 using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.Reponse;
 using Microsoft.EntityFrameworkCore;
@@ -13,12 +17,14 @@ namespace ClinicApi.Data;
 
 public class AuthRepositery : IAuthRepositery
 {
+    private readonly IMapper _mapper;
     private readonly DataContext _context;
     private readonly IConfiguration _configuration;
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public AuthRepositery(DataContext context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+    public AuthRepositery(IMapper mapper, DataContext context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
     {
+        _mapper = mapper;
         _context = context;
         _configuration = configuration;
         _httpContextAccessor = httpContextAccessor;
@@ -26,7 +32,7 @@ public class AuthRepositery : IAuthRepositery
     public async Task<ServiceResponse<string>> Login(string username, string password)
     {
         var response = new ServiceResponse<string>();
-        var user = await _context.PortalUser.Include(u => u.Entity).FirstOrDefaultAsync(u => u.Username.ToLower().Equals(username.ToLower()));
+        var user = await _context.PortalUser.Include(u => u.PersonalImage).Include(u => u.Entity).Include(u => u.Role).Include(u => u.Department).FirstOrDefaultAsync(u => u.Username.ToLower().Equals(username.ToLower()));
         if (user is null)
         {
             response.Success = false;
@@ -93,10 +99,14 @@ public class AuthRepositery : IAuthRepositery
         var claims = new List<Claim>{
                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
                 new Claim("Username",user.Username),
+                new Claim("UserFullName",user.UserFullname.ToString()),
                 new Claim("UserType",user.UserType.ToString()),
                 new Claim("EntityID",user.EntityId.ToString()),
-                new Claim("Entity",user.Entity.EntityName.ToString()),
+                new Claim("Entity",user.Entity.EntityName),
+                // new Claim("UserImg",System.Convert.ToBase64String(user.PersonalImage.PersonalImage)),
                 new Claim("RoleId",user.RoleId.ToString()),
+                new Claim("Role",user.Role.RoleName.ToString()),
+                new Claim("Department" , user.Department.DepartmentName.ToString()),
                 new Claim("LastLogin",user.LastLogin.ToString()),
                 new Claim("PasswordExpire",user.PasswordExpires.ToString()),
                 new Claim("Status",user.Status),
@@ -116,9 +126,46 @@ public class AuthRepositery : IAuthRepositery
             SigningCredentials = creds
         };
         JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-        SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
+        JwtSecurityToken token = tokenHandler.CreateJwtSecurityToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
 
     }
 
+    public async Task<ServiceResponse<PortalUserDto>> GetUserByID(int id)
+    {
+        var serviceResponse = new ServiceResponse<PortalUserDto>();
+        var dbContext = await _context.PortalUser.Include(u => u.PersonalImage).Include(e => e.Entity).Include(r => r.Role).Include(d => d.Department).FirstOrDefaultAsync(u => u.Id == id && u.EntityId == u.Department.EntityId);
+        // if (dbContext is null)
+        // {
+        //     throw new Exception($"The Id '{id}'Is Not Founde...");
+        // }
+        serviceResponse.Data = _mapper.Map<PortalUserDto>(dbContext);
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<PortalUserDto>> UpdatePortalUser(UpdatePortalUserDto updatePortalUser)
+    {
+
+        var serviceResponse = new ServiceResponse<PortalUserDto>();
+        try
+        {
+            var portalUser = await _context.PortalUser.FirstOrDefaultAsync(z => z.Id == updatePortalUser.Id);
+            if (portalUser is null)
+            {
+                throw new Exception($"The Id '{updatePortalUser.Id}'Is Not Founde...");
+            }
+            CreatePasswordHash(updatePortalUser.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            updatePortalUser.PasswordSalt = passwordSalt;
+            updatePortalUser.PasswordHash = passwordHash;
+            _mapper.Map(updatePortalUser, portalUser);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<PortalUserDto>(portalUser);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
 }

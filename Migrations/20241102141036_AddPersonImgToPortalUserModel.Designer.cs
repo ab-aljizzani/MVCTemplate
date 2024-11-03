@@ -4,6 +4,7 @@ using ClinicApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241102141036_AddPersonImgToPortalUserModel")]
+    partial class AddPersonImgToPortalUserModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -184,7 +187,7 @@ namespace ClinicApi.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<int>("PersonalImgId")
+                    b.Property<int>("PersonImgId")
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
@@ -211,14 +214,6 @@ namespace ClinicApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.HasIndex("EntityId");
-
-                    b.HasIndex("PersonalImgId");
-
-                    b.HasIndex("RoleId");
 
                     b.ToTable("PortalUser");
                 });
@@ -266,41 +261,6 @@ namespace ClinicApi.Migrations
                         .IsRequired();
 
                     b.Navigation("Entity");
-                });
-
-            modelBuilder.Entity("ClinicApi.Models.PortalUser.PortalUser", b =>
-                {
-                    b.HasOne("ClinicApi.Models.Entity.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ClinicApi.Models.Entity.Entity", "Entity")
-                        .WithMany()
-                        .HasForeignKey("EntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ClinicApi.Models.PersonalImagesModel.PersonalImg", "PersonalImage")
-                        .WithMany()
-                        .HasForeignKey("PersonalImgId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ClinicApi.Models.Role.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
-
-                    b.Navigation("Entity");
-
-                    b.Navigation("PersonalImage");
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("ClinicApi.Models.Entity.Entity", b =>

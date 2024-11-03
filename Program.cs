@@ -54,6 +54,9 @@ namespace ClinicApi
         ValidateAudience = false
     };
 });
+            builder.Services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             builder.Services.AddHttpContextAccessor();
             var app = builder.Build();
 

@@ -1,6 +1,7 @@
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.PortalUserDto;
+using ClinicApi.Dtos.PortalUserModelDto.Update;
 using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.Reponse;
 using Microsoft.AspNetCore.Http;
@@ -19,6 +20,11 @@ namespace ClinicApi.Controllers
         {
             _authRepo = authRepo;
             _mapper = mapper;
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<PortalUserDto>>> GetSingle(int id)
+        {
+            return Ok(await _authRepo.GetUserByID(id));
         }
         [HttpPost("Login")]
         public async Task<ActionResult<ServiceResponse<int>>> Login(LoginDto request)
@@ -39,6 +45,14 @@ namespace ClinicApi.Controllers
             {
                 return BadRequest(response);
             }
+            return Ok(response);
+        }
+        [HttpPut]
+        public async Task<ActionResult<UpdatePortalUserDto>> UpdateRole(UpdatePortalUserDto updatePortalUser)
+        {
+            var response = await _authRepo.UpdatePortalUser(updatePortalUser);
+            if (response.Success == false)
+                return NotFound(response);
             return Ok(response);
         }
     }
