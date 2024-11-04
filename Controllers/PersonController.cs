@@ -35,6 +35,12 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _personSerice.GetPersonByID(id));
         }
+        [HttpGet]
+        [Route("GetPersonsByEntity")]
+        public async Task<ActionResult<List<PersonDto>>> GetPersonsByEntity(int id)
+        {
+            return Ok(await _personSerice.GetPersonsByEntityID(id));
+        }
         [HttpPost]
         public async Task<ActionResult<List<PersonDto>>> AddnewPerson(PersonDto newPerson)
         {

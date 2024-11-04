@@ -9,5 +9,5 @@ public class GetEntityDto
     public int Id { get; set; }
     public string EntityName { get; set; } = string.Empty;
     public string EntityType { get; set; } = string.Empty;
-    public List<DepartmentDto>? Departments { get; set; }
+    public DepartmentDto? Departments { get; set; }
 }

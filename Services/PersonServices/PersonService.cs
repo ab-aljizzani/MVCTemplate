@@ -24,7 +24,7 @@ public class PersonService : IPersonService
         var person = _mapper.Map<Person>(newPerson);
         _context.Person.Add(person);
         _context.SaveChanges();
-        serviceResponse.Data = await _context.Person.Select(p => _mapper.Map<PersonDto>(p)).ToListAsync();
+        serviceResponse.Data = await _context.Person.Include(p => p.Department).Include(p => p.Entity).Include(p => p.PersonalImg).Include(p => p.Zone).Select(p => _mapper.Map<PersonDto>(p)).ToListAsync();
         return serviceResponse;
     }
 
@@ -33,7 +33,7 @@ public class PersonService : IPersonService
         var serviceResponse = new ServiceResponse<PersonDto>();
         try
         {
-            var person = await _context.Person.FirstOrDefaultAsync(p => p.Id == id);
+            var person = await _context.Person.Include(p => p.Department).Include(p => p.Entity).Include(p => p.PersonalImg).Include(p => p.Zone).FirstOrDefaultAsync(p => p.Id == id);
             if (person is null)
             {
                 throw new Exception($"The Id '{id}'Is Not Founde...");
@@ -61,7 +61,7 @@ public class PersonService : IPersonService
     public async Task<ServiceResponse<PersonDto>> GetPersonByID(int id)
     {
         var serviceResponse = new ServiceResponse<PersonDto>();
-        var dbContext = await _context.Person.FirstOrDefaultAsync(p => p.Id == id);
+        var dbContext = await _context.Person.Include(p => p.Department).Include(p => p.Entity).Include(p => p.PersonalImg).Include(p => p.Zone).FirstOrDefaultAsync(p => p.Id == id);
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
@@ -71,7 +71,7 @@ public class PersonService : IPersonService
     }
     public async Task<string> GetPersonCountByEntityID(int id)
     {
-        var dbContext = await _context.Person.Where(e => e.EntityId == id).ToListAsync();
+        var dbContext = await _context.Person.Where(e => e.EntityId == id).Include(p => p.Department).Include(p => p.Entity).Include(p => p.PersonalImg).Include(p => p.Zone).ToListAsync();
         var count = dbContext.Count();
         if (dbContext is null)
         {
@@ -80,6 +80,19 @@ public class PersonService : IPersonService
 
         return count.ToString();
     }
+
+    public async Task<ServiceResponse<List<PersonDto>>> GetPersonsByEntityID(int id)
+    {
+        var serviceResponse = new ServiceResponse<List<PersonDto>>();
+        var dbContext = await _context.Person.Where(p => p.EntityId == id).Include(p => p.Department).Include(p => p.Entity).Include(p => p.PersonalImg).Include(p => p.Zone).ToListAsync();
+        if (dbContext is null)
+        {
+            throw new Exception($"The Id '{id}'Is Not Founde...");
+        }
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<PersonDto>(p)).ToList();
+        return serviceResponse;
+    }
+
     public async Task<ServiceResponse<PersonDto>> UpdatePerson(UpdatePersonDto updatePerson)
     {
         var serviceResponse = new ServiceResponse<PersonDto>();

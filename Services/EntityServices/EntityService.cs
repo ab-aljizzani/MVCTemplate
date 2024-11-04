@@ -113,7 +113,7 @@ public class EntityService : IEntityService
     public async Task<ServiceResponse<List<DepartmentDto>>> GetAlldepartments()
     {
         var serviceResponse = new ServiceResponse<List<DepartmentDto>>();
-        var dbContext = await _context.Department.Include(e => e.Entity).ToListAsync();
+        var dbContext = await _context.Department.ToListAsync();
         serviceResponse.Data = dbContext.Select(e => _mapper.Map<DepartmentDto>(e)).ToList();
         return serviceResponse;
     }
@@ -131,7 +131,7 @@ public class EntityService : IEntityService
     public async Task<ServiceResponse<DepartmentDto>> GetDepartmentByID(int id)
     {
         var serviceResponse = new ServiceResponse<DepartmentDto>();
-        var dbContext = await _context.Department.Include(e => e.Entity).FirstOrDefaultAsync(e => e.Id == id);
+        var dbContext = await _context.Department.FirstOrDefaultAsync(e => e.Id == id);
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
@@ -142,20 +142,19 @@ public class EntityService : IEntityService
     public async Task<ServiceResponse<List<DepartmentDto>>> GetDepartmentByEntityID(int id)
     {
         var serviceResponse = new ServiceResponse<List<DepartmentDto>>();
-        var dbContext = await _context.Entity.Include(e => e.Departments).ToListAsync();
-        serviceResponse.Data = dbContext.Select(e => _mapper.Map<DepartmentDto>(e)).Where(w => w.EntityId == id).ToList();
+        var dbContext = await _context.Department.Where(w => w.EntityId == id).ToListAsync();
+        serviceResponse.Data = dbContext.Select(e => _mapper.Map<DepartmentDto>(e)).ToList();
         return serviceResponse;
     }
     public async Task<string> GetDepartmentCountByEntityID(int id)
     {
         var serviceResponse = new ServiceResponse<int>();
-        var dbContext = await _context.Department.Include(e => e.Entity).Where(e => e.EntityId == id).ToListAsync();
-        var count = dbContext.Count();
-        if (dbContext is null)
+        var dbContext = await _context.Department.Where(e => e.EntityId == id).ToListAsync();
+        var count = dbContext.Count(); 
+        if(count.ToString() is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
         }
-
         return count.ToString();
     }
 
@@ -173,19 +172,19 @@ public class EntityService : IEntityService
 
 
 
-    public async Task<ServiceResponse<GetEntityDto>> UpdateDepartment(UpdateDepartmentDot updateDepartment)
+    public async Task<ServiceResponse<DepartmentDto>> UpdateDepartment(UpdateDepartmentDot updateDepartment)
     {
-        var serviceResponse = new ServiceResponse<GetEntityDto>();
+        var serviceResponse = new ServiceResponse<DepartmentDto>();
         try
         {
-            var department = await _context.Entity.FirstOrDefaultAsync(e => e.Id == updateDepartment.Id);
+            var department = await _context.Department.FirstOrDefaultAsync(e => e.Id == updateDepartment.Id);
             if (department is null)
             {
                 throw new Exception($"The Id '{updateDepartment.Id}'Is Not Founde...");
             }
             _mapper.Map(updateDepartment, department);
             await _context.SaveChangesAsync();
-            serviceResponse.Data = _mapper.Map<GetEntityDto>(department);
+            serviceResponse.Data = _mapper.Map<DepartmentDto>(department);
         }
         catch (Exception ex)
         {

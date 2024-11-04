@@ -27,15 +27,16 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _entityService.GetAlldepartments());
         }
-        // [HttpGet("{id}")]
-        // public async Task<ActionResult<DepartmentDto>> GetSingle(int id)
-        // {
-        //     return Ok(await _entityService.GetDepartmentByID(id));
-        // }
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<DepartmentDto>>> GetSingleByEntity(int id)
+        public async Task<ActionResult<DepartmentDto>> GetSingle(int id)
         {
-            return Ok(await _entityService.GetDepartmentByEntityID(id));
+            return Ok(await _entityService.GetDepartmentByID(id));
+        }
+        [HttpGet]
+        [Route("GetSingleByEntity")]
+        public async Task<ActionResult<List<DepartmentDto>>> GetSingleByEntity(int ByEntityid)
+        {
+            return Ok(await _entityService.GetDepartmentByEntityID(ByEntityid));
         }
         [HttpGet("GetCount")]
         public async Task<ActionResult<DepartmentDto>> GetCount()

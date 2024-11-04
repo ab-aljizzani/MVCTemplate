@@ -8,6 +8,7 @@ public interface IPersonService
 {
     Task<ServiceResponse<List<PersonDto>>> GetAllPerson();
     Task<ServiceResponse<PersonDto>> GetPersonByID(int id);
+    Task<ServiceResponse<List<PersonDto>>> GetPersonsByEntityID(int id);
     Task<string> GetPersonCountByEntityID(int id);
     Task<ServiceResponse<List<PersonDto>>> AddNewPerson(PersonDto newPerson);
     Task<ServiceResponse<PersonDto>> UpdatePerson(UpdatePersonDto updatePerson);
