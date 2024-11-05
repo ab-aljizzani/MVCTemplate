@@ -9,7 +9,7 @@ public interface IPersonalImages
 {
     Task<ServiceResponse<List<PersonalImgDto>>> GetAllPersonalImages();
     Task<ServiceResponse<PersonalImgDto>> GetPersonalImagesByID(int id);
-    Task<ServiceResponse<List<PersonalImgDto>>> AddNewPersonalImages(PersonalImgDto newPersonalImages);
+    Task<ServiceResponse<int>> AddNewPersonalImages(PersonalImgDto newPersonalImages);
     Task<ServiceResponse<PersonalImgDto>> UpdatePersonalImages(UpdatePersonalImgDto updatePersonalImages);
     Task<ServiceResponse<PersonalImgDto>> DeletePersonalImages(int id);
 }

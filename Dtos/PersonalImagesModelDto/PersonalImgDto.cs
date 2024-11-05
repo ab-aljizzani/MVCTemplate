@@ -5,6 +5,7 @@ namespace ClinicApi.Data.PersonalImagesModelDto;
 
 public class PersonalImgDto
 {
+    public int Id { get; set; }
     public byte[]? PersonalImage { get; set; }
     public byte[]? DocumentImg { get; set; }
     [NotMapped]

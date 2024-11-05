@@ -309,8 +309,8 @@ c:\Users\abalj\OneDrive\Desktop\ClinicApi\obj\Debug\net8.0\ref\ClinicApi.dll
 c:\Users\SRG1\Documents\GitHub\ClinicApi\bin\Debug\net8.0\appsettings.Development.json
 c:\Users\SRG1\Documents\GitHub\ClinicApi\bin\Debug\net8.0\appsettings.json
 c:\Users\SRG1\Documents\GitHub\ClinicApi\bin\Debug\net8.0\ClinicApi.exe
-c:\Users\SRG1\Documents\GitHub\ClinicApi\bin\Debug\net8.0\ClinicApi.deps.json
-c:\Users\SRG1\Documents\GitHub\ClinicApi\bin\Debug\net8.0\ClinicApi.runtimeconfig.json
+C:\Users\SRG1\Documents\GitHub\ClinicApi\bin\Debug\net8.0\ClinicApi.deps.json
+C:\Users\SRG1\Documents\GitHub\ClinicApi\bin\Debug\net8.0\ClinicApi.runtimeconfig.json
 c:\Users\SRG1\Documents\GitHub\ClinicApi\bin\Debug\net8.0\ClinicApi.dll
 c:\Users\SRG1\Documents\GitHub\ClinicApi\bin\Debug\net8.0\ClinicApi.pdb
 c:\Users\SRG1\Documents\GitHub\ClinicApi\bin\Debug\net8.0\AutoMapper.dll
@@ -458,9 +458,9 @@ c:\Users\SRG1\Documents\GitHub\ClinicApi\obj\Debug\net8.0\staticwebassets\msbuil
 c:\Users\SRG1\Documents\GitHub\ClinicApi\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ClinicApi.props
 c:\Users\SRG1\Documents\GitHub\ClinicApi\obj\Debug\net8.0\staticwebassets.pack.json
 c:\Users\SRG1\Documents\GitHub\ClinicApi\obj\Debug\net8.0\scopedcss\bundle\ClinicApi.styles.css
-c:\Users\SRG1\Documents\GitHub\ClinicApi\obj\Debug\net8.0\ClinicApi.csproj.Up2Date
+C:\Users\SRG1\Documents\GitHub\ClinicApi\obj\Debug\net8.0\ClinicApi.csproj.Up2Date
 c:\Users\SRG1\Documents\GitHub\ClinicApi\obj\Debug\net8.0\ClinicApi.dll
 c:\Users\SRG1\Documents\GitHub\ClinicApi\obj\Debug\net8.0\refint\ClinicApi.dll
 c:\Users\SRG1\Documents\GitHub\ClinicApi\obj\Debug\net8.0\ClinicApi.pdb
-c:\Users\SRG1\Documents\GitHub\ClinicApi\obj\Debug\net8.0\ClinicApi.genruntimeconfig.cache
-c:\Users\SRG1\Documents\GitHub\ClinicApi\obj\Debug\net8.0\ref\ClinicApi.dll
+C:\Users\SRG1\Documents\GitHub\ClinicApi\obj\Debug\net8.0\ClinicApi.genruntimeconfig.cache
+C:\Users\SRG1\Documents\GitHub\ClinicApi\obj\Debug\net8.0\ref\ClinicApi.dll

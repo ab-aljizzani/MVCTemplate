@@ -22,9 +22,9 @@ public class PersonalImages : IPersonalImages
         _context = context;
         _web = web;
     }
-    public async Task<ServiceResponse<List<PersonalImgDto>>> AddNewPersonalImages(PersonalImgDto newPersonalImages)
+    public async Task<ServiceResponse<int>> AddNewPersonalImages(PersonalImgDto newPersonalImages)
     {
-        var serviceResponse = new ServiceResponse<List<PersonalImgDto>>();
+        var serviceResponse = new ServiceResponse<int>();
         using (var memoryStream = new MemoryStream())
         {
             if (newPersonalImages.ImgFile != null)
@@ -75,7 +75,8 @@ public class PersonalImages : IPersonalImages
             var personalImg = _mapper.Map<PersonalImg>(newPersonalImages);
             _context.PersonalImg.Add(personalImg);
             _context.SaveChanges();
-            serviceResponse.Data = await _context.PersonalImg.Select(z => _mapper.Map<PersonalImgDto>(z)).ToListAsync();
+            serviceResponse.Data = personalImg.Id;
+            // serviceResponse.Data = await _context.PersonalImg.Select(z => _mapper.Map<PersonalImgDto>(z)).ToListAsync();
         }
         return serviceResponse;
     }

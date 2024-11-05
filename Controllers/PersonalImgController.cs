@@ -27,7 +27,7 @@ namespace ClinicApi.Controllers
             return Ok(await _personalImages.GetPersonalImagesByID(id));
         }
         [HttpPost]
-        public async Task<ActionResult<List<PersonalImgDto>>> AddnewZone([FromForm] PersonalImgDto newZone)
+        public async Task<ActionResult<int>> AddnewZone(PersonalImgDto newZone)
         {
             return Ok(await _personalImages.AddNewPersonalImages(newZone));
         }
