@@ -9,7 +9,7 @@ public class UpdatePersonDto
     public string Title { get; set; } = string.Empty;
     public string FullArabicName { get; set; } = string.Empty;
     public string FullEnglishName { get; set; } = string.Empty;
-    public DateTime DateOfBirth { get; set; }
+    public DateOnly DateOfBirth { get; set; }
     public int ZoneId { get; set; }
     public int EntityId { get; set; }
     public int PersonalImgId { get; set; }

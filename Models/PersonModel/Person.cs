@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ClinicApi.Models.PersonModel;
 
@@ -9,9 +10,10 @@ public class Person
     public string Title { get; set; } = string.Empty;
     public string FullArabicName { get; set; } = string.Empty;
     public string FullEnglishName { get; set; } = string.Empty;
-    public DateTime DateOfBirth { get; set; }
+    [DisplayFormat(DataFormatString = "{0: MM/dd/yyyy}")]
+    public DateOnly DateOfBirth { get; set; }
     public int ZoneId { get; set; }
-    public Models.ZoneModel.Zone? Zone {get ; set ;}
+    public Models.ZoneModel.Zone? Zone { get; set; }
     public int EntityId { get; set; }
     public int DepartmentId { get; set; }
     public Models.Entity.Department? Department { get; set; }

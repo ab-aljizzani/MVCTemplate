@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using ClinicApi.Data.PersonalImagesModelDto;
 using ClinicApi.Dtos.Entity;
 using ClinicApi.Dtos.ZoneModelDto;
@@ -12,7 +13,8 @@ public class PersonDto
     public string Title { get; set; } = string.Empty;
     public string FullArabicName { get; set; } = string.Empty;
     public string FullEnglishName { get; set; } = string.Empty;
-    public DateTime DateOfBirth { get; set; }
+    [DisplayFormat(DataFormatString = "{0: MM/dd/yyyy}")]
+    public DateOnly DateOfBirth { get; set; }
     public int ZoneId { get; set; }
     public Models.ZoneModel.Zone? Zone { get; set; }
     public int EntityId { get; set; }

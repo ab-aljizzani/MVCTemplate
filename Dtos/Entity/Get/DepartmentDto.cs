@@ -7,7 +7,8 @@ public class DepartmentDto
 {
     [Key]
     public int Id { get; set; }
+    [Required(ErrorMessage = "الرجاء إدخال الإدارة")]
+    [Display(Name = "الإدارة")]
     public string DepartmentName { get; set; } = string.Empty;
-    // public Models.Entity.Entity? Entity { get; set; }
     public int EntityId { get; set; }
 }

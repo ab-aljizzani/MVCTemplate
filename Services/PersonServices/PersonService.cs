@@ -89,7 +89,7 @@ public class PersonService : IPersonService
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
         }
-        
+
         serviceResponse.Data = dbContext.Select(p => _mapper.Map<PersonDto>(p)).ToList();
         return serviceResponse;
     }
