@@ -76,7 +76,6 @@ public class PersonalImages : IPersonalImages
             _context.PersonalImg.Add(personalImg);
             _context.SaveChanges();
             serviceResponse.Data = personalImg.Id;
-            // serviceResponse.Data = await _context.PersonalImg.Select(z => _mapper.Map<PersonalImgDto>(z)).ToListAsync();
         }
         return serviceResponse;
     }
