@@ -9,6 +9,8 @@ namespace ClinicApi.Data;
 public interface IAuthRepositery
 {
 
+    Task<ServiceResponse<List<PortalUserDto>>> GetAll();
+    Task<ServiceResponse<List<PortalUserDto>>> GetAllByEntityId(int id);
     Task<ServiceResponse<int>> Register(PortalUser user, string password);
     Task<ServiceResponse<string>> Login(string username, string password);
     Task<ServiceResponse<PortalUserDto>> GetUserByID(int id);
