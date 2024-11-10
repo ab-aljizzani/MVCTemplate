@@ -18,7 +18,7 @@ public class PersonService : IPersonService
         _mapper = mapper;
         _context = context;
     }
-    public async Task<ServiceResponse<List<PersonDto>>> AddNewPerson(PersonDto newPerson)
+    public async Task<ServiceResponse<List<PersonDto>>> AddNewPerson(InsertPersonDto newPerson)
     {
         var serviceResponse = new ServiceResponse<List<PersonDto>>();
         var person = _mapper.Map<Person>(newPerson);
@@ -61,7 +61,7 @@ public class PersonService : IPersonService
     public async Task<ServiceResponse<PersonDto>> GetPersonByID(int id)
     {
         var serviceResponse = new ServiceResponse<PersonDto>();
-        var dbContext = await _context.Person.FirstOrDefaultAsync(p => p.Id == id);
+        var dbContext = await _context.Person.Include(p => p.Entity).Include(p => p.Zone).Include(p => p.Department).Include(p => p.PersonalImg).FirstOrDefaultAsync(p => p.Id == id);
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
@@ -84,7 +84,7 @@ public class PersonService : IPersonService
     public async Task<ServiceResponse<List<PersonDto>>> GetPersonsByEntityID(int id)
     {
         var serviceResponse = new ServiceResponse<List<PersonDto>>();
-        var dbContext = await _context.Person.Include(p => p.Zone).Include(p => p.Department).Include(p => p.PersonalImg).ToListAsync();
+        var dbContext = await _context.Person.Where(p => p.EntityId == id).Include(p => p.Zone).Include(p => p.Department).Include(p => p.PersonalImg).ToListAsync();
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
@@ -94,9 +94,9 @@ public class PersonService : IPersonService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<PersonDto>> UpdatePerson(UpdatePersonDto updatePerson)
+    public async Task<ServiceResponse<UpdatePersonDto>> UpdatePerson(UpdatePersonDto updatePerson)
     {
-        var serviceResponse = new ServiceResponse<PersonDto>();
+        var serviceResponse = new ServiceResponse<UpdatePersonDto>();
         try
         {
             var person = await _context.Person.FirstOrDefaultAsync(z => z.Id == updatePerson.Id);
@@ -106,7 +106,7 @@ public class PersonService : IPersonService
             }
             _mapper.Map(updatePerson, person);
             await _context.SaveChangesAsync();
-            serviceResponse.Data = _mapper.Map<PersonDto>(person);
+            serviceResponse.Data = _mapper.Map<UpdatePersonDto>(person);
         }
         catch (Exception ex)
         {

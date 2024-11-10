@@ -14,10 +14,12 @@ public class PersonDto
     public string FullArabicName { get; set; } = string.Empty;
     public string FullEnglishName { get; set; } = string.Empty;
     [DisplayFormat(DataFormatString = "{0: MM/dd/yyyy}")]
-    public DateOnly DateOfBirth { get; set; }
+    public string DateOfBirth { get; set; } = string.Empty;
+    public string PhoneNumber { get; set; } = string.Empty;
     public int ZoneId { get; set; }
     public Models.ZoneModel.Zone? Zone { get; set; }
     public int EntityId { get; set; }
+    public Models.Entity.Entity? Entity { get; set; }
     public int DepartmentId { get; set; }
     public Models.Entity.Department? Department { get; set; }
     public string NationalIdType { get; set; } = string.Empty;

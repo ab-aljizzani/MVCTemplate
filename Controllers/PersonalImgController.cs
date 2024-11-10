@@ -1,12 +1,14 @@
 using ClinicApi.Data.PersonalImagesModelDto;
 using ClinicApi.Dtos.PersonalImagesModelDto;
 using ClinicApi.Services.PersonalImagesServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClinicApi.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class PersonalImgController : ControllerBase
     {
@@ -27,20 +29,20 @@ namespace ClinicApi.Controllers
             return Ok(await _personalImages.GetPersonalImagesByID(id));
         }
         [HttpPost]
-        public async Task<ActionResult<int>> AddnewZone(PersonalImgDto newZone)
+        public async Task<ActionResult<int>> AddnewPersonalImg(PersonalImgDto newPersonalImg)
         {
-            return Ok(await _personalImages.AddNewPersonalImages(newZone));
+            return Ok(await _personalImages.AddNewPersonalImages(newPersonalImg));
         }
         [HttpPut]
-        public async Task<ActionResult<PersonalImgDto>> UpdateZone([FromForm] UpdatePersonalImgDto updateZone)
+        public async Task<ActionResult<PersonalImgDto>> UpdatePersonalImg(UpdatePersonalImgDto updatePersonalImg)
         {
-            var response = await _personalImages.UpdatePersonalImages(updateZone);
+            var response = await _personalImages.UpdatePersonalImages(updatePersonalImg);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
         }
         [HttpDelete("{id}")]
-        public async Task<ActionResult<PersonalImgDto>> DeleteZone(int id)
+        public async Task<ActionResult<PersonalImgDto>> DeletePersonalImg(int id)
         {
             return Ok(await _personalImages.DeletePersonalImages(id));
         }

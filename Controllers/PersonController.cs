@@ -42,7 +42,7 @@ namespace ClinicApi.Controllers
             return Ok(await _personSerice.GetPersonsByEntityID(id));
         }
         [HttpPost]
-        public async Task<ActionResult<List<PersonDto>>> AddnewPerson(PersonDto newPerson)
+        public async Task<ActionResult<List<PersonDto>>> AddnewPerson(InsertPersonDto newPerson)
         {
             var userEntity = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "EntityID");
             if (int.Parse(userEntity.Value.ToString()) != newPerson.EntityId)
@@ -50,7 +50,7 @@ namespace ClinicApi.Controllers
             return Ok(await _personSerice.AddNewPerson(newPerson));
         }
         [HttpPut]
-        public async Task<ActionResult<PersonDto>> UpdatePerson(UpdatePersonDto updatePerson)
+        public async Task<ActionResult<UpdatePersonDto>> UpdatePerson(UpdatePersonDto updatePerson)
         {
             var userEntity = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "EntityID");
             if (int.Parse(userEntity.Value.ToString()) != updatePerson.EntityId)

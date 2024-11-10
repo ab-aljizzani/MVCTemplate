@@ -53,5 +53,8 @@ public class AutoMapperProfile : Profile
         CreateMap<Person, PersonDto>();
         CreateMap<PersonDto, Person>();
         CreateMap<UpdatePersonDto, Person>();
+        CreateMap<Person, UpdatePersonDto>();
+        CreateMap<InsertPersonDto, Person>();
+        CreateMap<Person, InsertPersonDto>();
     }
 }

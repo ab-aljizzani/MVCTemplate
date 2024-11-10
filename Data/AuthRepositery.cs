@@ -99,7 +99,7 @@ public class AuthRepositery : IAuthRepositery
         var claims = new List<Claim>{
                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
                 new Claim("Username",user.Username),
-                new Claim("UserFullName",user.UserFullname.ToString()),
+                new Claim("UserFullName",user.UserFullName.ToString()),
                 new Claim("UserType",user.UserType.ToString()),
                 new Claim("EntityID",user.EntityId.ToString()),
                 new Claim("Entity",user.Entity.EntityName),

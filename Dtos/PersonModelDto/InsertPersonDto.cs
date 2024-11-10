@@ -2,14 +2,13 @@ using System;
 
 namespace ClinicApi.Dtos.PersonModelDto;
 
-public class UpdatePersonDto
+public class InsertPersonDto
 {
-    public int Id { get; set; }
     public string NationalId { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;
     public string FullArabicName { get; set; } = string.Empty;
     public string FullEnglishName { get; set; } = string.Empty;
-    public string DateOfBirth { get; set; }
+    public string DateOfBirth { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
     public int ZoneId { get; set; }
     public int EntityId { get; set; }

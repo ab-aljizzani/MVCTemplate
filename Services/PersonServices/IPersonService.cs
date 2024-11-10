@@ -10,7 +10,7 @@ public interface IPersonService
     Task<ServiceResponse<PersonDto>> GetPersonByID(int id);
     Task<ServiceResponse<List<PersonDto>>> GetPersonsByEntityID(int id);
     Task<string> GetPersonCountByEntityID(int id);
-    Task<ServiceResponse<List<PersonDto>>> AddNewPerson(PersonDto newPerson);
-    Task<ServiceResponse<PersonDto>> UpdatePerson(UpdatePersonDto updatePerson);
+    Task<ServiceResponse<List<PersonDto>>> AddNewPerson(InsertPersonDto newPerson);
+    Task<ServiceResponse<UpdatePersonDto>> UpdatePerson(UpdatePersonDto updatePerson);
     Task<ServiceResponse<PersonDto>> DeletePerson(int id);
 }
