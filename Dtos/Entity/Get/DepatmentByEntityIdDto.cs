@@ -1,14 +1,15 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ClinicApi.Models.Entity;
+namespace ClinicApi.Dtos.Entity.Get;
 
-public class Department
+public class DepatmentByEntityIdDto
 {
+    [Key]
     public int Id { get; set; }
     [Required(ErrorMessage = "الرجاء إدخال الإدارة")]
     [Display(Name = "الإدارة")]
     public string DepartmentName { get; set; } = string.Empty;
-    public int EntityId { get; set; }
-    public Entity? Entity { get; set; }
+    public string EntityName { get; set; } = string.Empty;
+    // public int EntityId { get; set; }
+    // public GetEntityDto? Entity { get; set; }
 }

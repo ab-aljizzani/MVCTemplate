@@ -121,7 +121,7 @@ public class EntityService : IEntityService
     public async Task<ServiceResponse<List<GetEntityDto>>> GetAllEntitys()
     {
         var serviceResponse = new ServiceResponse<List<GetEntityDto>>();
-        var dbContext = await _context.Entity.Include(e => e.Departments).ToListAsync();
+        var dbContext = await _context.Entity.ToListAsync();
         serviceResponse.Data = dbContext.Select(e => _mapper.Map<GetEntityDto>(e)).ToList();
         return serviceResponse;
     }
@@ -150,8 +150,8 @@ public class EntityService : IEntityService
     {
         var serviceResponse = new ServiceResponse<int>();
         var dbContext = await _context.Department.Where(e => e.EntityId == id).ToListAsync();
-        var count = dbContext.Count(); 
-        if(count.ToString() is null)
+        var count = dbContext.Count();
+        if (count.ToString() is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
         }
