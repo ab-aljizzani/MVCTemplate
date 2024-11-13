@@ -12,5 +12,4 @@ public class Entity
     [Required(ErrorMessage = "الرجاء إدخال النوع")]
     [Display(Name = "النوع")]
     public string EntityType { get; set; } = string.Empty;
-    public Department? Departments { get; set; }
 }

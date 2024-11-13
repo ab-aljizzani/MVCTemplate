@@ -1,6 +1,7 @@
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.PortalUserDto;
+using ClinicApi.Dtos.PortalUserModelDto.Insert;
 using ClinicApi.Dtos.PortalUserModelDto.Update;
 using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.Reponse;
@@ -32,6 +33,12 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _authRepo.GetAllByEntityId(id));
         }
+        [HttpGet]
+        [Route("GetAllByUserType")]
+        public async Task<ActionResult<List<PortalUserDto>>> GetAllByUserType(string type)
+        {
+            return Ok(await _authRepo.GetAllByUserType(type));
+        }
         [HttpGet("{id}")]
         public async Task<ActionResult<List<PortalUserDto>>> GetSingle(int id)
         {
@@ -48,10 +55,10 @@ namespace ClinicApi.Controllers
             return Ok(response.Data);
         }
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<int>>> Register(PortalUserDto request)
+        public async Task<ActionResult<ServiceResponse<int>>> Register(InsertPortalUserDto request)
         {
-            var user = _mapper.Map<PortalUser>(request);
-            var response = await _authRepo.Register(user, request.Password);
+            // var user = _mapper.Map<PortalUser>(request);
+            var response = await _authRepo.Register(request, request.Password);
             if (!response.Success)
             {
                 return BadRequest(response);
