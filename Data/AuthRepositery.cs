@@ -103,7 +103,6 @@ public class AuthRepositery : IAuthRepositery
                 new Claim("UserType",user.UserType.ToString()),
                 new Claim("EntityID",user.EntityId.ToString()),
                 new Claim("Entity",user.Entity.EntityName),
-                // new Claim("UserImg",System.Convert.ToBase64String(user.PersonalImage.PersonalImage)),
                 new Claim("RoleId",user.RoleId.ToString()),
                 new Claim("Role",user.Role.RoleName.ToString()),
                 new Claim("Department" , user.Department.DepartmentName.ToString()),
@@ -130,7 +129,28 @@ public class AuthRepositery : IAuthRepositery
         return tokenHandler.WriteToken(token);
 
     }
-
+    public async Task<ServiceResponse<List<PortalUserDto>>> GetAll()
+    {
+        var serviceResponse = new ServiceResponse<List<PortalUserDto>>();
+        var dbContext = await _context.PortalUser.Include(u => u.PersonalImage).Include(e => e.Entity).Include(r => r.Role).Include(d => d.Department).ToListAsync();
+        // if (dbContext is null)
+        // {
+        //     throw new Exception($"The Id '{id}'Is Not Founde...");
+        // }
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<PortalUserDto>(p)).ToList();
+        return serviceResponse;
+    }
+    public async Task<ServiceResponse<List<PortalUserDto>>> GetAllByEntityId(int id)
+    {
+        var serviceResponse = new ServiceResponse<List<PortalUserDto>>();
+        var dbContext = await _context.PortalUser.Where(u => u.EntityId == id).Include(u => u.PersonalImage).Include(e => e.Entity).Include(r => r.Role).Include(d => d.Department).ToListAsync();
+        // if (dbContext is null)
+        // {
+        //     throw new Exception($"The Id '{id}'Is Not Founde...");
+        // }
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<PortalUserDto>(p)).ToList();
+        return serviceResponse;
+    }
     public async Task<ServiceResponse<PortalUserDto>> GetUserByID(int id)
     {
         var serviceResponse = new ServiceResponse<PortalUserDto>();

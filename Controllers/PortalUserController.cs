@@ -21,6 +21,17 @@ namespace ClinicApi.Controllers
             _authRepo = authRepo;
             _mapper = mapper;
         }
+        [HttpGet]
+        public async Task<ActionResult<List<PortalUserDto>>> GetAll()
+        {
+            return Ok(await _authRepo.GetAll());
+        }
+        [HttpGet]
+        [Route("GetAllByEntityId")]
+        public async Task<ActionResult<List<PortalUserDto>>> GetAllByEntityId(int id)
+        {
+            return Ok(await _authRepo.GetAllByEntityId(id));
+        }
         [HttpGet("{id}")]
         public async Task<ActionResult<List<PortalUserDto>>> GetSingle(int id)
         {
