@@ -10,6 +10,4 @@ public class DepatmentByEntityIdDto
     [Display(Name = "الإدارة")]
     public string DepartmentName { get; set; } = string.Empty;
     public string EntityName { get; set; } = string.Empty;
-    // public int EntityId { get; set; }
-    // public GetEntityDto? Entity { get; set; }
 }
