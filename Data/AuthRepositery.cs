@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using AutoMapper;
 using ClinicApi.Dtos.PortalUserDto;
+using ClinicApi.Dtos.PortalUserModelDto.Insert;
 using ClinicApi.Dtos.PortalUserModelDto.Update;
-using ClinicApi.Models.Entity;
 using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.Reponse;
 using Microsoft.EntityFrameworkCore;
@@ -48,10 +44,10 @@ public class AuthRepositery : IAuthRepositery
         return response;
     }
 
-    public async Task<ServiceResponse<int>> Register(PortalUser user, string password)
+    public async Task<ServiceResponse<int>> Register(InsertPortalUserDto userDto, string password)
     {
         var response = new ServiceResponse<int>();
-        if (await UserExists(user.Username))
+        if (await UserExists(userDto.Username))
         {
             response.Success = false;
             response.Message = "User Already Exists...";
@@ -59,12 +55,13 @@ public class AuthRepositery : IAuthRepositery
         else
         {
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
+            var user = _mapper.Map<PortalUser>(userDto);
             user.PasswordSalt = passwordSalt;
             user.PasswordHash = passwordHash;
 
             _context.PortalUser.Add(user);
             await _context.SaveChangesAsync();
-            response.Data = user.Id;
+            response.Data = userDto.Id;
         }
         return response;
     }
@@ -105,6 +102,7 @@ public class AuthRepositery : IAuthRepositery
                 new Claim("Entity",user.Entity.EntityName),
                 new Claim("RoleId",user.RoleId.ToString()),
                 new Claim("Role",user.Role.RoleName.ToString()),
+                new Claim("DepartmentId" , user.DepartmentId.ToString()),
                 new Claim("Department" , user.Department.DepartmentName.ToString()),
                 new Claim("LastLogin",user.LastLogin.ToString()),
                 new Claim("PasswordExpire",user.PasswordExpires.ToString()),
@@ -144,10 +142,15 @@ public class AuthRepositery : IAuthRepositery
     {
         var serviceResponse = new ServiceResponse<List<PortalUserDto>>();
         var dbContext = await _context.PortalUser.Where(u => u.EntityId == id).Include(u => u.PersonalImage).Include(e => e.Entity).Include(r => r.Role).Include(d => d.Department).ToListAsync();
-        // if (dbContext is null)
-        // {
-        //     throw new Exception($"The Id '{id}'Is Not Founde...");
-        // }
+
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<PortalUserDto>(p)).ToList();
+        return serviceResponse;
+    }
+    public async Task<ServiceResponse<List<PortalUserDto>>> GetAllByUserType(string type)
+    {
+        var serviceResponse = new ServiceResponse<List<PortalUserDto>>();
+        var dbContext = await _context.PortalUser.Where(u => u.UserType == type).Include(u => u.PersonalImage).Include(e => e.Entity).Include(r => r.Role).Include(d => d.Department).ToListAsync();
+
         serviceResponse.Data = dbContext.Select(p => _mapper.Map<PortalUserDto>(p)).ToList();
         return serviceResponse;
     }
@@ -155,10 +158,7 @@ public class AuthRepositery : IAuthRepositery
     {
         var serviceResponse = new ServiceResponse<PortalUserDto>();
         var dbContext = await _context.PortalUser.Include(u => u.PersonalImage).Include(e => e.Entity).Include(r => r.Role).Include(d => d.Department).FirstOrDefaultAsync(u => u.Id == id && u.EntityId == u.Department.EntityId);
-        // if (dbContext is null)
-        // {
-        //     throw new Exception($"The Id '{id}'Is Not Founde...");
-        // }
+
         serviceResponse.Data = _mapper.Map<PortalUserDto>(dbContext);
         return serviceResponse;
     }

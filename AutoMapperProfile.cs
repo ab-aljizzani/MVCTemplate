@@ -5,6 +5,7 @@ using ClinicApi.Dtos.Entity;
 using ClinicApi.Dtos.PersonalImagesModelDto;
 using ClinicApi.Dtos.PersonModelDto;
 using ClinicApi.Dtos.PortalUserDto;
+using ClinicApi.Dtos.PortalUserModelDto.Insert;
 using ClinicApi.Dtos.PortalUserModelDto.Update;
 using ClinicApi.Dtos.RoleDto;
 using ClinicApi.Dtos.RoleDto.Update;
@@ -41,6 +42,7 @@ public class AutoMapperProfile : Profile
         CreateMap<PortalUser, PortalUserDto>();
         CreateMap<PortalUserDto, PortalUser>();
         CreateMap<UpdatePortalUserDto, PortalUser>();
+        CreateMap<InsertPortalUserDto, PortalUser>();
 
         CreateMap<Zone, ZoneDto>();
         CreateMap<ZoneDto, Zone>();

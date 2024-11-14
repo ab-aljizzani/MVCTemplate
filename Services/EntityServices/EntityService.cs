@@ -161,7 +161,7 @@ public class EntityService : IEntityService
     public async Task<ServiceResponse<GetEntityDto>> GetEntityByID(int id)
     {
         var serviceResponse = new ServiceResponse<GetEntityDto>();
-        var dbContext = await _context.Entity.Include(e => e.Departments).FirstOrDefaultAsync(e => e.Id == id);
+        var dbContext = await _context.Entity.FirstOrDefaultAsync(e => e.Id == id);
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
