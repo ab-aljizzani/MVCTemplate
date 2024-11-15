@@ -10,7 +10,6 @@ public class Person
     public string Title { get; set; } = string.Empty;
     public string FullArabicName { get; set; } = string.Empty;
     public string FullEnglishName { get; set; } = string.Empty;
-    [DisplayFormat(DataFormatString = "{0: MM/dd/yyyy}")]
     public string DateOfBirth { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
     public int ZoneId { get; set; }

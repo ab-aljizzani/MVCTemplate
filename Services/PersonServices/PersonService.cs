@@ -53,7 +53,7 @@ public class PersonService : IPersonService
     public async Task<ServiceResponse<List<PersonDto>>> GetAllPerson()
     {
         var serviceResponse = new ServiceResponse<List<PersonDto>>();
-        var dbContext = await _context.Person.ToListAsync();
+        var dbContext = await _context.Person.Include(p => p.Zone).Include(p => p.Department).Include(p => p.PersonalImg).ToListAsync();
         serviceResponse.Data = dbContext.Select(p => _mapper.Map<PersonDto>(p)).ToList();
         return serviceResponse;
     }

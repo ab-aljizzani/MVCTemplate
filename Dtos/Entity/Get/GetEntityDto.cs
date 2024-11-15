@@ -1,5 +1,7 @@
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using ClinicApi.Data;
 using ClinicApi.Models.Entity;
 
 namespace ClinicApi.Dtos.Entity;
@@ -7,9 +9,10 @@ namespace ClinicApi.Dtos.Entity;
 public class GetEntityDto
 {
     public int Id { get; set; }
-    [Display(Name = "الوحدة")]
+    [Required(ErrorMessage = "الرجاء إدخال القطاع ")]
+    [Display(Name = "القطاع")]
     public string EntityName { get; set; } = string.Empty;
-    [Display(Name = "النوع")]
+    [Required(ErrorMessage = "الرجاء إختيار نوع القطاع ")]
+    [Display(Name = "نوع القطاع")]
     public string EntityType { get; set; } = string.Empty;
-    // public DepartmentDto? Departments { get; set; }
 }
