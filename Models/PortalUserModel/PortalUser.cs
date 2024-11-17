@@ -18,7 +18,7 @@ public class PortalUser
     public int PersonalImgId { get; set; }
     public Models.PersonalImagesModel.PersonalImg? PersonalImage { get; set; }
     public string DateOfBirth { get; set; } = string.Empty;
-
+    public string PhoneNumber { get; set; } = string.Empty;
     public string UserType { get; set; } = string.Empty;
     public Models.Entity.Entity? Entity { get; set; }
     public int EntityId { get; set; }

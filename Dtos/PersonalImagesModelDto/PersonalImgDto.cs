@@ -9,11 +9,9 @@ public class PersonalImgDto
     public byte[]? PersonalImage { get; set; }
     public byte[]? DocumentImg { get; set; }
     [NotMapped]
-    [Required(ErrorMessage = "الرجاء إدخال صورة الموظف")]
     [Display(Name = "الصورة الشخصية")]
     public IFormFile? ImgFile { get; set; }
     [NotMapped]
-    [Required(ErrorMessage = "الرجاء إدخال صورة الهوية الوطنية")]
     [Display(Name = "صورة الهوية الوطنية")]
     public IFormFile? DocFile { get; set; }
 }
