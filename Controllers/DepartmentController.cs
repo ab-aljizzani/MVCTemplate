@@ -23,6 +23,7 @@ namespace ClinicApi.Controllers
             _entityService = entityService;
             _tokenRoles = tokenRoles;
         }
+        [AllowAnonymous]
         [HttpGet("GetAll")]
         public async Task<ActionResult<List<DepartmentDto>>> Get()
         {

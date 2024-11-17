@@ -9,6 +9,7 @@ using ClinicApi.Dtos.Entity;
 using ClinicApi.Dtos.Entity.Get;
 using ClinicApi.Models.Entity;
 using ClinicApi.Models.Reponse;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.JsonWebTokens;
@@ -110,7 +111,7 @@ public class EntityService : IEntityService
     }
 
 
-
+    [AllowAnonymous]
     public async Task<ServiceResponse<List<DepartmentDto>>> GetAlldepartments()
     {
         var serviceResponse = new ServiceResponse<List<DepartmentDto>>();
