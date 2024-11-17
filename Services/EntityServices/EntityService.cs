@@ -6,6 +6,7 @@ using System.Security.Claims;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.Entity;
+using ClinicApi.Dtos.Entity.Get;
 using ClinicApi.Models.Entity;
 using ClinicApi.Models.Reponse;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -117,7 +118,13 @@ public class EntityService : IEntityService
         serviceResponse.Data = dbContext.Select(e => _mapper.Map<DepartmentDto>(e)).ToList();
         return serviceResponse;
     }
-
+    public async Task<ServiceResponse<List<DepartmentDto>>> GetDeptEntity()
+    {
+        var serviceResponse = new ServiceResponse<List<DepartmentDto>>();
+        var dbContext = await _context.Department.Include(d => d.Entity).ToListAsync();
+        serviceResponse.Data = dbContext.Select(e => _mapper.Map<DepartmentDto>(e)).ToList();
+        return serviceResponse;
+    }
     public async Task<ServiceResponse<List<GetEntityDto>>> GetAllEntitys()
     {
         var serviceResponse = new ServiceResponse<List<GetEntityDto>>();
@@ -142,7 +149,7 @@ public class EntityService : IEntityService
     public async Task<ServiceResponse<List<DepartmentDto>>> GetDepartmentByEntityID(int id)
     {
         var serviceResponse = new ServiceResponse<List<DepartmentDto>>();
-        var dbContext = await _context.Department.Where(w => w.EntityId == id).ToListAsync();
+        var dbContext = await _context.Department.Where(w => w.EntityId == id).Include(d => d.Entity).ToListAsync();
         serviceResponse.Data = dbContext.Select(e => _mapper.Map<DepartmentDto>(e)).ToList();
         return serviceResponse;
     }

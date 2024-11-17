@@ -1,5 +1,6 @@
 using System;
 using ClinicApi.Dtos.Entity;
+using ClinicApi.Dtos.Entity.Get;
 using ClinicApi.Models.Reponse;
 
 namespace ClinicApi.Services.Entity;
@@ -16,6 +17,7 @@ public interface IEntityService
     Task<ServiceResponse<List<DepartmentDto>>> GetAlldepartments();
     Task<ServiceResponse<DepartmentDto>> GetDepartmentByID(int id);
     Task<ServiceResponse<List<DepartmentDto>>> GetDepartmentByEntityID(int id);
+    Task<ServiceResponse<List<DepartmentDto>>> GetDeptEntity();
     Task<string> GetDepartmentCountByEntityID(int id);
     Task<ServiceResponse<List<GetEntityDto>>> AddNewDepartment(AddDepartmentDto newDepartment);
     Task<ServiceResponse<DepartmentDto>> UpdateDepartment(UpdateDepartmentDot updateDepartment);

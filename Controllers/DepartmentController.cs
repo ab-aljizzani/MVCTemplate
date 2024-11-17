@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using ClinicApi.Data;
 using ClinicApi.Dtos.Entity;
+using ClinicApi.Dtos.Entity.Get;
 using ClinicApi.Services.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +28,11 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _entityService.GetAlldepartments());
         }
+        [HttpGet("GetDeptEntity")]
+        public async Task<ActionResult<List<DepartmentDto>>> GetDeptEntity()
+        {
+            return Ok(await _entityService.GetDeptEntity());
+        }
         [HttpGet("{id}")]
         public async Task<ActionResult<DepartmentDto>> GetSingle(int id)
         {
@@ -48,8 +54,8 @@ namespace ClinicApi.Controllers
         public async Task<ActionResult<List<GetEntityDto>>> AddNewDepartment(AddDepartmentDto newDepartment)
         {
             var userEntity = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "EntityID");
-            if (int.Parse(userEntity.Value.ToString()) != newDepartment.EntityId)
-                return BadRequest("Entity Must Be The Same As You");
+            // if (int.Parse(userEntity.Value.ToString()) != newDepartment.EntityId)
+            //     return BadRequest("Entity Must Be The Same As You");
             return Ok(await _entityService.AddNewDepartment(newDepartment));
         }
         [HttpPut]
