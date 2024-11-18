@@ -3,7 +3,9 @@ using ClinicApi.Models.Entity;
 using ClinicApi.Models.PersonalImagesModel;
 using ClinicApi.Models.PersonModel;
 using ClinicApi.Models.PortalUser;
+using ClinicApi.Models.RequestModel;
 using ClinicApi.Models.Role;
+using ClinicApi.Models.SurveyModel;
 using ClinicApi.Models.ZoneModel;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,4 +24,11 @@ public class DataContext : DbContext
     public DbSet<Zone> Zone => Set<Zone>();
     public DbSet<PersonalImg> PersonalImg => Set<PersonalImg>();
     public DbSet<Person> Person => Set<Person>();
+    public DbSet<Request> Request => Set<Request>();
+    public DbSet<RequestStatus> RequestStatus => Set<RequestStatus>();
+    public DbSet<Survey> Survey => Set<Survey>();
+    public DbSet<SurveyQuestion> SurveyQuestion => Set<SurveyQuestion>();
+    public DbSet<SurveyAnswer> SurveyAnswer => Set<SurveyAnswer>();
+    public DbSet<SurveyAnswerType> SurveyAnswerType => Set<SurveyAnswerType>();
+    public DbSet<UserSurveyAnswer> UserSurveyAnswer => Set<UserSurveyAnswer>();
 }

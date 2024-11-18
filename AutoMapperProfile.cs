@@ -8,15 +8,23 @@ using ClinicApi.Dtos.PersonModelDto;
 using ClinicApi.Dtos.PortalUserDto;
 using ClinicApi.Dtos.PortalUserModelDto.Insert;
 using ClinicApi.Dtos.PortalUserModelDto.Update;
+using ClinicApi.Dtos.RequestDto.Get;
+using ClinicApi.Dtos.RequestDto.Insert;
+using ClinicApi.Dtos.RequestDto.Update;
 using ClinicApi.Dtos.RoleDto;
 using ClinicApi.Dtos.RoleDto.Update;
+using ClinicApi.Dtos.SurveyDto.Get;
+using ClinicApi.Dtos.SurveyDto.Insert;
+using ClinicApi.Dtos.SurveyDto.Update;
 using ClinicApi.Dtos.ZoneModelDto;
 using ClinicApi.Dtos.ZoneModelDto.Update;
 using ClinicApi.Models.Entity;
 using ClinicApi.Models.PersonalImagesModel;
 using ClinicApi.Models.PersonModel;
 using ClinicApi.Models.PortalUser;
+using ClinicApi.Models.RequestModel;
 using ClinicApi.Models.Role;
+using ClinicApi.Models.SurveyModel;
 using ClinicApi.Models.ZoneModel;
 
 namespace ClinicApi;
@@ -61,5 +69,55 @@ public class AutoMapperProfile : Profile
         CreateMap<Person, UpdatePersonDto>();
         CreateMap<InsertPersonDto, Person>();
         CreateMap<Person, InsertPersonDto>();
+
+        CreateMap<GetRequestDto, Request>();
+        CreateMap<InsertRequestDto, Request>();
+        CreateMap<UpdateRequestDto, Request>();
+        CreateMap<Request, GetRequestDto>();
+        CreateMap<Request, InsertRequestDto>();
+        CreateMap<Request, UpdateRequestDto>();
+
+        CreateMap<GetRequestStatusDto, RequestStatus>();
+        CreateMap<InsertRequestStatusDto, RequestStatus>();
+        CreateMap<UpdateRequestStatusDto, RequestStatus>();
+        CreateMap<RequestStatus, GetRequestStatusDto>();
+        CreateMap<RequestStatus, InsertRequestStatusDto>();
+        CreateMap<RequestStatus, UpdateRequestStatusDto>();
+
+        CreateMap<GetSurveyDto, Survey>();
+        CreateMap<InsertSurveyDto, Survey>();
+        CreateMap<UpdateSurveyDto, Survey>();
+        CreateMap<Survey, GetSurveyDto>();
+        CreateMap<Survey, InsertSurveyDto>();
+        CreateMap<Survey, UpdateSurveyDto>();
+
+        CreateMap<GetSurveyAnswerDto, SurveyAnswer>();
+        CreateMap<InsertSurveyAnswerDto, SurveyAnswer>();
+        CreateMap<UpdateSurveyAnswerDto, SurveyAnswer>();
+        CreateMap<SurveyAnswer, GetSurveyAnswerDto>();
+        CreateMap<SurveyAnswer, InsertSurveyAnswerDto>();
+        CreateMap<SurveyAnswer, UpdateSurveyAnswerDto>();
+
+        CreateMap<GetSurveyAnswerTypeDto, SurveyAnswerType>();
+        CreateMap<InsertSurveyAnswerTypeDto, SurveyAnswerType>();
+        CreateMap<UpdateSurveyAnswerTypeDto, SurveyAnswerType>();
+        CreateMap<SurveyAnswerType, GetSurveyAnswerTypeDto>();
+        CreateMap<SurveyAnswerType, InsertSurveyAnswerTypeDto>();
+        CreateMap<SurveyAnswerType, UpdateSurveyAnswerTypeDto>();
+
+
+        CreateMap<GetSurveyQuestionDto, SurveyQuestion>();
+        CreateMap<InsertSurveyQuestionDto, SurveyQuestion>();
+        CreateMap<UpdateSurveyQuestionDto, SurveyQuestion>();
+        CreateMap<SurveyQuestion, GetSurveyQuestionDto>();
+        CreateMap<SurveyQuestion, InsertSurveyQuestionDto>();
+        CreateMap<SurveyQuestion, UpdateSurveyQuestionDto>();
+
+        CreateMap<GetUserSurveyAnswerDto, UserSurveyAnswer>();
+        CreateMap<InsertUserSurveyAnswerDto, UserSurveyAnswer>();
+        CreateMap<UpdateUserSurveyAnswerDto, UserSurveyAnswer>();
+        CreateMap<UserSurveyAnswer, GetUserSurveyAnswerDto>();
+        CreateMap<UserSurveyAnswer, InsertUserSurveyAnswerDto>();
+        CreateMap<UserSurveyAnswer, UpdateUserSurveyAnswerDto>();
     }
 }
