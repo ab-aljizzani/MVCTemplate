@@ -23,7 +23,7 @@
     <Compile Include="Models\RequestModel\Request.cs" />
     <Compile Include="Models\RequestModel\RequestStatus.cs" />
     <Compile Include="Models\RoleModel\Role.cs" />
-    <Compile Include="Models\SurveyModel\Survey.cs" />
+    <Compile Include="Models\SurveyModel\SurveyType.cs" />
     <Compile Include="Models\SurveyModel\SurveyAnswer.cs" />
     <Compile Include="Models\SurveyModel\SurveyAnswerType.cs" />
     <Compile Include="Models\SurveyModel\SurveyQuestion.cs" />

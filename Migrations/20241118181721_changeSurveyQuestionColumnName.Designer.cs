@@ -3,6 +3,7 @@ using ClinicApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241118181721_changeSurveyQuestionColumnName")]
+    partial class changeSurveyQuestionColumnName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,8 +185,9 @@ namespace ClinicApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LoginAttemp")
-                        .HasColumnType("int");
+                    b.Property<string>("LoginAttemp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NationalId")
                         .IsRequired()
@@ -254,6 +258,9 @@ namespace ClinicApi.Migrations
                     b.Property<int>("RequstStatusId")
                         .HasColumnType("int");
 
+                    b.Property<int>("SurveyId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Request");
@@ -291,6 +298,22 @@ namespace ClinicApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Role");
+                });
+
+            modelBuilder.Entity("ClinicApi.Models.SurveyModel.Survey", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("UserSurveyAnswer")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Survey");
                 });
 
             modelBuilder.Entity("ClinicApi.Models.SurveyModel.SurveyAnswer", b =>
@@ -345,29 +368,9 @@ namespace ClinicApi.Migrations
                     b.Property<int>("SurveyAnswerTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SurveyTypeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("SurveyQuestion");
-                });
-
-            modelBuilder.Entity("ClinicApi.Models.SurveyModel.SurveyType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SurveyType");
                 });
 
             modelBuilder.Entity("ClinicApi.Models.SurveyModel.UserSurveyAnswer", b =>
@@ -383,9 +386,6 @@ namespace ClinicApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RequestId")
                         .HasColumnType("int");
 
                     b.Property<int>("SurveyAnswerId")

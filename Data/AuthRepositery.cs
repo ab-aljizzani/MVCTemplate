@@ -13,13 +13,15 @@ namespace ClinicApi.Data;
 
 public class AuthRepositery : IAuthRepositery
 {
+    private readonly MagicString _magicString;
     private readonly IMapper _mapper;
     private readonly DataContext _context;
     private readonly IConfiguration _configuration;
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public AuthRepositery(IMapper mapper, DataContext context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+    public AuthRepositery(MagicString magicString, IMapper mapper, DataContext context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
     {
+        _magicString = magicString;
         _mapper = mapper;
         _context = context;
         _configuration = configuration;
@@ -32,15 +34,40 @@ public class AuthRepositery : IAuthRepositery
         if (user is null)
         {
             response.Success = false;
-            response.Message = "User Not Found...";
+            response.Message = "User Not Found... ";
         }
+        else if (user.PasswordExpires == true)
+        {
+            response.Success = false;
+            response.Message = "User Expire... ";
+        }
+        else if (user.Status == "DisActive")
+        {
+            response.Success = false;
+            response.Message = "User DisActive... ";
+        }
+        // else if(user.LastLogin)
         else if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
         {
             response.Success = false;
             response.Message = "Wrong Password...";
+            user.LoginAttemp = user.LoginAttemp + 1;
+            await _context.SaveChangesAsync();
+            if (user.LoginAttemp >= 3)
+            {
+                response.Success = false;
+                response.Message = _magicString.LoginAttimptMessage;
+                user.PasswordExpires = true;
+                user.Status = "DisActive";
+                await _context.SaveChangesAsync();
+            }
         }
         else
+        {
             response.Data = CreateToken(user);
+            user.LastLogin = DateTime.Now.ToString();
+            await _context.SaveChangesAsync();
+        }
         return response;
     }
 

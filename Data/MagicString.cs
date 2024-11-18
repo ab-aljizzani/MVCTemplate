@@ -7,15 +7,13 @@ public class MagicString
     public string[] entityTypeList;
     public string[] personNationalIdTypeList;
     public string[] userTypeList;
-    // public int[] gradeList;
+
+    public readonly string LoginAttimptMessage = "لقد وصلت الحد الأعلى لعدد المحاولات الخاطئة لتسجيل الدخول تم تعطيل الحساب الرجاء التواصل مع مدير النظام";
     public MagicString()
     {
         entityTypeList = ["داخلي", "خارجي"];
         userTypeList = ["رئيسي", "فرعي"];
         personNationalIdTypeList = ["المملكة العربية السعودية", "سوريا", "مصر", "الأردن"];
-        // for (int i = 0; i <= 15; i++)
-        // {
-        //     gradeList[i] = i;
-        // }
+
     }
 }

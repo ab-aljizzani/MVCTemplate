@@ -41,7 +41,7 @@ public class PortalUserDto
     public Models.Entity.Department? Department { get; set; }
     public int RoleId { get; set; }
     public Models.Role.Role? Role { get; set; }
-    public string LoginAttemp { get; set; } = string.Empty;
+    public int LoginAttemp { get; set; }
     public string LastLogin { get; set; } = string.Empty;
     public string CreatedDate { get; set; } = string.Empty;
     public bool PasswordExpires { get; set; }

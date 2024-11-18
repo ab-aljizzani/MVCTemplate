@@ -20,13 +20,13 @@ public class SurveyService : ISurveyService
         _mapper = mapper;
         _context = context;
     }
-    public async Task<ServiceResponse<List<GetSurveyDto>>> AddNewSurvey(InsertSurveyDto newSurvey)
+    public async Task<ServiceResponse<List<GetSurveyTypeDto>>> AddNewSurvey(InsertSurveyTypeDto newSurvey)
     {
-        var serviceResponse = new ServiceResponse<List<GetSurveyDto>>();
-        var survey = _mapper.Map<Models.SurveyModel.Survey>(newSurvey);
-        _context.Survey.Add(survey);
+        var serviceResponse = new ServiceResponse<List<GetSurveyTypeDto>>();
+        var survey = _mapper.Map<Models.SurveyModel.SurveyType>(newSurvey);
+        _context.SurveyType.Add(survey);
         _context.SaveChanges();
-        serviceResponse.Data = await _context.Survey.Select(p => _mapper.Map<GetSurveyDto>(p)).ToListAsync();
+        serviceResponse.Data = await _context.SurveyType.Select(p => _mapper.Map<GetSurveyTypeDto>(p)).ToListAsync();
         return serviceResponse;
     }
 
@@ -70,19 +70,19 @@ public class SurveyService : ISurveyService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<GetSurveyDto>> DeleteSurvey(int id)
+    public async Task<ServiceResponse<GetSurveyTypeDto>> DeleteSurvey(int id)
     {
-        var serviceResponse = new ServiceResponse<GetSurveyDto>();
+        var serviceResponse = new ServiceResponse<GetSurveyTypeDto>();
         try
         {
-            var survey = await _context.Survey.FirstOrDefaultAsync(p => p.Id == id);
+            var survey = await _context.SurveyType.FirstOrDefaultAsync(p => p.Id == id);
             if (survey is null)
             {
                 throw new Exception($"The Id '{id}'Is Not Founde...");
             }
-            _context.Survey.Remove(survey);
+            _context.SurveyType.Remove(survey);
             await _context.SaveChangesAsync();
-            serviceResponse.Data = _mapper.Map<GetSurveyDto>(survey);
+            serviceResponse.Data = _mapper.Map<GetSurveyTypeDto>(survey);
         }
         catch (Exception ex)
         {
@@ -180,11 +180,11 @@ public class SurveyService : ISurveyService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<List<GetSurveyDto>>> GetAllSurvey()
+    public async Task<ServiceResponse<List<GetSurveyTypeDto>>> GetAllSurvey()
     {
-        var serviceResponse = new ServiceResponse<List<GetSurveyDto>>();
-        var dbContext = await _context.Survey.ToListAsync();
-        serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetSurveyDto>(p)).ToList();
+        var serviceResponse = new ServiceResponse<List<GetSurveyTypeDto>>();
+        var dbContext = await _context.SurveyType.ToListAsync();
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetSurveyTypeDto>(p)).ToList();
         return serviceResponse;
     }
 
@@ -244,15 +244,15 @@ public class SurveyService : ISurveyService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<GetSurveyDto>> GetSurveyByID(int id)
+    public async Task<ServiceResponse<GetSurveyTypeDto>> GetSurveyByID(int id)
     {
-        var serviceResponse = new ServiceResponse<GetSurveyDto>();
-        var dbContext = await _context.Survey.FirstOrDefaultAsync(p => p.Id == id);
+        var serviceResponse = new ServiceResponse<GetSurveyTypeDto>();
+        var dbContext = await _context.SurveyType.FirstOrDefaultAsync(p => p.Id == id);
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
         }
-        serviceResponse.Data = _mapper.Map<GetSurveyDto>(dbContext);
+        serviceResponse.Data = _mapper.Map<GetSurveyTypeDto>(dbContext);
         return serviceResponse;
     }
 
@@ -280,19 +280,19 @@ public class SurveyService : ISurveyService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<UpdateSurveyDto>> UpdateSurvey(UpdateSurveyDto updateSurvey)
+    public async Task<ServiceResponse<UpdateSurveyTypeDto>> UpdateSurvey(UpdateSurveyTypeDto updateSurvey)
     {
-        var serviceResponse = new ServiceResponse<UpdateSurveyDto>();
+        var serviceResponse = new ServiceResponse<UpdateSurveyTypeDto>();
         try
         {
-            var survey = await _context.Survey.FirstOrDefaultAsync(z => z.Id == updateSurvey.Id);
+            var survey = await _context.SurveyType.FirstOrDefaultAsync(z => z.Id == updateSurvey.Id);
             if (survey is null)
             {
                 throw new Exception($"The Id '{updateSurvey.Id}'Is Not Founde...");
             }
             _mapper.Map(updateSurvey, survey);
             await _context.SaveChangesAsync();
-            serviceResponse.Data = _mapper.Map<UpdateSurveyDto>(survey);
+            serviceResponse.Data = _mapper.Map<UpdateSurveyTypeDto>(survey);
         }
         catch (Exception ex)
         {

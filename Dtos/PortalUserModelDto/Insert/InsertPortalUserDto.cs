@@ -49,7 +49,7 @@ public class InsertPortalUserDto
     public int RoleId { get; set; }
     // [NotMapped]
     // public RoleDto.RoleDto? Role { get; set; }
-    public string LoginAttemp { get; set; } = string.Empty;
+    public int LoginAttemp { get; set; }
     public string LastLogin { get; set; } = string.Empty;
     public string CreatedDate { get; set; } = string.Empty;
     public bool PasswordExpires { get; set; }

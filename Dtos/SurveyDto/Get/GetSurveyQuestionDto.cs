@@ -6,5 +6,6 @@ public class GetSurveyQuestionDto
 {
     public int Id { get; set; }
     public string Question { get; set; } = string.Empty;
-    public int SurveyAnswerId { get; set; }
+    public int SurveyTypeId { get; set; }
+    public int SurveyAnswerTypeId { get; set; }
 }
