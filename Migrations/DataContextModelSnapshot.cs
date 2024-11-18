@@ -38,8 +38,7 @@ namespace ClinicApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EntityId")
-                        .IsUnique();
+                    b.HasIndex("EntityId");
 
                     b.ToTable("Department");
                 });
@@ -239,6 +238,48 @@ namespace ClinicApi.Migrations
                     b.ToTable("PortalUser");
                 });
 
+            modelBuilder.Entity("ClinicApi.Models.RequestModel.Request", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PortalUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RequstStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SurveyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Request");
+                });
+
+            modelBuilder.Entity("ClinicApi.Models.RequestModel.RequestStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RequestStatus");
+                });
+
             modelBuilder.Entity("ClinicApi.Models.Role.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -254,6 +295,108 @@ namespace ClinicApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Role");
+                });
+
+            modelBuilder.Entity("ClinicApi.Models.SurveyModel.Survey", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("UserSurveyAnswer")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Survey");
+                });
+
+            modelBuilder.Entity("ClinicApi.Models.SurveyModel.SurveyAnswer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SurveyAnswerTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SurveyAnswer");
+                });
+
+            modelBuilder.Entity("ClinicApi.Models.SurveyModel.SurveyAnswerType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SurveyAnswerType");
+                });
+
+            modelBuilder.Entity("ClinicApi.Models.SurveyModel.SurveyQuestion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SurveyAnswerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SurveyQuestion");
+                });
+
+            modelBuilder.Entity("ClinicApi.Models.SurveyModel.UserSurveyAnswer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SurveyAnswerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SurveyQuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserSurveyAnswer");
                 });
 
             modelBuilder.Entity("ClinicApi.Models.ZoneModel.Zone", b =>
@@ -275,11 +418,13 @@ namespace ClinicApi.Migrations
 
             modelBuilder.Entity("ClinicApi.Models.Entity.Department", b =>
                 {
-                    b.HasOne("ClinicApi.Models.Entity.Entity", null)
-                        .WithOne("Departments")
-                        .HasForeignKey("ClinicApi.Models.Entity.Department", "EntityId")
+                    b.HasOne("ClinicApi.Models.Entity.Entity", "Entity")
+                        .WithMany()
+                        .HasForeignKey("EntityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Entity");
                 });
 
             modelBuilder.Entity("ClinicApi.Models.PersonModel.Person", b =>
@@ -350,11 +495,6 @@ namespace ClinicApi.Migrations
                     b.Navigation("PersonalImage");
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("ClinicApi.Models.Entity.Entity", b =>
-                {
-                    b.Navigation("Departments");
                 });
 #pragma warning restore 612, 618
         }

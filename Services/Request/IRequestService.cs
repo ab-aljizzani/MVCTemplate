@@ -1,0 +1,22 @@
+using System;
+using ClinicApi.Dtos.RequestDto.Get;
+using ClinicApi.Dtos.RequestDto.Insert;
+using ClinicApi.Dtos.RequestDto.Update;
+using ClinicApi.Models.Reponse;
+
+namespace ClinicApi.Services.Request;
+
+public interface IRequestService
+{
+    Task<ServiceResponse<List<GetRequestDto>>> GetAllRequest();
+    Task<ServiceResponse<GetRequestDto>> GetRequestByID(int id);
+    Task<ServiceResponse<List<GetRequestDto>>> AddNewRequest(InsertRequestDto newRequest);
+    Task<ServiceResponse<UpdateRequestDto>> UpdateRequest(UpdateRequestDto updateRequest);
+    Task<ServiceResponse<GetRequestDto>> DeleteRequest(int id);
+
+    Task<ServiceResponse<List<GetRequestStatusDto>>> GetAllRequestStatus();
+    Task<ServiceResponse<GetRequestStatusDto>> GetRequestStatusByID(int id);
+    Task<ServiceResponse<List<GetRequestStatusDto>>> AddNewRequestStatus(InsertRequestStatusDto newRequestStatus);
+    Task<ServiceResponse<UpdateRequestStatusDto>> UpdateRequestStatus(UpdateRequestStatusDto updateRequestStatus);
+    Task<ServiceResponse<GetRequestStatusDto>> DeleteRequestStatus(int id);
+}

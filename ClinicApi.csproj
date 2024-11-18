@@ -20,7 +20,14 @@
     <Compile Include="Models\PersonModel\Person.cs" />
     <Compile Include="Models\PortalUserModel\PortalUser.cs" />
     <Compile Include="Models\ReponseModel\ServiceResponse.cs" />
+    <Compile Include="Models\RequestModel\Request.cs" />
+    <Compile Include="Models\RequestModel\RequestStatus.cs" />
     <Compile Include="Models\RoleModel\Role.cs" />
+    <Compile Include="Models\SurveyModel\Survey.cs" />
+    <Compile Include="Models\SurveyModel\SurveyAnswer.cs" />
+    <Compile Include="Models\SurveyModel\SurveyAnswerType.cs" />
+    <Compile Include="Models\SurveyModel\SurveyQuestion.cs" />
+    <Compile Include="Models\SurveyModel\UserSurveyAnswer.cs" />
     <Compile Include="Models\ZoneModel\Zone.cs" />
   </ItemGroup>
 
@@ -44,6 +51,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore.swagger" Version="6.9.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.swaggerGen" Version="6.9.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.swaggerUi" Version="6.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Survey\" />
   </ItemGroup>
 
 </Project>
