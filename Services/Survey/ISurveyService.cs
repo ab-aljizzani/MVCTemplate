@@ -17,6 +17,7 @@ public interface ISurveyService
 
     Task<ServiceResponse<List<GetSurveyAnswerDto>>> GetAllSurveyAnswer();
     Task<ServiceResponse<GetSurveyAnswerDto>> GetSurveyAnswerByID(int id);
+    Task<ServiceResponse<List<GetSurveyAnswerDto>>> GetSurveyAnswerByAnswerType(int id);
     Task<ServiceResponse<List<GetSurveyAnswerDto>>> AddNewSurveyAnswer(InsertSurveyAnswerDto newSurveyAnswer);
     Task<ServiceResponse<UpdateSurveyAnswerDto>> UpdateSurveyAnswer(UpdateSurveyAnswerDto updateSurveyAnswer);
     Task<ServiceResponse<GetSurveyAnswerDto>> DeleteSurveyAnswer(int id);

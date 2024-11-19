@@ -29,6 +29,12 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _surveyService.GetSurveyAnswerByID(id));
         }
+        [HttpGet]
+        [Route("GetSurveyByAnswetType")]
+        public async Task<ActionResult<List<GetSurveyAnswerDto>>> GetSurveyByAnswetType(int id)
+        {
+            return Ok(await _surveyService.GetSurveyAnswerByAnswerType(id));
+        }
         [HttpPost]
         public async Task<ActionResult<List<InsertSurveyAnswerDto>>> AddnewSurveyAnswer(InsertSurveyAnswerDto newSurveyAnswer)
         {

@@ -3,6 +3,7 @@ using ClinicApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241119180951_AddMinyToMinyRelation")]
+    partial class AddMinyToMinyRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -350,6 +353,8 @@ namespace ClinicApi.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SurveyAnswerTypeId");
+
                     b.ToTable("SurveyQuestion");
                 });
 
@@ -401,8 +406,6 @@ namespace ClinicApi.Migrations
 
                     b.HasIndex("SurveyAnswerId");
 
-                    b.HasIndex("SurveyQuestionId");
-
                     b.ToTable("UserSurveyAnswer");
                 });
 
@@ -421,6 +424,21 @@ namespace ClinicApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Zone");
+                });
+
+            modelBuilder.Entity("SurveyAnswerSurveyQuestion", b =>
+                {
+                    b.Property<int>("SurveyAnswerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SurveyQuestionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SurveyAnswerId", "SurveyQuestionId");
+
+                    b.HasIndex("SurveyQuestionId");
+
+                    b.ToTable("SurveyAnswerSurveyQuestion");
                 });
 
             modelBuilder.Entity("ClinicApi.Models.Entity.Department", b =>
@@ -504,6 +522,17 @@ namespace ClinicApi.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("ClinicApi.Models.SurveyModel.SurveyQuestion", b =>
+                {
+                    b.HasOne("ClinicApi.Models.SurveyModel.SurveyAnswerType", "surveyAnswerType")
+                        .WithMany()
+                        .HasForeignKey("SurveyAnswerTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("surveyAnswerType");
+                });
+
             modelBuilder.Entity("ClinicApi.Models.SurveyModel.UserSurveyAnswer", b =>
                 {
                     b.HasOne("ClinicApi.Models.SurveyModel.SurveyAnswer", "surveyAnswer")
@@ -512,15 +541,22 @@ namespace ClinicApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ClinicApi.Models.SurveyModel.SurveyQuestion", "SurveyQuestion")
+                    b.Navigation("surveyAnswer");
+                });
+
+            modelBuilder.Entity("SurveyAnswerSurveyQuestion", b =>
+                {
+                    b.HasOne("ClinicApi.Models.SurveyModel.SurveyAnswer", null)
+                        .WithMany()
+                        .HasForeignKey("SurveyAnswerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ClinicApi.Models.SurveyModel.SurveyQuestion", null)
                         .WithMany()
                         .HasForeignKey("SurveyQuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("SurveyQuestion");
-
-                    b.Navigation("surveyAnswer");
                 });
 #pragma warning restore 612, 618
         }

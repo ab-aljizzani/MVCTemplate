@@ -216,8 +216,16 @@ public class SurveyService : ISurveyService
     public async Task<ServiceResponse<List<GetUserSurveyAnswerDto>>> GetAllUserSurveyAnswer()
     {
         var serviceResponse = new ServiceResponse<List<GetUserSurveyAnswerDto>>();
-        var dbContext = await _context.UserSurveyAnswer.ToListAsync();
+        var dbContext = await _context.UserSurveyAnswer.Include(u => u.surveyAnswer).Include(u => u.SurveyQuestion).ToListAsync();
         serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetUserSurveyAnswerDto>(p)).ToList();
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<List<GetSurveyAnswerDto>>> GetSurveyAnswerByAnswerType(int id)
+    {
+        var serviceResponse = new ServiceResponse<List<GetSurveyAnswerDto>>();
+        var dbContext = await _context.SurveyAnswer.Where(a => a.SurveyAnswerTypeId == id).ToListAsync();
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetSurveyAnswerDto>(p)).ToList();
         return serviceResponse;
     }
 
