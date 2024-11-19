@@ -84,12 +84,12 @@ public class AutoMapperProfile : Profile
         CreateMap<RequestStatus, InsertRequestStatusDto>();
         CreateMap<RequestStatus, UpdateRequestStatusDto>();
 
-        CreateMap<GetSurveyDto, Survey>();
-        CreateMap<InsertSurveyDto, Survey>();
-        CreateMap<UpdateSurveyDto, Survey>();
-        CreateMap<Survey, GetSurveyDto>();
-        CreateMap<Survey, InsertSurveyDto>();
-        CreateMap<Survey, UpdateSurveyDto>();
+        CreateMap<GetSurveyTypeDto, SurveyType>();
+        CreateMap<InsertSurveyTypeDto, SurveyType>();
+        CreateMap<UpdateSurveyTypeDto, SurveyType>();
+        CreateMap<SurveyType, GetSurveyTypeDto>();
+        CreateMap<SurveyType, InsertSurveyTypeDto>();
+        CreateMap<SurveyType, UpdateSurveyTypeDto>();
 
         CreateMap<GetSurveyAnswerDto, SurveyAnswer>();
         CreateMap<InsertSurveyAnswerDto, SurveyAnswer>();

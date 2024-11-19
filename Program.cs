@@ -47,6 +47,7 @@ namespace ClinicApi
             builder.Services.AddScoped<IPersonService, PersonService>();
             builder.Services.AddScoped<IRequestService, RequestService>();
             builder.Services.AddScoped<ISurveyService, SurveyService>();
+            builder.Services.AddScoped<MagicString>();
             builder.Services.AddScoped<TokenRoles>();
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {

@@ -26,7 +26,7 @@ public class DataContext : DbContext
     public DbSet<Person> Person => Set<Person>();
     public DbSet<Request> Request => Set<Request>();
     public DbSet<RequestStatus> RequestStatus => Set<RequestStatus>();
-    public DbSet<Survey> Survey => Set<Survey>();
+    public DbSet<SurveyType> SurveyType => Set<SurveyType>();
     public DbSet<SurveyQuestion> SurveyQuestion => Set<SurveyQuestion>();
     public DbSet<SurveyAnswer> SurveyAnswer => Set<SurveyAnswer>();
     public DbSet<SurveyAnswerType> SurveyAnswerType => Set<SurveyAnswerType>();

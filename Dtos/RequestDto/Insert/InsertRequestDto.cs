@@ -8,5 +8,4 @@ public class InsertRequestDto
     public int PersonId { get; set; }
     public int PortalUserId { get; set; }
     public int RequstStatusId { get; set; }
-    public int SurveyId { get; set; }
 }

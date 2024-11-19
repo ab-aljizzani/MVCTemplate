@@ -8,11 +8,11 @@ namespace ClinicApi.Services.Survey;
 
 public interface ISurveyService
 {
-    Task<ServiceResponse<List<GetSurveyDto>>> GetAllSurvey();
-    Task<ServiceResponse<GetSurveyDto>> GetSurveyByID(int id);
-    Task<ServiceResponse<List<GetSurveyDto>>> AddNewSurvey(InsertSurveyDto newSurvey);
-    Task<ServiceResponse<UpdateSurveyDto>> UpdateSurvey(UpdateSurveyDto updateSurvey);
-    Task<ServiceResponse<GetSurveyDto>> DeleteSurvey(int id);
+    Task<ServiceResponse<List<GetSurveyTypeDto>>> GetAllSurvey();
+    Task<ServiceResponse<GetSurveyTypeDto>> GetSurveyByID(int id);
+    Task<ServiceResponse<List<GetSurveyTypeDto>>> AddNewSurvey(InsertSurveyTypeDto newSurvey);
+    Task<ServiceResponse<UpdateSurveyTypeDto>> UpdateSurvey(UpdateSurveyTypeDto updateSurvey);
+    Task<ServiceResponse<GetSurveyTypeDto>> DeleteSurvey(int id);
 
     Task<ServiceResponse<List<GetSurveyAnswerDto>>> GetAllSurveyAnswer();
     Task<ServiceResponse<GetSurveyAnswerDto>> GetSurveyAnswerByID(int id);

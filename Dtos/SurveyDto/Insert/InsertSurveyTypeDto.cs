@@ -2,8 +2,9 @@ using System;
 
 namespace ClinicApi.Dtos.SurveyDto.Insert;
 
-public class InsertSurveyDto
+public class InsertSurveyTypeDto
 {
+
     public int Id { get; set; }
-    public int UserSurveyAnswer { get; set; }
+    public string Type { get; set; } = string.Empty;
 }
