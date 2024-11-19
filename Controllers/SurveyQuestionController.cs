@@ -2,6 +2,7 @@ using ClinicApi.Dtos.SurveyDto.Get;
 using ClinicApi.Dtos.SurveyDto.Insert;
 using ClinicApi.Dtos.SurveyDto.Update;
 using ClinicApi.Services.Survey;
+using ClinicApi.ViewModel.Survey;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,12 @@ namespace ClinicApi.Controllers
         public async Task<ActionResult<List<GetSurveyQuestionDto>>> GetSurveyById(int id)
         {
             return Ok(await _surveyService.GetSurveyQuestionByID(id));
+        }
+        [HttpGet]
+        [Route("GetSurveyQuestionAnswer")]
+        public async Task<ActionResult<List<GetSurveyQesAnswerDto>>> GetSurveyQuestionAnswer(int id)
+        {
+            return Ok(await _surveyService.GetSurveyQuestionAnswer(id));
         }
         [HttpPost]
         public async Task<ActionResult<List<InsertSurveyQuestionDto>>> AddnewSurveyQuestion(InsertSurveyQuestionDto newSurveyQuestion)
