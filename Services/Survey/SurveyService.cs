@@ -6,6 +6,7 @@ using ClinicApi.Dtos.SurveyDto.Insert;
 using ClinicApi.Dtos.SurveyDto.Update;
 using ClinicApi.Models.Reponse;
 using ClinicApi.Models.SurveyModel;
+using ClinicApi.ViewModel.Survey;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClinicApi.Services.Survey;
@@ -256,6 +257,36 @@ public class SurveyService : ISurveyService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<List<GetSurveyQesAnswerDto>>> GetSurveyQuestionAnswer(int id)
+    {
+        var serviceResponse = new ServiceResponse<List<GetSurveyQesAnswerDto>>();
+        var dbContext = await _context.SurveyQuestion.Where(s => s.SurveyTypeId == id).ToListAsync();
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetSurveyQesAnswerDto>(p)).ToList();
+        return serviceResponse;
+    }
+
+    // public async Task<ServiceResponse<object>> GetSurveyQuestionAnswerVm(int SurveyTypeId)
+    // {
+    //     var serviceResponse = new ServiceResponse<object>();
+    //     var surveyQ = await _context.SurveyQuestion.Where(sq => sq.SurveyTypeId == SurveyTypeId).ToListAsync();
+    //     var surveyAns = await _context.SurveyAnswer.Where(s => s.SurveyAnswerTypeId == surveyQ.Select(sa => sa.SurveyAnswerTypeId).FirstOrDefault()).ToListAsync();
+    //     var surveyVm = new SurveyQuestionAnswerVm() { SurveyQuestion = surveyQ, SurveyAnswer = surveyAns };
+    //     if (surveyVm is null)
+    //     {
+    //         throw new Exception($"Not Founde...");
+    //     }
+    //     // serviceResponse.Data = surveyVm.Select(p => _mapper.Map<SurveyQuestionAnswerVm>(p)).ToList();
+    //     serviceResponse.Data = surveyVm;
+    //     return serviceResponse;
+    // }
+    // public async Task<List<SurveyQuestionAnswerVm>> GetSurveyQuestionVm(int SurveyTypeId)
+    // {
+    //     var serviceResponse = new ServiceResponse<List<SurveyQuestionAnswerVm>>();
+    //     var dbContextQ = await _context.SurveyQuestion.Where(s => s.SurveyTypeId == SurveyTypeId).ToListAsync();
+    //     var surveyVm = new SurveyQuestionAnswerVm(){SurveyQuestion = dbContextQ , SurveyAnswer = dbContextA};
+    //     serviceResponse.Data = surveyVm.SurveyQuestion.Select(p => _mapper.Map<SurveyQuestionAnswerVm>(p)).ToList();
+    //     return serviceResponse;
+    // }
     public async Task<ServiceResponse<GetSurveyQuestionDto>> GetSurveyQuestionByID(int id)
     {
         var serviceResponse = new ServiceResponse<GetSurveyQuestionDto>();

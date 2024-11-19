@@ -3,6 +3,7 @@ using ClinicApi.Dtos.SurveyDto.Get;
 using ClinicApi.Dtos.SurveyDto.Insert;
 using ClinicApi.Dtos.SurveyDto.Update;
 using ClinicApi.Models.Reponse;
+using ClinicApi.ViewModel.Survey;
 
 namespace ClinicApi.Services.Survey;
 
@@ -28,6 +29,7 @@ public interface ISurveyService
 
     Task<ServiceResponse<List<GetSurveyQuestionDto>>> GetAllSurveyQuestion();
     Task<ServiceResponse<GetSurveyQuestionDto>> GetSurveyQuestionByID(int id);
+    Task<ServiceResponse<List<GetSurveyQesAnswerDto>>> GetSurveyQuestionAnswer(int id);
     Task<ServiceResponse<List<GetSurveyQuestionDto>>> AddNewSurveyQuestion(InsertSurveyQuestionDto newSurveyQuestion);
     Task<ServiceResponse<UpdateSurveyQuestionDto>> UpdateSurveyQuestion(UpdateSurveyQuestionDto updateSurveyQuestion);
     Task<ServiceResponse<GetSurveyQuestionDto>> DeleteSurveyQuestion(int id);
@@ -37,4 +39,8 @@ public interface ISurveyService
     Task<ServiceResponse<List<GetUserSurveyAnswerDto>>> AddNewUserSurveyAnswer(InsertUserSurveyAnswerDto newUserSurveyAnswer);
     Task<ServiceResponse<UpdateUserSurveyAnswerDto>> UpdateUserSurveyAnswer(UpdateUserSurveyAnswerDto updateUserSurveyAnswer);
     Task<ServiceResponse<GetUserSurveyAnswerDto>> DeleteUserSurveyAnswer(int id);
+
+
+
+    // Task<ServiceResponse<object>> GetSurveyQuestionAnswerVm(int SurveyTypeId);
 }

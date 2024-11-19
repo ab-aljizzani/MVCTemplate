@@ -26,6 +26,7 @@ using ClinicApi.Models.RequestModel;
 using ClinicApi.Models.Role;
 using ClinicApi.Models.SurveyModel;
 using ClinicApi.Models.ZoneModel;
+using ClinicApi.ViewModel.Survey;
 
 namespace ClinicApi;
 
@@ -119,5 +120,10 @@ public class AutoMapperProfile : Profile
         CreateMap<UserSurveyAnswer, GetUserSurveyAnswerDto>();
         CreateMap<UserSurveyAnswer, InsertUserSurveyAnswerDto>();
         CreateMap<UserSurveyAnswer, UpdateUserSurveyAnswerDto>();
+
+
+        CreateMap<GetSurveyQesAnswerDto, SurveyQuestion>();
+        CreateMap<SurveyQuestion, GetSurveyQesAnswerDto>();
+
     }
 }
