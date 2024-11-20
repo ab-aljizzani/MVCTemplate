@@ -6383,11 +6383,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\SRG1\\Documents\\GitHub\\ClinicApi\\ClinicApi.csproj",
+      "projectUniqueName": "C:\\Users\\SRG1\\Documents\\GitHub\\ClinicApi\\ClinicApi.csproj",
       "projectName": "ClinicApi",
-      "projectPath": "c:\\Users\\SRG1\\Documents\\GitHub\\ClinicApi\\ClinicApi.csproj",
+      "projectPath": "C:\\Users\\SRG1\\Documents\\GitHub\\ClinicApi\\ClinicApi.csproj",
       "packagesPath": "C:\\Users\\SRG1\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\SRG1\\Documents\\GitHub\\ClinicApi\\obj\\",
+      "outputPath": "C:\\Users\\SRG1\\Documents\\GitHub\\ClinicApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6515,13 +6515,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json."
-    }
-  ]
+  }
 }
