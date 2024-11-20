@@ -3,6 +3,7 @@ using ClinicApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241119185316_RemoveMinyToMinyRelation")]
+    partial class RemoveMinyToMinyRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -401,8 +404,6 @@ namespace ClinicApi.Migrations
 
                     b.HasIndex("SurveyAnswerId");
 
-                    b.HasIndex("SurveyQuestionId");
-
                     b.ToTable("UserSurveyAnswer");
                 });
 
@@ -511,14 +512,6 @@ namespace ClinicApi.Migrations
                         .HasForeignKey("SurveyAnswerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("ClinicApi.Models.SurveyModel.SurveyQuestion", "SurveyQuestion")
-                        .WithMany()
-                        .HasForeignKey("SurveyQuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SurveyQuestion");
 
                     b.Navigation("surveyAnswer");
                 });

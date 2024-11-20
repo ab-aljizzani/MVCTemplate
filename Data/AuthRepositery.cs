@@ -66,6 +66,7 @@ public class AuthRepositery : IAuthRepositery
         {
             response.Data = CreateToken(user);
             user.LastLogin = DateTime.Now.ToString();
+            user.LoginAttemp = 0;
             await _context.SaveChangesAsync();
         }
         return response;
