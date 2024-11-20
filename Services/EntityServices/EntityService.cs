@@ -21,9 +21,11 @@ public class EntityService : IEntityService
     private readonly IMapper _mapper;
     private readonly DataContext _context;
     private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly MagicString _magicString;
 
-    public EntityService(IMapper mapper, DataContext context, IHttpContextAccessor httpContextAccessor)
+    public EntityService(MagicString magicString, IMapper mapper, DataContext context, IHttpContextAccessor httpContextAccessor)
     {
+        _magicString = magicString;
         _mapper = mapper;
         _context = context;
         _httpContextAccessor = httpContextAccessor;
@@ -45,6 +47,7 @@ public class EntityService : IEntityService
             var department = _mapper.Map<Department>(newDepartment);
             _context.Department.Add(department);
             await _context.SaveChangesAsync();
+            serviceResponse.Message = _magicString.InsertSuccess;
         }
         catch (Exception ex)
         {

@@ -19,13 +19,13 @@ public class RequestService : IRequestService
         _mapper = mapper;
         _context = context;
     }
-    public async Task<ServiceResponse<List<GetRequestDto>>> AddNewRequest(InsertRequestDto newRequest)
+    public async Task<ServiceResponse<int>> AddNewRequest(InsertRequestDto newRequest)
     {
-        var serviceResponse = new ServiceResponse<List<GetRequestDto>>();
+        var serviceResponse = new ServiceResponse<int>();
         var request = _mapper.Map<Models.RequestModel.Request>(newRequest);
         _context.Request.Add(request);
-        _context.SaveChanges();
-        serviceResponse.Data = await _context.Request.Select(p => _mapper.Map<GetRequestDto>(p)).ToListAsync();
+        await _context.SaveChangesAsync();
+        serviceResponse.Data = request.Id;
         return serviceResponse;
     }
 
@@ -90,7 +90,7 @@ public class RequestService : IRequestService
     public async Task<ServiceResponse<List<GetRequestDto>>> GetAllRequest()
     {
         var serviceResponse = new ServiceResponse<List<GetRequestDto>>();
-        var dbContext = await _context.Request.ToListAsync();
+        var dbContext = await _context.Request.Include(r => r.Person).Include(r => r.RequestStatus).Include(r => r.PortalUser).ToListAsync();
         serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetRequestDto>(p)).ToList();
         return serviceResponse;
     }
