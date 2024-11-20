@@ -6377,23 +6377,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\abalj\\.nuget\\packages\\": {},
+    "C:\\Users\\SRG1\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\abalj\\OneDrive\\Desktop\\ClinicApi\\ClinicApi.csproj",
+      "projectUniqueName": "c:\\Users\\SRG1\\Documents\\GitHub\\ClinicApi\\ClinicApi.csproj",
       "projectName": "ClinicApi",
-      "projectPath": "c:\\Users\\abalj\\OneDrive\\Desktop\\ClinicApi\\ClinicApi.csproj",
-      "packagesPath": "C:\\Users\\abalj\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\abalj\\OneDrive\\Desktop\\ClinicApi\\obj\\",
+      "projectPath": "c:\\Users\\SRG1\\Documents\\GitHub\\ClinicApi\\ClinicApi.csproj",
+      "packagesPath": "C:\\Users\\SRG1\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\SRG1\\Documents\\GitHub\\ClinicApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\abalj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\SRG1\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
