@@ -13,9 +13,11 @@ public class ZoneService : IZoneSerice
 {
     private readonly IMapper _mapper;
     private readonly DataContext _context;
+    private readonly MagicString _magicString;
 
-    public ZoneService(IMapper mapper, DataContext context)
+    public ZoneService(MagicString magicString, IMapper mapper, DataContext context)
     {
+        _magicString = magicString;
         _mapper = mapper;
         _context = context;
     }
@@ -25,6 +27,7 @@ public class ZoneService : IZoneSerice
         var zone = _mapper.Map<Zone>(newZone);
         _context.Zone.Add(zone);
         _context.SaveChanges();
+        serviceResponse.Message = _magicString.InsertSuccess;
         serviceResponse.Data = await _context.Zone.Select(z => _mapper.Map<ZoneDto>(z)).ToListAsync();
         return serviceResponse;
     }
