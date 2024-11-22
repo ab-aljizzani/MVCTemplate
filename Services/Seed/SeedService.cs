@@ -1,0 +1,103 @@
+using System;
+using AutoMapper;
+using ClinicApi.Data;
+using ClinicApi.Dtos.RequestDto.Insert;
+using ClinicApi.Dtos.RoleDto;
+using ClinicApi.Dtos.SurveyDto.Insert;
+using ClinicApi.Dtos.ZoneModelDto;
+using ClinicApi.Models.Reponse;
+using Microsoft.AspNetCore.Http.HttpResults;
+
+namespace ClinicApi.Services.Seed;
+
+public class SeedService : ISeedService
+{
+    private readonly IMapper _mapper;
+    private readonly DataContext _context;
+
+    public SeedService(IMapper mapper, DataContext context)
+    {
+        _mapper = mapper;
+        _context = context;
+    }
+    public async Task<ServiceResponse<string>> SeedAll()
+    {
+        var serviceResponse = new ServiceResponse<string>();
+        List<InsertRequestStatusDto> newRequestStatus = new List<InsertRequestStatusDto>();
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "إنتظار الإنتهاء من الاستبيان", StatusOrder = 1 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "انتظار الموافقة", StatusOrder = 2 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الارسال الى العيادة", StatusOrder = 3 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم جدولة الطلب", StatusOrder = 4 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الحضور", StatusOrder = 5 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "لم يحضر", StatusOrder = 6 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الانتهاء", StatusOrder = 7 });
+        List<RoleDto> newRole = new List<RoleDto>();
+        newRole.Add(new RoleDto { RoleName = "SuperAdmin" });
+        newRole.Add(new RoleDto { RoleName = "PortalAdmin" });
+        newRole.Add(new RoleDto { RoleName = "EntityContact" });
+        newRole.Add(new RoleDto { RoleName = "DeptAdmin" });
+        newRole.Add(new RoleDto { RoleName = "DeptEditor" });
+        List<ZoneDto> newZone = new List<ZoneDto>();
+        newZone.Add(new ZoneDto { ZoneName = "الأولى" });
+        newZone.Add(new ZoneDto { ZoneName = "الثانية" });
+        newZone.Add(new ZoneDto { ZoneName = "الثالثة" });
+        List<InsertSurveyTypeDto> newSurvey = new List<InsertSurveyTypeDto>();
+        newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج الإفصاح" });
+        newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج المقياس" });
+
+        List<InsertSurveyQuestionDto> newSurveyQ = new List<InsertSurveyQuestionDto>();
+        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل تعاني حاليا أو سبق أن عانيت من مشاكل أو اعراض نفسية أو جسدية قد تشكل تهديدا لسلامتك وسلامة الآخرين", SurveyTypeId = 1 });
+        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل سبق لك أن إستخدمت مواد محظورة بطريقة أثرت سلبا على سلوكك أو تفكيرك", SurveyTypeId = 1 });
+        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل سبق لك أن حاولت الإضرار بنفسك أو بغيرك", SurveyTypeId = 1 });
+        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل تستخدم حاليا أو سبق أن إستخدمت أدوية نفسية", SurveyTypeId = 1 });
+
+        List<InsertSurveyAnswerDto> newSurveyA = new List<InsertSurveyAnswerDto>();
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 1 });
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 1 });
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 2 });
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 2 });
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 3 });
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 3 });
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 4 });
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 4 });
+
+        foreach (var item in newSurveyA)
+        {
+            var requestAnswer = _mapper.Map<Models.SurveyModel.SurveyAnswer>(item);
+            _context.SurveyAnswer.Add(requestAnswer);
+        }
+
+        // foreach (var item in newSurveyQ)
+        // {
+        //     var requestStatus = _mapper.Map<Models.SurveyModel.SurveyQuestion>(item);
+        //     _context.SurveyQuestion.Add(requestStatus);
+        // }
+
+        // foreach (var item in newRequestStatus)
+        // {
+        //     var requestStatus = _mapper.Map<Models.RequestModel.RequestStatus>(item);
+        //     _context.RequestStatus.Add(requestStatus);
+        // }
+
+        // foreach (var item in newRole)
+        // {
+        //     var role = _mapper.Map<Models.Role.Role>(item);
+        //     _context.Role.Add(role);
+        // }
+
+        // foreach (var item in newZone)
+        // {
+        //     var zone = _mapper.Map<Models.ZoneModel.Zone>(item);
+        //     _context.Zone.Add(zone);
+        // }
+        // foreach (var item in newSurvey)
+        // {
+        //     var survey = _mapper.Map<Models.SurveyModel.SurveyType>(item);
+        //     _context.SurveyType.Add(survey);
+        // }
+
+        await _context.SaveChangesAsync();
+        serviceResponse.Data = "Seed Exicutes Successfuly";
+        return serviceResponse;
+    }
+}
