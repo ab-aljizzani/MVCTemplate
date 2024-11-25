@@ -29,6 +29,12 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _requestService.GetRequestByID(id));
         }
+        [HttpGet]
+        [Route("GetByPersonId")]
+        public async Task<ActionResult<GetRequestDto>> GetByPersonId(int id)
+        {
+            return Ok(await _requestService.GetRequestByPersonId(id));
+        }
         [HttpPost]
         public async Task<ActionResult<List<InsertRequestDto>>> AddNewRequest(InsertRequestDto newRequest)
         {
@@ -38,6 +44,15 @@ namespace ClinicApi.Controllers
         public async Task<ActionResult<UpdateRequestDto>> UpdateRequest(UpdateRequestDto updateRequest)
         {
             var response = await _requestService.UpdateRequest(updateRequest);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
+        [HttpPut]
+        [Route("UpdateAppsentReason")]
+        public async Task<ActionResult<UpdateRequestAppsentReasonDto>> UpdateRequestAppsentReason(UpdateRequestAppsentReasonDto updateRequest)
+        {
+            var response = await _requestService.UpdateRequestAppsentReason(updateRequest);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

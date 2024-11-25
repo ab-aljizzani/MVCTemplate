@@ -216,7 +216,7 @@ public class SurveyService : ISurveyService
     public async Task<ServiceResponse<List<GetUserSurveyAnswerDto>>> GetAllUserSurveyAnswer()
     {
         var serviceResponse = new ServiceResponse<List<GetUserSurveyAnswerDto>>();
-        var dbContext = await _context.UserSurveyAnswer.Include(u => u.surveyAnswer).Include(u => u.SurveyQuestion).ToListAsync();
+        var dbContext = await _context.UserSurveyAnswer.Include(u => u.surveyAnswer).Include(u => u.SurveyQuestion).Include(u => u.Person).Include(u => u.PortalUser).ToListAsync();
         serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetUserSurveyAnswerDto>(p)).ToList();
         return serviceResponse;
     }
@@ -307,15 +307,15 @@ public class SurveyService : ISurveyService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<GetUserSurveyAnswerDto>> GetUserSurveyAnswerByID(int id)
+    public async Task<ServiceResponse<List<GetUserSurveyAnswerDto>>> GetUserSurveyAnswerByID(int id)
     {
-        var serviceResponse = new ServiceResponse<GetUserSurveyAnswerDto>();
-        var dbContext = await _context.Request.FirstOrDefaultAsync(p => p.Id == id);
+        var serviceResponse = new ServiceResponse<List<GetUserSurveyAnswerDto>>();
+        var dbContext = await _context.UserSurveyAnswer.Where(p => p.RequestId == id).Include(u => u.surveyAnswer).Include(u => u.SurveyQuestion).Include(u => u.Person).Include(u => u.PortalUser).ToListAsync();
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
         }
-        serviceResponse.Data = _mapper.Map<GetUserSurveyAnswerDto>(dbContext);
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetUserSurveyAnswerDto>(p)).ToList();
         return serviceResponse;
     }
 

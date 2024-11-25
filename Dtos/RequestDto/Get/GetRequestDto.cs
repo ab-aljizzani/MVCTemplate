@@ -7,10 +7,14 @@ namespace ClinicApi.Dtos.RequestDto.Get;
 public class GetRequestDto
 {
     public int Id { get; set; }
+    public DateTime CreatedDate { get; set; }
+    public DateTime LastStatusDate { get; set; }
     public int PersonId { get; set; }
     public Person? Person { get; set; }
     public int PortalUserId { get; set; }
     public Models.PortalUser.PortalUser? PortalUser { get; set; }
     public int RequestStatusId { get; set; }
     public RequestStatus? RequestStatus { get; set; }
+    public string AppsentReason { get; set; } = string.Empty;
+
 }

@@ -1,10 +1,12 @@
 using System;
 using AutoMapper;
 using ClinicApi.Data;
+using ClinicApi.Dtos.PortalUserModelDto.Insert;
 using ClinicApi.Dtos.RequestDto.Insert;
 using ClinicApi.Dtos.RoleDto;
 using ClinicApi.Dtos.SurveyDto.Insert;
 using ClinicApi.Dtos.ZoneModelDto;
+using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.Reponse;
 using Microsoft.AspNetCore.Http.HttpResults;
 
@@ -14,9 +16,11 @@ public class SeedService : ISeedService
 {
     private readonly IMapper _mapper;
     private readonly DataContext _context;
+    private readonly IAuthRepositery _auth;
 
-    public SeedService(IMapper mapper, DataContext context)
+    public SeedService(IMapper mapper, DataContext context, IAuthRepositery auth)
     {
+        _auth = auth;
         _mapper = mapper;
         _context = context;
     }
@@ -24,12 +28,12 @@ public class SeedService : ISeedService
     {
         var serviceResponse = new ServiceResponse<string>();
         List<InsertRequestStatusDto> newRequestStatus = new List<InsertRequestStatusDto>();
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "إنتظار الإنتهاء من الاستبيان", StatusOrder = 1 });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "انتظار الموافقة", StatusOrder = 2 });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الارسال الى العيادة", StatusOrder = 3 });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم جدولة الطلب", StatusOrder = 4 });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الحضور", StatusOrder = 5 });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "لم يحضر", StatusOrder = 6 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "انتظار الموافقة", StatusOrder = 1 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الارسال الى العيادة", StatusOrder = 2 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم جدولة الطلب", StatusOrder = 3 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الحضور", StatusOrder = 4 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "لم يحضر", StatusOrder = 5 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "إنتظار الإنتهاء من الاستبيان", StatusOrder = 6 });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الانتهاء", StatusOrder = 7 });
         List<RoleDto> newRole = new List<RoleDto>();
         newRole.Add(new RoleDto { RoleName = "SuperAdmin" });
@@ -61,11 +65,48 @@ public class SeedService : ISeedService
         newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 4 });
         newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 4 });
 
-        foreach (var item in newSurveyA)
+        InsertPortalUserDto newPortalUser = new InsertPortalUserDto()
         {
-            var requestAnswer = _mapper.Map<Models.SurveyModel.SurveyAnswer>(item);
-            _context.SurveyAnswer.Add(requestAnswer);
+            Username = "1083622900",
+            NationalId = "1083622900",
+            Password = "123",
+            ConfirmPassword = "1234",
+            UserFullName = "عبدالرحمن علي أبكر الجيزاني",
+            Email = "b@b.com",
+            Code = "",
+            PhoneNumber = "0563438021",
+            DateOfBirth = "24/05/1993",
+            UserType = "رئيسي",
+            LoginAttemp = 0,
+            LastLogin = DateTime.Now.ToString(),
+            CreatedDate = DateTime.Now.ToString(),
+            PasswordExpires = false,
+            Status = "Active",
+            PersonalImgId = 1,
+            EntityId = 1,
+            DepartmentId = 1,
+            RoleId = 1
+        };
+        if (await _auth.UserExists(newPortalUser.Username))
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = "User Already Exists...";
         }
+        else
+        {
+            CreatePasswordHash(newPortalUser.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            var user = _mapper.Map<PortalUser>(newPortalUser);
+            user.PasswordSalt = passwordSalt;
+            user.PasswordHash = passwordHash;
+
+            _context.PortalUser.Add(user);
+        }
+
+        // foreach (var item in newSurveyA)
+        // {
+        //     var requestAnswer = _mapper.Map<Models.SurveyModel.SurveyAnswer>(item);
+        //     _context.SurveyAnswer.Add(requestAnswer);
+        // }
 
         // foreach (var item in newSurveyQ)
         // {
@@ -99,5 +140,13 @@ public class SeedService : ISeedService
         await _context.SaveChangesAsync();
         serviceResponse.Data = "Seed Exicutes Successfuly";
         return serviceResponse;
+    }
+    private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+    {
+        using (var hmac = new System.Security.Cryptography.HMACSHA512())
+        {
+            passwordSalt = hmac.Key;
+            passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+        }
     }
 }

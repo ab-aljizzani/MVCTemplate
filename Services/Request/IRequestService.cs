@@ -10,8 +10,10 @@ public interface IRequestService
 {
     Task<ServiceResponse<List<GetRequestDto>>> GetAllRequest();
     Task<ServiceResponse<GetRequestDto>> GetRequestByID(int id);
+    Task<ServiceResponse<List<GetRequestDto>>> GetRequestByPersonId(int id);
     Task<ServiceResponse<int>> AddNewRequest(InsertRequestDto newRequest);
     Task<ServiceResponse<UpdateRequestDto>> UpdateRequest(UpdateRequestDto updateRequest);
+    Task<ServiceResponse<UpdateRequestDto>> UpdateRequestAppsentReason(UpdateRequestAppsentReasonDto updateRequest);
     Task<ServiceResponse<GetRequestDto>> DeleteRequest(int id);
 
     Task<ServiceResponse<List<GetRequestStatusDto>>> GetAllRequestStatus();
