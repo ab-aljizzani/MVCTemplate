@@ -116,6 +116,17 @@ public class RequestService : IRequestService
         serviceResponse.Data = _mapper.Map<GetRequestDto>(dbContext);
         return serviceResponse;
     }
+    public async Task<ServiceResponse<List<GetRequestDto>>> GetRequestByPersonId(int id)
+    {
+        var serviceResponse = new ServiceResponse<List<GetRequestDto>>();
+        var dbContext = await _context.Request.Where(r => r.PersonId == id).Include(r => r.Person).Include(r => r.RequestStatus).Include(r => r.PortalUser).ToListAsync();
+        if (dbContext is null)
+        {
+            throw new Exception($"The Id '{id}'Is Not Founde...");
+        }
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetRequestDto>(p)).ToList();
+        return serviceResponse;
+    }
 
     public async Task<ServiceResponse<GetRequestStatusDto>> GetRequestStatusByID(int id)
     {
@@ -131,6 +142,28 @@ public class RequestService : IRequestService
 
 
     public async Task<ServiceResponse<UpdateRequestDto>> UpdateRequest(UpdateRequestDto updateRequest)
+    {
+        var serviceResponse = new ServiceResponse<UpdateRequestDto>();
+        try
+        {
+            var request = await _context.Request.FirstOrDefaultAsync(z => z.Id == updateRequest.Id);
+            if (request is null)
+            {
+                throw new Exception($"The Id '{updateRequest.Id}'Is Not Founde...");
+            }
+            _mapper.Map(updateRequest, request);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<UpdateRequestDto>(request);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<UpdateRequestDto>> UpdateRequestAppsentReason(UpdateRequestAppsentReasonDto updateRequest)
     {
         var serviceResponse = new ServiceResponse<UpdateRequestDto>();
         try

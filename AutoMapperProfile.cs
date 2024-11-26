@@ -55,6 +55,9 @@ public class AutoMapperProfile : Profile
         CreateMap<PortalUserDto, PortalUser>();
         CreateMap<UpdatePortalUserDto, PortalUser>();
         CreateMap<InsertPortalUserDto, PortalUser>();
+        CreateMap<PasswordExpireUpdateDto, PortalUser>();
+        CreateMap<PasswordInitialDto, PortalUser>();
+        CreateMap<UpdatePortalUserPhoneDto, PortalUser>();
 
         CreateMap<Zone, ZoneDto>();
         CreateMap<ZoneDto, Zone>();
@@ -77,6 +80,7 @@ public class AutoMapperProfile : Profile
         CreateMap<Request, GetRequestDto>();
         CreateMap<Request, InsertRequestDto>();
         CreateMap<Request, UpdateRequestDto>();
+        CreateMap<UpdateRequestAppsentReasonDto, Request>();
 
         CreateMap<GetRequestStatusDto, RequestStatus>();
         CreateMap<InsertRequestStatusDto, RequestStatus>();

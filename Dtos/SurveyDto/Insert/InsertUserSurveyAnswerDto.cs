@@ -6,7 +6,7 @@ public class InsertUserSurveyAnswerDto
 {
     public int Id { get; set; }
     public int PersonId { get; set; }
-    public int UserId { get; set; }
+    public int PortalUserId { get; set; }
     public int RequestId { get; set; }
     public int SurveyQuestionId { get; set; }
     public int SurveyAnswerId { get; set; }

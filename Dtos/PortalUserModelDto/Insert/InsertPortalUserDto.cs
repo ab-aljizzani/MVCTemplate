@@ -15,8 +15,13 @@ public class InsertPortalUserDto
     public string Username { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إدخال كلمة المرور")]
     [Display(Name = "كلمة المرور")]
+    [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@!%*?&!£$%^&*()_+{}:@~<>?|=[\];'#,.\/\\-])[A-Za-z\d$@!%*?&!£$%^&*()_+{}:@~<>?|=[\];'#,.\/\\-]{8,}$", ErrorMessage = "كلمة المرور يجب أن تكون 8 حروف وارقام على الأقل , كلمة المرور يجب أن تحتوي على حرف كبير على الأقل , كلمة المرور يجب أن تحتوى حلى حرف مميز على الاقل ")]
     public string Password { get; set; } = string.Empty;
-
+    [Required(ErrorMessage = "كلمة المرور يجب أن تكون متطابقة")]
+    [Display(Name = "كلمة المرور")]
+    [DataType("Password")]
+    [Compare("Password")]
+    public string ConfirmPassword { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إدخال رقم الهوية")]
     [Display(Name = "رقم الهوية")]
     public string NationalId { get; set; } = string.Empty;
@@ -28,8 +33,6 @@ public class InsertPortalUserDto
     [EmailAddress]
     public string Email { get; set; } = string.Empty;
     public int PersonalImgId { get; set; }
-    // [NotMapped]
-    // public PersonalImgDto? PersonalImage { get; set; }
     [Required(ErrorMessage = "الرجاء إدخال تاريخ الميلاد")]
     [Display(Name = "تاريخ الميلاد")]
     public string DateOfBirth { get; set; } = string.Empty;
@@ -40,6 +43,8 @@ public class InsertPortalUserDto
     [Required(ErrorMessage = "الرجاء إدخال رقم الجوال")]
     [Display(Name = "رقم الجوال")]
     public string PhoneNumber { get; set; } = string.Empty;
+    public string Code { get; set; } = string.Empty;
+    public bool IsFirstLogin { get; set; } = false;
     public int EntityId { get; set; }
     // [NotMapped]
     // public GetEntityDto? Entity { get; set; }

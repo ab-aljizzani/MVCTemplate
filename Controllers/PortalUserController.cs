@@ -66,9 +66,36 @@ namespace ClinicApi.Controllers
             return Ok(response);
         }
         [HttpPut]
-        public async Task<ActionResult<UpdatePortalUserDto>> UpdateRole(UpdatePortalUserDto updatePortalUser)
+        public async Task<ActionResult<UpdatePortalUserDto>> UpdatePortalUser(UpdatePortalUserDto updatePortalUser)
         {
             var response = await _authRepo.UpdatePortalUser(updatePortalUser);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
+        [HttpPut]
+        [Route("PasswordExpire")]
+        public async Task<ActionResult<UpdatePortalUserDto>> PasswordExpire(PasswordExpireUpdateDto updatePortalUserPassword)
+        {
+            var response = await _authRepo.PasswordExpireUpdate(updatePortalUserPassword);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
+        [HttpPut]
+        [Route("PasswordInitial")]
+        public async Task<ActionResult<UpdatePortalUserDto>> PasswordInitial(PasswordInitialDto updatePortalUserPassword)
+        {
+            var response = await _authRepo.PasswordInitialUpdate(updatePortalUserPassword);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
+        [HttpPut]
+        [Route("UpdateUserPhone")]
+        public async Task<ActionResult<UpdatePortalUserDto>> UpdateUserPhone(UpdatePortalUserPhoneDto updatePortalUserPhone)
+        {
+            var response = await _authRepo.UpdateUserPhone(updatePortalUserPhone);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

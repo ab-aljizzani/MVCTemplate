@@ -4,6 +4,7 @@ using ClinicApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241122165502_AddCreatedDateAndLastStatusDatedToRequestModel")]
+    partial class AddCreatedDateAndLastStatusDatedToRequestModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,10 +164,6 @@ namespace ClinicApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CreatedDate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -178,13 +177,10 @@ namespace ClinicApi.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EntityId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsFirstLogin")
-                        .HasColumnType("bit");
 
                     b.Property<string>("LastLogin")
                         .IsRequired()
@@ -195,7 +191,7 @@ namespace ClinicApi.Migrations
 
                     b.Property<string>("NationalId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PasswordExpires")
                         .HasColumnType("bit");
@@ -230,26 +226,17 @@ namespace ClinicApi.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
-
                     b.HasIndex("EntityId");
-
-                    b.HasIndex("NationalId")
-                        .IsUnique();
 
                     b.HasIndex("PersonalImgId");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("Username")
-                        .IsUnique();
 
                     b.ToTable("PortalUser");
                 });
@@ -261,10 +248,6 @@ namespace ClinicApi.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AppsentReason")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");

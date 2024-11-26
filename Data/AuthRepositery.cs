@@ -27,20 +27,16 @@ public class AuthRepositery : IAuthRepositery
         _configuration = configuration;
         _httpContextAccessor = httpContextAccessor;
     }
-    public async Task<ServiceResponse<string>> Login(string username, string password)
+    public async Task<ServiceResponse<string>> Login(string nationalId, string password)
     {
         var response = new ServiceResponse<string>();
-        var user = await _context.PortalUser.Include(u => u.PersonalImage).Include(u => u.Entity).Include(u => u.Role).Include(u => u.Department).FirstOrDefaultAsync(u => u.Username.ToLower().Equals(username.ToLower()));
+        var user = await _context.PortalUser.Include(u => u.PersonalImage).Include(u => u.Entity).Include(u => u.Role).Include(u => u.Department).FirstOrDefaultAsync(u => u.NationalId.ToLower().Equals(nationalId.ToLower()));
         if (user is null)
         {
             response.Success = false;
             response.Message = "User Not Found... ";
         }
-        else if (user.PasswordExpires == true)
-        {
-            response.Success = false;
-            response.Message = "User Expire... ";
-        }
+
         else if (user.Status == "DisActive")
         {
             response.Success = false;
@@ -53,11 +49,10 @@ public class AuthRepositery : IAuthRepositery
             response.Message = "Wrong Password...";
             user.LoginAttemp = user.LoginAttemp + 1;
             await _context.SaveChangesAsync();
-            if (user.LoginAttemp >= 3)
+            if (user.LoginAttemp >= 4)
             {
                 response.Success = false;
                 response.Message = _magicString.LoginAttimptMessage;
-                user.PasswordExpires = true;
                 user.Status = "DisActive";
                 await _context.SaveChangesAsync();
             }
@@ -134,6 +129,7 @@ public class AuthRepositery : IAuthRepositery
                 new Claim("Department" , user.Department.DepartmentName.ToString()),
                 new Claim("LastLogin",user.LastLogin.ToString()),
                 new Claim("PasswordExpire",user.PasswordExpires.ToString()),
+                new Claim("IsFirstLogin",user.IsFirstLogin.ToString()),
                 new Claim("Status",user.Status),
             };
         var appSettingsToken = _configuration.GetSection("AppSettings:Token").Value;
@@ -205,6 +201,98 @@ public class AuthRepositery : IAuthRepositery
             CreatePasswordHash(updatePortalUser.Password, out byte[] passwordHash, out byte[] passwordSalt);
             updatePortalUser.PasswordSalt = passwordSalt;
             updatePortalUser.PasswordHash = passwordHash;
+            _mapper.Map(updatePortalUser, portalUser);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<PortalUserDto>(portalUser);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<PortalUserDto>> PasswordExpireUpdate(PasswordExpireUpdateDto passwordExpiredDto)
+    {
+        var serviceResponse = new ServiceResponse<PortalUserDto>();
+        try
+        {
+            var portalUser = await _context.PortalUser.FirstOrDefaultAsync(z => z.Id == passwordExpiredDto.Id);
+            if (portalUser is null)
+            {
+                throw new Exception($"The Id '{passwordExpiredDto.Id}'Is Not Founde...");
+            }
+            if (VerifyPasswordHash(passwordExpiredDto.Password, portalUser.PasswordHash, portalUser.PasswordSalt))
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = "New Password Must Be Different From Old Password...";
+            }
+            else
+            {
+
+                CreatePasswordHash(passwordExpiredDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+                passwordExpiredDto.PasswordSalt = passwordSalt;
+                passwordExpiredDto.PasswordHash = passwordHash;
+                passwordExpiredDto.PasswordExpires = false;
+                _mapper.Map(passwordExpiredDto, portalUser);
+                await _context.SaveChangesAsync();
+                serviceResponse.Data = _mapper.Map<PortalUserDto>(portalUser);
+            }
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<PortalUserDto>> PasswordInitialUpdate(PasswordInitialDto passwordInitialDto)
+    {
+        var serviceResponse = new ServiceResponse<PortalUserDto>();
+        try
+        {
+            var portalUser = await _context.PortalUser.FirstOrDefaultAsync(z => z.Id == passwordInitialDto.Id);
+            if (portalUser is null)
+            {
+                throw new Exception($"The Id '{passwordInitialDto.Id}'Is Not Founde...");
+            }
+            if (!VerifyPasswordHash(passwordInitialDto.CurrentPassword, portalUser.PasswordHash, portalUser.PasswordSalt))
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = "Current Password Is Not Currect...";
+            }
+            else
+            {
+
+                CreatePasswordHash(passwordInitialDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+                passwordInitialDto.PasswordSalt = passwordSalt;
+                passwordInitialDto.PasswordHash = passwordHash;
+                passwordInitialDto.IsFirstLogin = false;
+                _mapper.Map(passwordInitialDto, portalUser);
+                await _context.SaveChangesAsync();
+                serviceResponse.Data = _mapper.Map<PortalUserDto>(portalUser);
+            }
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<PortalUserDto>> UpdateUserPhone(UpdatePortalUserPhoneDto updatePortalUser)
+    {
+        var serviceResponse = new ServiceResponse<PortalUserDto>();
+        try
+        {
+            var portalUser = await _context.PortalUser.FirstOrDefaultAsync(z => z.Id == updatePortalUser.Id);
+            if (portalUser is null)
+            {
+                throw new Exception($"The Id '{updatePortalUser.Id}'Is Not Founde...");
+            }
             _mapper.Map(updatePortalUser, portalUser);
             await _context.SaveChangesAsync();
             serviceResponse.Data = _mapper.Map<PortalUserDto>(portalUser);

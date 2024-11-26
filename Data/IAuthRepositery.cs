@@ -15,6 +15,9 @@ public interface IAuthRepositery
     Task<ServiceResponse<int>> Register(InsertPortalUserDto user, string password);
     Task<ServiceResponse<string>> Login(string username, string password);
     Task<ServiceResponse<PortalUserDto>> UpdatePortalUser(UpdatePortalUserDto updatePortalUser);
+    Task<ServiceResponse<PortalUserDto>> PasswordExpireUpdate(PasswordExpireUpdateDto updatePortalUser);
+    Task<ServiceResponse<PortalUserDto>> PasswordInitialUpdate(PasswordInitialDto updatePortalUser);
+    Task<ServiceResponse<PortalUserDto>> UpdateUserPhone(UpdatePortalUserPhoneDto updatePortalUser);
     Task<bool> UserExists(string username);
 
 }

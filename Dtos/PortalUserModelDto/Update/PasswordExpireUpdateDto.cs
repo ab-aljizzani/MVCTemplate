@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ClinicApi.Dtos.PortalUserModelDto.Update;
 
-public class UpdatePortalUserDto
+public class PasswordExpireUpdateDto
 {
     public int Id { get; set; }
     [DataType("Password")]
@@ -19,4 +19,5 @@ public class UpdatePortalUserDto
     public string ConfirmPassword { get; set; } = string.Empty;
     public byte[]? PasswordHash { get; set; }
     public byte[]? PasswordSalt { get; set; }
+    public bool PasswordExpires { get; set; }
 }
