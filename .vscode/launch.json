@@ -1,12 +1,19 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "C#: ClinicApi",
-            "type": "dotnet",
-            "request": "launch",
-            "projectPath": "${workspaceFolder}\\ClinicApi.csproj",
-            "launchConfigurationId": "TargetFramework=;http"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C#: ClinicApi",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}\\ClinicApi.csproj",
+      "launchConfigurationId": "TargetFramework=;http"
+    },
+    {
+      "name": "C#: ClinicApi",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}\\ClinicApi.csproj",
+      "launchConfigurationId": "TargetFramework=;http"
+    }
+  ]
 }

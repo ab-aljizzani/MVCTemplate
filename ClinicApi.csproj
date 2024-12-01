@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Models\DashboarUserModel\DashboardUser.cs" />
     <Compile Include="Models\EntityModel\Department.cs" />
     <Compile Include="Models\EntityModel\Entity.cs" />
     <Compile Include="Models\PersonalImagesModel\PersonalImg.cs" />
