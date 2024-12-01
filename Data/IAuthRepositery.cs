@@ -1,3 +1,6 @@
+using ClinicApi.Dtos.DashboardUserDto;
+using ClinicApi.Dtos.DashboardUserDto.Insert;
+using ClinicApi.Dtos.DashboardUserDto.Update;
 using ClinicApi.Dtos.PortalUserDto;
 using ClinicApi.Dtos.PortalUserModelDto.Insert;
 using ClinicApi.Dtos.PortalUserModelDto.Update;
@@ -19,5 +22,19 @@ public interface IAuthRepositery
     Task<ServiceResponse<PortalUserDto>> PasswordInitialUpdate(PasswordInitialDto updatePortalUser);
     Task<ServiceResponse<PortalUserDto>> UpdateUserPhone(UpdatePortalUserPhoneDto updatePortalUser);
     Task<bool> UserExists(string username);
+
+
+
+    Task<ServiceResponse<List<DashboardUserDto>>> DashboardGetAll();
+    Task<ServiceResponse<List<DashboardUserDto>>> DashboardGetAllByEntityId(int id);
+    Task<ServiceResponse<List<DashboardUserDto>>> DashboardGetAllByUserType(string type);
+    Task<ServiceResponse<DashboardUserDto>> DashboardGetUserByID(int id);
+    Task<ServiceResponse<int>> DashboardRegister(InsertDashboardUserDto user, string password);
+    Task<ServiceResponse<string>> DashboardLogin(string username, string password);
+    Task<ServiceResponse<DashboardUserDto>> DashboardUpdateUser(UpdateDashboardUserDto updatePortalUser);
+    Task<ServiceResponse<DashboardUserDto>> DashboardPasswordExpireUpdate(DashboardPasswordExpireUpdateDto updatePortalUser);
+    Task<ServiceResponse<DashboardUserDto>> DashboardPasswordInitialUpdate(DashboardPasswordInitialDto updatePortalUser);
+    Task<ServiceResponse<DashboardUserDto>> DashboardUpdateUserPhone(UpdateDashboardUserPhoneDto updatePortalUser);
+    Task<bool> DashboardUserExists(string username);
 
 }

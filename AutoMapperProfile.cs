@@ -1,6 +1,9 @@
 using System;
 using AutoMapper;
 using ClinicApi.Data.PersonalImagesModelDto;
+using ClinicApi.Dtos.DashboardUserDto;
+using ClinicApi.Dtos.DashboardUserDto.Insert;
+using ClinicApi.Dtos.DashboardUserDto.Update;
 using ClinicApi.Dtos.Entity;
 using ClinicApi.Dtos.Entity.Get;
 using ClinicApi.Dtos.PersonalImagesModelDto;
@@ -18,6 +21,7 @@ using ClinicApi.Dtos.SurveyDto.Insert;
 using ClinicApi.Dtos.SurveyDto.Update;
 using ClinicApi.Dtos.ZoneModelDto;
 using ClinicApi.Dtos.ZoneModelDto.Update;
+using ClinicApi.Models.DashboarUserModel;
 using ClinicApi.Models.Entity;
 using ClinicApi.Models.PersonalImagesModel;
 using ClinicApi.Models.PersonModel;
@@ -58,6 +62,17 @@ public class AutoMapperProfile : Profile
         CreateMap<PasswordExpireUpdateDto, PortalUser>();
         CreateMap<PasswordInitialDto, PortalUser>();
         CreateMap<UpdatePortalUserPhoneDto, PortalUser>();
+
+
+        CreateMap<DashboardUser, DashboardUserDto>();
+        CreateMap<DashboardUserDto, DashboardUser>();
+        CreateMap<UpdateDashboardUserDto, DashboardUser>();
+        CreateMap<InsertDashboardUserDto, DashboardUser>();
+        CreateMap<DashboardPasswordExpireUpdateDto, DashboardUser>();
+        CreateMap<DashboardPasswordInitialDto, DashboardUser>();
+        CreateMap<UpdateDashboardUserPhoneDto, DashboardUser>();
+
+
 
         CreateMap<Zone, ZoneDto>();
         CreateMap<ZoneDto, Zone>();

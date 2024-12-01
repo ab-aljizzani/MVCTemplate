@@ -1,4 +1,5 @@
 using System;
+using ClinicApi.Models.DashboarUserModel;
 using ClinicApi.Models.Entity;
 using ClinicApi.Models.PersonalImagesModel;
 using ClinicApi.Models.PersonModel;
@@ -22,6 +23,7 @@ public class DataContext : DbContext
     public DbSet<Department> Department => Set<Department>();
     public DbSet<Role> Role => Set<Role>();
     public DbSet<PortalUser> PortalUser => Set<PortalUser>();
+    public DbSet<DashboardUser> DashboardUser => Set<DashboardUser>();
     public DbSet<Zone> Zone => Set<Zone>();
     public DbSet<PersonalImg> PersonalImg => Set<PersonalImg>();
     public DbSet<Person> Person => Set<Person>();

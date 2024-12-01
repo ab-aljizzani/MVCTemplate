@@ -31,10 +31,7 @@ public class SeedService : ISeedService
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "انتظار الموافقة", StatusOrder = 1 });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الارسال الى العيادة", StatusOrder = 2 });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم جدولة الطلب", StatusOrder = 3 });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الحضور", StatusOrder = 4 });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "لم يحضر", StatusOrder = 5 });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "إنتظار الإنتهاء من الاستبيان", StatusOrder = 6 });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الانتهاء", StatusOrder = 7 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الانتهاء", StatusOrder = 4 });
         List<RoleDto> newRole = new List<RoleDto>();
         newRole.Add(new RoleDto { RoleName = "SuperAdmin" });
         newRole.Add(new RoleDto { RoleName = "PortalAdmin" });
