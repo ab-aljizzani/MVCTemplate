@@ -1,6 +1,7 @@
 using System;
 using AutoMapper;
 using ClinicApi.Data;
+using ClinicApi.Dtos.Entity;
 using ClinicApi.Dtos.PortalUserModelDto.Insert;
 using ClinicApi.Dtos.RequestDto.Insert;
 using ClinicApi.Dtos.RoleDto;
@@ -34,10 +35,13 @@ public class SeedService : ISeedService
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الانتهاء", StatusOrder = 4 });
         List<RoleDto> newRole = new List<RoleDto>();
         newRole.Add(new RoleDto { RoleName = "SuperAdmin" });
-        newRole.Add(new RoleDto { RoleName = "PortalAdmin" });
+        newRole.Add(new RoleDto { RoleName = "Admin" });
         newRole.Add(new RoleDto { RoleName = "EntityContact" });
         newRole.Add(new RoleDto { RoleName = "DeptAdmin" });
         newRole.Add(new RoleDto { RoleName = "DeptEditor" });
+        newRole.Add(new RoleDto { RoleName = "Reception" });
+        newRole.Add(new RoleDto { RoleName = "Doctor" });
+
         List<ZoneDto> newZone = new List<ZoneDto>();
         newZone.Add(new ZoneDto { ZoneName = "الأولى" });
         newZone.Add(new ZoneDto { ZoneName = "الثانية" });
@@ -45,6 +49,12 @@ public class SeedService : ISeedService
         List<InsertSurveyTypeDto> newSurvey = new List<InsertSurveyTypeDto>();
         newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج الإفصاح" });
         newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج المقياس" });
+
+        List<AddEntityDto> newEntity = new List<AddEntityDto>();
+        newEntity.Add(new AddEntityDto { EntityType = "داخلي", EntityName = "رئاسة الحرس الملكي" });
+
+        List<AddDepartmentDto> newDept = new List<AddDepartmentDto>();
+        newDept.Add(new AddDepartmentDto { DepartmentName = "الإدارة الطبية", EntityId = 2 });
 
         List<InsertSurveyQuestionDto> newSurveyQ = new List<InsertSurveyQuestionDto>();
         newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل تعاني حاليا أو سبق أن عانيت من مشاكل أو اعراض نفسية أو جسدية قد تشكل تهديدا لسلامتك وسلامة الآخرين", SurveyTypeId = 1 });
@@ -111,16 +121,28 @@ public class SeedService : ISeedService
         //     _context.SurveyQuestion.Add(requestStatus);
         // }
 
-        foreach (var item in newRequestStatus)
+        // foreach (var item in newRequestStatus)
+        // {
+        //     var requestStatus = _mapper.Map<Models.RequestModel.RequestStatus>(item);
+        //     _context.RequestStatus.Add(requestStatus);
+        // }
+
+        foreach (var item in newRole)
         {
-            var requestStatus = _mapper.Map<Models.RequestModel.RequestStatus>(item);
-            _context.RequestStatus.Add(requestStatus);
+            var role = _mapper.Map<Models.Role.Role>(item);
+            _context.Role.Add(role);
         }
 
-        // foreach (var item in newRole)
+        // foreach (var item in newEntity)
         // {
-        //     var role = _mapper.Map<Models.Role.Role>(item);
-        //     _context.Role.Add(role);
+        //     var entity = _mapper.Map<Models.Entity.Entity>(item);
+        //     _context.Entity.Add(entity);
+        // }
+
+        // foreach (var item in newDept)
+        // {
+        //     var dept = _mapper.Map<Models.Entity.Department>(item);
+        //     _context.Department.Add(dept);
         // }
 
         // foreach (var item in newZone)

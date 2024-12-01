@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicApi", "ClinicApi.cspr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicPortal", "..\ClinicPortal\ClinicPortal.csproj", "{3E4CFADE-3B49-4535-96B9-33076B0E99FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicDashboard", "..\ClinicDashboard\ClinicDashboard.csproj", "{F6C28205-2262-4364-ADE3-6D333F6C81E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicDashboard", "..\ClinicDashboard\ClinicDashboard.csproj", "{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,10 +22,10 @@ Global
 		{3E4CFADE-3B49-4535-96B9-33076B0E99FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3E4CFADE-3B49-4535-96B9-33076B0E99FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E4CFADE-3B49-4535-96B9-33076B0E99FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F6C28205-2262-4364-ADE3-6D333F6C81E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6C28205-2262-4364-ADE3-6D333F6C81E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6C28205-2262-4364-ADE3-6D333F6C81E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F6C28205-2262-4364-ADE3-6D333F6C81E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

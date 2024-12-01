@@ -57,14 +57,14 @@ public class EntityService : IEntityService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<List<GetEntityDto>>> AddNewEntity(AddEntityDto newEntity)
+    public async Task<ServiceResponse<int>> AddNewEntity(AddEntityDto newEntity)
     {
-        var serviceResponse = new ServiceResponse<List<GetEntityDto>>();
+        var serviceResponse = new ServiceResponse<int>();
 
         var entity = _mapper.Map<Models.Entity.Entity>(newEntity);
         _context.Entity.Add(entity);
         _context.SaveChanges();
-        serviceResponse.Data = await _context.Entity.Select(e => _mapper.Map<GetEntityDto>(e)).ToListAsync();
+        serviceResponse.Data = entity.Id;
         return serviceResponse;
 
     }

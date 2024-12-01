@@ -9,7 +9,7 @@ public interface IEntityService
 {
     Task<ServiceResponse<List<GetEntityDto>>> GetAllEntitys();
     Task<ServiceResponse<GetEntityDto>> GetEntityByID(int id);
-    Task<ServiceResponse<List<GetEntityDto>>> AddNewEntity(AddEntityDto newEntity);
+    Task<ServiceResponse<int>> AddNewEntity(AddEntityDto newEntity);
     Task<ServiceResponse<GetEntityDto>> UpdateEntity(UpdateEntityDto updateEnityt);
     Task<ServiceResponse<GetEntityDto>> DeleteEntity(int id);
 
