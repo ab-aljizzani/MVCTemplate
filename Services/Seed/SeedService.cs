@@ -72,48 +72,48 @@ public class SeedService : ISeedService
         newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 4 });
         newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 4 });
 
-        // InsertPortalUserDto newPortalUser = new InsertPortalUserDto()
-        // {
-        //     Username = "1083622900",
-        //     NationalId = "1083622900",
-        //     Password = "123",
-        //     ConfirmPassword = "1234",
-        //     UserFullName = "عبدالرحمن علي أبكر الجيزاني",
-        //     Email = "b@b.com",
-        //     Code = "",
-        //     PhoneNumber = "0563438021",
-        //     DateOfBirth = "24/05/1993",
-        //     UserType = "رئيسي",
-        //     LoginAttemp = 0,
-        //     LastLogin = DateTime.Now.ToString(),
-        //     CreatedDate = DateTime.Now.ToString(),
-        //     PasswordExpires = false,
-        //     Status = "Active",
-        //     PersonalImgId = 1,
-        //     EntityId = 1,
-        //     DepartmentId = 1,
-        //     RoleId = 1
-        // };
-        // if (await _auth.UserExists(newPortalUser.Username))
-        // {
-        //     serviceResponse.Success = false;
-        //     serviceResponse.Message = "User Already Exists...";
-        // }
-        // else
-        // {
-        //     CreatePasswordHash(newPortalUser.Password, out byte[] passwordHash, out byte[] passwordSalt);
-        //     var user = _mapper.Map<PortalUser>(newPortalUser);
-        //     user.PasswordSalt = passwordSalt;
-        //     user.PasswordHash = passwordHash;
+        InsertPortalUserDto newPortalUser = new InsertPortalUserDto()
+        {
+            Username = "1083622900",
+            NationalId = "1083622900",
+            Password = "Zero8021#",
+            ConfirmPassword = "Zero8021#",
+            UserFullName = "عبدالرحمن علي أبكر الجيزاني",
+            Email = "b@b.com",
+            Code = "",
+            PhoneNumber = "0563438021",
+            DateOfBirth = "24/05/1993",
+            UserType = "رئيسي",
+            LoginAttemp = 0,
+            LastLogin = DateTime.Now.ToString(),
+            CreatedDate = DateTime.Now.ToString(),
+            PasswordExpires = false,
+            Status = "Active",
+            PersonalImgId = 1,
+            EntityId = 1,
+            DepartmentId = 1,
+            RoleId = 1
+        };
+        if (await _auth.UserExists(newPortalUser.Username))
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = "User Already Exists...";
+        }
+        else
+        {
+            CreatePasswordHash(newPortalUser.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            var user = _mapper.Map<PortalUser>(newPortalUser);
+            user.PasswordSalt = passwordSalt;
+            user.PasswordHash = passwordHash;
 
-        //     _context.PortalUser.Add(user);
-        // }
+            _context.PortalUser.Add(user);
+        }
 
-        // foreach (var item in newSurveyA)
-        // {
-        //     var requestAnswer = _mapper.Map<Models.SurveyModel.SurveyAnswer>(item);
-        //     _context.SurveyAnswer.Add(requestAnswer);
-        // }
+        foreach (var item in newSurveyA)
+        {
+            var requestAnswer = _mapper.Map<Models.SurveyModel.SurveyAnswer>(item);
+            _context.SurveyAnswer.Add(requestAnswer);
+        }
 
         // foreach (var item in newSurveyQ)
         // {
@@ -139,11 +139,11 @@ public class SeedService : ISeedService
         //     _context.Entity.Add(entity);
         // }
 
-        foreach (var item in newDept)
-        {
-            var dept = _mapper.Map<Models.Entity.Department>(item);
-            _context.Department.Add(dept);
-        }
+        // foreach (var item in newDept)
+        // {
+        //     var dept = _mapper.Map<Models.Entity.Department>(item);
+        //     _context.Department.Add(dept);
+        // }
 
         // foreach (var item in newZone)
         // {
