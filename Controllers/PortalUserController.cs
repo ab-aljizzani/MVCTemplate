@@ -100,5 +100,14 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
+        [HttpPut]
+        [Route("UpdateUserRole")]
+        public async Task<ActionResult<UpdatePortalUserRoleDto>> UpdateUserRole(UpdatePortalUserRoleDto updatePortalUserRole)
+        {
+            var response = await _authRepo.UpdateUserRole(updatePortalUserRole);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
     }
 }

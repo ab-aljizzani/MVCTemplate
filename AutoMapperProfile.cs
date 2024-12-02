@@ -62,7 +62,7 @@ public class AutoMapperProfile : Profile
         CreateMap<PasswordExpireUpdateDto, PortalUser>();
         CreateMap<PasswordInitialDto, PortalUser>();
         CreateMap<UpdatePortalUserPhoneDto, PortalUser>();
-
+        CreateMap<UpdatePortalUserRoleDto, PortalUser>();
 
         CreateMap<DashboardUser, DashboardUserDto>();
         CreateMap<DashboardUserDto, DashboardUser>();

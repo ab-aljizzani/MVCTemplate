@@ -33,6 +33,7 @@ public class AuthRepositery : IAuthRepositery
     }
     public async Task<ServiceResponse<string>> Login(string nationalId, string password)
     {
+        var _random = new Random();
         var response = new ServiceResponse<string>();
         var user = await _context.PortalUser.Include(u => u.PersonalImage).Include(u => u.Entity).Include(u => u.Role).Include(u => u.Department).FirstOrDefaultAsync(u => u.NationalId.ToLower().Equals(nationalId.ToLower()));
         if (user is null)
@@ -63,6 +64,7 @@ public class AuthRepositery : IAuthRepositery
         }
         else
         {
+            user.Code = _random.Next(0, 9999).ToString("D4");
             response.Data = CreateToken(user);
             user.LastLogin = DateTime.Now.ToString();
             user.LoginAttemp = 0;
@@ -70,6 +72,7 @@ public class AuthRepositery : IAuthRepositery
         }
         return response;
     }
+
 
     public async Task<ServiceResponse<int>> Register(InsertPortalUserDto userDto, string password)
     {
@@ -123,11 +126,15 @@ public class AuthRepositery : IAuthRepositery
                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
                 new Claim("Username",user.Username),
                 new Claim("UserFullName",user.UserFullName.ToString()),
+                new Claim("NationalId",user.NationalId),
+                new Claim("PhoneNumber",user.PhoneNumber),
+                new Claim("Code",user.Code),
                 new Claim("UserType",user.UserType.ToString()),
                 new Claim("EntityID",user.EntityId.ToString()),
                 new Claim("Entity",user.Entity.EntityName),
                 new Claim("RoleId",user.RoleId.ToString()),
                 new Claim("Role",user.Role.RoleName.ToString()),
+                new Claim("RoleType",user.Role.Roletype.ToString()),
                 new Claim("DepartmentId" , user.DepartmentId.ToString()),
                 new Claim("Department" , user.Department.DepartmentName.ToString()),
                 new Claim("LastLogin",user.LastLogin.ToString()),
@@ -562,5 +569,27 @@ public class AuthRepositery : IAuthRepositery
             return true;
         }
         return false;
+    }
+
+    public async Task<ServiceResponse<PortalUserDto>> UpdateUserRole(UpdatePortalUserRoleDto updatePortalUser)
+    {
+        var serviceResponse = new ServiceResponse<PortalUserDto>();
+        try
+        {
+            var portalUser = await _context.PortalUser.FirstOrDefaultAsync(z => z.Id == updatePortalUser.Id);
+            if (portalUser is null)
+            {
+                throw new Exception($"The Id '{updatePortalUser.Id}'Is Not Founde...");
+            }
+            _mapper.Map(updatePortalUser, portalUser);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<PortalUserDto>(portalUser);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
     }
 }

@@ -34,13 +34,13 @@ public class SeedService : ISeedService
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم جدولة الطلب", StatusOrder = 3 });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الانتهاء", StatusOrder = 4 });
         List<RoleDto> newRole = new List<RoleDto>();
-        newRole.Add(new RoleDto { RoleName = "SuperAdmin" });
-        newRole.Add(new RoleDto { RoleName = "Admin" });
-        newRole.Add(new RoleDto { RoleName = "EntityContact" });
-        newRole.Add(new RoleDto { RoleName = "DeptAdmin" });
-        newRole.Add(new RoleDto { RoleName = "DeptEditor" });
-        newRole.Add(new RoleDto { RoleName = "Reception" });
-        newRole.Add(new RoleDto { RoleName = "Doctor" });
+        newRole.Add(new RoleDto { RoleName = "SuperAdmin", RoleArabName = "مدير كامل النظام", Roletype = "Both" });
+        newRole.Add(new RoleDto { RoleName = "Admin", RoleArabName = "مدير النظام", Roletype = "Both" });
+        newRole.Add(new RoleDto { RoleName = "EntityContact", RoleArabName = "ضابط اتصال", Roletype = "Portal" });
+        newRole.Add(new RoleDto { RoleName = "DeptAdmin", RoleArabName = "مدير ادارة", Roletype = "Portal" });
+        newRole.Add(new RoleDto { RoleName = "DeptEditor", RoleArabName = "مدخل بيانات الادارة", Roletype = "Portal" });
+        newRole.Add(new RoleDto { RoleName = "Reception", RoleArabName = "استقبال", Roletype = "Dash" });
+        newRole.Add(new RoleDto { RoleName = "Doctor", RoleArabName = "طبيب", Roletype = "Dash" });
 
         List<ZoneDto> newZone = new List<ZoneDto>();
         newZone.Add(new ZoneDto { ZoneName = "الأولى" });
@@ -54,7 +54,7 @@ public class SeedService : ISeedService
         newEntity.Add(new AddEntityDto { EntityType = "داخلي", EntityName = "رئاسة الحرس الملكي" });
 
         List<AddDepartmentDto> newDept = new List<AddDepartmentDto>();
-        newDept.Add(new AddDepartmentDto { DepartmentName = "الإدارة الطبية", EntityId = 2 });
+        newDept.Add(new AddDepartmentDto { DepartmentName = "الاتصالات وتقنية المعلومات", EntityId = 1 });
 
         List<InsertSurveyQuestionDto> newSurveyQ = new List<InsertSurveyQuestionDto>();
         newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل تعاني حاليا أو سبق أن عانيت من مشاكل أو اعراض نفسية أو جسدية قد تشكل تهديدا لسلامتك وسلامة الآخرين", SurveyTypeId = 1 });
@@ -127,11 +127,11 @@ public class SeedService : ISeedService
         //     _context.RequestStatus.Add(requestStatus);
         // }
 
-        foreach (var item in newRole)
-        {
-            var role = _mapper.Map<Models.Role.Role>(item);
-            _context.Role.Add(role);
-        }
+        // foreach (var item in newRole)
+        // {
+        //     var role = _mapper.Map<Models.Role.Role>(item);
+        //     _context.Role.Add(role);
+        // }
 
         // foreach (var item in newEntity)
         // {
@@ -139,11 +139,11 @@ public class SeedService : ISeedService
         //     _context.Entity.Add(entity);
         // }
 
-        // foreach (var item in newDept)
-        // {
-        //     var dept = _mapper.Map<Models.Entity.Department>(item);
-        //     _context.Department.Add(dept);
-        // }
+        foreach (var item in newDept)
+        {
+            var dept = _mapper.Map<Models.Entity.Department>(item);
+            _context.Department.Add(dept);
+        }
 
         // foreach (var item in newZone)
         // {
