@@ -4,12 +4,12 @@ namespace ClinicApi.Models.OtpModel;
 
 public class Otp
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
-    public string NationalId { get; set; } = string.Empty;
-    public string PhoneNumber { get; set; } = string.Empty;
-    public string Content { get; set; } = string.Empty;
-    public DateTime SendTime { get; set; } = DateTime.Now;
-    public bool IsDeliverd { get; set; } = false;
+    // public Guid Id { get; set; } = Guid.NewGuid();
+    // public string NationalId { get; set; } = string.Empty;
+    public string mobile { get; set; } = string.Empty;
+    public string content { get; set; } = string.Empty;
+    public DateTime SendDateTime { get; set; } = DateTime.Now;
+    // public bool IsDeliverd { get; set; } = false;
 
 
 }
