@@ -39,7 +39,15 @@ public class RequestService : IRequestService
         return serviceResponse;
     }
 
-
+    public async Task<ServiceResponse<List<GetRequestTypeDto>>> AddNewRequestType(InsertRequestTypeDto newRequestType)
+    {
+        var serviceResponse = new ServiceResponse<List<GetRequestTypeDto>>();
+        var request = _mapper.Map<Models.RequestTypeModel.RequestType>(newRequestType);
+        _context.RequestType.Add(request);
+        _context.SaveChanges();
+        serviceResponse.Data = await _context.RequestType.Select(p => _mapper.Map<GetRequestTypeDto>(p)).ToListAsync();
+        return serviceResponse;
+    }
 
     public async Task<ServiceResponse<GetRequestDto>> DeleteRequest(int id)
     {
@@ -85,12 +93,32 @@ public class RequestService : IRequestService
         return serviceResponse;
     }
 
-
+    public async Task<ServiceResponse<GetRequestTypeDto>> DeleteRequestType(int id)
+    {
+         var serviceResponse = new ServiceResponse<GetRequestTypeDto>();
+        try
+        {
+            var requestType = await _context.RequestType.FirstOrDefaultAsync(p => p.Id == id);
+            if (requestType is null)
+            {
+                throw new Exception($"The Id '{id}'Is Not Founde...");
+            }
+            _context.RequestType.Remove(requestType);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<GetRequestTypeDto>(requestType);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
 
     public async Task<ServiceResponse<List<GetRequestDto>>> GetAllRequest()
     {
         var serviceResponse = new ServiceResponse<List<GetRequestDto>>();
-        var dbContext = await _context.Request.Include(r => r.Person).Include(r => r.RequestStatus).Include(r => r.PortalUser).ToListAsync();
+        var dbContext = await _context.Request.Include(r => r.Person).Include(r => r.RequestStatus).Include(r => r.RequestType).Include(r => r.PortalUser).ToListAsync();
         serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetRequestDto>(p)).ToList();
         return serviceResponse;
     }
@@ -103,7 +131,13 @@ public class RequestService : IRequestService
         return serviceResponse;
     }
 
-
+    public async Task<ServiceResponse<List<GetRequestTypeDto>>> GetAllRequestType()
+    {
+         var serviceResponse = new ServiceResponse<List<GetRequestTypeDto>>();
+        var dbContext = await _context.RequestType.ToListAsync();
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetRequestTypeDto>(p)).ToList();
+        return serviceResponse;
+    }
 
     public async Task<ServiceResponse<GetRequestDto>> GetRequestByID(int id)
     {
@@ -140,6 +174,17 @@ public class RequestService : IRequestService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<GetRequestTypeDto>> GetRequestTypeByID(int id)
+    {
+          var serviceResponse = new ServiceResponse<GetRequestTypeDto>();
+        var dbContext = await _context.RequestType.FirstOrDefaultAsync(p => p.Id == id);
+        if (dbContext is null)
+        {
+            throw new Exception($"The Id '{id}'Is Not Founde...");
+        }
+        serviceResponse.Data = _mapper.Map<GetRequestTypeDto>(dbContext);
+        return serviceResponse;
+    }
 
     public async Task<ServiceResponse<UpdateRequestDto>> UpdateRequest(UpdateRequestDto updateRequest)
     {
@@ -207,4 +252,25 @@ public class RequestService : IRequestService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<UpdateRequestTypeDto>> UpdateRequestType(UpdateRequestTypeDto updateRequestType)
+    {
+        var serviceResponse = new ServiceResponse<UpdateRequestTypeDto>();
+        try
+        {
+            var requestType = await _context.RequestType.FirstOrDefaultAsync(z => z.Id == updateRequestType.Id);
+            if (requestType is null)
+            {
+                throw new Exception($"The Id '{updateRequestType.Id}'Is Not Founde...");
+            }
+            _mapper.Map(updateRequestType, requestType);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<UpdateRequestTypeDto>(requestType);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
 }
