@@ -21,4 +21,10 @@ public interface IRequestService
     Task<ServiceResponse<List<GetRequestStatusDto>>> AddNewRequestStatus(InsertRequestStatusDto newRequestStatus);
     Task<ServiceResponse<UpdateRequestStatusDto>> UpdateRequestStatus(UpdateRequestStatusDto updateRequestStatus);
     Task<ServiceResponse<GetRequestStatusDto>> DeleteRequestStatus(int id);
+
+      Task<ServiceResponse<List<GetRequestTypeDto>>> GetAllRequestType();
+    Task<ServiceResponse<GetRequestTypeDto>> GetRequestTypeByID(int id);
+    Task<ServiceResponse<List<GetRequestTypeDto>>> AddNewRequestType(InsertRequestTypeDto newRequestType);
+    Task<ServiceResponse<UpdateRequestTypeDto>> UpdateRequestType(UpdateRequestTypeDto updateRequestType);
+    Task<ServiceResponse<GetRequestTypeDto>> DeleteRequestType(int id);
 }

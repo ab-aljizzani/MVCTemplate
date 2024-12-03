@@ -1,6 +1,7 @@
 using System;
 using ClinicApi.Models.PersonModel;
 using ClinicApi.Models.PortalUser;
+using ClinicApi.Models.RequestTypeModel;
 
 namespace ClinicApi.Models.RequestModel;
 
@@ -15,6 +16,8 @@ public class Request
     public Models.PortalUser.PortalUser? PortalUser { get; set; }
     public int RequestStatusId { get; set; }
     public RequestStatus? RequestStatus { get; set; }
+    public int RequestTypeId { get; set; }
+    public RequestType? RequestType { get; set; }
     public string AppsentReason { get; set; } = string.Empty;
 
 }

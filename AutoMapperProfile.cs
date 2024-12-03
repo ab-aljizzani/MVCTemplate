@@ -27,6 +27,7 @@ using ClinicApi.Models.PersonalImagesModel;
 using ClinicApi.Models.PersonModel;
 using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.RequestModel;
+using ClinicApi.Models.RequestTypeModel;
 using ClinicApi.Models.Role;
 using ClinicApi.Models.SurveyModel;
 using ClinicApi.Models.ZoneModel;
@@ -103,6 +104,13 @@ public class AutoMapperProfile : Profile
         CreateMap<RequestStatus, GetRequestStatusDto>();
         CreateMap<RequestStatus, InsertRequestStatusDto>();
         CreateMap<RequestStatus, UpdateRequestStatusDto>();
+
+        CreateMap<GetRequestStatusDto, RequestType>();
+        CreateMap<InsertRequestTypeDto, RequestType>();
+        CreateMap<UpdateRequestTypeDto, RequestType>();
+        CreateMap<RequestType, GetRequestTypeDto>();
+        CreateMap<RequestType, InsertRequestTypeDto>();
+        CreateMap<RequestType, UpdateRequestTypeDto>();
 
         CreateMap<GetSurveyTypeDto, SurveyType>();
         CreateMap<InsertSurveyTypeDto, SurveyType>();
