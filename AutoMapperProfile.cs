@@ -4,6 +4,9 @@ using ClinicApi.Data.PersonalImagesModelDto;
 using ClinicApi.Dtos.DashboardUserDto;
 using ClinicApi.Dtos.DashboardUserDto.Insert;
 using ClinicApi.Dtos.DashboardUserDto.Update;
+using ClinicApi.Dtos.DoctorAvailbleTimeDto;
+using ClinicApi.Dtos.DoctorAvailbleTimeDto.Insert;
+using ClinicApi.Dtos.DoctorAvailbleTimeDto.Update;
 using ClinicApi.Dtos.Entity;
 using ClinicApi.Dtos.Entity.Get;
 using ClinicApi.Dtos.PersonalImagesModelDto;
@@ -22,6 +25,7 @@ using ClinicApi.Dtos.SurveyDto.Update;
 using ClinicApi.Dtos.ZoneModelDto;
 using ClinicApi.Dtos.ZoneModelDto.Update;
 using ClinicApi.Models.DashboarUserModel;
+using ClinicApi.Models.DoctorAvailbleTimeModel;
 using ClinicApi.Models.Entity;
 using ClinicApi.Models.PersonalImagesModel;
 using ClinicApi.Models.PersonModel;
@@ -151,6 +155,11 @@ public class AutoMapperProfile : Profile
 
         CreateMap<GetSurveyQesAnswerDto, SurveyQuestion>();
         CreateMap<SurveyQuestion, GetSurveyQesAnswerDto>();
+
+
+        CreateMap<GetDoctorAvailbleTimeDto, DoctorAvailbleTime>();
+        CreateMap<InsertDoctorAvailbleTimeDto, DoctorAvailbleTime>();
+        CreateMap<UpdateDoctorAvailbleTimeDto, DoctorAvailbleTime>();
 
     }
 }

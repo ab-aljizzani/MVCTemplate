@@ -1,5 +1,6 @@
 using System;
 using ClinicApi.Models.DashboarUserModel;
+using ClinicApi.Models.DoctorAvailbleTimeModel;
 using ClinicApi.Models.Entity;
 using ClinicApi.Models.PersonalImagesModel;
 using ClinicApi.Models.PersonModel;
@@ -16,24 +17,25 @@ namespace ClinicApi.Data;
 
 public class DataContext : DbContext
 {
-    public DataContext(DbContextOptions<DataContext> options) : base(options)
-    {
+  public DataContext(DbContextOptions<DataContext> options) : base(options)
+  {
 
-    }
-    public DbSet<Entity> Entity => Set<Entity>();
-    public DbSet<Department> Department => Set<Department>();
-    public DbSet<Role> Role => Set<Role>();
-    public DbSet<PortalUser> PortalUser => Set<PortalUser>();
-    public DbSet<DashboardUser> DashboardUser => Set<DashboardUser>();
-    public DbSet<Zone> Zone => Set<Zone>();
-    public DbSet<PersonalImg> PersonalImg => Set<PersonalImg>();
-    public DbSet<Person> Person => Set<Person>();
-    public DbSet<Request> Request => Set<Request>();
-    public DbSet<RequestStatus> RequestStatus => Set<RequestStatus>();
-      public DbSet<RequestType> RequestType => Set<RequestType>();
-    public DbSet<SurveyType> SurveyType => Set<SurveyType>();
-    public DbSet<SurveyQuestion> SurveyQuestion => Set<SurveyQuestion>();
-    public DbSet<SurveyAnswer> SurveyAnswer => Set<SurveyAnswer>();
-    public DbSet<SurveyAnswerType> SurveyAnswerType => Set<SurveyAnswerType>();
-    public DbSet<UserSurveyAnswer> UserSurveyAnswer => Set<UserSurveyAnswer>();
+  }
+  public DbSet<Entity> Entity => Set<Entity>();
+  public DbSet<Department> Department => Set<Department>();
+  public DbSet<Role> Role => Set<Role>();
+  public DbSet<PortalUser> PortalUser => Set<PortalUser>();
+  public DbSet<DashboardUser> DashboardUser => Set<DashboardUser>();
+  public DbSet<Zone> Zone => Set<Zone>();
+  public DbSet<PersonalImg> PersonalImg => Set<PersonalImg>();
+  public DbSet<Person> Person => Set<Person>();
+  public DbSet<Request> Request => Set<Request>();
+  public DbSet<RequestStatus> RequestStatus => Set<RequestStatus>();
+  public DbSet<RequestType> RequestType => Set<RequestType>();
+  public DbSet<SurveyType> SurveyType => Set<SurveyType>();
+  public DbSet<SurveyQuestion> SurveyQuestion => Set<SurveyQuestion>();
+  public DbSet<SurveyAnswer> SurveyAnswer => Set<SurveyAnswer>();
+  public DbSet<SurveyAnswerType> SurveyAnswerType => Set<SurveyAnswerType>();
+  public DbSet<UserSurveyAnswer> UserSurveyAnswer => Set<UserSurveyAnswer>();
+  public DbSet<DoctorAvailbleTime> DoctorAvailbleTime => Set<DoctorAvailbleTime>();
 }
