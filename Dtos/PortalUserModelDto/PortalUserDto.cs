@@ -16,7 +16,7 @@ public class PortalUserDto
     [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@!%*?&!£$%^&*()_+{}:@~<>?|=[\];'#,.\/\\-])[A-Za-z\d$@!%*?&!£$%^&*()_+{}:@~<>?|=[\];'#,.\/\\-]{8,}$", ErrorMessage = "كلمة المرور يجب أن تكون 8 حروف وارقام على الأقل , كلمة المرور يجب أن تحتوي على حرف كبير على الأقل , كلمة المرور يجب أن تحتوى حلى حرف مميز على الاقل ")]
     public string Password { get; set; } = string.Empty;
     [Required(ErrorMessage = "كلمة المرور يجب أن تكون متطابقة")]
-    [Display(Name = "كلمة المرور")]
+    [Display(Name = "تاكيد كلمة المرور")]
     [DataType("Password")]
     [Compare("Password")]
     public string ConfirmPassword { get; set; } = string.Empty;

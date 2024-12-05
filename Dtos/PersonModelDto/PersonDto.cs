@@ -27,8 +27,8 @@ public class PersonDto
     [Required(ErrorMessage = "الرجاء إدخال رقم الجوال")]
     [Display(Name = "رقم الجوال")]
     public string PhoneNumber { get; set; } = string.Empty;
-    [Required(ErrorMessage = "الرجاء إختيار منطقة القرب ")]
-    [Display(Name = "منطقة القرب")]
+    [Required(ErrorMessage = "الرجاء إختيار درجة الأهمية ")]
+    [Display(Name = "درجة الأهمية")]
     public int ZoneId { get; set; }
     public Dtos.ZoneModelDto.ZoneDto? Zone { get; set; }
     public int EntityId { get; set; }
@@ -37,8 +37,8 @@ public class PersonDto
     [Display(Name = "الإدارة")]
     public int DepartmentId { get; set; }
     public Dtos.Entity.DepartmentDto? Department { get; set; }
-    [Required(ErrorMessage = "الرجاء إختيار نوع الهوية ")]
-    [Display(Name = "نوع الهوية")]
+    [Required(ErrorMessage = "الرجاء إختيار الجنسية ")]
+    [Display(Name = "الجنسية")]
     public string NationalIdType { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إدخال المسمى الوظيفي ")]
     [Display(Name = "المسمى الوظيفي")]
