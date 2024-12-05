@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "H59PDWpulg8=",
+  "dgSpecHash": "/wwFPecGbIc=",
   "success": true,
-  "projectFilePath": "c:\\Users\\557657\\Documents\\GitRep\\ClinicApi\\ClinicApi.csproj",
+  "projectFilePath": "C:\\Users\\557657\\Documents\\GitRep\\ClinicApi\\ClinicApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\557657\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\557657\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
