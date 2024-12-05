@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Compile Include="Models\DashboarUserModel\DashboardUser.cs" />
+    <Compile Include="Models\DoctorAvailbleTimeModel\DoctorAvailbleTime.cs" />
     <Compile Include="Models\EntityModel\Department.cs" />
     <Compile Include="Models\EntityModel\Entity.cs" />
     <Compile Include="Models\OtpModel\Otp.cs" />

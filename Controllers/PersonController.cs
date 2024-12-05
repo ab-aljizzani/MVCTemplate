@@ -44,21 +44,21 @@ namespace ClinicApi.Controllers
         [HttpPost]
         public async Task<ActionResult<List<PersonDto>>> AddnewPerson(InsertPersonDto newPerson)
         {
-            var userEntity = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "EntityID");
-            if (int.Parse(userEntity.Value.ToString()) != newPerson.EntityId)
-                return BadRequest("Person Entity Must Match With Your Entity");
+            // var userEntity = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "EntityID");
+            // if (int.Parse(userEntity.Value.ToString()) != newPerson.EntityId)
+            //     return BadRequest("Person Entity Must Match With Your Entity");
             return Ok(await _personSerice.AddNewPerson(newPerson));
         }
         [HttpPut]
         public async Task<ActionResult<UpdatePersonDto>> UpdatePerson(UpdatePersonDto updatePerson)
         {
-            var userEntity = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "EntityID");
-            var role = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "Role");
-            if (role.Value.ToString() != "SuperAdmin" && role.Value.ToString() != "PortalAdmin")
-            {
-                if (int.Parse(userEntity.Value.ToString()) != updatePerson.EntityId)
-                    return BadRequest("Person Entity Must Match With Your Entity");
-            }
+            // var userEntity = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "EntityID");
+            // var role = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "Role");
+            // if (role.Value.ToString() != "SuperAdmin" && role.Value.ToString() != "PortalAdmin")
+            // {
+            // if (int.Parse(userEntity.Value.ToString()) != updatePerson.EntityId)
+            //     return BadRequest("Person Entity Must Match With Your Entity");
+            // }
             var response = await _personSerice.UpdatePerson(updatePerson);
             if (response.Success == false)
                 return NotFound(response);
