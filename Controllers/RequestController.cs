@@ -40,7 +40,8 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _requestService.AddNewRequest(newRequest));
         }
-        [HttpPut]
+        [HttpPost]
+        [Route("EditRequest")]
         public async Task<ActionResult<UpdateRequestDto>> UpdateRequest(UpdateRequestDto updateRequest)
         {
             var response = await _requestService.UpdateRequest(updateRequest);
@@ -48,7 +49,7 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
-        [HttpPut]
+        [HttpPost]
         [Route("UpdateAppsentReason")]
         public async Task<ActionResult<UpdateRequestAppsentReasonDto>> UpdateRequestAppsentReason(UpdateRequestAppsentReasonDto updateRequest)
         {
@@ -57,10 +58,10 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<GetRequestDto>> DeleteRequest(int id)
-        {
-            return Ok(await _requestService.DeleteRequest(id));
-        }
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<GetRequestDto>> DeleteRequest(int id)
+        // {
+        //     return Ok(await _requestService.DeleteRequest(id));
+        // }
     }
 }

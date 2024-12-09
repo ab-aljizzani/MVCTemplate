@@ -33,7 +33,8 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _zoneSerice.AddNewZone(newZone));
         }
-        [HttpPut]
+        [HttpPost]
+        [Route("EditZone")]
         public async Task<ActionResult<ZoneDto>> UpdateZone(UpdateZoneDto updateZone)
         {
             var response = await _zoneSerice.UpdateZone(updateZone);
@@ -41,10 +42,10 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ZoneDto>> DeleteZone(int id)
-        {
-            return Ok(await _zoneSerice.DeleteZone(id));
-        }
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<ZoneDto>> DeleteZone(int id)
+        // {
+        //     return Ok(await _zoneSerice.DeleteZone(id));
+        // }
     }
 }

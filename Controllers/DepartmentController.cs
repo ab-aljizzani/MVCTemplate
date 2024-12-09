@@ -59,7 +59,8 @@ namespace ClinicApi.Controllers
             //     return BadRequest("Entity Must Be The Same As You");
             return Ok(await _entityService.AddNewDepartment(newDepartment));
         }
-        [HttpPut]
+        [HttpPost]
+         [Route("EditDept")]
         public async Task<ActionResult<GetEntityDto>> UpdateDepartment(UpdateDepartmentDot updateDepartment)
         {
             var response = await _entityService.UpdateDepartment(updateDepartment);
@@ -67,10 +68,10 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<GetEntityDto>> DeleteDepartment(int id)
-        {
-            return Ok(await _entityService.DeleteDepartment(id));
-        }
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<GetEntityDto>> DeleteDepartment(int id)
+        // {
+        //     return Ok(await _entityService.DeleteDepartment(id));
+        // }
     }
 }

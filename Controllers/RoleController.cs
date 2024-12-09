@@ -33,7 +33,8 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _roleService.AddNewRole(newRole));
         }
-        [HttpPut]
+        [HttpPost]
+        [Route("EditRole")]
         public async Task<ActionResult<UpdateRoleDto>> UpdateRole(UpdateRoleDto updateRole)
         {
             var response = await _roleService.UpdateRole(updateRole);
@@ -41,10 +42,10 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<RoleDto>> DeleteRole(int id)
-        {
-            return Ok(await _roleService.DeleteRole(id));
-        }
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<RoleDto>> DeleteRole(int id)
+        // {
+        //     return Ok(await _roleService.DeleteRole(id));
+        // }
     }
 }

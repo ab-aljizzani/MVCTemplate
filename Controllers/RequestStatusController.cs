@@ -34,7 +34,8 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _requestService.AddNewRequestStatus(newRequest));
         }
-        [HttpPut]
+        [HttpPost]
+        [Route("EditRequestStatus")]
         public async Task<ActionResult<UpdateRequestStatusDto>> UpdateRequestStatus(UpdateRequestStatusDto updateRequest)
         {
             var response = await _requestService.UpdateRequestStatus(updateRequest);
@@ -42,10 +43,10 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<GetRequestStatusDto>> DeleteRequestStatus(int id)
-        {
-            return Ok(await _requestService.DeleteRequestStatus(id));
-        }
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<GetRequestStatusDto>> DeleteRequestStatus(int id)
+        // {
+        //     return Ok(await _requestService.DeleteRequestStatus(id));
+        // }
     }
 }

@@ -49,7 +49,8 @@ namespace ClinicApi.Controllers
             //     return BadRequest("Person Entity Must Match With Your Entity");
             return Ok(await _personSerice.AddNewPerson(newPerson));
         }
-        [HttpPut]
+        [HttpPost]
+         [Route("EditPerson")]
         public async Task<ActionResult<UpdatePersonDto>> UpdatePerson(UpdatePersonDto updatePerson)
         {
             // var userEntity = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "EntityID");
@@ -64,10 +65,10 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<PersonDto>> DeletePerson(int id)
-        {
-            return Ok(await _personSerice.DeletePerson(id));
-        }
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<PersonDto>> DeletePerson(int id)
+        // {
+        //     return Ok(await _personSerice.DeletePerson(id));
+        // }
     }
 }

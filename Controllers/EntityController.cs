@@ -32,7 +32,8 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _entityService.AddNewEntity(newEntity));
         }
-        [HttpPut]
+        [HttpPost]
+        [Route("EditEntity")]
         public async Task<ActionResult<GetEntityDto>> UpdateEntity(UpdateEntityDto updateEntity)
         {
             var response = await _entityService.UpdateEntity(updateEntity);
@@ -40,10 +41,10 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<GetEntityDto>> DeleteEntity(int id)
-        {
-            return Ok(await _entityService.DeleteEntity(id));
-        }
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<GetEntityDto>> DeleteEntity(int id)
+        // {
+        //     return Ok(await _entityService.DeleteEntity(id));
+        // }
     }
 }

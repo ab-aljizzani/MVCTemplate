@@ -33,7 +33,8 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _personalImages.AddNewPersonalImages(newPersonalImg));
         }
-        [HttpPut]
+        [HttpPost]
+         [Route("EditPersonalImg")]
         public async Task<ActionResult<PersonalImgDto>> UpdatePersonalImg(UpdatePersonalImgDto updatePersonalImg)
         {
             var response = await _personalImages.UpdatePersonalImages(updatePersonalImg);
@@ -41,10 +42,10 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<PersonalImgDto>> DeletePersonalImg(int id)
-        {
-            return Ok(await _personalImages.DeletePersonalImages(id));
-        }
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<PersonalImgDto>> DeletePersonalImg(int id)
+        // {
+        //     return Ok(await _personalImages.DeletePersonalImages(id));
+        // }
     }
 }

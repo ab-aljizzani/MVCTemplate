@@ -34,7 +34,8 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _surveyService.AddNewSurveyAnswerType(newSurveyAnswerType));
         }
-        [HttpPut]
+        [HttpPost]
+        [Route("EditSurveyAnswerType")]
         public async Task<ActionResult<UpdateSurveyAnswerTypeDto>> UpdateSurveyAnswerType(UpdateSurveyAnswerTypeDto updateSurveyAnswerType)
         {
             var response = await _surveyService.UpdateSurveyAnswerType(updateSurveyAnswerType);
@@ -42,10 +43,10 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<GetSurveyAnswerTypeDto>> DeleteSurveyAnswerType(int id)
-        {
-            return Ok(await _surveyService.DeleteSurveyAnswer(id));
-        }
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<GetSurveyAnswerTypeDto>> DeleteSurveyAnswerType(int id)
+        // {
+        //     return Ok(await _surveyService.DeleteSurveyAnswer(id));
+        // }
     }
 }

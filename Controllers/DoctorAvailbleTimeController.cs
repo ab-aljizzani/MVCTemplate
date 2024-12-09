@@ -34,7 +34,8 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _doctorAvailbleTimeService.AddNewTime(newTime));
         }
-        [HttpPut]
+        [HttpPost]
+         [Route("EditTime")]
         public async Task<ActionResult<GetDoctorAvailbleTimeDto>> UpdateTime(UpdateDoctorAvailbleTimeDto updateTime)
         {
             var response = await _doctorAvailbleTimeService.UpdateTime(updateTime);
@@ -42,10 +43,10 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<GetDoctorAvailbleTimeDto>> DeleteTime(int id)
-        {
-            return Ok(await _doctorAvailbleTimeService.DeleteTime(id));
-        }
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<GetDoctorAvailbleTimeDto>> DeleteTime(int id)
+        // {
+        //     return Ok(await _doctorAvailbleTimeService.DeleteTime(id));
+        // }
     }
 }
