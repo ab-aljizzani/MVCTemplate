@@ -1,6 +1,7 @@
 using ClinicApi.Dtos.RequestDto.Get;
 using ClinicApi.Dtos.RequestDto.Insert;
 using ClinicApi.Dtos.RequestDto.Update;
+using ClinicApi.Services;
 using ClinicApi.Services.Request;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,37 +14,44 @@ namespace ClinicApi.Controllers
     [ApiController]
     public class RequestController : ControllerBase
     {
+        private readonly IAuditService _auditService;
         private readonly IRequestService _requestService;
 
-        public RequestController(IRequestService requestService)
+        public RequestController(IAuditService auditService, IRequestService requestService)
         {
+            _auditService = auditService;
             _requestService = requestService;
         }
         [HttpGet("GetAll")]
         public async Task<ActionResult<List<GetRequestDto>>> Get()
         {
+            // await _auditService.PostAudit("View All Request For User");
             return Ok(await _requestService.GetAllRequest());
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<GetRequestDto>> GetSingle(int id)
         {
+            await _auditService.PostAudit($"View Single Request By Id With Id Number '{id}' For User");
             return Ok(await _requestService.GetRequestByID(id));
         }
         [HttpGet]
         [Route("GetByPersonId")]
         public async Task<ActionResult<GetRequestDto>> GetByPersonId(int id)
         {
+            await _auditService.PostAudit($"View Single Request By PersonId With PersonId Number '{id}' For User");
             return Ok(await _requestService.GetRequestByPersonId(id));
         }
         [HttpPost]
         public async Task<ActionResult<List<InsertRequestDto>>> AddNewRequest(InsertRequestDto newRequest)
         {
+            await _auditService.PostAudit($"Insert Request With Id '{newRequest.Id + " With PersonId " + newRequest.PersonId}' By User ");
             return Ok(await _requestService.AddNewRequest(newRequest));
         }
         [HttpPost]
         [Route("EditRequest")]
         public async Task<ActionResult<UpdateRequestDto>> UpdateRequest(UpdateRequestDto updateRequest)
         {
+            await _auditService.PostAudit($"Update Request With ReqId '{updateRequest.Id + " To RequestStatusId " + updateRequest.RequestStatusId}' By User ");
             var response = await _requestService.UpdateRequest(updateRequest);
             if (response.Success == false)
                 return NotFound(response);
@@ -53,6 +61,7 @@ namespace ClinicApi.Controllers
         [Route("UpdateAppsentReason")]
         public async Task<ActionResult<UpdateRequestAppsentReasonDto>> UpdateRequestAppsentReason(UpdateRequestAppsentReasonDto updateRequest)
         {
+            await _auditService.PostAudit($"Update AppsentReason With ReqId '{updateRequest.Id + " To " + updateRequest.AppsentReason}' By User ");
             var response = await _requestService.UpdateRequestAppsentReason(updateRequest);
             if (response.Success == false)
                 return NotFound(response);

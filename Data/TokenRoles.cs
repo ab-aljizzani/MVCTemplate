@@ -12,7 +12,7 @@ public class TokenRoles
     {
         _httpContextAccessor = httpContextAccessor;
     }
-    public Dictionary<string, object> GetRoleToken()
+    public string GetRoleToken(string role)
     {
 
         var userClaims = _httpContextAccessor.HttpContext?.User.Claims.ToList();
@@ -23,7 +23,8 @@ public class TokenRoles
         {
             newTokenRole.Add(userRoleType[i], userRoleValue[i]);
         }
-        return newTokenRole;
+        var setRole = newTokenRole.FirstOrDefault(t => t.Key == role);
+        return setRole.Value.ToString(); ;
 
     }
 }

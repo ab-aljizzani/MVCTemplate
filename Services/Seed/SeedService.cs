@@ -7,6 +7,7 @@ using ClinicApi.Dtos.RequestDto.Insert;
 using ClinicApi.Dtos.RoleDto;
 using ClinicApi.Dtos.SurveyDto.Insert;
 using ClinicApi.Dtos.ZoneModelDto;
+using ClinicApi.Models.AuditsModel;
 using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.Reponse;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -34,7 +35,7 @@ public class SeedService : ISeedService
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم جدولة الطلب", StatusOrder = 3 });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الانتهاء", StatusOrder = 4 });
 
-                List<InsertRequestTypeDto> newRequestType = new List<InsertRequestTypeDto>();
+        List<InsertRequestTypeDto> newRequestType = new List<InsertRequestTypeDto>();
         newRequestType.Add(new InsertRequestTypeDto { Type = "داخلي من الإدارة" });
         newRequestType.Add(new InsertRequestTypeDto { Type = "خارجي من العيادة" });
 
@@ -121,11 +122,11 @@ public class SeedService : ISeedService
         //     _context.SurveyAnswer.Add(requestAnswer);
         // }
 
-              foreach (var item in newRequestType)
-        {
-            var requestType = _mapper.Map<Models.RequestTypeModel.RequestType>(item);
-            _context.RequestType.Add(requestType);
-        }
+        //       foreach (var item in newRequestType)
+        // {
+        //     var requestType = _mapper.Map<Models.RequestTypeModel.RequestType>(item);
+        //     _context.RequestType.Add(requestType);
+        // }
 
         // foreach (var item in newSurveyQ)
         // {

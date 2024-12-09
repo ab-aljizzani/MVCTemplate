@@ -124,6 +124,7 @@ public class AuthRepositery : IAuthRepositery
     {
         var claims = new List<Claim>{
                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
+                new Claim("PortalUserId",user.Id.ToString()),
                 new Claim("Username",user.Username),
                 new Claim("UserFullName",user.UserFullName.ToString()),
                 new Claim("NationalId",user.NationalId),
@@ -165,6 +166,7 @@ public class AuthRepositery : IAuthRepositery
     {
         var claims = new List<Claim>{
                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
+                   new Claim("PortalUserId",user.Id.ToString()),
                 new Claim("Username",user.Username),
                 new Claim("UserFullName",user.UserFullName.ToString()),
                 new Claim("UserType",user.UserType.ToString()),

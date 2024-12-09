@@ -1,5 +1,7 @@
 
 using ClinicApi.Data;
+using ClinicApi.Services;
+using ClinicApi.Services.AuditServices;
 using ClinicApi.Services.DoctorAvailbleTimeServices;
 using ClinicApi.Services.Entity;
 using ClinicApi.Services.PersonalImagesServices;
@@ -50,6 +52,7 @@ namespace ClinicApi
             builder.Services.AddScoped<IRequestService, RequestService>();
             builder.Services.AddScoped<ISurveyService, SurveyService>();
             builder.Services.AddScoped<ISeedService, SeedService>();
+            builder.Services.AddScoped<IAuditService, AuditService>();
             builder.Services.AddScoped<IDoctorAvailbleTimeService, DoctorAvailbleTimeService>();
             builder.Services.AddScoped<MagicString>();
             builder.Services.AddScoped<TokenRoles>();
