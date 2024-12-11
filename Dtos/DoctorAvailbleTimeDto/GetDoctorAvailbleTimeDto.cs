@@ -10,11 +10,11 @@ public class GetDoctorAvailbleTimeDto
 
     [Required(ErrorMessage = "الرجاء إدخال تاريخ بداية المواعيد")]
     [Display(Name = "تاريخ بداية المواعيد")]
-    public string StartDate { get; set; }
+    public string StartDate { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "الرجاء إدخال تاريخ نهاية المواعيد")]
     [Display(Name = "تاريخ نهاية المواعيد")]
-    public string EndDate { get; set; }
+    public string EndDate { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "الرجاء إدخال وقت بداية المواعيد")]
     [Display(Name = "وقت بداية المواعيد")]
@@ -28,4 +28,5 @@ public class GetDoctorAvailbleTimeDto
     [Required(ErrorMessage = "الرجاء إدخال الوقت بين المواعيد بالدقائق")]
     [Display(Name = "الوقت بين المواعيد بالدقائق")]
     public string TimeInBetween { get; set; } = string.Empty;
+    public bool IsActive { get; set; } = false;
 }

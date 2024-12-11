@@ -29,4 +29,5 @@ public class InsertDoctorAvailbleTimeDto
     [Required(ErrorMessage = "الرجاء إدخال الوقت بين المواعيد بالدقائق")]
     [Display(Name = "الوقت بين المواعيد بالدقائق")]
     public string TimeInBetween { get; set; } = string.Empty;
+    public bool IsActive { get; set; } = false;
 }

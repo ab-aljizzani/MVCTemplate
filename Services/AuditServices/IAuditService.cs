@@ -6,4 +6,5 @@ namespace ClinicApi.Services;
 public interface IAuditService
 {
     Task<bool> PostAudit(string AuditDesc);
+    Task<bool> PostAuditWuthNoToken(string auditDesc);
 }

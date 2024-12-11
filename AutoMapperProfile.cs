@@ -158,8 +158,10 @@ public class AutoMapperProfile : Profile
 
 
         CreateMap<GetDoctorAvailbleTimeDto, DoctorAvailbleTime>();
+        CreateMap<DoctorAvailbleTime, GetDoctorAvailbleTimeDto>();
         CreateMap<InsertDoctorAvailbleTimeDto, DoctorAvailbleTime>();
         CreateMap<UpdateDoctorAvailbleTimeDto, DoctorAvailbleTime>();
+        CreateMap<UpdateDoctorIsActive, DoctorAvailbleTime>();
 
     }
 }

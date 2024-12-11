@@ -33,4 +33,19 @@ public class AuditService : IAuditService
         await _context.SaveChangesAsync();
         return true;
     }
+    public async Task<bool> PostAuditWuthNoToken(string auditDesc)
+    {
+        var audit = new Audits();
+        audit.PortalUserId = 0;
+        audit.HttpRequest = _httpContextAccessor.HttpContext.Request.Method;
+        audit.AuditDesc = auditDesc;
+        audit.EndPoint = _httpContextAccessor.HttpContext.Request.Path;
+        audit.BaseUrl = _httpContextAccessor.HttpContext.Request.Host.ToString();
+        audit.AuditTime = DateTime.Now;
+        audit.AuditIp = _httpContextAccessor.HttpContext.Connection.LocalIpAddress.ToString();
+
+        _context.Audits.Add(audit);
+        await _context.SaveChangesAsync();
+        return true;
+    }
 }

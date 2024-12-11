@@ -60,6 +60,18 @@ public class DoctorAvailbleTimeService : IDoctorAvailbleTimeService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<GetDoctorAvailbleTimeDto>> GetTimeByDoctorID(int id)
+    {
+        var serviceResponse = new ServiceResponse<GetDoctorAvailbleTimeDto>();
+        var dbContext = await _context.DoctorAvailbleTime.FirstOrDefaultAsync(e => e.PortalUserId == id);
+        if (dbContext is null)
+        {
+            throw new Exception($"The Id '{id}'Is Not Founde...");
+        }
+        serviceResponse.Data = _mapper.Map<GetDoctorAvailbleTimeDto>(dbContext);
+        return serviceResponse;
+    }
+
     public async Task<ServiceResponse<GetDoctorAvailbleTimeDto>> GetTimeByID(int id)
     {
         var serviceResponse = new ServiceResponse<GetDoctorAvailbleTimeDto>();
@@ -73,6 +85,27 @@ public class DoctorAvailbleTimeService : IDoctorAvailbleTimeService
     }
 
     public async Task<ServiceResponse<GetDoctorAvailbleTimeDto>> UpdateTime(UpdateDoctorAvailbleTimeDto updateTime)
+    {
+        var serviceResponse = new ServiceResponse<GetDoctorAvailbleTimeDto>();
+        try
+        {
+            var time = await _context.DoctorAvailbleTime.FirstOrDefaultAsync(e => e.Id == updateTime.Id);
+            if (time is null)
+            {
+                throw new Exception($"The Id '{updateTime.Id}'Is Not Founde...");
+            }
+            _mapper.Map(updateTime, time);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<GetDoctorAvailbleTimeDto>(time);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
+    public async Task<ServiceResponse<GetDoctorAvailbleTimeDto>> UpdateIsActive(UpdateDoctorIsActive updateTime)
     {
         var serviceResponse = new ServiceResponse<GetDoctorAvailbleTimeDto>();
         try

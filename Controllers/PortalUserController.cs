@@ -58,6 +58,7 @@ namespace ClinicApi.Controllers
             {
                 return BadRequest(response);
             }
+            await _auditService.PostAuditWuthNoToken($"User With NatuinalId Num '{request.Username}' is LoggedIn");
             return Ok(response.Data);
         }
         [HttpPost]

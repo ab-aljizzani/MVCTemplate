@@ -34,6 +34,13 @@ namespace ClinicApi.Controllers
             await _auditService.PostAudit("View Single DoctorAvailbleTime By Id For User");
             return Ok(await _doctorAvailbleTimeService.GetTimeByID(id));
         }
+        [HttpGet]
+        [Route("ByDoctor")]
+        public async Task<ActionResult<List<GetDoctorAvailbleTimeDto>>> GetTimeByDoctorId(int id)
+        {
+            await _auditService.PostAudit($"View Single DoctorAvailbleTime For Doctor '{id}' By User");
+            return Ok(await _doctorAvailbleTimeService.GetTimeByDoctorID(id));
+        }
         [HttpPost]
         public async Task<ActionResult<List<GetDoctorAvailbleTimeDto>>> AddnewTime(InsertDoctorAvailbleTimeDto newTime)
         {
@@ -46,6 +53,16 @@ namespace ClinicApi.Controllers
         {
             await _auditService.PostAudit($"Update DoctorAvailbleTime with Id '{updateTime.Id + " To StartEndDate " + updateTime.StartDate + ' ' + updateTime.EndDate}' By User ");
             var response = await _doctorAvailbleTimeService.UpdateTime(updateTime);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
+        [HttpPost]
+        [Route("EditIsActive")]
+        public async Task<ActionResult<GetDoctorAvailbleTimeDto>> UpdateIsActive(UpdateDoctorIsActive updateTime)
+        {
+            await _auditService.PostAudit($"Update DoctorAvailbleTime with Id '{updateTime.Id + " Change IsActive To " + updateTime.IsActive}' By User ");
+            var response = await _doctorAvailbleTimeService.UpdateIsActive(updateTime);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
