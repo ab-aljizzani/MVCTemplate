@@ -1,6 +1,7 @@
 using System;
 using AutoMapper;
 using ClinicApi.Data;
+using ClinicApi.Dtos.AppointmentDto.Get;
 using ClinicApi.Dtos.Entity;
 using ClinicApi.Dtos.PortalUserModelDto.Insert;
 using ClinicApi.Dtos.RequestDto.Insert;
@@ -78,6 +79,15 @@ public class SeedService : ISeedService
         newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 3 });
         newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 4 });
         newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 4 });
+
+        List<AppointmentStatusDto> newAppointmentStatus = new List<AppointmentStatusDto>();
+        newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تمت الجدولة" });
+        newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تم الحضور" });
+        newAppointmentStatus.Add(new AppointmentStatusDto { Status = "لم يحضر" });
+        newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تم الانتهاء" });
+
+        List<PerscritionDto> newPerscrition = new List<PerscritionDto>();
+        newPerscrition.Add(new PerscritionDto { PerscriptionName = "بدون وصفة طبية" });
 
         // InsertPortalUserDto newPortalUser = new InsertPortalUserDto()
         // {
@@ -168,6 +178,16 @@ public class SeedService : ISeedService
         //     var survey = _mapper.Map<Models.SurveyModel.SurveyType>(item);
         //     _context.SurveyType.Add(survey);
         // }
+        foreach (var item in newAppointmentStatus)
+        {
+            var status = _mapper.Map<Models.AppointmentModel.AppointmentStatus>(item);
+            _context.AppointmentStatus.Add(status);
+        }
+        foreach (var item in newPerscrition)
+        {
+            var perscription = _mapper.Map<Models.AppointmentModel.Perscription>(item);
+            _context.Perscription.Add(perscription);
+        }
 
         await _context.SaveChangesAsync();
         serviceResponse.Data = "Seed Exicutes Successfuly";

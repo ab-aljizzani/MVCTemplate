@@ -12,12 +12,12 @@ namespace ClinicApi.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class AppointmentCotroller : ControllerBase
+    public class AppointmentController : ControllerBase
     {
         private readonly IAuditService _auditService;
         private readonly IAppointmentService _appointmentService;
 
-        public AppointmentCotroller(IAuditService auditService, IAppointmentService appointmentService)
+        public AppointmentController(IAuditService auditService, IAppointmentService appointmentService)
         {
             _auditService = auditService;
             _appointmentService = appointmentService;
