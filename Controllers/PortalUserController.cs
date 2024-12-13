@@ -6,11 +6,13 @@ using ClinicApi.Dtos.PortalUserModelDto.Update;
 using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.Reponse;
 using ClinicApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClinicApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PortalUserController : ControllerBase
@@ -50,6 +52,7 @@ namespace ClinicApi.Controllers
             // await _auditService.PostAudit($"View Single PortalUser By Id With Id Number '{id}' For User");
             return Ok(await _authRepo.GetUserByID(id));
         }
+        [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<ActionResult<ServiceResponse<int>>> Login(LoginDto request)
         {

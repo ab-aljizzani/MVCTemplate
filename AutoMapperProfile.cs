@@ -1,6 +1,9 @@
 using System;
 using AutoMapper;
 using ClinicApi.Data.PersonalImagesModelDto;
+using ClinicApi.Dtos.AppointmentDto.Get;
+using ClinicApi.Dtos.AppointmentDto.Insert;
+using ClinicApi.Dtos.AppointmentDto.Update;
 using ClinicApi.Dtos.DashboardUserDto;
 using ClinicApi.Dtos.DashboardUserDto.Insert;
 using ClinicApi.Dtos.DashboardUserDto.Update;
@@ -24,6 +27,7 @@ using ClinicApi.Dtos.SurveyDto.Insert;
 using ClinicApi.Dtos.SurveyDto.Update;
 using ClinicApi.Dtos.ZoneModelDto;
 using ClinicApi.Dtos.ZoneModelDto.Update;
+using ClinicApi.Models.AppointmentModel;
 using ClinicApi.Models.DashboarUserModel;
 using ClinicApi.Models.DoctorAvailbleTimeModel;
 using ClinicApi.Models.Entity;
@@ -162,6 +166,22 @@ public class AutoMapperProfile : Profile
         CreateMap<InsertDoctorAvailbleTimeDto, DoctorAvailbleTime>();
         CreateMap<UpdateDoctorAvailbleTimeDto, DoctorAvailbleTime>();
         CreateMap<UpdateDoctorIsActive, DoctorAvailbleTime>();
+
+
+        CreateMap<AppointmentDto, Appointment>();
+        CreateMap<Appointment, AppointmentDto>();
+        CreateMap<InsertAppointmentDto, Appointment>();
+        CreateMap<UpdateAppointmentDto, Appointment>();
+
+        CreateMap<AppointmentStatusDto, AppointmentStatus>();
+        CreateMap<AppointmentStatus, AppointmentStatusDto>();
+        CreateMap<InsertAppointmentStatusDto, AppointmentStatus>();
+        CreateMap<UpdateAppointmentStatusDto, AppointmentStatus>();
+
+        CreateMap<PerscritionDto, Perscription>();
+        CreateMap<Perscription, PerscritionDto>();
+        CreateMap<InsertPerscriptionDto, Perscription>();
+        CreateMap<UpdatePerscriptionDto, Perscription>();
 
     }
 }

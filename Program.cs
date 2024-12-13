@@ -1,6 +1,7 @@
 
 using ClinicApi.Data;
 using ClinicApi.Services;
+using ClinicApi.Services.AppointmentServices;
 using ClinicApi.Services.AuditServices;
 using ClinicApi.Services.DoctorAvailbleTimeServices;
 using ClinicApi.Services.Entity;
@@ -54,6 +55,7 @@ namespace ClinicApi
             builder.Services.AddScoped<ISeedService, SeedService>();
             builder.Services.AddScoped<IAuditService, AuditService>();
             builder.Services.AddScoped<IDoctorAvailbleTimeService, DoctorAvailbleTimeService>();
+            builder.Services.AddScoped<IAppointmentService, AppointmentService>();
             builder.Services.AddScoped<MagicString>();
             builder.Services.AddScoped<TokenRoles>();
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

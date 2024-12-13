@@ -1,4 +1,5 @@
 using System;
+using ClinicApi.Models.AppointmentModel;
 using ClinicApi.Models.AuditsModel;
 using ClinicApi.Models.DashboarUserModel;
 using ClinicApi.Models.DoctorAvailbleTimeModel;
@@ -40,4 +41,7 @@ public class DataContext : DbContext
   public DbSet<UserSurveyAnswer> UserSurveyAnswer => Set<UserSurveyAnswer>();
   public DbSet<DoctorAvailbleTime> DoctorAvailbleTime => Set<DoctorAvailbleTime>();
   public DbSet<Audits> Audits => Set<Audits>();
+  public DbSet<Appointment> Appointment => Set<Appointment>();
+  public DbSet<AppointmentStatus> AppointmentStatus => Set<AppointmentStatus>();
+  public DbSet<Perscription> Perscription => Set<Perscription>();
 }

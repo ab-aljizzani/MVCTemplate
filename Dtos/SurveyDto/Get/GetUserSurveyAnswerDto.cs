@@ -8,9 +8,9 @@ public class GetUserSurveyAnswerDto
 {
     public int Id { get; set; }
     public int PersonId { get; set; }
-    public Person? Person { get; set; }
+    // public Person? Person { get; set; }
     public int PortalUserId { get; set; }
-    public Models.PortalUser.PortalUser? PortalUser { get; set; }
+    // public Models.PortalUser.PortalUser? PortalUser { get; set; }
     public int RequestId { get; set; }
     public int SurveyQuestionId { get; set; }
     public SurveyQuestion? SurveyQuestion { get; set; }
