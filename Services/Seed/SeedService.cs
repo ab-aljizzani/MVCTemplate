@@ -34,7 +34,9 @@ public class SeedService : ISeedService
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "انتظار الموافقة", StatusOrder = 1 });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الارسال الى العيادة", StatusOrder = 2 });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم جدولة الطلب", StatusOrder = 3 });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الانتهاء", StatusOrder = 4 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الحضور", StatusOrder = 4 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "لم يحضر", StatusOrder = 5 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الانتهاء", StatusOrder = 6 });
 
         List<InsertRequestTypeDto> newRequestType = new List<InsertRequestTypeDto>();
         newRequestType.Add(new InsertRequestTypeDto { Type = "داخلي من الإدارة" });
@@ -84,7 +86,6 @@ public class SeedService : ISeedService
         newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تمت الجدولة" });
         newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تم الحضور" });
         newAppointmentStatus.Add(new AppointmentStatusDto { Status = "لم يحضر" });
-        newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تم الانتهاء" });
 
         List<PerscritionDto> newPerscrition = new List<PerscritionDto>();
         newPerscrition.Add(new PerscritionDto { PerscriptionName = "بدون وصفة طبية" });
@@ -183,11 +184,11 @@ public class SeedService : ISeedService
             var status = _mapper.Map<Models.AppointmentModel.AppointmentStatus>(item);
             _context.AppointmentStatus.Add(status);
         }
-        foreach (var item in newPerscrition)
-        {
-            var perscription = _mapper.Map<Models.AppointmentModel.Perscription>(item);
-            _context.Perscription.Add(perscription);
-        }
+        // foreach (var item in newPerscrition)
+        // {
+        //     var perscription = _mapper.Map<Models.AppointmentModel.Perscription>(item);
+        //     _context.Perscription.Add(perscription);
+        // }
 
         await _context.SaveChangesAsync();
         serviceResponse.Data = "Seed Exicutes Successfuly";

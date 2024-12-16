@@ -105,6 +105,7 @@ public class AutoMapperProfile : Profile
         CreateMap<Request, InsertRequestDto>();
         CreateMap<Request, UpdateRequestDto>();
         CreateMap<UpdateRequestAppsentReasonDto, Request>();
+        CreateMap<UpdateRequestStatusIdDto, Request>();
 
         CreateMap<GetRequestStatusDto, RequestStatus>();
         CreateMap<InsertRequestStatusDto, RequestStatus>();
@@ -172,6 +173,8 @@ public class AutoMapperProfile : Profile
         CreateMap<Appointment, AppointmentDto>();
         CreateMap<InsertAppointmentDto, Appointment>();
         CreateMap<UpdateAppointmentDto, Appointment>();
+        CreateMap<UpdateAppointmentDto, Appointment>();
+        CreateMap<UpdateIsPersonShowup, Appointment>();
 
         CreateMap<AppointmentStatusDto, AppointmentStatus>();
         CreateMap<AppointmentStatus, AppointmentStatusDto>();

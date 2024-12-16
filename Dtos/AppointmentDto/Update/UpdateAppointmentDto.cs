@@ -10,6 +10,7 @@ public class UpdateAppointmentDto
     public int AppointmentStatusId { get; set; }
     public int PerscriptionId { get; set; }
     public string ApponitmentDate { get; set; } = string.Empty;
+    public string AppointmentDay { get; set; } = string.Empty;
     public string AppointmentStartTime { get; set; } = string.Empty;
     public string AppointmentEndTime { get; set; } = string.Empty;
     public string AppointmentReview { get; set; } = string.Empty;

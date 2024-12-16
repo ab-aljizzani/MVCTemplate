@@ -67,6 +67,16 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
+        [HttpPost]
+        [Route("UpdateReqStatusId")]
+        public async Task<ActionResult<UpdateRequestStatusIdDto>> UpdateReqStatusId(UpdateRequestStatusIdDto updateRequest)
+        {
+            await _auditService.PostAudit($"Update UpdateReqStatusId With ReqId '{updateRequest.Id + " And reqStatusId To" + updateRequest.RequestStatusId}' By User ");
+            var response = await _requestService.UpdateRequestStatusId(updateRequest);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
         // [HttpDelete("{id}")]
         // public async Task<ActionResult<GetRequestDto>> DeleteRequest(int id)
         // {
