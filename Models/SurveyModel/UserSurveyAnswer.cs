@@ -16,5 +16,6 @@ public class UserSurveyAnswer
     public SurveyQuestion? SurveyQuestion { get; set; }
     public int SurveyAnswerId { get; set; }
     public SurveyAnswer? surveyAnswer { get; set; }
+    public int SurveyTypeId { get; set; }
     public string Note { get; set; } = string.Empty;
 }

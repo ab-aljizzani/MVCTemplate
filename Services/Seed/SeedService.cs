@@ -57,6 +57,7 @@ public class SeedService : ISeedService
         newZone.Add(new ZoneDto { ZoneName = "الثانية" });
         newZone.Add(new ZoneDto { ZoneName = "الثالثة" });
         List<InsertSurveyTypeDto> newSurvey = new List<InsertSurveyTypeDto>();
+        newSurvey.Add(new InsertSurveyTypeDto { Type = "لم يتم تعيين نموذج" });
         newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج الإفصاح" });
         newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج المقياس" });
 
@@ -67,10 +68,10 @@ public class SeedService : ISeedService
         newDept.Add(new AddDepartmentDto { DepartmentName = "الاتصالات وتقنية المعلومات", EntityId = 1 });
 
         List<InsertSurveyQuestionDto> newSurveyQ = new List<InsertSurveyQuestionDto>();
-        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل تعاني حاليا أو سبق أن عانيت من مشاكل أو اعراض نفسية أو جسدية قد تشكل تهديدا لسلامتك وسلامة الآخرين", SurveyTypeId = 1 });
-        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل سبق لك أن إستخدمت مواد محظورة بطريقة أثرت سلبا على سلوكك أو تفكيرك", SurveyTypeId = 1 });
-        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل سبق لك أن حاولت الإضرار بنفسك أو بغيرك", SurveyTypeId = 1 });
-        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل تستخدم حاليا أو سبق أن إستخدمت أدوية نفسية", SurveyTypeId = 1 });
+        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل تعاني حاليا أو سبق أن عانيت من مشاكل أو اعراض نفسية أو جسدية قد تشكل تهديدا لسلامتك وسلامة الآخرين", SurveyTypeId = 2 });
+        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل سبق لك أن إستخدمت مواد محظورة بطريقة أثرت سلبا على سلوكك أو تفكيرك", SurveyTypeId = 2 });
+        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل سبق لك أن حاولت الإضرار بنفسك أو بغيرك", SurveyTypeId = 2 });
+        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل تستخدم حاليا أو سبق أن إستخدمت أدوية نفسية", SurveyTypeId = 2 });
 
         List<InsertSurveyAnswerDto> newSurveyA = new List<InsertSurveyAnswerDto>();
         newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 1 });
@@ -174,16 +175,16 @@ public class SeedService : ISeedService
         //     var zone = _mapper.Map<Models.ZoneModel.Zone>(item);
         //     _context.Zone.Add(zone);
         // }
-        // foreach (var item in newSurvey)
-        // {
-        //     var survey = _mapper.Map<Models.SurveyModel.SurveyType>(item);
-        //     _context.SurveyType.Add(survey);
-        // }
-        foreach (var item in newAppointmentStatus)
+        foreach (var item in newSurvey)
         {
-            var status = _mapper.Map<Models.AppointmentModel.AppointmentStatus>(item);
-            _context.AppointmentStatus.Add(status);
+            var survey = _mapper.Map<Models.SurveyModel.SurveyType>(item);
+            _context.SurveyType.Add(survey);
         }
+        // foreach (var item in newAppointmentStatus)
+        // {
+        //     var status = _mapper.Map<Models.AppointmentModel.AppointmentStatus>(item);
+        //     _context.AppointmentStatus.Add(status);
+        // }
         // foreach (var item in newPerscrition)
         // {
         //     var perscription = _mapper.Map<Models.AppointmentModel.Perscription>(item);

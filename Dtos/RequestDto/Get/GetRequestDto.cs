@@ -18,6 +18,7 @@ public class GetRequestDto
     public RequestStatus? RequestStatus { get; set; }
     public int RequestTypeId { get; set; }
     public RequestType? RequestType { get; set; }
+    public int SurveyTypeId { get; set; }
     public string AppsentReason { get; set; } = string.Empty;
 
 }
