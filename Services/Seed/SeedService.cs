@@ -31,16 +31,16 @@ public class SeedService : ISeedService
     {
         var serviceResponse = new ServiceResponse<string>();
         List<InsertRequestStatusDto> newRequestStatus = new List<InsertRequestStatusDto>();
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "انتظار الموافقة", StatusOrder = 1 });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الارسال الى العيادة", StatusOrder = 2 });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم جدولة الطلب", StatusOrder = 3 });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الحضور", StatusOrder = 4 });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "لم يحضر", StatusOrder = 5 });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الانتهاء", StatusOrder = 6 });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "انتظار الموافقة", StatusOrder = 1, BadgeColor = "badge rounded-pill bg-dark mx-auto" });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الارسال الى العيادة", StatusOrder = 2, BadgeColor = "badge rounded-pill bg-warning mx-auto" });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم جدولة الطلب", StatusOrder = 3, BadgeColor = "badge rounded-pill bg-success mx-auto" });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الحضور", StatusOrder = 4, BadgeColor = "badge rounded-pill bg-primary mx-auto" });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "لم يحضر", StatusOrder = 5, BadgeColor = "badge rounded-pill bg-danger mx-auto" });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الانتهاء", StatusOrder = 6, BadgeColor = "badge rounded-pill bg-soft-dark mx-auto" });
 
         List<InsertRequestTypeDto> newRequestType = new List<InsertRequestTypeDto>();
-        newRequestType.Add(new InsertRequestTypeDto { Type = "داخلي من الإدارة" });
-        newRequestType.Add(new InsertRequestTypeDto { Type = "خارجي من العيادة" });
+        newRequestType.Add(new InsertRequestTypeDto { Type = "داخلي من الإدارة", BadgeColor = "badge rounded-pill bg-primary mx-auto" });
+        newRequestType.Add(new InsertRequestTypeDto { Type = "خارجي من العيادة", BadgeColor = "badge rounded-pill bg-success mx-auto" });
 
 
         List<RoleDto> newRole = new List<RoleDto>();
@@ -84,9 +84,9 @@ public class SeedService : ISeedService
         newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 4 });
 
         List<AppointmentStatusDto> newAppointmentStatus = new List<AppointmentStatusDto>();
-        newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تمت الجدولة" });
-        newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تم الحضور" });
-        newAppointmentStatus.Add(new AppointmentStatusDto { Status = "لم يحضر" });
+        newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تمت الجدولة", BadgeColor = "badge rounded-pill bg-success mx-auto" });
+        newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تم الحضور", BadgeColor = "badge rounded-pill bg-primary mx-auto" });
+        newAppointmentStatus.Add(new AppointmentStatusDto { Status = "لم يحضر", BadgeColor = "badge rounded-pill bg-danger mx-auto" });
 
         List<PerscritionDto> newPerscrition = new List<PerscritionDto>();
         newPerscrition.Add(new PerscritionDto { PerscriptionName = "بدون وصفة طبية" });
@@ -134,7 +134,7 @@ public class SeedService : ISeedService
         //     _context.SurveyAnswer.Add(requestAnswer);
         // }
 
-        //       foreach (var item in newRequestType)
+        // foreach (var item in newRequestType)
         // {
         //     var requestType = _mapper.Map<Models.RequestTypeModel.RequestType>(item);
         //     _context.RequestType.Add(requestType);
@@ -175,16 +175,16 @@ public class SeedService : ISeedService
         //     var zone = _mapper.Map<Models.ZoneModel.Zone>(item);
         //     _context.Zone.Add(zone);
         // }
-        foreach (var item in newSurvey)
-        {
-            var survey = _mapper.Map<Models.SurveyModel.SurveyType>(item);
-            _context.SurveyType.Add(survey);
-        }
-        // foreach (var item in newAppointmentStatus)
+        // foreach (var item in newSurvey)
         // {
-        //     var status = _mapper.Map<Models.AppointmentModel.AppointmentStatus>(item);
-        //     _context.AppointmentStatus.Add(status);
+        //     var survey = _mapper.Map<Models.SurveyModel.SurveyType>(item);
+        //     _context.SurveyType.Add(survey);
         // }
+        foreach (var item in newAppointmentStatus)
+        {
+            var status = _mapper.Map<Models.AppointmentModel.AppointmentStatus>(item);
+            _context.AppointmentStatus.Add(status);
+        }
         // foreach (var item in newPerscrition)
         // {
         //     var perscription = _mapper.Map<Models.AppointmentModel.Perscription>(item);

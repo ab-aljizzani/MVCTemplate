@@ -7,4 +7,5 @@ public class UpdateRequestStatusDto
     public int Id { get; set; }
     public string Status { get; set; } = string.Empty;
     public int StatusOrder { get; set; }
+    public string BadgeColor { get; set; } = string.Empty;
 }
