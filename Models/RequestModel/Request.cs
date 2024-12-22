@@ -20,5 +20,6 @@ public class Request
     public RequestType? RequestType { get; set; }
     public int SurveyTypeId { get; set; }
     public string AppsentReason { get; set; } = string.Empty;
+    public bool IsSurveyInserted { get; set; }
 
 }

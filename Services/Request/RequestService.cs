@@ -186,6 +186,28 @@ public class RequestService : IRequestService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<UpdateRequestDto>> UpdateRequesIsSurveyInserted(UpdateRequestSurveyInsertedDto updateRequest)
+    {
+        var serviceResponse = new ServiceResponse<UpdateRequestDto>();
+        try
+        {
+            var requestSurveyInserted = await _context.Request.FirstOrDefaultAsync(z => z.Id == updateRequest.Id);
+            if (requestSurveyInserted is null)
+            {
+                throw new Exception($"The Id '{updateRequest.Id}'Is Not Founde...");
+            }
+            _mapper.Map(updateRequest, requestSurveyInserted);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<UpdateRequestDto>(requestSurveyInserted);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
+
     public async Task<ServiceResponse<UpdateRequestDto>> UpdateRequest(UpdateRequestDto updateRequest)
     {
         var serviceResponse = new ServiceResponse<UpdateRequestDto>();

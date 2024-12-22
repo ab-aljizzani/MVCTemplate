@@ -12,4 +12,5 @@ public class InsertRequestDto
     public int RequestStatusId { get; set; }
     public int SurveyTypeId { get; set; }
     public int RequestTypeId { get; set; }
+    public bool IsSurveyInserted { get; set; }
 }

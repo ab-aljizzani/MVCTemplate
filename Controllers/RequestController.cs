@@ -77,6 +77,16 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
+        [HttpPost]
+        [Route("UpdateReqSurveyInserted")]
+        public async Task<ActionResult<UpdateRequestStatusIdDto>> UpdateReqSurveyInserted(UpdateRequestSurveyInsertedDto updateRequest)
+        {
+            await _auditService.PostAudit($"Update UpdateReqSurveyInserted With ReqId '{updateRequest.Id + " And reqSurveyInserted To" + updateRequest.IsSurveyInserted}' By User ");
+            var response = await _requestService.UpdateRequesIsSurveyInserted(updateRequest);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
         // [HttpDelete("{id}")]
         // public async Task<ActionResult<GetRequestDto>> DeleteRequest(int id)
         // {
