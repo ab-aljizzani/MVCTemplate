@@ -176,6 +176,7 @@ public class AutoMapperProfile : Profile
         CreateMap<UpdateAppointmentDto, Appointment>();
         CreateMap<UpdateAppointmentDto, Appointment>();
         CreateMap<UpdateIsPersonShowup, Appointment>();
+        CreateMap<UpdateAppointmentSurveyTypeIdDto, Appointment>();
 
         CreateMap<AppointmentStatusDto, AppointmentStatus>();
         CreateMap<AppointmentStatus, AppointmentStatusDto>();

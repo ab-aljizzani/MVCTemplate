@@ -15,6 +15,6 @@ public class InsertAppointmentDto
     public string AppointmentStartTime { get; set; } = string.Empty;
     public string AppointmentEndTime { get; set; } = string.Empty;
     public string AppointmentReview { get; set; } = string.Empty;
-    public string ApsentReason { get; set; } = string.Empty;
+    public bool IsSurveyInserted { get; set; }
     public bool IsPersonShowUp { get; set; }
 }

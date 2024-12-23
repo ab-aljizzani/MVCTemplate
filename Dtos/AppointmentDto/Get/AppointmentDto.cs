@@ -1,4 +1,5 @@
 using System;
+using ClinicApi.Models.SurveyModel;
 
 namespace ClinicApi.Dtos.AppointmentDto.Get;
 
@@ -7,6 +8,7 @@ public class AppointmentDto
     public int Id { get; set; }
     public int RequestId { get; set; }
     public int SurveyTypeId { get; set; }
+    public SurveyType? SurveyType { get; set; }
     public int PortalUserId { get; set; }
     public Models.PortalUser.PortalUser? portalUser { get; set; }
     public int AppointmentStatusId { get; set; }
@@ -16,6 +18,6 @@ public class AppointmentDto
     public string AppointmentStartTime { get; set; } = string.Empty;
     public string AppointmentEndTime { get; set; } = string.Empty;
     public string AppointmentReview { get; set; } = string.Empty;
-    public string ApsentReason { get; set; } = string.Empty;
+    public bool IsSurveyInserted { get; set; }
     public bool IsPersonShowUp { get; set; }
 }

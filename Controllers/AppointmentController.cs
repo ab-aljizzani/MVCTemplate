@@ -61,8 +61,18 @@ namespace ClinicApi.Controllers
         [Route("EditIsPersonShowup")]
         public async Task<ActionResult<AppointmentDto>> EditIsPersonShowup(UpdateIsPersonShowup updateAppointment)
         {
-            await _auditService.PostAudit($"Update Appointment IsPersonShowUp with Appointment Id '{updateAppointment.RequestId + " To IsPersonShowUp " + updateAppointment.IsPersonShowUp}' By User ");
+            await _auditService.PostAudit($"Update Appointment IsPersonShowUp with AppointmentReq Id '{updateAppointment.RequestId + " To IsPersonShowUp " + updateAppointment.IsPersonShowUp}' By User ");
             var response = await _appointmentService.UpdateIsPersonShowUp(updateAppointment);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
+        [HttpPost]
+        [Route("EditSurvTypeIdByReqId")]
+        public async Task<ActionResult<AppointmentDto>> EditSurvTypeIdByReqId(UpdateAppointmentSurveyTypeIdDto updateAppointment)
+        {
+            await _auditService.PostAudit($"Set Appointment SurveyTypeId with AppointmentReq Id '{updateAppointment.RequestId + " To SurveyTypeId " + updateAppointment.SurveyTypeId}' By User ");
+            var response = await _appointmentService.UpdateSurvTypeIdByReqId(updateAppointment);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
