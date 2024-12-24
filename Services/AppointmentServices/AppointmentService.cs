@@ -20,13 +20,13 @@ public class AppointmentService : IAppointmentService
         _mapper = mapper;
         _context = context;
     }
-    public async Task<ServiceResponse<List<AppointmentDto>>> AddNewAppointment(InsertAppointmentDto newAppointment)
+    public async Task<ServiceResponse<int>> AddNewAppointment(InsertAppointmentDto newAppointment)
     {
-        var serviceResponse = new ServiceResponse<List<AppointmentDto>>();
+        var serviceResponse = new ServiceResponse<int>();
         var appointment = _mapper.Map<Appointment>(newAppointment);
         _context.Appointment.Add(appointment);
         _context.SaveChanges();
-        serviceResponse.Data = await _context.Appointment.Select(e => _mapper.Map<AppointmentDto>(e)).ToListAsync();
+        serviceResponse.Data = appointment.Id;
         return serviceResponse;
     }
 
@@ -119,7 +119,7 @@ public class AppointmentService : IAppointmentService
     public async Task<ServiceResponse<List<AppointmentDto>>> GetAllAppointment()
     {
         var serviceResponse = new ServiceResponse<List<AppointmentDto>>();
-        var dbContext = await _context.Appointment.Include(e => e.portalUser).Include(e => e.SurveyType).ToListAsync();
+        var dbContext = await _context.Appointment.Include(e => e.SurveyType).Include(e => e.portalUser).ToListAsync();
         serviceResponse.Data = dbContext.Select(e => _mapper.Map<AppointmentDto>(e)).ToList();
         return serviceResponse;
     }
@@ -143,7 +143,7 @@ public class AppointmentService : IAppointmentService
     public async Task<ServiceResponse<AppointmentDto>> GetAppointmentByID(int id)
     {
         var serviceResponse = new ServiceResponse<AppointmentDto>();
-        var dbContext = await _context.Appointment.Include(e => e.portalUser).Include(e => e.SurveyType).FirstOrDefaultAsync(e => e.Id == id);
+        var dbContext = await _context.Appointment.Include(e => e.SurveyType).Include(e => e.portalUser).FirstOrDefaultAsync(e => e.Id == id);
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
@@ -155,7 +155,7 @@ public class AppointmentService : IAppointmentService
     public async Task<ServiceResponse<AppointmentDto>> GetAppointmentByReqID(int id)
     {
         var serviceResponse = new ServiceResponse<AppointmentDto>();
-        var dbContext = await _context.Appointment.Where(e => e.RequestId == id).Include(e => e.portalUser).Include(e => e.SurveyType).FirstOrDefaultAsync();
+        var dbContext = await _context.Appointment.Where(e => e.Id == id).Include(e => e.SurveyType).Include(e => e.portalUser).FirstOrDefaultAsync();
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
@@ -237,10 +237,10 @@ public class AppointmentService : IAppointmentService
         var serviceResponse = new ServiceResponse<AppointmentDto>();
         try
         {
-            var appointment = await _context.Appointment.FirstOrDefaultAsync(e => e.RequestId == updateAppointment.RequestId);
+            var appointment = await _context.Appointment.FirstOrDefaultAsync(e => e.Id == updateAppointment.Id);
             if (appointment is null)
             {
-                throw new Exception($"The Id '{updateAppointment.RequestId}'Is Not Founde...");
+                throw new Exception($"The Id '{updateAppointment.Id}'Is Not Founde...");
             }
             _mapper.Map(updateAppointment, appointment);
             await _context.SaveChangesAsync();
@@ -281,10 +281,10 @@ public class AppointmentService : IAppointmentService
         var serviceResponse = new ServiceResponse<AppointmentDto>();
         try
         {
-            var appointment = await _context.Appointment.FirstOrDefaultAsync(e => e.RequestId == updateAppointment.RequestId);
+            var appointment = await _context.Appointment.FirstOrDefaultAsync(e => e.Id == updateAppointment.Id);
             if (appointment is null)
             {
-                throw new Exception($"The Id '{updateAppointment.RequestId}'Is Not Founde...");
+                throw new Exception($"The Id '{updateAppointment.Id}'Is Not Founde...");
             }
             _mapper.Map(updateAppointment, appointment);
             await _context.SaveChangesAsync();

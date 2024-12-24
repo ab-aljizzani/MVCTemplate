@@ -118,7 +118,7 @@ public class RequestService : IRequestService
     public async Task<ServiceResponse<List<GetRequestDto>>> GetAllRequest()
     {
         var serviceResponse = new ServiceResponse<List<GetRequestDto>>();
-        var dbContext = await _context.Request.Include(r => r.Person).Include(r => r.RequestStatus).Include(r => r.RequestType).Include(r => r.PortalUser).ToListAsync();
+        var dbContext = await _context.Request.Include(r => r.Person).Include(r => r.RequestStatus).Include(r => r.RequestType).Include(r => r.PortalUser).Include(r => r.Appointment).ToListAsync();
         serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetRequestDto>(p)).ToList();
         return serviceResponse;
     }
@@ -153,7 +153,7 @@ public class RequestService : IRequestService
     public async Task<ServiceResponse<List<GetRequestDto>>> GetRequestByPersonId(int id)
     {
         var serviceResponse = new ServiceResponse<List<GetRequestDto>>();
-        var dbContext = await _context.Request.Where(r => r.PersonId == id).Include(r => r.Person).Include(r => r.RequestStatus).Include(r => r.PortalUser).ToListAsync();
+        var dbContext = await _context.Request.Where(r => r.PersonId == id).Include(r => r.Appointment).Include(r => r.Person).Include(r => r.RequestStatus).Include(r => r.PortalUser).ToListAsync();
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
@@ -183,6 +183,28 @@ public class RequestService : IRequestService
             throw new Exception($"The Id '{id}'Is Not Founde...");
         }
         serviceResponse.Data = _mapper.Map<GetRequestTypeDto>(dbContext);
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<UpdateRequestDto>> UpdateReqAppointmentId(UpdateReqAppointmentIdDto updateRequest)
+    {
+        var serviceResponse = new ServiceResponse<UpdateRequestDto>();
+        try
+        {
+            var requestAppointmentId = await _context.Request.FirstOrDefaultAsync(z => z.Id == updateRequest.Id);
+            if (requestAppointmentId is null)
+            {
+                throw new Exception($"The Id '{updateRequest.Id}'Is Not Founde...");
+            }
+            _mapper.Map(updateRequest, requestAppointmentId);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<UpdateRequestDto>(requestAppointmentId);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
         return serviceResponse;
     }
 

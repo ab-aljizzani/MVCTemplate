@@ -4,6 +4,7 @@ using ClinicApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241224072238_DropColumnsFromAppointmentModel_2")]
+    partial class DropColumnsFromAppointmentModel_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,15 +62,10 @@ namespace ClinicApi.Migrations
                     b.Property<int>("PerscriptionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PortalUserId")
-                        .HasColumnType("int");
-
                     b.Property<int>("SurveyTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PortalUserId");
 
                     b.HasIndex("SurveyTypeId");
 
@@ -531,9 +529,6 @@ namespace ClinicApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AppointmentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("AppsentReason")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -563,8 +558,6 @@ namespace ClinicApi.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppointmentId");
 
                     b.HasIndex("PersonId");
 
@@ -785,12 +778,6 @@ namespace ClinicApi.Migrations
 
             modelBuilder.Entity("ClinicApi.Models.AppointmentModel.Appointment", b =>
                 {
-                    b.HasOne("ClinicApi.Models.PortalUser.PortalUser", "portalUser")
-                        .WithMany()
-                        .HasForeignKey("PortalUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ClinicApi.Models.SurveyModel.SurveyType", "SurveyType")
                         .WithMany()
                         .HasForeignKey("SurveyTypeId")
@@ -798,8 +785,6 @@ namespace ClinicApi.Migrations
                         .IsRequired();
 
                     b.Navigation("SurveyType");
-
-                    b.Navigation("portalUser");
                 });
 
             modelBuilder.Entity("ClinicApi.Models.DashboarUserModel.DashboardUser", b =>
@@ -920,12 +905,6 @@ namespace ClinicApi.Migrations
 
             modelBuilder.Entity("ClinicApi.Models.RequestModel.Request", b =>
                 {
-                    b.HasOne("ClinicApi.Models.AppointmentModel.Appointment", "Appointment")
-                        .WithMany()
-                        .HasForeignKey("AppointmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ClinicApi.Models.PersonModel.Person", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
@@ -949,8 +928,6 @@ namespace ClinicApi.Migrations
                         .HasForeignKey("RequestTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Appointment");
 
                     b.Navigation("Person");
 

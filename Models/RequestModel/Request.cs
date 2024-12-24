@@ -1,4 +1,5 @@
 using System;
+using ClinicApi.Models.AppointmentModel;
 using ClinicApi.Models.PersonModel;
 using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.RequestTypeModel;
@@ -19,6 +20,8 @@ public class Request
     public int RequestTypeId { get; set; }
     public RequestType? RequestType { get; set; }
     public int SurveyTypeId { get; set; }
+    public int AppointmentId { get; set; }
+    public Appointment? Appointment { get; set; }
     public string AppsentReason { get; set; } = string.Empty;
     public bool IsSurveyInserted { get; set; }
 

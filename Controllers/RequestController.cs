@@ -87,6 +87,16 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
+        [HttpPost]
+        [Route("UpdateReqAppointmentId")]
+        public async Task<ActionResult<UpdateReqAppointmentIdDto>> UpdateReqAppointmentId(UpdateReqAppointmentIdDto updateRequest)
+        {
+            await _auditService.PostAudit($"Update UpdateReqAppointmentId With ReqId '{updateRequest.Id + " And AppointmentId To" + updateRequest.AppointmentId}' By User ");
+            var response = await _requestService.UpdateReqAppointmentId(updateRequest);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
         // [HttpDelete("{id}")]
         // public async Task<ActionResult<GetRequestDto>> DeleteRequest(int id)
         // {

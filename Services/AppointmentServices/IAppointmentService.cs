@@ -11,7 +11,7 @@ public interface IAppointmentService
     Task<ServiceResponse<List<AppointmentDto>>> GetAllAppointment();
     Task<ServiceResponse<AppointmentDto>> GetAppointmentByID(int id);
     Task<ServiceResponse<AppointmentDto>> GetAppointmentByReqID(int id);
-    Task<ServiceResponse<List<AppointmentDto>>> AddNewAppointment(InsertAppointmentDto newAppointment);
+    Task<ServiceResponse<int>> AddNewAppointment(InsertAppointmentDto newAppointment);
     Task<ServiceResponse<AppointmentDto>> UpdateAppointment(UpdateAppointmentDto updateAppointment);
     Task<ServiceResponse<AppointmentDto>> UpdateIsPersonShowUp(UpdateIsPersonShowup updateAppointment);
     Task<ServiceResponse<AppointmentDto>> UpdateSurvTypeIdByReqId(UpdateAppointmentSurveyTypeIdDto updateAppointment);

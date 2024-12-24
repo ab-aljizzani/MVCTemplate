@@ -2,6 +2,7 @@ using System;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.AppointmentDto.Get;
+using ClinicApi.Dtos.AppointmentDto.Insert;
 using ClinicApi.Dtos.Entity;
 using ClinicApi.Dtos.PortalUserModelDto.Insert;
 using ClinicApi.Dtos.RequestDto.Insert;
@@ -90,6 +91,22 @@ public class SeedService : ISeedService
 
         List<PerscritionDto> newPerscrition = new List<PerscritionDto>();
         newPerscrition.Add(new PerscritionDto { PerscriptionName = "بدون وصفة طبية" });
+
+        List<InsertAppointmentDto> newAppointment = new List<InsertAppointmentDto>();
+        newAppointment.Add(new InsertAppointmentDto
+        {
+            PortalUserId = 2,
+            SurveyTypeId = 1,
+            PerscriptionId = 1,
+            IsPersonShowUp = false,
+            IsSurveyInserted = false,
+            ApponitmentDate = "--",
+            AppointmentStartTime = "--" + ":" + "--",
+            AppointmentEndTime = "--" + ":" + "--",
+            AppointmentReview = "--",
+            AppointmentDay = "--"
+        });
+
 
         // InsertPortalUserDto newPortalUser = new InsertPortalUserDto()
         // {
@@ -180,16 +197,21 @@ public class SeedService : ISeedService
         //     var survey = _mapper.Map<Models.SurveyModel.SurveyType>(item);
         //     _context.SurveyType.Add(survey);
         // }
-        foreach (var item in newAppointmentStatus)
-        {
-            var status = _mapper.Map<Models.AppointmentModel.AppointmentStatus>(item);
-            _context.AppointmentStatus.Add(status);
-        }
+        // foreach (var item in newAppointmentStatus)
+        // {
+        //     var status = _mapper.Map<Models.AppointmentModel.AppointmentStatus>(item);
+        //     _context.AppointmentStatus.Add(status);
+        // }
         // foreach (var item in newPerscrition)
         // {
         //     var perscription = _mapper.Map<Models.AppointmentModel.Perscription>(item);
         //     _context.Perscription.Add(perscription);
         // }
+        foreach (var item in newAppointment)
+        {
+            var appointment = _mapper.Map<Models.AppointmentModel.Appointment>(item);
+            _context.Appointment.Add(appointment);
+        }
 
         await _context.SaveChangesAsync();
         serviceResponse.Data = "Seed Exicutes Successfuly";

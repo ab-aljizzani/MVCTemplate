@@ -107,6 +107,7 @@ public class AutoMapperProfile : Profile
         CreateMap<UpdateRequestAppsentReasonDto, Request>();
         CreateMap<UpdateRequestStatusIdDto, Request>();
         CreateMap<UpdateRequestSurveyInsertedDto, Request>();
+        CreateMap<UpdateReqAppointmentIdDto, Request>();
 
         CreateMap<GetRequestStatusDto, RequestStatus>();
         CreateMap<InsertRequestStatusDto, RequestStatus>();
