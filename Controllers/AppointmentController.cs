@@ -57,6 +57,17 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("EditIsAppIsSurvInserted")]
+        public async Task<ActionResult<AppointmentDto>> EditIsAppIsSurvInserted(UpdateAppointmentIsSurveyInsertedDto updateAppointment)
+        {
+            await _auditService.PostAuditWuthNoToken($"Update Appointment IsSurvInserted with Appointment Id '{updateAppointment.Id + " To IsSurvInserted " + updateAppointment.IsSurveyInserted}'");
+            var response = await _appointmentService.UpdateAppointmentIsSurvInserted(updateAppointment);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
         [HttpPost]
         [Route("EditIsPersonShowup")]
         public async Task<ActionResult<AppointmentDto>> EditIsPersonShowup(UpdateIsPersonShowup updateAppointment)

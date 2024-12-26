@@ -42,6 +42,14 @@ namespace ClinicApi.Controllers
             await _auditService.PostAudit($"View Single Person By Id With Id Number '{id}' For User");
             return Ok(await _personSerice.GetPersonByID(id));
         }
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("GetPersonsByNationalId")]
+        public async Task<ActionResult<string>> GetPersonsByNationalId(string id)
+        {
+            await _auditService.PostAuditWuthNoToken($"View Single Person By National Id With National Id Number '{id}'");
+            return Ok(await _personSerice.GetPersonByNationalId(id));
+        }
         [HttpGet]
         [Route("GetPersonsByEntity")]
         public async Task<ActionResult<List<PersonDto>>> GetPersonsByEntity(int id)

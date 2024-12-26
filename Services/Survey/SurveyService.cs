@@ -307,6 +307,14 @@ public class SurveyService : ISurveyService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<List<GetSurveyQuestionDto>>> GetSurveyQuestionBySurvTypeId(int id)
+    {
+        var serviceResponse = new ServiceResponse<List<GetSurveyQuestionDto>>();
+        var dbContext = await _context.SurveyQuestion.Include(s => s.SurveyAnswer).Where(p => p.SurveyTypeId == id).ToListAsync();
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetSurveyQuestionDto>(p)).ToList();
+        return serviceResponse;
+    }
+
     public async Task<ServiceResponse<List<GetUserSurveyAnswerDto>>> GetUserSurveyAnswerByID(int id)
     {
         var serviceResponse = new ServiceResponse<List<GetUserSurveyAnswerDto>>();

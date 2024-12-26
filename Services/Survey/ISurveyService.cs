@@ -30,6 +30,7 @@ public interface ISurveyService
 
     Task<ServiceResponse<List<GetSurveyQuestionDto>>> GetAllSurveyQuestion();
     Task<ServiceResponse<GetSurveyQuestionDto>> GetSurveyQuestionByID(int id);
+    Task<ServiceResponse<List<GetSurveyQuestionDto>>> GetSurveyQuestionBySurvTypeId(int id);
     Task<ServiceResponse<List<GetSurveyQesAnswerDto>>> GetSurveyQuestionAnswer(int id);
     Task<ServiceResponse<List<GetSurveyQuestionDto>>> AddNewSurveyQuestion(InsertSurveyQuestionDto newSurveyQuestion);
     Task<ServiceResponse<UpdateSurveyQuestionDto>> UpdateSurveyQuestion(UpdateSurveyQuestionDto updateSurveyQuestion);

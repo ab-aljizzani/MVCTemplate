@@ -34,10 +34,11 @@ namespace ClinicApi.Controllers
             await _auditService.PostAudit($"View Single UserSurveyAnswer By RequestId With RequestId Number '{id}' For User");
             return Ok(await _surveyService.GetUserSurveyAnswerByID(id));
         }
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<List<InsertUserSurveyAnswerDto>>> AddnewUserSurvey(InsertUserSurveyAnswerDto newUserSurvey)
         {
-            await _auditService.PostAudit($"Insert UserSurveyAnswer For PersonId '{newUserSurvey.PersonId + " With AnswerId " + newUserSurvey.SurveyAnswerId + "For QuesId " + newUserSurvey.SurveyQuestionId}' By User ");
+            await _auditService.PostAuditWuthNoToken($"Insert UserSurveyAnswer For PersonId '{newUserSurvey.PersonId + " With AnswerId " + newUserSurvey.SurveyAnswerId + "For QuesId " + newUserSurvey.SurveyQuestionId}'  ");
             return Ok(await _surveyService.AddNewUserSurveyAnswer(newUserSurvey));
         }
         [HttpPost]

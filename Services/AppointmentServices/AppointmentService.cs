@@ -210,6 +210,28 @@ public class AppointmentService : IAppointmentService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<AppointmentDto>> UpdateAppointmentIsSurvInserted(UpdateAppointmentIsSurveyInsertedDto updateAppointment)
+    {
+        var serviceResponse = new ServiceResponse<AppointmentDto>();
+        try
+        {
+            var appointment = await _context.Appointment.FirstOrDefaultAsync(e => e.Id == updateAppointment.Id);
+            if (appointment is null)
+            {
+                throw new Exception($"The Id '{updateAppointment.Id}'Is Not Founde...");
+            }
+            _mapper.Map(updateAppointment, appointment);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<AppointmentDto>(appointment);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
+
     public async Task<ServiceResponse<AppointmentStatusDto>> UpdateAppointmentStatus(UpdateAppointmentStatusDto updateAppointmentStatus)
     {
         var serviceResponse = new ServiceResponse<AppointmentStatusDto>();
