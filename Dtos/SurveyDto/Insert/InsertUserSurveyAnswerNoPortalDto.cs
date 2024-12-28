@@ -2,11 +2,10 @@ using System;
 
 namespace ClinicApi.Dtos.SurveyDto.Insert;
 
-public class InsertUserSurveyAnswerDto
+public class InsertUserSurveyAnswerNoPortalDto
 {
     public int Id { get; set; }
     public int PersonId { get; set; }
-    public int PortalUserId { get; set; }
     public int RequestId { get; set; }
     public int SurveyQuestionId { get; set; }
     public int SurveyAnswerId { get; set; }

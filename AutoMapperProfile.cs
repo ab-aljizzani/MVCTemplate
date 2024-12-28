@@ -158,6 +158,7 @@ public class AutoMapperProfile : Profile
         CreateMap<UserSurveyAnswer, GetUserSurveyAnswerDto>();
         CreateMap<UserSurveyAnswer, InsertUserSurveyAnswerDto>();
         CreateMap<UserSurveyAnswer, UpdateUserSurveyAnswerDto>();
+        CreateMap<InsertUserSurveyAnswerNoPortalDto, UserSurveyAnswer>();
 
 
         CreateMap<GetSurveyQesAnswerDto, SurveyQuestion>();

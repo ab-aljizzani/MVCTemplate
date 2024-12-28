@@ -22,6 +22,8 @@ public class Appointment
     public string AppointmentEndTime { get; set; } = string.Empty;
     public string AppointmentReview { get; set; } = string.Empty;
     public bool IsSurveyInserted { get; set; }
+    public string SurveyScore { get; set; } = string.Empty;
+    public string RiskLevel { get; set; } = string.Empty;
     public bool IsPersonShowUp { get; set; } = false;
 
 }

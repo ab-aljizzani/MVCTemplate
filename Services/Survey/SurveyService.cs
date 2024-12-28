@@ -71,6 +71,16 @@ public class SurveyService : ISurveyService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<List<GetUserSurveyAnswerDto>>> AddNewUserSurveyAnswerNoPortal(InsertUserSurveyAnswerNoPortalDto newUserSurveyAnswer)
+    {
+        var serviceResponse = new ServiceResponse<List<GetUserSurveyAnswerDto>>();
+        var userSurveyAnswer = _mapper.Map<Models.SurveyModel.UserSurveyAnswer>(newUserSurveyAnswer);
+        _context.UserSurveyAnswer.Add(userSurveyAnswer);
+        _context.SaveChanges();
+        serviceResponse.Data = await _context.UserSurveyAnswer.Select(p => _mapper.Map<GetUserSurveyAnswerDto>(p)).ToListAsync();
+        return serviceResponse;
+    }
+
     public async Task<ServiceResponse<GetSurveyTypeDto>> DeleteSurvey(int id)
     {
         var serviceResponse = new ServiceResponse<GetSurveyTypeDto>();
