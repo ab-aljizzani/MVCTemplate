@@ -8,6 +8,7 @@ using ClinicApi.Services.Entity;
 using ClinicApi.Services.PersonalImagesServices;
 using ClinicApi.Services.PersonServices;
 using ClinicApi.Services.Request;
+using ClinicApi.Services.RiskLevelServices;
 using ClinicApi.Services.RoleServices;
 using ClinicApi.Services.Seed;
 using ClinicApi.Services.Survey;
@@ -56,6 +57,7 @@ namespace ClinicApi
             builder.Services.AddScoped<IAuditService, AuditService>();
             builder.Services.AddScoped<IDoctorAvailbleTimeService, DoctorAvailbleTimeService>();
             builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+            builder.Services.AddScoped<IRiskLevelService, RiskLevelService>();
             builder.Services.AddScoped<MagicString>();
             builder.Services.AddScoped<TokenRoles>();
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

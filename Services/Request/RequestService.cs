@@ -142,7 +142,7 @@ public class RequestService : IRequestService
     public async Task<ServiceResponse<GetRequestDto>> GetRequestByID(int id)
     {
         var serviceResponse = new ServiceResponse<GetRequestDto>();
-        var dbContext = await _context.Request.Where(r => r.Id == id).Include(r => r.Appointment).Include(r => r.Person).Include(r => r.Person.Entity).Include(r => r.Person.PersonalImg).Include(r => r.Person.Department).Include(r => r.Person.Zone).Include(r => r.RequestStatus).Include(r => r.PortalUser).FirstOrDefaultAsync();
+        var dbContext = await _context.Request.Where(r => r.Id == id).Include(r => r.Appointment).Include(r => r.Appointment.RiskLevel).Include(r => r.Person).Include(r => r.Person.Entity).Include(r => r.Person.PersonalImg).Include(r => r.Person.Department).Include(r => r.Person.Zone).Include(r => r.RequestStatus).Include(r => r.RequestType).Include(r => r.PortalUser).FirstOrDefaultAsync();
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");

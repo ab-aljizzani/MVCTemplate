@@ -4,6 +4,7 @@ using ClinicApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250102140051_ChangePerscriptionModel")]
+    partial class ChangePerscriptionModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,8 +62,9 @@ namespace ClinicApi.Migrations
                     b.Property<int>("PortalUserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RiskLevelId")
-                        .HasColumnType("int");
+                    b.Property<string>("RiskLevel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SurveyScore")
                         .IsRequired()
@@ -72,8 +76,6 @@ namespace ClinicApi.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PortalUserId");
-
-                    b.HasIndex("RiskLevelId");
 
                     b.HasIndex("SurveyTypeId");
 
@@ -635,23 +637,6 @@ namespace ClinicApi.Migrations
                     b.ToTable("RequestType");
                 });
 
-            modelBuilder.Entity("ClinicApi.Models.RiskLevelModel.RiskLevel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Risk")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RiskLevel");
-                });
-
             modelBuilder.Entity("ClinicApi.Models.Role.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -825,19 +810,11 @@ namespace ClinicApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ClinicApi.Models.RiskLevelModel.RiskLevel", "RiskLevel")
-                        .WithMany()
-                        .HasForeignKey("RiskLevelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ClinicApi.Models.SurveyModel.SurveyType", "SurveyType")
                         .WithMany()
                         .HasForeignKey("SurveyTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("RiskLevel");
 
                     b.Navigation("SurveyType");
 

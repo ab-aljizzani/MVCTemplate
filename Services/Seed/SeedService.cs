@@ -6,6 +6,7 @@ using ClinicApi.Dtos.AppointmentDto.Insert;
 using ClinicApi.Dtos.Entity;
 using ClinicApi.Dtos.PortalUserModelDto.Insert;
 using ClinicApi.Dtos.RequestDto.Insert;
+using ClinicApi.Dtos.RiskLevelDto.Insert;
 using ClinicApi.Dtos.RoleDto;
 using ClinicApi.Dtos.SurveyDto.Insert;
 using ClinicApi.Dtos.ZoneModelDto;
@@ -89,8 +90,8 @@ public class SeedService : ISeedService
         newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تم الحضور", BadgeColor = "badge rounded-pill bg-primary mx-auto" });
         newAppointmentStatus.Add(new AppointmentStatusDto { Status = "لم يحضر", BadgeColor = "badge rounded-pill bg-danger mx-auto" });
 
-        List<PerscritionDto> newPerscrition = new List<PerscritionDto>();
-        newPerscrition.Add(new PerscritionDto { PerscriptionName = "بدون وصفة طبية" });
+        // List<PerscritionDto> newPerscrition = new List<PerscritionDto>();
+        // newPerscrition.Add(new PerscritionDto { PerscriptionName = "بدون وصفة طبية" });
 
         List<InsertAppointmentDto> newAppointment = new List<InsertAppointmentDto>();
         newAppointment.Add(new InsertAppointmentDto
@@ -104,8 +105,14 @@ public class SeedService : ISeedService
             AppointmentStartTime = "--" + ":" + "--",
             AppointmentEndTime = "--" + ":" + "--",
             AppointmentReview = "--",
-            AppointmentDay = "--"
+            AppointmentDay = "--",
+            RiskLevelId = 1
         });
+        List<InsertRiskLevelDto> newRiskLevel = new List<InsertRiskLevelDto>();
+        newRiskLevel.Add(new InsertRiskLevelDto { Risk = "لا يوجد خطر" });
+        newRiskLevel.Add(new InsertRiskLevelDto { Risk = "منخفض" });
+        newRiskLevel.Add(new InsertRiskLevelDto { Risk = "متوسط" });
+        newRiskLevel.Add(new InsertRiskLevelDto { Risk = "عالي" });
 
 
         // InsertPortalUserDto newPortalUser = new InsertPortalUserDto()
@@ -206,6 +213,11 @@ public class SeedService : ISeedService
         // {
         //     var perscription = _mapper.Map<Models.AppointmentModel.Perscription>(item);
         //     _context.Perscription.Add(perscription);
+        // }
+        // foreach (var item in newRiskLevel)
+        // {
+        //     var risk = _mapper.Map<Models.RiskLevelModel.RiskLevel>(item);
+        //     _context.RiskLevel.Add(risk);
         // }
         foreach (var item in newAppointment)
         {

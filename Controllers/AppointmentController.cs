@@ -72,8 +72,18 @@ namespace ClinicApi.Controllers
         [Route("EditIsPersonShowup")]
         public async Task<ActionResult<AppointmentDto>> EditIsPersonShowup(UpdateIsPersonShowup updateAppointment)
         {
-            // await _auditService.PostAudit($"Update Appointment IsPersonShowUp with AppointmentReq Id '{updateAppointment.RequestId + " To IsPersonShowUp " + updateAppointment.IsPersonShowUp}' By User ");
+            await _auditService.PostAudit($"Update Appointment IsPersonShowUp with Appointment Id '{updateAppointment.Id + " To IsPersonShowUp " + updateAppointment.IsPersonShowUp}' By User ");
             var response = await _appointmentService.UpdateIsPersonShowUp(updateAppointment);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
+        [HttpPost]
+        [Route("EditAppointmentReview")]
+        public async Task<ActionResult<AppointmentDto>> EditAppointmentReview(UpdateAppointmentReviewDto updateAppointment)
+        {
+            await _auditService.PostAudit($"Update Appointment Review with Appointment Id '{updateAppointment.Id + " To Review " + updateAppointment.AppointmentReview}' By User ");
+            var response = await _appointmentService.UpdateAppointmentReview(updateAppointment);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
@@ -82,7 +92,7 @@ namespace ClinicApi.Controllers
         [Route("EditSurvTypeIdByReqId")]
         public async Task<ActionResult<AppointmentDto>> EditSurvTypeIdByReqId(UpdateAppointmentSurveyTypeIdDto updateAppointment)
         {
-            // await _auditService.PostAudit($"Set Appointment SurveyTypeId with AppointmentReq Id '{updateAppointment.RequestId + " To SurveyTypeId " + updateAppointment.SurveyTypeId}' By User ");
+            await _auditService.PostAudit($"Set Appointment SurveyTypeId with Appointment Id '{updateAppointment.Id + " To SurveyTypeId " + updateAppointment.SurveyTypeId}' By User ");
             var response = await _appointmentService.UpdateSurvTypeIdByReqId(updateAppointment);
             if (response.Success == false)
                 return NotFound(response);

@@ -9,6 +9,7 @@ using ClinicApi.Models.PersonModel;
 using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.RequestModel;
 using ClinicApi.Models.RequestTypeModel;
+using ClinicApi.Models.RiskLevelModel;
 using ClinicApi.Models.Role;
 using ClinicApi.Models.SurveyModel;
 using ClinicApi.Models.ZoneModel;
@@ -44,4 +45,5 @@ public class DataContext : DbContext
   public DbSet<Appointment> Appointment => Set<Appointment>();
   public DbSet<AppointmentStatus> AppointmentStatus => Set<AppointmentStatus>();
   public DbSet<Perscription> Perscription => Set<Perscription>();
+  public DbSet<RiskLevel> RiskLevel => Set<RiskLevel>();
 }

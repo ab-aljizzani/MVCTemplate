@@ -16,6 +16,7 @@ public interface IAppointmentService
     Task<ServiceResponse<AppointmentDto>> UpdateIsPersonShowUp(UpdateIsPersonShowup updateAppointment);
     Task<ServiceResponse<AppointmentDto>> UpdateSurvTypeIdByReqId(UpdateAppointmentSurveyTypeIdDto updateAppointment);
     Task<ServiceResponse<AppointmentDto>> UpdateAppointmentIsSurvInserted(UpdateAppointmentIsSurveyInsertedDto updateAppointment);
+    Task<ServiceResponse<AppointmentDto>> UpdateAppointmentReview(UpdateAppointmentReviewDto updateAppointment);
     Task<ServiceResponse<AppointmentDto>> DeleteAppointment(int id);
 
     Task<ServiceResponse<List<AppointmentStatusDto>>> GetAllAppointmentStatus();
@@ -26,6 +27,7 @@ public interface IAppointmentService
 
     Task<ServiceResponse<List<PerscritionDto>>> GetAllPerscrition();
     Task<ServiceResponse<PerscritionDto>> GetPerscritionByID(int id);
+    Task<ServiceResponse<List<PerscritionDto>>> GetPerscritionByAppID(int id);
     Task<ServiceResponse<List<PerscritionDto>>> AddNewPerscrition(InsertPerscriptionDto newPerscrition);
     Task<ServiceResponse<PerscritionDto>> UpdatePerscrition(UpdatePerscriptionDto updatePerscrition);
     Task<ServiceResponse<PerscritionDto>> DeletePerscrition(int id);

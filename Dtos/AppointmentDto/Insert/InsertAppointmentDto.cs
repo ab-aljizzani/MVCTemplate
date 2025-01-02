@@ -17,6 +17,6 @@ public class InsertAppointmentDto
     public string AppointmentReview { get; set; } = string.Empty;
     public bool IsSurveyInserted { get; set; }
     public string SurveyScore { get; set; } = string.Empty;
-    public string RiskLevel { get; set; } = string.Empty;
+    public int RiskLevelId { get; set; }
     public bool IsPersonShowUp { get; set; }
 }

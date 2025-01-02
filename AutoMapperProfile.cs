@@ -20,6 +20,9 @@ using ClinicApi.Dtos.PortalUserModelDto.Update;
 using ClinicApi.Dtos.RequestDto.Get;
 using ClinicApi.Dtos.RequestDto.Insert;
 using ClinicApi.Dtos.RequestDto.Update;
+using ClinicApi.Dtos.RiskLevelDto.Get;
+using ClinicApi.Dtos.RiskLevelDto.Insert;
+using ClinicApi.Dtos.RiskLevelDto.Update;
 using ClinicApi.Dtos.RoleDto;
 using ClinicApi.Dtos.RoleDto.Update;
 using ClinicApi.Dtos.SurveyDto.Get;
@@ -36,6 +39,7 @@ using ClinicApi.Models.PersonModel;
 using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.RequestModel;
 using ClinicApi.Models.RequestTypeModel;
+using ClinicApi.Models.RiskLevelModel;
 using ClinicApi.Models.Role;
 using ClinicApi.Models.SurveyModel;
 using ClinicApi.Models.ZoneModel;
@@ -180,6 +184,7 @@ public class AutoMapperProfile : Profile
         CreateMap<UpdateIsPersonShowup, Appointment>();
         CreateMap<UpdateAppointmentSurveyTypeIdDto, Appointment>();
         CreateMap<UpdateAppointmentIsSurveyInsertedDto, Appointment>();
+        CreateMap<UpdateAppointmentReviewDto, Appointment>();
 
         CreateMap<AppointmentStatusDto, AppointmentStatus>();
         CreateMap<AppointmentStatus, AppointmentStatusDto>();
@@ -190,6 +195,11 @@ public class AutoMapperProfile : Profile
         CreateMap<Perscription, PerscritionDto>();
         CreateMap<InsertPerscriptionDto, Perscription>();
         CreateMap<UpdatePerscriptionDto, Perscription>();
+
+        CreateMap<GetRiskLevelDto, RiskLevel>();
+        CreateMap<RiskLevel, GetRiskLevelDto>();
+        CreateMap<InsertRiskLevelDto, RiskLevel>();
+        CreateMap<UpdateRiskLevelDto, RiskLevel>();
 
     }
 }

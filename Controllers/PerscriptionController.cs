@@ -34,6 +34,13 @@ namespace ClinicApi.Controllers
             await _auditService.PostAudit($"View Single Perscription By Id '{id}' For User");
             return Ok(await _appointmentService.GetPerscritionByID(id));
         }
+        [HttpGet]
+        [Route("GetPerscriptionByAppId")]
+        public async Task<ActionResult<List<PerscritionDto>>> GetPerscriptionByAppId(int id)
+        {
+            await _auditService.PostAudit($"View Single Perscription By Appointment Id '{id}' For User");
+            return Ok(await _appointmentService.GetPerscritionByAppID(id));
+        }
         [HttpPost]
         public async Task<ActionResult<List<PerscritionDto>>> AddnewPerscription(InsertPerscriptionDto insertPerscriptionDto)
         {

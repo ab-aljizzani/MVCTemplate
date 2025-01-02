@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using ClinicApi.Models.RiskLevelModel;
 using ClinicApi.Models.SurveyModel;
 
 namespace ClinicApi.Models.AppointmentModel;
@@ -15,7 +16,7 @@ public class Appointment
     public int PortalUserId { get; set; }
     public Models.PortalUser.PortalUser? portalUser { get; set; }
     // public int AppointmentStatusId { get; set; }
-    public int PerscriptionId { get; set; }
+    // public int PerscriptionId { get; set; }
     public string ApponitmentDate { get; set; } = string.Empty;
     public string AppointmentDay { get; set; } = string.Empty;
     public string AppointmentStartTime { get; set; } = string.Empty;
@@ -23,7 +24,8 @@ public class Appointment
     public string AppointmentReview { get; set; } = string.Empty;
     public bool IsSurveyInserted { get; set; }
     public string SurveyScore { get; set; } = string.Empty;
-    public string RiskLevel { get; set; } = string.Empty;
+    public int RiskLevelId { get; set; }
+    public RiskLevel? RiskLevel { get; set; }
     public bool IsPersonShowUp { get; set; } = false;
 
 }

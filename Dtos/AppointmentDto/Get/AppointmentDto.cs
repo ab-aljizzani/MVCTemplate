@@ -1,4 +1,5 @@
 using System;
+using ClinicApi.Models.RiskLevelModel;
 using ClinicApi.Models.SurveyModel;
 
 namespace ClinicApi.Dtos.AppointmentDto.Get;
@@ -20,6 +21,6 @@ public class AppointmentDto
     public string AppointmentReview { get; set; } = string.Empty;
     public bool IsSurveyInserted { get; set; }
     public string SurveyScore { get; set; } = string.Empty;
-    public string RiskLevel { get; set; } = string.Empty;
+    public int RiskLevelId { get; set; }
     public bool IsPersonShowUp { get; set; }
 }

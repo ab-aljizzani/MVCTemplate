@@ -31,6 +31,7 @@
     <Compile Include="Models\RequestModel\Request.cs" />
     <Compile Include="Models\RequestModel\RequestStatus.cs" />
     <Compile Include="Models\RequestTypeModel\RequestType.cs" />
+    <Compile Include="Models\RiskLevelModel\RiskLevel.cs" />
     <Compile Include="Models\RoleModel\Role.cs" />
     <Compile Include="Models\SurveyModel\SurveyType.cs" />
     <Compile Include="Models\SurveyModel\SurveyAnswer.cs" />
