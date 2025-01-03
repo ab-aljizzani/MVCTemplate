@@ -21,13 +21,13 @@ public class SurveyService : ISurveyService
         _mapper = mapper;
         _context = context;
     }
-    public async Task<ServiceResponse<List<GetSurveyTypeDto>>> AddNewSurvey(InsertSurveyTypeDto newSurvey)
+    public async Task<ServiceResponse<int>> AddNewSurvey(InsertSurveyTypeDto newSurvey)
     {
-        var serviceResponse = new ServiceResponse<List<GetSurveyTypeDto>>();
+        var serviceResponse = new ServiceResponse<int>();
         var survey = _mapper.Map<Models.SurveyModel.SurveyType>(newSurvey);
         _context.SurveyType.Add(survey);
         _context.SaveChanges();
-        serviceResponse.Data = await _context.SurveyType.Select(p => _mapper.Map<GetSurveyTypeDto>(p)).ToListAsync();
+        serviceResponse.Data = survey.Id;
         return serviceResponse;
     }
 
@@ -51,13 +51,13 @@ public class SurveyService : ISurveyService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<List<GetSurveyQuestionDto>>> AddNewSurveyQuestion(InsertSurveyQuestionDto newSurveyQuestion)
+    public async Task<ServiceResponse<int>> AddNewSurveyQuestion(InsertSurveyQuestionDto newSurveyQuestion)
     {
-        var serviceResponse = new ServiceResponse<List<GetSurveyQuestionDto>>();
+        var serviceResponse = new ServiceResponse<int>();
         var surveyQuestion = _mapper.Map<Models.SurveyModel.SurveyQuestion>(newSurveyQuestion);
         _context.SurveyQuestion.Add(surveyQuestion);
         _context.SaveChanges();
-        serviceResponse.Data = await _context.SurveyQuestion.Select(p => _mapper.Map<GetSurveyQuestionDto>(p)).ToListAsync();
+        serviceResponse.Data = surveyQuestion.Id;
         return serviceResponse;
     }
 

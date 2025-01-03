@@ -11,7 +11,7 @@ public interface ISurveyService
 {
     Task<ServiceResponse<List<GetSurveyTypeDto>>> GetAllSurvey();
     Task<ServiceResponse<GetSurveyTypeDto>> GetSurveyByID(int id);
-    Task<ServiceResponse<List<GetSurveyTypeDto>>> AddNewSurvey(InsertSurveyTypeDto newSurvey);
+    Task<ServiceResponse<int>> AddNewSurvey(InsertSurveyTypeDto newSurvey);
     Task<ServiceResponse<UpdateSurveyTypeDto>> UpdateSurvey(UpdateSurveyTypeDto updateSurvey);
     Task<ServiceResponse<GetSurveyTypeDto>> DeleteSurvey(int id);
 
@@ -32,7 +32,7 @@ public interface ISurveyService
     Task<ServiceResponse<GetSurveyQuestionDto>> GetSurveyQuestionByID(int id);
     Task<ServiceResponse<List<GetSurveyQuestionDto>>> GetSurveyQuestionBySurvTypeId(int id);
     Task<ServiceResponse<List<GetSurveyQesAnswerDto>>> GetSurveyQuestionAnswer(int id);
-    Task<ServiceResponse<List<GetSurveyQuestionDto>>> AddNewSurveyQuestion(InsertSurveyQuestionDto newSurveyQuestion);
+    Task<ServiceResponse<int>> AddNewSurveyQuestion(InsertSurveyQuestionDto newSurveyQuestion);
     Task<ServiceResponse<UpdateSurveyQuestionDto>> UpdateSurveyQuestion(UpdateSurveyQuestionDto updateSurveyQuestion);
     Task<ServiceResponse<GetSurveyQuestionDto>> DeleteSurveyQuestion(int id);
 
