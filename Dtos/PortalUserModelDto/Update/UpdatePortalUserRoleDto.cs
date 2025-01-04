@@ -6,4 +6,5 @@ public class UpdatePortalUserRoleDto
 {
     public int Id { get; set; }
     public int RoleId { get; set; }
+    public string UserType { get; set; } = string.Empty;
 }

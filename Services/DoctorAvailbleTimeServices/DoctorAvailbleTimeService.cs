@@ -60,15 +60,15 @@ public class DoctorAvailbleTimeService : IDoctorAvailbleTimeService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<GetDoctorAvailbleTimeDto>> GetTimeByDoctorID(int id)
+    public async Task<ServiceResponse<List<GetDoctorAvailbleTimeDto>>> GetTimeByDoctorID(int id)
     {
-        var serviceResponse = new ServiceResponse<GetDoctorAvailbleTimeDto>();
-        var dbContext = await _context.DoctorAvailbleTime.FirstOrDefaultAsync(e => e.PortalUserId == id);
+        var serviceResponse = new ServiceResponse<List<GetDoctorAvailbleTimeDto>>();
+        var dbContext = await _context.DoctorAvailbleTime.Where(e => e.PortalUserId == id).ToListAsync();
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
         }
-        serviceResponse.Data = _mapper.Map<GetDoctorAvailbleTimeDto>(dbContext);
+        serviceResponse.Data = dbContext.Select(e => _mapper.Map<GetDoctorAvailbleTimeDto>(e)).ToList();
         return serviceResponse;
     }
 
