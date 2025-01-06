@@ -40,6 +40,7 @@ public class DataContext : DbContext
   public DbSet<SurveyAnswer> SurveyAnswer => Set<SurveyAnswer>();
   public DbSet<SurveyAnswerType> SurveyAnswerType => Set<SurveyAnswerType>();
   public DbSet<UserSurveyAnswer> UserSurveyAnswer => Set<UserSurveyAnswer>();
+  public DbSet<UserSurveyAnswerTimes> UserSurveyAnswerTimes => Set<UserSurveyAnswerTimes>();
   public DbSet<DoctorAvailbleTime> DoctorAvailbleTime => Set<DoctorAvailbleTime>();
   public DbSet<Audits> Audits => Set<Audits>();
   public DbSet<Appointment> Appointment => Set<Appointment>();

@@ -81,6 +81,16 @@ public class SurveyService : ISurveyService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<List<GetUserSurveyAnswerTimeDto>>> AddNewUserSurveyAnswerTime(InsertUserSurveyAnswerTimeDto newUserSurveyAnswer)
+    {
+        var serviceResponse = new ServiceResponse<List<GetUserSurveyAnswerTimeDto>>();
+        var userSurveyAnswerTimes = _mapper.Map<Models.SurveyModel.UserSurveyAnswerTimes>(newUserSurveyAnswer);
+        _context.UserSurveyAnswerTimes.Add(userSurveyAnswerTimes);
+        _context.SaveChanges();
+        serviceResponse.Data = await _context.UserSurveyAnswerTimes.Select(p => _mapper.Map<GetUserSurveyAnswerTimeDto>(p)).ToListAsync();
+        return serviceResponse;
+    }
+
     public async Task<ServiceResponse<GetSurveyTypeDto>> DeleteSurvey(int id)
     {
         var serviceResponse = new ServiceResponse<GetSurveyTypeDto>();
@@ -231,6 +241,14 @@ public class SurveyService : ISurveyService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<List<GetUserSurveyAnswerTimeDto>>> GetAllUserSurveyAnswerTime()
+    {
+        var serviceResponse = new ServiceResponse<List<GetUserSurveyAnswerTimeDto>>();
+        var dbContext = await _context.UserSurveyAnswerTimes.Include(u => u.SurveyQuestion).Include(u => u.SurveyAnswer).Select(s => new { s.Id, s.AnswerTime }).ToListAsync();
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetUserSurveyAnswerTimeDto>(p)).ToList();
+        return serviceResponse;
+    }
+
     public async Task<ServiceResponse<List<GetSurveyAnswerDto>>> GetSurveyAnswerByAnswerType(int id)
     {
         var serviceResponse = new ServiceResponse<List<GetSurveyAnswerDto>>();
@@ -334,6 +352,18 @@ public class SurveyService : ISurveyService
             throw new Exception($"The Id '{id}'Is Not Founde...");
         }
         serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetUserSurveyAnswerDto>(p)).ToList();
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<List<object>>> GetUserSurveyAnswerTimeByAppointId(int id)
+    {
+        var serviceResponse = new ServiceResponse<List<object>>();
+        var dbContext = await _context.UserSurveyAnswerTimes.Where(p => p.AppointmentId == id).Include(u => u.SurveyQuestion).Include(u => u.SurveyAnswer).ToListAsync(); ;
+        if (dbContext is null)
+        {
+            throw new Exception($"The Id '{id}'Is Not Founde...");
+        }
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<object>(new { p.SurveyQuestion.Question, p.SurveyAnswer.Answer, p.AnswerTime })).ToList();
         return serviceResponse;
     }
 

@@ -44,6 +44,8 @@ public interface ISurveyService
     Task<ServiceResponse<GetUserSurveyAnswerDto>> DeleteUserSurveyAnswer(int id);
 
 
-
+    Task<ServiceResponse<List<GetUserSurveyAnswerTimeDto>>> GetAllUserSurveyAnswerTime();
+    Task<ServiceResponse<List<object>>> GetUserSurveyAnswerTimeByAppointId(int id);
+    Task<ServiceResponse<List<GetUserSurveyAnswerTimeDto>>> AddNewUserSurveyAnswerTime(InsertUserSurveyAnswerTimeDto newUserSurveyAnswer);
     // Task<ServiceResponse<object>> GetSurveyQuestionAnswerVm(int SurveyTypeId);
 }

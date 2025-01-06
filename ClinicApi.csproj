@@ -38,6 +38,7 @@
     <Compile Include="Models\SurveyModel\SurveyAnswerType.cs" />
     <Compile Include="Models\SurveyModel\SurveyQuestion.cs" />
     <Compile Include="Models\SurveyModel\UserSurveyAnswer.cs" />
+    <Compile Include="Models\SurveyModel\UserSurveyAnswerTimes.cs" />
     <Compile Include="Models\ZoneModel\Zone.cs" />
   </ItemGroup>
 
