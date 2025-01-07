@@ -355,10 +355,10 @@ public class SurveyService : ISurveyService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<List<object>>> GetUserSurveyAnswerTimeByAppointId(int id)
+    public async Task<ServiceResponse<List<object>>> GetUserSurveyAnswerTimeByAppointId(int id, int questionId)
     {
         var serviceResponse = new ServiceResponse<List<object>>();
-        var dbContext = await _context.UserSurveyAnswerTimes.Where(p => p.AppointmentId == id).Include(u => u.SurveyQuestion).Include(u => u.SurveyAnswer).ToListAsync(); ;
+        var dbContext = await _context.UserSurveyAnswerTimes.Where(p => p.AppointmentId == id && p.SurveyQuestionId == questionId).Include(u => u.SurveyQuestion).Include(u => u.SurveyAnswer).ToListAsync(); ;
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");

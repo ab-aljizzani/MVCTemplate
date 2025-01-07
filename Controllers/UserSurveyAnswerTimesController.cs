@@ -27,11 +27,11 @@ namespace ClinicApi.Controllers
             await _auditService.PostAudit("View All UserSurveyAnswerTime For User");
             return Ok(await _surveyService.GetAllUserSurveyAnswerTime());
         }
-        [HttpGet("{id}")]
-        public async Task<ActionResult<List<GetUserSurveyAnswerTimeDto>>> GetSurveyById(int id)
+        [HttpGet]
+        public async Task<ActionResult<List<GetUserSurveyAnswerTimeDto>>> GetSurveyByAppAndQuesId(int id, int questionId)
         {
-            await _auditService.PostAudit($"View UserSurveyAnswerTime By AppointmentId With AppointmentId Number '{id}' For User");
-            return Ok(await _surveyService.GetUserSurveyAnswerTimeByAppointId(id));
+            await _auditService.PostAudit($"View UserSurveyAnswerTime By Appointment And Question Id With AppointmentId Number '{id}' and QuestionId Number '{questionId}' For User");
+            return Ok(await _surveyService.GetUserSurveyAnswerTimeByAppointId(id, questionId));
         }
         [AllowAnonymous]
         [HttpPost]
