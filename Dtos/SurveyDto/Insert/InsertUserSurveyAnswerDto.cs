@@ -16,6 +16,8 @@ public class InsertUserSurveyAnswerDto
     [Required]
     public int SurveyAnswerId { get; set; }
     [Required]
+    public string CalculatedAnswerPoint { get; set; } = string.Empty;
+    [Required]
     public int SurveyTypeId { get; set; }
     public string Note { get; set; } = string.Empty;
 }

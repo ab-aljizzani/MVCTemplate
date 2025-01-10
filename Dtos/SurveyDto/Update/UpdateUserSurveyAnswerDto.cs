@@ -10,6 +10,7 @@ public class UpdateUserSurveyAnswerDto
     public int RequestId { get; set; }
     public int SurveyQuestionId { get; set; }
     public int SurveyAnswerId { get; set; }
+    public string CalculatedAnswerPoint { get; set; } = string.Empty;
     public int SurveyTypeId { get; set; }
     public string Note { get; set; } = string.Empty;
 }

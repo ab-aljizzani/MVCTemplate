@@ -269,6 +269,18 @@ public class SurveyService : ISurveyService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<string>> GetSurveyAnswerPointByID(int id)
+    {
+        var serviceResponse = new ServiceResponse<string>();
+        var dbContext = await _context.SurveyAnswer.Where(p => p.Id == id).Select(a => a.AnswerPoint).FirstOrDefaultAsync();
+        if (dbContext is null)
+        {
+            throw new Exception($"The Id '{id}'Is Not Founde...");
+        }
+        serviceResponse.Data = _mapper.Map<string>(dbContext);
+        return serviceResponse;
+    }
+
     public async Task<ServiceResponse<GetSurveyAnswerTypeDto>> GetSurveyAnswerTypeByID(int id)
     {
         var serviceResponse = new ServiceResponse<GetSurveyAnswerTypeDto>();

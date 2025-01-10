@@ -41,6 +41,14 @@ namespace ClinicApi.Controllers
             await _auditService.PostAudit($"View Single SurveyAnswer By AnswerTypeId With TypeId Number '{id}' For User");
             return Ok(await _surveyService.GetSurveyAnswerByAnswerType(id));
         }
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetSurveyAnswerPointByID")]
+        public async Task<ActionResult<List<GetSurveyAnswerDto>>> GetSurveyAnswerPointByID(int id)
+        {
+            await _auditService.PostAuditWuthNoToken($"View Single SurveyAnswerPoints By AnswerId With Id Number '{id}' ");
+            return Ok(await _surveyService.GetSurveyAnswerPointByID(id));
+        }
         [HttpPost]
         public async Task<ActionResult<List<InsertSurveyAnswerDto>>> AddnewSurveyAnswer(InsertSurveyAnswerDto newSurveyAnswer)
         {
