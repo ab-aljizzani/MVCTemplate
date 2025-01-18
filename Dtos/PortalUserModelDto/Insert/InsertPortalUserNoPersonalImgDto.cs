@@ -1,13 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using ClinicApi.Data.PersonalImagesModelDto;
-using ClinicApi.Dtos.Entity;
-using ClinicApi.Dtos.RoleDto;
 
 namespace ClinicApi.Dtos.PortalUserModelDto.Insert;
 
-public class InsertPortalUserDto
+public class InsertPortalUserNoPersonalImgDto
 {
     public int Id { get; set; }
     [Required(ErrorMessage = "الرجاء إدخال اسم المستخدم")]
@@ -32,7 +28,6 @@ public class InsertPortalUserDto
     [Display(Name = "البريد الالكتروني")]
     [EmailAddress]
     public string Email { get; set; } = string.Empty;
-    public int PersonalImgId { get; set; }
     [Required(ErrorMessage = "الرجاء إدخال تاريخ الميلاد")]
     [Display(Name = "تاريخ الميلاد")]
     public string DateOfBirth { get; set; } = string.Empty;

@@ -34,6 +34,13 @@ namespace ClinicApi.Controllers
             await _auditService.PostAudit($"View Single UserSurveyAnswer By RequestId With RequestId Number '{id}' For User");
             return Ok(await _surveyService.GetUserSurveyAnswerByID(id));
         }
+        [HttpGet]
+        [Route("CheckUserSurveyAnswerBySurveyTypeID")]
+        public async Task<ActionResult<List<GetUserSurveyAnswerDto>>> CheckUserSurveyAnswerBySurveyTypeID(int id)
+        {
+            await _auditService.PostAudit($"Check If UserSurveyAnswer Has Answers Filtered By SurveyTypeId '{id}' For User");
+            return Ok(await _surveyService.CheckUserSurveyAnswerBySurveyTypeID(id));
+        }
         [HttpPost]
         public async Task<ActionResult<List<InsertUserSurveyAnswerDto>>> AddnewUserSurvey(InsertUserSurveyAnswerDto newUserSurvey)
         {

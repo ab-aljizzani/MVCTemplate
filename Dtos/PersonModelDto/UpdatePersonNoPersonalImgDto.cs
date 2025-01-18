@@ -2,8 +2,9 @@ using System;
 
 namespace ClinicApi.Dtos.PersonModelDto;
 
-public class UpdatePersonDto
+public class UpdatePersonNoPersonalImgDto
 {
+
     public int Id { get; set; }
     public string NationalId { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;
@@ -13,7 +14,6 @@ public class UpdatePersonDto
     public string PhoneNumber { get; set; } = string.Empty;
     public int ZoneId { get; set; }
     public int EntityId { get; set; }
-    public int PersonalImgId { get; set; }
     public int DepartmentId { get; set; }
     public string NationalIdType { get; set; } = string.Empty;
     public string JobTitle { get; set; } = string.Empty;

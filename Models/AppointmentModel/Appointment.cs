@@ -11,7 +11,7 @@ public class Appointment
     [Required]
     public int Id { get; set; }
     // public int RequestId { get; set; }
-    public int SurveyTypeId { get; set; }
+    public int? SurveyTypeId { get; set; }
     public SurveyType? SurveyType { get; set; }
     public int PortalUserId { get; set; }
     public Models.PortalUser.PortalUser? portalUser { get; set; }

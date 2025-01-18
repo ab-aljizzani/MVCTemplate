@@ -65,9 +65,10 @@ namespace ClinicApi.Controllers
             return Ok(response.Data);
         }
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<ServiceResponse<int>>> Register(InsertPortalUserDto request)
         {
-            await _auditService.PostAudit($"Insert PortalUser '{request.Id + " With NationalId " + request.NationalId}' By User ");
+            // await _auditService.PostAudit($"Insert PortalUser '{request.Id + " With NationalId " + request.NationalId}' By User ");
             // var user = _mapper.Map<PortalUser>(request);
             var response = await _authRepo.Register(request, request.Password);
             if (!response.Success)

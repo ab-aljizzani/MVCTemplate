@@ -84,14 +84,29 @@ public class AuthRepositery : IAuthRepositery
         }
         else
         {
-            CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
-            var user = _mapper.Map<PortalUser>(userDto);
-            user.PasswordSalt = passwordSalt;
-            user.PasswordHash = passwordHash;
+            if (userDto.PersonalImgId == 0 || userDto.PersonalImgId == null)
+            {
+                CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
+                var portalDto = _mapper.Map<InsertPortalUserNoPersonalImgDto>(userDto);
+                var user = _mapper.Map<PortalUser>(portalDto);
+                user.PasswordSalt = passwordSalt;
+                user.PasswordHash = passwordHash;
 
-            _context.PortalUser.Add(user);
-            await _context.SaveChangesAsync();
-            response.Data = userDto.Id;
+                _context.PortalUser.Add(user);
+                await _context.SaveChangesAsync();
+                response.Data = userDto.Id;
+            }
+            else
+            {
+                CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
+                var user = _mapper.Map<PortalUser>(userDto);
+                user.PasswordSalt = passwordSalt;
+                user.PasswordHash = passwordHash;
+
+                _context.PortalUser.Add(user);
+                await _context.SaveChangesAsync();
+                response.Data = userDto.Id;
+            }
         }
         return response;
     }

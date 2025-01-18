@@ -367,6 +367,21 @@ public class SurveyService : ISurveyService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<bool>> CheckUserSurveyAnswerBySurveyTypeID(int id)
+    {
+        var serviceResponse = new ServiceResponse<bool>();
+        var dbContext = await _context.UserSurveyAnswer.Where(p => p.SurveyTypeId == id).Include(u => u.surveyAnswer).Include(u => u.SurveyQuestion).Include(u => u.Person).Include(u => u.PortalUser).ToListAsync();
+        if (dbContext is null)
+        {
+            throw new Exception($"The Id '{id}'Is Not Founde...");
+        }
+        if (dbContext.Count() > 0)
+            serviceResponse.Data = false;
+        else
+            serviceResponse.Data = true;
+        return serviceResponse;
+    }
+
     public async Task<ServiceResponse<List<object>>> GetUserSurveyAnswerTimeByAppointId(int id, int questionId)
     {
         var serviceResponse = new ServiceResponse<List<object>>();

@@ -21,7 +21,7 @@ public class PortalUser
     public string Email { get; set; } = string.Empty;
     public string Code { get; set; } = string.Empty;
     public bool IsFirstLogin { get; set; } = false;
-    public int PersonalImgId { get; set; }
+    public int? PersonalImgId { get; set; }
     public Models.PersonalImagesModel.PersonalImg? PersonalImage { get; set; }
     public string DateOfBirth { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;

@@ -97,7 +97,7 @@ public class SeedService : ISeedService
         newAppointment.Add(new InsertAppointmentDto
         {
             PortalUserId = 2,
-            SurveyTypeId = 1,
+            // SurveyTypeId = 1,
             PerscriptionId = 1,
             IsPersonShowUp = false,
             IsSurveyInserted = false,

@@ -39,6 +39,8 @@ public interface ISurveyService
 
     Task<ServiceResponse<List<GetUserSurveyAnswerDto>>> GetAllUserSurveyAnswer();
     Task<ServiceResponse<List<GetUserSurveyAnswerDto>>> GetUserSurveyAnswerByID(int id);
+
+    Task<ServiceResponse<bool>> CheckUserSurveyAnswerBySurveyTypeID(int id);
     Task<ServiceResponse<List<GetUserSurveyAnswerDto>>> AddNewUserSurveyAnswer(InsertUserSurveyAnswerDto newUserSurveyAnswer);
     Task<ServiceResponse<List<GetUserSurveyAnswerDto>>> AddNewUserSurveyAnswerNoPortal(InsertUserSurveyAnswerNoPortalDto newUserSurveyAnswer);
     Task<ServiceResponse<UpdateUserSurveyAnswerDto>> UpdateUserSurveyAnswer(UpdateUserSurveyAnswerDto updateUserSurveyAnswer);

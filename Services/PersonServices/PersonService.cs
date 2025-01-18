@@ -21,10 +21,21 @@ public class PersonService : IPersonService
     public async Task<ServiceResponse<List<PersonDto>>> AddNewPerson(InsertPersonDto newPerson)
     {
         var serviceResponse = new ServiceResponse<List<PersonDto>>();
-        var person = _mapper.Map<Person>(newPerson);
-        _context.Person.Add(person);
-        _context.SaveChanges();
-        serviceResponse.Data = await _context.Person.Select(p => _mapper.Map<PersonDto>(p)).ToListAsync();
+        if (newPerson.PersonalImgId == 0 || newPerson?.PersonalImgId == null)
+        {
+            var personDto = _mapper.Map<InsertPersonNoPersonImgDto>(newPerson);
+            var person = _mapper.Map<Person>(personDto);
+            _context.Person.Add(person);
+            _context.SaveChanges();
+            serviceResponse.Data = await _context.Person.Select(p => _mapper.Map<PersonDto>(p)).ToListAsync();
+        }
+        else
+        {
+            var person = _mapper.Map<Person>(newPerson);
+            _context.Person.Add(person);
+            _context.SaveChanges();
+            serviceResponse.Data = await _context.Person.Select(p => _mapper.Map<PersonDto>(p)).ToListAsync();
+        }
         return serviceResponse;
     }
 
@@ -117,9 +128,21 @@ public class PersonService : IPersonService
             {
                 throw new Exception($"The Id '{updatePerson.Id}'Is Not Founde...");
             }
-            _mapper.Map(updatePerson, person);
-            await _context.SaveChangesAsync();
-            serviceResponse.Data = _mapper.Map<UpdatePersonDto>(person);
+            if (updatePerson.PersonalImgId == 0 || updatePerson?.PersonalImgId == null)
+            {
+                var personDto = _mapper.Map<UpdatePersonNoPersonalImgDto>(updatePerson);
+                _mapper.Map(personDto, person);
+                // var person = _mapper.Map<Person>(personDto);
+                // _context.Person.Add(person);
+                await _context.SaveChangesAsync();
+                serviceResponse.Data = _mapper.Map<UpdatePersonDto>(person);
+            }
+            else
+            {
+                _mapper.Map(updatePerson, person);
+                await _context.SaveChangesAsync();
+                serviceResponse.Data = _mapper.Map<UpdatePersonDto>(person);
+            }
         }
         catch (Exception ex)
         {
@@ -128,4 +151,5 @@ public class PersonService : IPersonService
         }
         return serviceResponse;
     }
+
 }

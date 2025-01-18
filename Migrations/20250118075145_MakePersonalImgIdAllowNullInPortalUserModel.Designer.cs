@@ -4,6 +4,7 @@ using ClinicApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250118075145_MakePersonalImgIdAllowNullInPortalUserModel")]
+    partial class MakePersonalImgIdAllowNullInPortalUserModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,7 +69,7 @@ namespace ClinicApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SurveyTypeId")
+                    b.Property<int>("SurveyTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -544,7 +547,7 @@ namespace ClinicApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AppointmentId")
+                    b.Property<int>("AppointmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("AppsentReason")
@@ -873,7 +876,9 @@ namespace ClinicApi.Migrations
 
                     b.HasOne("ClinicApi.Models.SurveyModel.SurveyType", "SurveyType")
                         .WithMany()
-                        .HasForeignKey("SurveyTypeId");
+                        .HasForeignKey("SurveyTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("RiskLevel");
 
@@ -998,7 +1003,9 @@ namespace ClinicApi.Migrations
                 {
                     b.HasOne("ClinicApi.Models.AppointmentModel.Appointment", "Appointment")
                         .WithMany()
-                        .HasForeignKey("AppointmentId");
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ClinicApi.Models.PersonModel.Person", "Person")
                         .WithMany()

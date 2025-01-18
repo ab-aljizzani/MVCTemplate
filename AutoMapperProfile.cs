@@ -76,6 +76,8 @@ public class AutoMapperProfile : Profile
         CreateMap<PasswordInitialDto, PortalUser>();
         CreateMap<UpdatePortalUserPhoneDto, PortalUser>();
         CreateMap<UpdatePortalUserRoleDto, PortalUser>();
+        CreateMap<InsertPortalUserNoPersonalImgDto, PortalUser>();
+        CreateMap<InsertPortalUserDto, InsertPortalUserNoPersonalImgDto>();
 
         CreateMap<DashboardUser, DashboardUserDto>();
         CreateMap<DashboardUserDto, DashboardUser>();
@@ -101,6 +103,11 @@ public class AutoMapperProfile : Profile
         CreateMap<Person, UpdatePersonDto>();
         CreateMap<InsertPersonDto, Person>();
         CreateMap<Person, InsertPersonDto>();
+        CreateMap<InsertPersonNoPersonImgDto, Person>();
+        CreateMap<InsertPersonDto, InsertPersonNoPersonImgDto>();
+        CreateMap<UpdatePersonDto, UpdatePersonNoPersonalImgDto>();
+        CreateMap<UpdatePersonNoPersonalImgDto, UpdatePersonDto>();
+        CreateMap<UpdatePersonNoPersonalImgDto, Person>();
 
         CreateMap<GetRequestDto, Request>();
         CreateMap<InsertRequestDto, Request>();

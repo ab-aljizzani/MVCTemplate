@@ -21,6 +21,6 @@ public class Person
     public string NationalIdType { get; set; } = string.Empty;
     public string JobTitle { get; set; } = string.Empty;
     public string Grade { get; set; } = string.Empty;
-    public int PersonalImgId { get; set; }
+    public int? PersonalImgId { get; set; }
     public Models.PersonalImagesModel.PersonalImg? PersonalImg { get; set; }
 }

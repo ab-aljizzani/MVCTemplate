@@ -122,9 +122,9 @@ public class PersonalImages : IPersonalImages
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<PersonalImgDto>> UpdatePersonalImages(UpdatePersonalImgDto updatePersonalImages)
+    public async Task<ServiceResponse<int>> UpdatePersonalImages(UpdatePersonalImgDto updatePersonalImages)
     {
-        var serviceResponse = new ServiceResponse<PersonalImgDto>();
+        var serviceResponse = new ServiceResponse<int>();
         try
         {
             var personalImg = await _context.PersonalImg.FirstOrDefaultAsync(z => z.Id == updatePersonalImages.Id);
@@ -185,7 +185,7 @@ public class PersonalImages : IPersonalImages
             {
                 _mapper.Map(updatePersonalImages, personalImg);
                 await _context.SaveChangesAsync();
-                serviceResponse.Data = _mapper.Map<PersonalImgDto>(personalImg);
+                serviceResponse.Data = personalImg.Id;
             }
 
         }
