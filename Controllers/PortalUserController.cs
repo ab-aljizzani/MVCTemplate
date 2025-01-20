@@ -1,6 +1,7 @@
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.PortalUserDto;
+using ClinicApi.Dtos.PortalUserModelDto;
 using ClinicApi.Dtos.PortalUserModelDto.Insert;
 using ClinicApi.Dtos.PortalUserModelDto.Update;
 using ClinicApi.Models.PortalUser;
@@ -57,6 +58,18 @@ namespace ClinicApi.Controllers
         public async Task<ActionResult<ServiceResponse<int>>> Login(LoginDto request)
         {
             var response = await _authRepo.Login(request.Username, request.Password);
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+            await _auditService.PostAuditWuthNoToken($"User With NatuinalId Num '{request.Username}' is LoggedIn");
+            return Ok(response.Data);
+        }
+        [AllowAnonymous]
+        [HttpPost("PersonLogin")]
+        public async Task<ActionResult<ServiceResponse<int>>> PersonLogin(PersonLoginDto request)
+        {
+            var response = await _authRepo.PersonLogin(request.Username);
             if (!response.Success)
             {
                 return BadRequest(response);

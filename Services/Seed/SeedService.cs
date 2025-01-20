@@ -53,6 +53,7 @@ public class SeedService : ISeedService
         newRole.Add(new RoleDto { RoleName = "DeptEditor", RoleArabName = "مدخل بيانات الادارة", Roletype = "Portal" });
         newRole.Add(new RoleDto { RoleName = "Reception", RoleArabName = "استقبال", Roletype = "Dash" });
         newRole.Add(new RoleDto { RoleName = "Doctor", RoleArabName = "طبيب", Roletype = "Dash" });
+        newRole.Add(new RoleDto { RoleName = "Person", RoleArabName = "شخص", Roletype = "Dash" });
 
         List<ZoneDto> newZone = new List<ZoneDto>();
         newZone.Add(new ZoneDto { ZoneName = "الأولى" });
@@ -176,11 +177,11 @@ public class SeedService : ISeedService
         //     _context.RequestStatus.Add(requestStatus);
         // }
 
-        // foreach (var item in newRole)
-        // {
-        //     var role = _mapper.Map<Models.Role.Role>(item);
-        //     _context.Role.Add(role);
-        // }
+        foreach (var item in newRole)
+        {
+            var role = _mapper.Map<Models.Role.Role>(item);
+            _context.Role.Add(role);
+        }
 
         // foreach (var item in newEntity)
         // {
@@ -219,11 +220,11 @@ public class SeedService : ISeedService
         //     var risk = _mapper.Map<Models.RiskLevelModel.RiskLevel>(item);
         //     _context.RiskLevel.Add(risk);
         // }
-        foreach (var item in newAppointment)
-        {
-            var appointment = _mapper.Map<Models.AppointmentModel.Appointment>(item);
-            _context.Appointment.Add(appointment);
-        }
+        // foreach (var item in newAppointment)
+        // {
+        //     var appointment = _mapper.Map<Models.AppointmentModel.Appointment>(item);
+        //     _context.Appointment.Add(appointment);
+        // }
 
         await _context.SaveChangesAsync();
         serviceResponse.Data = "Seed Exicutes Successfuly";

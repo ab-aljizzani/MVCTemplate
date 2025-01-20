@@ -23,6 +23,7 @@ public interface IAuthRepositery
     Task<ServiceResponse<PortalUserDto>> UpdateUserPhone(UpdatePortalUserPhoneDto updatePortalUser);
     Task<ServiceResponse<PortalUserDto>> UpdateUserRole(UpdatePortalUserRoleDto updatePortalUser);
     Task<bool> UserExists(string username);
+    Task<ServiceResponse<string>> PersonLogin(string username);
 
 
 

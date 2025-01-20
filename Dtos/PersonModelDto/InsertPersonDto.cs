@@ -17,4 +17,5 @@ public class InsertPersonDto
     public string NationalIdType { get; set; } = string.Empty;
     public string JobTitle { get; set; } = string.Empty;
     public string Grade { get; set; } = string.Empty;
+    public int? RoleId { get; set; } = 8;
 }

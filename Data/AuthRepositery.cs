@@ -8,6 +8,7 @@ using ClinicApi.Dtos.PortalUserDto;
 using ClinicApi.Dtos.PortalUserModelDto.Insert;
 using ClinicApi.Dtos.PortalUserModelDto.Update;
 using ClinicApi.Models.DashboarUserModel;
+using ClinicApi.Models.PersonModel;
 using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.Reponse;
 using Microsoft.EntityFrameworkCore;
@@ -47,7 +48,6 @@ public class AuthRepositery : IAuthRepositery
             response.Success = false;
             response.Message = "User DisActive... ";
         }
-        // else if(user.LastLogin)
         else if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
         {
             response.Success = false;
@@ -72,7 +72,24 @@ public class AuthRepositery : IAuthRepositery
         }
         return response;
     }
-
+    public async Task<ServiceResponse<string>> PersonLogin(string nationalId)
+    {
+        var _random = new Random();
+        var response = new ServiceResponse<string>();
+        var user = await _context.Person.Include(p => p.Role).FirstOrDefaultAsync(u => u.NationalId.ToLower().Equals(nationalId.ToLower()));
+        if (user is null)
+        {
+            response.Success = false;
+            response.Message = "User Not Found... ";
+        }
+        else
+        {
+            user.Code = _random.Next(0, 9999).ToString("D4");
+            response.Data = CreatePersonToken(user);
+            await _context.SaveChangesAsync();
+        }
+        return response;
+    }
 
     public async Task<ServiceResponse<int>> Register(InsertPortalUserDto userDto, string password)
     {
@@ -157,6 +174,36 @@ public class AuthRepositery : IAuthRepositery
                 new Claim("PasswordExpire",user.PasswordExpires.ToString()),
                 new Claim("IsFirstLogin",user.IsFirstLogin.ToString()),
                 new Claim("Status",user.Status),
+            };
+        var appSettingsToken = _configuration.GetSection("AppSettings:Token").Value;
+        if (appSettingsToken is null)
+        {
+            throw new Exception("AppSettings Token is Null...");
+        }
+        Console.WriteLine(appSettingsToken);
+        SymmetricSecurityKey key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(appSettingsToken));
+        SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(claims),
+            Expires = DateTime.Now.AddDays(1),
+            SigningCredentials = creds
+        };
+        JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+        JwtSecurityToken token = tokenHandler.CreateJwtSecurityToken(tokenDescriptor);
+        return tokenHandler.WriteToken(token);
+
+    }
+    private string CreatePersonToken(Person user)
+    {
+        var claims = new List<Claim>{
+                new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
+                new Claim("NationalId",user.NationalId),
+                new Claim("PhoneNumber",user.PhoneNumber),
+                new Claim("Code",user.Code),
+                new Claim("RoleId",user.RoleId.ToString()),
+                new Claim("Role",user.Role.RoleName.ToString()),
+                new Claim("RoleType",user.Role.Roletype.ToString()),
             };
         var appSettingsToken = _configuration.GetSection("AppSettings:Token").Value;
         if (appSettingsToken is null)
@@ -609,4 +656,6 @@ public class AuthRepositery : IAuthRepositery
         }
         return serviceResponse;
     }
+
+
 }

@@ -23,4 +23,7 @@ public class Person
     public string Grade { get; set; } = string.Empty;
     public int? PersonalImgId { get; set; }
     public Models.PersonalImagesModel.PersonalImg? PersonalImg { get; set; }
+    public string Code { get; set; } = string.Empty;
+    public int? RoleId { get; set; }
+    public Models.Role.Role? Role { get; set; }
 }
