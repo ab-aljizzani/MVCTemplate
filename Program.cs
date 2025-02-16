@@ -11,6 +11,7 @@ using ClinicApi.Services.Request;
 using ClinicApi.Services.RiskLevelServices;
 using ClinicApi.Services.RoleServices;
 using ClinicApi.Services.Seed;
+using ClinicApi.Services.SickLeaveServices;
 using ClinicApi.Services.Survey;
 using ClinicApi.Services.ZoneServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -58,6 +59,7 @@ namespace ClinicApi
             builder.Services.AddScoped<IDoctorAvailbleTimeService, DoctorAvailbleTimeService>();
             builder.Services.AddScoped<IAppointmentService, AppointmentService>();
             builder.Services.AddScoped<IRiskLevelService, RiskLevelService>();
+            builder.Services.AddScoped<ISickLeaveService, SickLeaveService>();
             builder.Services.AddScoped<MagicString>();
             builder.Services.AddScoped<TokenRoles>();
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using ClinicApi.Models.RiskLevelModel;
+using ClinicApi.Models.SickLeaveModel;
 using ClinicApi.Models.SurveyModel;
 
 namespace ClinicApi.Models.AppointmentModel;
@@ -27,5 +28,7 @@ public class Appointment
     public int RiskLevelId { get; set; }
     public RiskLevel? RiskLevel { get; set; }
     public bool IsPersonShowUp { get; set; } = false;
+    public int? SickLeaveId { get; set; }
+    public SickLeave? SickLeave { get; set; }
 
 }

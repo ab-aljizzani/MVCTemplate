@@ -33,6 +33,7 @@
     <Compile Include="Models\RequestTypeModel\RequestType.cs" />
     <Compile Include="Models\RiskLevelModel\RiskLevel.cs" />
     <Compile Include="Models\RoleModel\Role.cs" />
+    <Compile Include="Models\SickLeaveModel\SickLeave.cs" />
     <Compile Include="Models\SurveyModel\SurveyType.cs" />
     <Compile Include="Models\SurveyModel\SurveyAnswer.cs" />
     <Compile Include="Models\SurveyModel\SurveyAnswerType.cs" />

@@ -25,6 +25,9 @@ using ClinicApi.Dtos.RiskLevelDto.Insert;
 using ClinicApi.Dtos.RiskLevelDto.Update;
 using ClinicApi.Dtos.RoleDto;
 using ClinicApi.Dtos.RoleDto.Update;
+using ClinicApi.Dtos.SickLeaveDto.Get;
+using ClinicApi.Dtos.SickLeaveDto.Insert;
+using ClinicApi.Dtos.SickLeaveDto.Update;
 using ClinicApi.Dtos.SurveyDto.Get;
 using ClinicApi.Dtos.SurveyDto.Insert;
 using ClinicApi.Dtos.SurveyDto.Update;
@@ -41,6 +44,7 @@ using ClinicApi.Models.RequestModel;
 using ClinicApi.Models.RequestTypeModel;
 using ClinicApi.Models.RiskLevelModel;
 using ClinicApi.Models.Role;
+using ClinicApi.Models.SickLeaveModel;
 using ClinicApi.Models.SurveyModel;
 using ClinicApi.Models.ZoneModel;
 using ClinicApi.ViewModel.Survey;
@@ -211,6 +215,11 @@ public class AutoMapperProfile : Profile
         CreateMap<RiskLevel, GetRiskLevelDto>();
         CreateMap<InsertRiskLevelDto, RiskLevel>();
         CreateMap<UpdateRiskLevelDto, RiskLevel>();
+
+        CreateMap<GetSickLeaveDto, SickLeave>();
+        CreateMap<SickLeave, GetSickLeaveDto>();
+        CreateMap<InsertSickLeaveDto, SickLeave>();
+        CreateMap<UpdateSickLeaveDto, SickLeave>();
 
     }
 }

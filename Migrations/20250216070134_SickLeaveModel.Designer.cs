@@ -4,6 +4,7 @@ using ClinicApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250216070134_SickLeaveModel")]
+    partial class SickLeaveModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +65,7 @@ namespace ClinicApi.Migrations
                     b.Property<int>("RiskLevelId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SickLeaveId")
+                    b.Property<int>("SickLeaveId")
                         .HasColumnType("int");
 
                     b.Property<string>("SurveyScore")
@@ -911,7 +914,9 @@ namespace ClinicApi.Migrations
 
                     b.HasOne("ClinicApi.Models.SickLeaveModel.SickLeave", "SickLeave")
                         .WithMany()
-                        .HasForeignKey("SickLeaveId");
+                        .HasForeignKey("SickLeaveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ClinicApi.Models.SurveyModel.SurveyType", "SurveyType")
                         .WithMany()
