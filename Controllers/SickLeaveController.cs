@@ -33,6 +33,13 @@ namespace ClinicApi.Controllers
             await _auditService.PostAudit($"View Single SickLeave By Id With Id Number '{id}' For User");
             return Ok(await _sickLeave.GetSickLeaveByID(id));
         }
+        [HttpGet]
+        [Route("GetSickLeaveByAppointmentId")]
+        public async Task<ActionResult<List<GetSickLeaveDto>>> GetSickLeaveByAppointmentId(int id)
+        {
+            await _auditService.PostAudit($"View Single SickLeave By AppointmentId With AppointmentId Number '{id}' For User");
+            return Ok(await _sickLeave.GetSickLeaveByAppointmentID(id));
+        }
         [HttpPost]
         public async Task<ActionResult<List<GetSickLeaveDto>>> AddnewSickLeave(InsertSickLeaveDto newSickLeave)
         {

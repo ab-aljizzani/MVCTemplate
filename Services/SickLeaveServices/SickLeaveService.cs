@@ -60,6 +60,18 @@ public class SickLeaveService : ISickLeaveService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<List<GetSickLeaveDto>>> GetSickLeaveByAppointmentID(int id)
+    {
+        var serviceResponse = new ServiceResponse<List<GetSickLeaveDto>>();
+        var dbContext = await _context.SickLeave.Where(e => e.AppointmentId == id).ToListAsync();
+        if (dbContext is null)
+        {
+            throw new Exception($"The Id '{id}'Is Not Founde...");
+        }
+        serviceResponse.Data = dbContext.Select(e => _mapper.Map<GetSickLeaveDto>(e)).ToList();
+        return serviceResponse;
+    }
+
     public async Task<ServiceResponse<GetSickLeaveDto>> GetSickLeaveByID(int id)
     {
         var serviceResponse = new ServiceResponse<GetSickLeaveDto>();
