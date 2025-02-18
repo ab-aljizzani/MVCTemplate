@@ -49,4 +49,5 @@ public class DataContext : DbContext
   public DbSet<Perscription> Perscription => Set<Perscription>();
   public DbSet<RiskLevel> RiskLevel => Set<RiskLevel>();
   public DbSet<SickLeave> SickLeave => Set<SickLeave>();
+  public DbSet<UserSurveyList> UserSurveyList => Set<UserSurveyList>();
 }

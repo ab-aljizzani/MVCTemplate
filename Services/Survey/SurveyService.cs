@@ -503,4 +503,117 @@ public class SurveyService : ISurveyService
         }
         return serviceResponse;
     }
+
+    public async Task<ServiceResponse<List<GetUserSurveyListDto>>> GetAllUserSurveyList()
+    {
+        var serviceResponse = new ServiceResponse<List<GetUserSurveyListDto>>();
+        var dbContext = await _context.UserSurveyList.ToListAsync();
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetUserSurveyListDto>(p)).ToList();
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<GetUserSurveyListDto>> GetUserSurveyListByID(int id)
+    {
+        var serviceResponse = new ServiceResponse<GetUserSurveyListDto>();
+        var dbContext = await _context.UserSurveyList.FirstOrDefaultAsync(p => p.Id == id);
+        if (dbContext is null)
+        {
+            throw new Exception($"The Id '{id}'Is Not Founde...");
+        }
+        serviceResponse.Data = _mapper.Map<GetUserSurveyListDto>(dbContext);
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<List<GetUserSurveyListDto>>> AddNewUserSurveyList(InsertUserSurveyListDto newSurveyList)
+    {
+        var serviceResponse = new ServiceResponse<List<GetUserSurveyListDto>>();
+        var usersurveyList = _mapper.Map<Models.SurveyModel.UserSurveyList>(newSurveyList);
+        var usersurvey = await _context.UserSurveyList.FirstOrDefaultAsync(u => u.AppointmentId == newSurveyList.AppointmentId && u.SurveyTypeId == newSurveyList.SurveyTypeId && u.RequestId == newSurveyList.RequestId);
+        if (usersurvey != null)
+        {
+            throw new Exception($"The Survey Already Inserted For This Appointment...");
+        }
+        _context.UserSurveyList.Add(usersurveyList);
+        _context.SaveChanges();
+        serviceResponse.Data = await _context.UserSurveyList.Select(p => _mapper.Map<GetUserSurveyListDto>(p)).ToListAsync();
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<UpdateUserSurveyListDto>> UpdateUserSurveyList(UpdateUserSurveyListDto updateSurveyList)
+    {
+        var serviceResponse = new ServiceResponse<UpdateUserSurveyListDto>();
+        try
+        {
+            var userSurveyList = await _context.UserSurveyList.FirstOrDefaultAsync(z => z.Id == updateSurveyList.Id);
+            if (userSurveyList is null)
+            {
+                throw new Exception($"The Id '{updateSurveyList.Id}'Is Not Founde...");
+            }
+            _mapper.Map(updateSurveyList, userSurveyList);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<UpdateUserSurveyListDto>(userSurveyList);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<GetUserSurveyListDto>> DeleteUserSurveyList(int id)
+    {
+        var serviceResponse = new ServiceResponse<GetUserSurveyListDto>();
+        try
+        {
+            var survey = await _context.UserSurveyList.FirstOrDefaultAsync(p => p.Id == id);
+            if (survey is null)
+            {
+                throw new Exception($"The Id '{id}'Is Not Founde...");
+            }
+            _context.UserSurveyList.Remove(survey);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<GetUserSurveyListDto>(survey);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<UpdateUserSurveyListScoreAndInserted>> UpdateUserSurveyListScoreAndInserted(UpdateUserSurveyListScoreAndInserted updateSurveyList)
+    {
+        var serviceResponse = new ServiceResponse<UpdateUserSurveyListScoreAndInserted>();
+        try
+        {
+            var userSurveyList = await _context.UserSurveyList.FirstOrDefaultAsync(z => z.Id == updateSurveyList.Id);
+            if (userSurveyList is null)
+            {
+                throw new Exception($"The Id '{updateSurveyList.Id}'Is Not Founde...");
+            }
+            _mapper.Map(updateSurveyList, userSurveyList);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<UpdateUserSurveyListScoreAndInserted>(userSurveyList);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<List<GetUserSurveyListDto>>> GetUserSurveyListByReqId(int id)
+    {
+        var serviceResponse = new ServiceResponse<List<GetUserSurveyListDto>>();
+        var dbContext = await _context.UserSurveyList.Where(p => p.RequestId == id).Include(u => u.SurveyType).ToListAsync();
+        if (dbContext is null)
+        {
+            throw new Exception($"The Id '{id}'Is Not Founde...");
+        }
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetUserSurveyListDto>(p)).ToList();
+        return serviceResponse;
+    }
 }

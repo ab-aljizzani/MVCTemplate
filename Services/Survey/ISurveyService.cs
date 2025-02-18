@@ -51,4 +51,12 @@ public interface ISurveyService
     Task<ServiceResponse<List<object>>> GetUserSurveyAnswerTimeByAppointId(int id, int questionId);
     Task<ServiceResponse<List<GetUserSurveyAnswerTimeDto>>> AddNewUserSurveyAnswerTime(InsertUserSurveyAnswerTimeDto newUserSurveyAnswer);
     // Task<ServiceResponse<object>> GetSurveyQuestionAnswerVm(int SurveyTypeId);
+
+    Task<ServiceResponse<List<GetUserSurveyListDto>>> GetAllUserSurveyList();
+    Task<ServiceResponse<GetUserSurveyListDto>> GetUserSurveyListByID(int id);
+    Task<ServiceResponse<List<GetUserSurveyListDto>>> GetUserSurveyListByReqId(int id);
+    Task<ServiceResponse<List<GetUserSurveyListDto>>> AddNewUserSurveyList(InsertUserSurveyListDto newSurvey);
+    Task<ServiceResponse<UpdateUserSurveyListDto>> UpdateUserSurveyList(UpdateUserSurveyListDto updateSurvey);
+    Task<ServiceResponse<UpdateUserSurveyListScoreAndInserted>> UpdateUserSurveyListScoreAndInserted(UpdateUserSurveyListScoreAndInserted updateSurvey);
+    Task<ServiceResponse<GetUserSurveyListDto>> DeleteUserSurveyList(int id);
 }
