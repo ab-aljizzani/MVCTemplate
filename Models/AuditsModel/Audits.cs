@@ -6,6 +6,7 @@ public class Audits
 {
     public int Id { get; set; }
     public int PortalUserId { get; set; }
+    public string NationalId { get; set; } = string.Empty;
     public string HttpRequest { get; set; } = string.Empty;
     public string BaseUrl { get; set; } = string.Empty;
     public string EndPoint { get; set; } = string.Empty;

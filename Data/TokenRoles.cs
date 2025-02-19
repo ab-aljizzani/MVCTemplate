@@ -15,16 +15,23 @@ public class TokenRoles
     public string GetRoleToken(string role)
     {
 
+
         var userClaims = _httpContextAccessor.HttpContext?.User.Claims.ToList();
         var userRoleType = userClaims.Select(u => u.Type).ToList();
         var userRoleValue = userClaims.Select(u => u.Value).ToList();
         var newTokenRole = new Dictionary<string, object>();
+
         for (int i = 0; i < userRoleValue.Count; i++)
         {
             newTokenRole.Add(userRoleType[i], userRoleValue[i]);
         }
         var setRole = newTokenRole.FirstOrDefault(t => t.Key == role);
-        return setRole.Value.ToString(); ;
+        if (setRole.Value is null)
+        {
+            return "no Data";
+        }
+        else
+            return setRole.Value.ToString();
 
     }
 }

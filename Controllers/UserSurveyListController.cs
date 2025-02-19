@@ -36,6 +36,7 @@ namespace ClinicApi.Controllers
         }
         [HttpGet]
         [Route("GetUserSurveyListByReqId")]
+        // [AllowAnonymous]
         public async Task<ActionResult<List<GetUserSurveyListDto>>> GetUserSurveyListByReqId(int id)
         {
             await _auditService.PostAudit($"View Single UserSurveyList By ReqId With Number '{id}' For User");
