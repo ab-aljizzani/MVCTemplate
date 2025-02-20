@@ -9,5 +9,7 @@ public class UpdateSurveyAnswerDto
     [Required]
     public string Answer { get; set; } = string.Empty;
     [Required]
+    public string AnswerEng { get; set; } = string.Empty;
+    [Required]
     public int SurveyAnswerTypeId { get; set; }
 }

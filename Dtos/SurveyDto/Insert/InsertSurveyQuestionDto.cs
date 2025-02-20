@@ -9,5 +9,7 @@ public class InsertSurveyQuestionDto
     [Required]
     public string Question { get; set; } = string.Empty;
     [Required]
+    public string QuestionEng { get; set; } = string.Empty;
+    [Required]
     public int SurveyTypeId { get; set; }
 }
