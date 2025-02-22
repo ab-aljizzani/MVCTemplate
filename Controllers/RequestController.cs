@@ -42,6 +42,14 @@ namespace ClinicApi.Controllers
             await _auditService.PostAuditWuthNoToken($"View Single Request By PersonId With PersonId Number '{id}'");
             return Ok(await _requestService.GetRequestByPersonId(id));
         }
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("GetRequestByPersonIdAndReqId")]
+        public async Task<ActionResult<GetRequestDto>> GetRequestByPersonIdAndReqId(int id, int reqId)
+        {
+            await _auditService.PostAuditWuthNoToken($"View Single Request By PersonId And RequestId With Id's Numbera '{id + " " + reqId}'");
+            return Ok(await _requestService.GetRequestByPersonIdAndReqId(id, reqId));
+        }
         [HttpPost]
         public async Task<ActionResult<List<InsertRequestDto>>> AddNewRequest(InsertRequestDto newRequest)
         {

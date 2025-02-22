@@ -162,6 +162,18 @@ public class RequestService : IRequestService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<List<GetRequestDto>>> GetRequestByPersonIdAndReqId(int id, int reqId)
+    {
+        var serviceResponse = new ServiceResponse<List<GetRequestDto>>();
+        var dbContext = await _context.Request.Where(r => r.PersonId == id && r.Id == reqId && r.RequestStatusId == 4).Include(r => r.Appointment).Include(r => r.Person).Include(r => r.RequestStatus).Include(r => r.PortalUser).ToListAsync();
+        if (dbContext is null)
+        {
+            throw new Exception($"The Id '{id}'Is Not Founde...");
+        }
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetRequestDto>(p)).ToList();
+        return serviceResponse;
+    }
+
     public async Task<ServiceResponse<GetRequestStatusDto>> GetRequestStatusByID(int id)
     {
         var serviceResponse = new ServiceResponse<GetRequestStatusDto>();
