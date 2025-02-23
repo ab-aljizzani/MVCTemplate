@@ -54,6 +54,7 @@ public interface ISurveyService
 
     Task<ServiceResponse<List<GetUserSurveyListDto>>> GetAllUserSurveyList();
     Task<ServiceResponse<GetUserSurveyListDto>> GetUserSurveyListByID(int id);
+    Task<ServiceResponse<GetUserSurveyScoreDto>> GetUserSurveyListScore(int appid, int reqId, int survTypeID);
     Task<ServiceResponse<List<GetUserSurveyListDto>>> GetUserSurveyListByReqId(int id);
     Task<ServiceResponse<List<GetUserSurveyListDto>>> AddNewUserSurveyList(InsertUserSurveyListDto newSurvey);
     Task<ServiceResponse<UpdateUserSurveyListDto>> UpdateUserSurveyList(UpdateUserSurveyListDto updateSurvey);

@@ -616,4 +616,16 @@ public class SurveyService : ISurveyService
         serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetUserSurveyListDto>(p)).ToList();
         return serviceResponse;
     }
+
+    public async Task<ServiceResponse<GetUserSurveyScoreDto>> GetUserSurveyListScore(int appid, int reqId, int survTypeID)
+    {
+        var serviceResponse = new ServiceResponse<GetUserSurveyScoreDto>();
+        var dbContext = await _context.UserSurveyList.Where(p => p.RequestId == reqId && p.AppointmentId == appid && p.SurveyTypeId == survTypeID).FirstOrDefaultAsync();
+        if (dbContext is null)
+        {
+            throw new Exception($"The Id's '{appid + ' ' + reqId + ' ' + survTypeID}'Is Not Founde...");
+        }
+        serviceResponse.Data = _mapper.Map<GetUserSurveyScoreDto>(dbContext);
+        return serviceResponse;
+    }
 }

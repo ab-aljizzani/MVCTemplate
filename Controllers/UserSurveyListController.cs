@@ -42,6 +42,14 @@ namespace ClinicApi.Controllers
             await _auditService.PostAudit($"View Single UserSurveyList By ReqId With Number '{id}' For User");
             return Ok(await _surveyService.GetUserSurveyListByReqId(id));
         }
+        [HttpGet]
+        [Route("GetUserSurveyListScore")]
+        // [AllowAnonymous]
+        public async Task<ActionResult<GetUserSurveyScoreDto>> GetUserSurveyListScore(int appId, int reqId, int survTypeId)
+        {
+            await _auditService.PostAudit($"View Single UserSurveyList By AppId & ReqId & survTypeId With Number '{appId + ' ' + reqId + ' ' + survTypeId}' For User");
+            return Ok(await _surveyService.GetUserSurveyListScore(appId, reqId, survTypeId));
+        }
         [HttpPost]
         public async Task<ActionResult<List<InsertUserSurveyListDto>>> AddnewUserSurveyList(InsertUserSurveyListDto newSurvey)
         {
