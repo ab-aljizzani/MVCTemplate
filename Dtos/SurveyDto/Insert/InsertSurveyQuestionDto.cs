@@ -11,5 +11,7 @@ public class InsertSurveyQuestionDto
     [Required]
     public string QuestionEng { get; set; } = string.Empty;
     [Required]
+    public string QuestionOrderNumber { get; set; } = string.Empty;
+    [Required]
     public int SurveyTypeId { get; set; }
 }

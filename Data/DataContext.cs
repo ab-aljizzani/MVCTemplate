@@ -1,4 +1,5 @@
 using System;
+using ClinicApi.Models.AppintmentReviewModel;
 using ClinicApi.Models.AppointmentModel;
 using ClinicApi.Models.AuditsModel;
 using ClinicApi.Models.DashboarUserModel;
@@ -50,4 +51,5 @@ public class DataContext : DbContext
   public DbSet<RiskLevel> RiskLevel => Set<RiskLevel>();
   public DbSet<SickLeave> SickLeave => Set<SickLeave>();
   public DbSet<UserSurveyList> UserSurveyList => Set<UserSurveyList>();
+  public DbSet<AppointmentReview> AppointmentReview => Set<AppointmentReview>();
 }

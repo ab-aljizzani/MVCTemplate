@@ -7,6 +7,7 @@ public class SurveyQuestion
     public int Id { get; set; }
     public string Question { get; set; } = string.Empty;
     public string QuestionEng { get; set; } = string.Empty;
+    public string QuestionOrderNumber { get; set; } = string.Empty;
     public int SurveyTypeId { get; set; }
     // public int SurveyAnswerTypeId { get; set; }
     public List<SurveyAnswer>? SurveyAnswer { get; set; }

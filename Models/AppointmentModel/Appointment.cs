@@ -23,6 +23,7 @@ public class Appointment
     public string AppointmentStartTime { get; set; } = string.Empty;
     public string AppointmentEndTime { get; set; } = string.Empty;
     public string AppointmentReview { get; set; } = string.Empty;
+    public string AppointmentDoctorReview { get; set; } = string.Empty;
     public bool IsSurveyInserted { get; set; }
     public string SurveyScore { get; set; } = string.Empty;
     public int RiskLevelId { get; set; }

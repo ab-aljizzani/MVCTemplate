@@ -15,6 +15,7 @@ public class UpdateAppointmentDto
     public string AppointmentStartTime { get; set; } = string.Empty;
     public string AppointmentEndTime { get; set; } = string.Empty;
     public string AppointmentReview { get; set; } = string.Empty;
+    public string AppointmentDoctorReview { get; set; } = string.Empty;
     public bool IsSurveyInserted { get; set; }
     public bool IsPersonShowUp { get; set; }
 }

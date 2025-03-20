@@ -1,6 +1,7 @@
 
 using ClinicApi.Data;
 using ClinicApi.Services;
+using ClinicApi.Services.AppointmentReviewServices;
 using ClinicApi.Services.AppointmentServices;
 using ClinicApi.Services.AuditServices;
 using ClinicApi.Services.DoctorAvailbleTimeServices;
@@ -58,6 +59,7 @@ namespace ClinicApi
             builder.Services.AddScoped<IAuditService, AuditService>();
             builder.Services.AddScoped<IDoctorAvailbleTimeService, DoctorAvailbleTimeService>();
             builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+            builder.Services.AddScoped<IAppointmentReviewService, AppointmentReviewService>();
             builder.Services.AddScoped<IRiskLevelService, RiskLevelService>();
             builder.Services.AddScoped<ISickLeaveService, SickLeaveService>();
             builder.Services.AddScoped<MagicString>();

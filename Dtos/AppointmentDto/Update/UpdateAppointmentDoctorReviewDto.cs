@@ -2,9 +2,9 @@ using System;
 
 namespace ClinicApi.Dtos.AppointmentDto.Update;
 
-public class UpdateAppointmentReviewDto
+public class UpdateAppointmentDoctorReviewDto
 {
     public int Id { get; set; }
-    // public string AppointmentReview { get; set; } = string.Empty;
+    public string AppointmentDoctorReview { get; set; } = string.Empty;
     public int RiskLevelId { get; set; }
 }

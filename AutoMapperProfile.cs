@@ -1,6 +1,8 @@
 using System;
 using AutoMapper;
 using ClinicApi.Data.PersonalImagesModelDto;
+using ClinicApi.Dtos.ApoointmentReviewDto.Get;
+using ClinicApi.Dtos.ApoointmentReviewDto.Insert;
 using ClinicApi.Dtos.AppointmentDto.Get;
 using ClinicApi.Dtos.AppointmentDto.Insert;
 using ClinicApi.Dtos.AppointmentDto.Update;
@@ -33,6 +35,7 @@ using ClinicApi.Dtos.SurveyDto.Insert;
 using ClinicApi.Dtos.SurveyDto.Update;
 using ClinicApi.Dtos.ZoneModelDto;
 using ClinicApi.Dtos.ZoneModelDto.Update;
+using ClinicApi.Models.AppintmentReviewModel;
 using ClinicApi.Models.AppointmentModel;
 using ClinicApi.Models.DashboarUserModel;
 using ClinicApi.Models.DoctorAvailbleTimeModel;
@@ -212,6 +215,7 @@ public class AutoMapperProfile : Profile
         CreateMap<UpdateAppointmentSurveyTypeIdDto, Appointment>();
         CreateMap<UpdateAppointmentIsSurveyInsertedDto, Appointment>();
         CreateMap<UpdateAppointmentReviewDto, Appointment>();
+        CreateMap<UpdateAppointmentDoctorReviewDto, Appointment>();
 
         CreateMap<AppointmentStatusDto, AppointmentStatus>();
         CreateMap<AppointmentStatus, AppointmentStatusDto>();
@@ -232,6 +236,11 @@ public class AutoMapperProfile : Profile
         CreateMap<SickLeave, GetSickLeaveDto>();
         CreateMap<InsertSickLeaveDto, SickLeave>();
         CreateMap<UpdateSickLeaveDto, SickLeave>();
+
+        CreateMap<GetAppointmentReviewDto, AppointmentReview>();
+        CreateMap<AppointmentReview, GetAppointmentReviewDto>();
+        CreateMap<InsertAppointmentReviewDto, AppointmentReview>();
+        CreateMap<UpdateAppointmentReviewDto, AppointmentReview>();
 
     }
 }
