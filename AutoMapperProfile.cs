@@ -239,6 +239,8 @@ public class AutoMapperProfile : Profile
 
         CreateMap<GetAppointmentReviewDto, AppointmentReview>();
         CreateMap<AppointmentReview, GetAppointmentReviewDto>();
+        CreateMap<GetCustomAppointmentReivewDto, AppointmentReview>();
+        CreateMap<AppointmentReview, GetCustomAppointmentReivewDto>();
         CreateMap<InsertAppointmentReviewDto, AppointmentReview>();
         CreateMap<UpdateAppointmentReviewDto, AppointmentReview>();
 

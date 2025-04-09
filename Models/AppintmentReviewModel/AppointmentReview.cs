@@ -10,4 +10,5 @@ public class AppointmentReview
     public int PortalUserId { get; set; }
     public Models.PortalUser.PortalUser? PortalUser { get; set; }
     public string Review { get; set; } = string.Empty;
+    public string ReviewDate { get; set; } = string.Empty;
 }

@@ -29,7 +29,7 @@ namespace ClinicApi.Controllers
             return Ok(await _requestService.GetAllRequest());
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetRequestDto>> GetSingle(int id)
+        public async Task<ActionResult<object>> GetSingle(int id)
         {
             await _auditService.PostAudit($"View Single Request By Id With Id Number '{id}' For User");
             return Ok(await _requestService.GetRequestByID(id));

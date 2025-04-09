@@ -10,7 +10,7 @@ namespace ClinicApi.Services.AppointmentReviewServices;
 public interface IAppointmentReviewService
 {
     Task<ServiceResponse<List<GetAppointmentReviewDto>>> GetAllAppointmentReview();
-    Task<ServiceResponse<List<GetAppointmentReviewDto>>> GetAppointmentReviewByAppointmentId(int id);
+    Task<ServiceResponse<List<object>>> GetAppointmentReviewByAppointmentId(int id);
     Task<ServiceResponse<GetAppointmentReviewDto>> GetAppointmentReviewByID(int id);
     Task<ServiceResponse<List<GetAppointmentReviewDto>>> AddNewAppointmentReview(InsertAppointmentReviewDto newAppointmentReview);
     Task<ServiceResponse<GetAppointmentReviewDto>> UpdateAppointmentReview(UpdateAppointmentReview_Dto updateAppointmentReview);

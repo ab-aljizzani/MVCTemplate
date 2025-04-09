@@ -60,15 +60,16 @@ public class AppointmentReviewService : IAppointmentReviewService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<List<GetAppointmentReviewDto>>> GetAppointmentReviewByAppointmentId(int id)
+    public async Task<ServiceResponse<List<object>>> GetAppointmentReviewByAppointmentId(int id)
     {
-        var serviceResponse = new ServiceResponse<List<GetAppointmentReviewDto>>();
-        var dbContext = await _context.AppointmentReview.Where(e => e.AppointmentId == id).Include(e => e.PortalUser).ToListAsync();
+        var serviceResponse = new ServiceResponse<List<object>>();
+        // var dbContext = await _context.AppointmentReview.Where(e => e.AppointmentId == id).Include(e => e.PortalUser).ToListAsync();
+        var dbContext = await _context.AppointmentReview.Where(e => e.AppointmentId == id && e.PortalUserId == e.PortalUser.Id && e.PortalUser.RoleId == e.PortalUser.Role.Id).Select(s => new { s.Review, s.ReviewDate, s.PortalUser.UserFullName, s.PortalUser.Role.RoleName }).ToListAsync();
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
         }
-        serviceResponse.Data = dbContext.Select(e => _mapper.Map<GetAppointmentReviewDto>(e)).ToList();
+        serviceResponse.Data = dbContext.Select(e => _mapper.Map<object>(e)).ToList();
         return serviceResponse;
     }
 

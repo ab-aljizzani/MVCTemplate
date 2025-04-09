@@ -139,15 +139,46 @@ public class RequestService : IRequestService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<GetRequestDto>> GetRequestByID(int id)
+    public async Task<ServiceResponse<object>> GetRequestByID(int id)
     {
-        var serviceResponse = new ServiceResponse<GetRequestDto>();
-        var dbContext = await _context.Request.Where(r => r.Id == id).Include(r => r.Appointment).Include(r => r.Appointment.RiskLevel).Include(r => r.Appointment.SurveyType).Include(r => r.Person).Include(r => r.Person.Entity).Include(r => r.Person.PersonalImg).Include(r => r.Person.Department).Include(r => r.Person.Zone).Include(r => r.RequestStatus).Include(r => r.RequestType).Include(r => r.PortalUser).FirstOrDefaultAsync();
+        var serviceResponse = new ServiceResponse<object>();
+        // var dbContext = await _context.Request.Where(r => r.Id == id).Include(r => r.Appointment).Include(r => r.Appointment.RiskLevel).Include(r => r.Appointment.SurveyType).Include(r => r.Person).Include(r => r.Person.Entity).Include(r => r.Person.PersonalImg).Include(r => r.Person.Department).Include(r => r.Person.Zone).Include(r => r.RequestStatus).Include(r => r.RequestType).Include(r => r.PortalUser).FirstOrDefaultAsync();
+        var dbContext = await _context.Request.Where(r => r.Id == id && r.AppointmentId == r.Appointment.Id && r.PersonId == r.Person.Id && r.RequestStatusId == r.RequestStatus.Id && r.RequestTypeId == r.RequestType.Id && r.PersonId == r.Person.Id)
+        .Select(r => new
+        {
+            r.Id,
+            r.AppointmentId,
+            r.Appointment.PortalUserId,
+            r.RequestStatusId,
+            r.PersonId,
+            r.Appointment.RiskLevelId,
+            r.RequestStatus.Status,
+            r.RequestType.Type,
+            r.AppsentReason,
+            r.Appointment.ApponitmentDate,
+            r.Appointment.AppointmentDay,
+            r.Appointment.AppointmentStartTime,
+            r.Appointment.portalUser.Role.RoleArabName,
+            r.Appointment.portalUser.UserFullName,
+            r.Appointment.RiskLevel.Risk,
+            r.Person.FullArabicName,
+            r.Person.NationalId,
+            r.Person.Entity.EntityName,
+            r.Person.Department.DepartmentName,
+            r.Person.PhoneNumber,
+            r.Person.Zone.ZoneName,
+            r.Person.Grade,
+            r.Person.JobTitle,
+            r.Person.DateOfBirth,
+            r.Person.Title,
+            r.Person.PersonalImg.PersonalImage,
+            r.Person.PersonalImgId
+        }).FirstAsync();
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
         }
-        serviceResponse.Data = _mapper.Map<GetRequestDto>(dbContext);
+        serviceResponse.Data = _mapper.Map<object>(dbContext);
         return serviceResponse;
     }
     public async Task<ServiceResponse<List<GetRequestDto>>> GetRequestByPersonId(int id)

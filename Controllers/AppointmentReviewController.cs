@@ -34,7 +34,7 @@ namespace ClinicApi.Controllers
         }
         [HttpGet]
         [Route("GetAppointmentReviewByAppointmentId")]
-        public async Task<ActionResult<List<GetAppointmentReviewDto>>> GetAppointmentReviewByAppointmentId(int AppointmentId)
+        public async Task<ActionResult<List<object>>> GetAppointmentReviewByAppointmentId(int AppointmentId)
         {
             await _auditService.PostAudit($"View Appointment Reviews By Appointment Id '{AppointmentId}' For User");
             return Ok(await _appointmentReview.GetAppointmentReviewByAppointmentId(AppointmentId));

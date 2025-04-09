@@ -8,4 +8,5 @@ public class InsertAppointmentReviewDto
     public int AppointmentId { get; set; }
     public int PortalUserId { get; set; }
     public string Review { get; set; } = string.Empty;
+    public string ReviewDate { get; set; } = string.Empty;
 }

@@ -38,7 +38,8 @@ public class SeedService : ISeedService
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم جدولة الطلب", StatusOrder = 3, BadgeColor = "badge rounded-pill bg-success mx-auto" });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الحضور", StatusOrder = 4, BadgeColor = "badge rounded-pill bg-primary mx-auto" });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "لم يحضر", StatusOrder = 5, BadgeColor = "badge rounded-pill bg-danger mx-auto" });
-        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الانتهاء", StatusOrder = 6, BadgeColor = "badge rounded-pill bg-soft-dark mx-auto" });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "طلب تقييم طبيب", StatusOrder = 6, BadgeColor = "badge rounded-pill bg-info mx-auto" });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الانتهاء", StatusOrder = 7, BadgeColor = "badge rounded-pill bg-soft-dark mx-auto" });
 
         List<InsertRequestTypeDto> newRequestType = new List<InsertRequestTypeDto>();
         newRequestType.Add(new InsertRequestTypeDto { Type = "داخلي من الإدارة", BadgeColor = "badge rounded-pill bg-primary mx-auto" });
@@ -54,6 +55,7 @@ public class SeedService : ISeedService
         newRole.Add(new RoleDto { RoleName = "Reception", RoleArabName = "استقبال", Roletype = "Dash" });
         newRole.Add(new RoleDto { RoleName = "Doctor", RoleArabName = "طبيب", Roletype = "Dash" });
         newRole.Add(new RoleDto { RoleName = "Person", RoleArabName = "شخص", Roletype = "Dash" });
+        newRole.Add(new RoleDto { RoleName = "Specialist", RoleArabName = "اخصائي", Roletype = "Dash" });
 
         List<ZoneDto> newZone = new List<ZoneDto>();
         newZone.Add(new ZoneDto { ZoneName = "الأولى" });
@@ -91,8 +93,8 @@ public class SeedService : ISeedService
         newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تم الحضور", BadgeColor = "badge rounded-pill bg-primary mx-auto" });
         newAppointmentStatus.Add(new AppointmentStatusDto { Status = "لم يحضر", BadgeColor = "badge rounded-pill bg-danger mx-auto" });
 
-        // List<PerscritionDto> newPerscrition = new List<PerscritionDto>();
-        // newPerscrition.Add(new PerscritionDto { PerscriptionName = "بدون وصفة طبية" });
+        List<PerscritionDto> newPerscrition = new List<PerscritionDto>();
+        newPerscrition.Add(new PerscritionDto { PerscriptionName = "بدون وصفة طبية" });
 
         List<InsertAppointmentDto> newAppointment = new List<InsertAppointmentDto>();
         newAppointment.Add(new InsertAppointmentDto
@@ -171,17 +173,17 @@ public class SeedService : ISeedService
         //     _context.SurveyQuestion.Add(requestStatus);
         // }
 
-        // foreach (var item in newRequestStatus)
-        // {
-        //     var requestStatus = _mapper.Map<Models.RequestModel.RequestStatus>(item);
-        //     _context.RequestStatus.Add(requestStatus);
-        // }
-
-        foreach (var item in newRole)
+        foreach (var item in newRequestStatus)
         {
-            var role = _mapper.Map<Models.Role.Role>(item);
-            _context.Role.Add(role);
+            var requestStatus = _mapper.Map<Models.RequestModel.RequestStatus>(item);
+            _context.RequestStatus.Add(requestStatus);
         }
+
+        // foreach (var item in newRole)
+        // {
+        //     var role = _mapper.Map<Models.Role.Role>(item);
+        //     _context.Role.Add(role);
+        // }
 
         // foreach (var item in newEntity)
         // {
