@@ -28,7 +28,7 @@ public interface IAppointmentService
 
     Task<ServiceResponse<List<PerscritionDto>>> GetAllPerscrition();
     Task<ServiceResponse<PerscritionDto>> GetPerscritionByID(int id);
-    Task<ServiceResponse<List<PerscritionDto>>> GetPerscritionByAppID(int id);
+    Task<ServiceResponse<List<object>>> GetPerscritionByAppID(int id);
     Task<ServiceResponse<List<PerscritionDto>>> AddNewPerscrition(InsertPerscriptionDto newPerscrition);
     Task<ServiceResponse<PerscritionDto>> UpdatePerscrition(UpdatePerscriptionDto updatePerscrition);
     Task<ServiceResponse<PerscritionDto>> DeletePerscrition(int id);

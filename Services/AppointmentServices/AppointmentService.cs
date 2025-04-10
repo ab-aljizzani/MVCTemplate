@@ -176,15 +176,15 @@ public class AppointmentService : IAppointmentService
         return serviceResponse;
     }
 
-    public async Task<ServiceResponse<List<PerscritionDto>>> GetPerscritionByAppID(int id)
+    public async Task<ServiceResponse<List<object>>> GetPerscritionByAppID(int id)
     {
-        var serviceResponse = new ServiceResponse<List<PerscritionDto>>();
-        var dbContext = await _context.Perscription.Where(e => e.AppointmentId == id).ToListAsync();
+        var serviceResponse = new ServiceResponse<List<object>>();
+        var dbContext = await _context.Perscription.Where(e => e.AppointmentId == id && e.PortalUserId == e.PortalUser.Id && e.PortalUser.RoleId == e.PortalUser.Role.Id).Select(e => new { e.AppointmentId, e.PerscriptionName, e.CreateDate, e.Discription, e.PortalUser.UserFullName, e.PortalUser.Role.RoleArabName }).ToListAsync();
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
         }
-        serviceResponse.Data = dbContext.Select(e => _mapper.Map<PerscritionDto>(e)).ToList();
+        serviceResponse.Data = dbContext.Select(e => _mapper.Map<object>(e)).ToList();
         return serviceResponse;
     }
 

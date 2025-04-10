@@ -6,6 +6,7 @@ using ClinicApi.Dtos.ApoointmentReviewDto.Insert;
 using ClinicApi.Dtos.AppointmentDto.Get;
 using ClinicApi.Dtos.AppointmentDto.Insert;
 using ClinicApi.Dtos.AppointmentDto.Update;
+using ClinicApi.Dtos.CountriesDto.Get;
 using ClinicApi.Dtos.DashboardUserDto;
 using ClinicApi.Dtos.DashboardUserDto.Insert;
 using ClinicApi.Dtos.DashboardUserDto.Update;
@@ -37,6 +38,7 @@ using ClinicApi.Dtos.ZoneModelDto;
 using ClinicApi.Dtos.ZoneModelDto.Update;
 using ClinicApi.Models.AppintmentReviewModel;
 using ClinicApi.Models.AppointmentModel;
+using ClinicApi.Models.CountriesModel;
 using ClinicApi.Models.DashboarUserModel;
 using ClinicApi.Models.DoctorAvailbleTimeModel;
 using ClinicApi.Models.Entity;
@@ -243,6 +245,9 @@ public class AutoMapperProfile : Profile
         CreateMap<AppointmentReview, GetCustomAppointmentReivewDto>();
         CreateMap<InsertAppointmentReviewDto, AppointmentReview>();
         CreateMap<UpdateAppointmentReviewDto, AppointmentReview>();
+
+        CreateMap<GetCountrieDto, Countries>();
+        CreateMap<Countries, GetCountrieDto>();
 
     }
 }

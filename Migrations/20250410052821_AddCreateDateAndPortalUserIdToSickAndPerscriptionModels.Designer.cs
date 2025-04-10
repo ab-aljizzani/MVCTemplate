@@ -4,6 +4,7 @@ using ClinicApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250410052821_AddCreateDateAndPortalUserIdToSickAndPerscriptionModels")]
+    partial class AddCreateDateAndPortalUserIdToSickAndPerscriptionModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,8 +168,6 @@ namespace ClinicApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PortalUserId");
-
                     b.ToTable("Perscription");
                 });
 
@@ -211,23 +212,6 @@ namespace ClinicApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Audits");
-                });
-
-            modelBuilder.Entity("ClinicApi.Models.CountriesModel.Countries", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("ClinicApi.Models.DashboarUserModel.DashboardUser", b =>
@@ -780,8 +764,6 @@ namespace ClinicApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PortalUserId");
-
                     b.ToTable("SickLeave");
                 });
 
@@ -1048,17 +1030,6 @@ namespace ClinicApi.Migrations
                     b.Navigation("portalUser");
                 });
 
-            modelBuilder.Entity("ClinicApi.Models.AppointmentModel.Perscription", b =>
-                {
-                    b.HasOne("ClinicApi.Models.PortalUser.PortalUser", "PortalUser")
-                        .WithMany()
-                        .HasForeignKey("PortalUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PortalUser");
-                });
-
             modelBuilder.Entity("ClinicApi.Models.DashboarUserModel.DashboardUser", b =>
                 {
                     b.HasOne("ClinicApi.Models.Entity.Department", "Department")
@@ -1216,17 +1187,6 @@ namespace ClinicApi.Migrations
                     b.Navigation("RequestStatus");
 
                     b.Navigation("RequestType");
-                });
-
-            modelBuilder.Entity("ClinicApi.Models.SickLeaveModel.SickLeave", b =>
-                {
-                    b.HasOne("ClinicApi.Models.PortalUser.PortalUser", "PortalUser")
-                        .WithMany()
-                        .HasForeignKey("PortalUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PortalUser");
                 });
 
             modelBuilder.Entity("ClinicApi.Models.SurveyModel.SurveyAnswer", b =>

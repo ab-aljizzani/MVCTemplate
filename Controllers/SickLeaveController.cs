@@ -35,7 +35,7 @@ namespace ClinicApi.Controllers
         }
         [HttpGet]
         [Route("GetSickLeaveByAppointmentId")]
-        public async Task<ActionResult<List<GetSickLeaveDto>>> GetSickLeaveByAppointmentId(int id)
+        public async Task<ActionResult<List<object>>> GetSickLeaveByAppointmentId(int id)
         {
             await _auditService.PostAudit($"View Single SickLeave By AppointmentId With AppointmentId Number '{id}' For User");
             return Ok(await _sickLeave.GetSickLeaveByAppointmentID(id));

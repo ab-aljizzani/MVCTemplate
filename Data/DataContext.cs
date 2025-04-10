@@ -2,6 +2,7 @@ using System;
 using ClinicApi.Models.AppintmentReviewModel;
 using ClinicApi.Models.AppointmentModel;
 using ClinicApi.Models.AuditsModel;
+using ClinicApi.Models.CountriesModel;
 using ClinicApi.Models.DashboarUserModel;
 using ClinicApi.Models.DoctorAvailbleTimeModel;
 using ClinicApi.Models.Entity;
@@ -52,4 +53,5 @@ public class DataContext : DbContext
   public DbSet<SickLeave> SickLeave => Set<SickLeave>();
   public DbSet<UserSurveyList> UserSurveyList => Set<UserSurveyList>();
   public DbSet<AppointmentReview> AppointmentReview => Set<AppointmentReview>();
+  public DbSet<Countries> Countries => Set<Countries>();
 }

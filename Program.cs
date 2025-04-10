@@ -4,6 +4,7 @@ using ClinicApi.Services;
 using ClinicApi.Services.AppointmentReviewServices;
 using ClinicApi.Services.AppointmentServices;
 using ClinicApi.Services.AuditServices;
+using ClinicApi.Services.CountriesServices;
 using ClinicApi.Services.DoctorAvailbleTimeServices;
 using ClinicApi.Services.Entity;
 using ClinicApi.Services.PersonalImagesServices;
@@ -62,6 +63,7 @@ namespace ClinicApi
             builder.Services.AddScoped<IAppointmentReviewService, AppointmentReviewService>();
             builder.Services.AddScoped<IRiskLevelService, RiskLevelService>();
             builder.Services.AddScoped<ISickLeaveService, SickLeaveService>();
+            builder.Services.AddScoped<ICountriesService, CountriesService>();
             builder.Services.AddScoped<MagicString>();
             builder.Services.AddScoped<TokenRoles>();
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
