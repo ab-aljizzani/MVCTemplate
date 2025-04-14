@@ -11,4 +11,6 @@ public class InsertSurveyTypeDto
     public string Type { get; set; } = string.Empty;
     [Required]
     public string EngType { get; set; } = string.Empty;
+    [Required]
+    public string TypeRole { get; set; } = string.Empty;
 }

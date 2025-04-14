@@ -12,4 +12,7 @@ public class GetSurveyTypeDto
     [Required(ErrorMessage = "الرجاء إدخال اسم النموذج بالإنجليزي ")]
     [Display(Name = "اسم النموذج بالإنجليزي")]
     public string EngType { get; set; } = string.Empty;
+    [Required(ErrorMessage = "الرجاء إختيار اسم نوع النموذج ")]
+    [Display(Name = "نوع النموذج ")]
+    public string TypeRole { get; set; } = string.Empty;
 }

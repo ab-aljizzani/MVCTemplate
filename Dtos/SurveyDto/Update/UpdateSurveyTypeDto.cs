@@ -8,4 +8,5 @@ public class UpdateSurveyTypeDto
     public int Id { get; set; }
     public string Type { get; set; } = string.Empty;
     public string EngType { get; set; } = string.Empty;
+    public string TypeRole { get; set; } = string.Empty;
 }

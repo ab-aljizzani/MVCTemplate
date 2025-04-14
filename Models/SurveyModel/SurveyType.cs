@@ -9,4 +9,5 @@ public class SurveyType
     [Required(ErrorMessage = "الرجاء إدخال اسم النموذج ")]
     public string Type { get; set; } = string.Empty;
     public string EngType { get; set; } = string.Empty;
+    public string TypeRole { get; set; } = string.Empty;
 }
