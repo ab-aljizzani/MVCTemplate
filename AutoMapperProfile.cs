@@ -200,6 +200,8 @@ public class AutoMapperProfile : Profile
         CreateMap<UpdateUserSurveyListScoreAndInserted, UserSurveyList>();
         CreateMap<GetUserSurveyScoreDto, UserSurveyList>();
         CreateMap<UserSurveyList, GetUserSurveyScoreDto>();
+        CreateMap<UserSurveyList, UpdateUserSurveyListPladgeApproved>();
+        CreateMap<UpdateUserSurveyListPladgeApproved, UserSurveyList>();
 
         CreateMap<GetDoctorAvailbleTimeDto, DoctorAvailbleTime>();
         CreateMap<DoctorAvailbleTime, GetDoctorAvailbleTimeDto>();

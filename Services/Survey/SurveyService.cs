@@ -628,4 +628,34 @@ public class SurveyService : ISurveyService
         serviceResponse.Data = _mapper.Map<GetUserSurveyScoreDto>(dbContext);
         return serviceResponse;
     }
+
+    public async Task<ServiceResponse<List<GetUserSurveyListDto>>> GetAllUserReportSurveyList()
+    {
+        var serviceResponse = new ServiceResponse<List<GetUserSurveyListDto>>();
+        var dbContext = await _context.UserSurveyList.Where(p => p.IsSurveyInserted == false && p.SurveyType.TypeRole.ToLower() == "report").Include(u => u.SurveyType).ToListAsync();
+        serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetUserSurveyListDto>(p)).ToList();
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<UpdateUserSurveyListPladgeApproved>> UpdateUserSurveyListPladgeApproved(UpdateUserSurveyListPladgeApproved updateSurvey)
+    {
+        var serviceResponse = new ServiceResponse<UpdateUserSurveyListPladgeApproved>();
+        try
+        {
+            var userSurveyList = await _context.UserSurveyList.FirstOrDefaultAsync(z => z.Id == updateSurvey.Id);
+            if (userSurveyList is null)
+            {
+                throw new Exception($"The Id '{updateSurvey.Id}'Is Not Founde...");
+            }
+            _mapper.Map(updateSurvey, userSurveyList);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<UpdateUserSurveyListPladgeApproved>(userSurveyList);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
 }

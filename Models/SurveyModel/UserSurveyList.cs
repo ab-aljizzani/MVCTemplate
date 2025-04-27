@@ -11,4 +11,5 @@ public class UserSurveyList
     public SurveyType? SurveyType { get; set; }
     public string SurveyScore { get; set; } = string.Empty;
     public bool IsSurveyInserted { get; set; } = false;
+    public bool IsPledgeApproved { get; set; } = false;
 }

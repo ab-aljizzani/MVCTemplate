@@ -3,6 +3,7 @@ using ClinicApi.Models.AppointmentModel;
 using ClinicApi.Models.PersonModel;
 using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.RequestTypeModel;
+using ClinicApi.Models.SurveyModel;
 
 namespace ClinicApi.Models.RequestModel;
 
@@ -20,6 +21,7 @@ public class Request
     public int RequestTypeId { get; set; }
     public RequestType? RequestType { get; set; }
     public int SurveyTypeId { get; set; }
+    public SurveyType? SurveyType { get; set; }
     public int? AppointmentId { get; set; }
     public Appointment? Appointment { get; set; }
     public string AppsentReason { get; set; } = string.Empty;

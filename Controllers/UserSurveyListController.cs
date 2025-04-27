@@ -28,6 +28,13 @@ namespace ClinicApi.Controllers
             await _auditService.PostAudit("View All UserSurveyList For User");
             return Ok(await _surveyService.GetAllUserSurveyList());
         }
+        [HttpGet]
+        [Route("GetAllUserReportSurveyList")]
+        public async Task<ActionResult<List<GetUserSurveyListDto>>> GetAllUserReportSurveyList()
+        {
+            await _auditService.PostAudit("View All UserReportSurveyList For User");
+            return Ok(await _surveyService.GetAllUserReportSurveyList());
+        }
         [HttpGet("{id}")]
         public async Task<ActionResult<List<GetUserSurveyListDto>>> GetUserSurveyListById(int id)
         {
@@ -72,6 +79,16 @@ namespace ClinicApi.Controllers
         {
             await _auditService.PostAudit($"Update UserSurveyList For '{updateSurvey}' By User ");
             var response = await _surveyService.UpdateUserSurveyListScoreAndInserted(updateSurvey);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
+        [HttpPost]
+        [Route("EditUserSurveyListPladgeApproved")]
+        public async Task<ActionResult<UpdateUserSurveyListPladgeApproved>> EditUserSurveyListPladgeApproved(UpdateUserSurveyListPladgeApproved updateSurvey)
+        {
+            await _auditService.PostAudit($"Update UserSurveyListPladgeApproved For '{updateSurvey}' By User ");
+            var response = await _surveyService.UpdateUserSurveyListPladgeApproved(updateSurvey);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

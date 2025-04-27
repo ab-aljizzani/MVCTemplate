@@ -53,11 +53,13 @@ public interface ISurveyService
     // Task<ServiceResponse<object>> GetSurveyQuestionAnswerVm(int SurveyTypeId);
 
     Task<ServiceResponse<List<GetUserSurveyListDto>>> GetAllUserSurveyList();
+    Task<ServiceResponse<List<GetUserSurveyListDto>>> GetAllUserReportSurveyList();
     Task<ServiceResponse<GetUserSurveyListDto>> GetUserSurveyListByID(int id);
     Task<ServiceResponse<GetUserSurveyScoreDto>> GetUserSurveyListScore(int appid, int reqId, int survTypeID);
     Task<ServiceResponse<List<GetUserSurveyListDto>>> GetUserSurveyListByReqId(int id);
     Task<ServiceResponse<List<GetUserSurveyListDto>>> AddNewUserSurveyList(InsertUserSurveyListDto newSurvey);
     Task<ServiceResponse<UpdateUserSurveyListDto>> UpdateUserSurveyList(UpdateUserSurveyListDto updateSurvey);
     Task<ServiceResponse<UpdateUserSurveyListScoreAndInserted>> UpdateUserSurveyListScoreAndInserted(UpdateUserSurveyListScoreAndInserted updateSurvey);
+    Task<ServiceResponse<UpdateUserSurveyListPladgeApproved>> UpdateUserSurveyListPladgeApproved(UpdateUserSurveyListPladgeApproved updateSurvey);
     Task<ServiceResponse<GetUserSurveyListDto>> DeleteUserSurveyList(int id);
 }

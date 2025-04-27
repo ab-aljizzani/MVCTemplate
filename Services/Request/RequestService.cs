@@ -118,7 +118,7 @@ public class RequestService : IRequestService
     public async Task<ServiceResponse<List<GetRequestDto>>> GetAllRequest()
     {
         var serviceResponse = new ServiceResponse<List<GetRequestDto>>();
-        var dbContext = await _context.Request.Include(r => r.Person).Include(r => r.RequestStatus).Include(r => r.RequestType).Include(r => r.PortalUser).Include(r => r.Appointment).ToListAsync();
+        var dbContext = await _context.Request.Include(r => r.Person).Include(r => r.RequestStatus).Include(r => r.RequestType).Include(r => r.PortalUser).Include(r => r.Appointment).Include(r => r.SurveyType).ToListAsync();
         serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetRequestDto>(p)).ToList();
         return serviceResponse;
     }
