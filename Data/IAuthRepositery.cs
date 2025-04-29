@@ -15,8 +15,11 @@ public interface IAuthRepositery
     Task<ServiceResponse<List<PortalUserDto>>> GetAllByEntityId(int id);
     Task<ServiceResponse<List<PortalUserDto>>> GetAllByUserType(string type);
     Task<ServiceResponse<PortalUserDto>> GetUserByID(int id);
+    Task<ServiceResponse<PortalUserDto>> GetUserByNationalId(string id);
     Task<ServiceResponse<int>> Register(InsertPortalUserDto user, string password);
+    Task<ServiceResponse<string>> IamRegister(InsertPortalUserDto user);
     Task<ServiceResponse<string>> Login(string username, string password);
+    Task<ServiceResponse<string>> IamLogin(string username);
     Task<ServiceResponse<PortalUserDto>> UpdatePortalUser(UpdatePortalUserDto updatePortalUser);
     Task<ServiceResponse<PortalUserDto>> PasswordExpireUpdate(PasswordExpireUpdateDto updatePortalUser);
     Task<ServiceResponse<PortalUserDto>> PasswordInitialUpdate(PasswordInitialDto updatePortalUser);

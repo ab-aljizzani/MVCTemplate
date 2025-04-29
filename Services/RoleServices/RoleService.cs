@@ -59,6 +59,18 @@ public class RoleService : IRoleService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<RoleDto>> GetRoleByEngName(string id)
+    {
+        var serviceResponse = new ServiceResponse<RoleDto>();
+        var dbContext = await _context.Role.FirstOrDefaultAsync(e => e.RoleName.ToLower() == id.ToLower());
+        if (dbContext is null)
+        {
+            throw new Exception($"The Id '{id}'Is Not Founde...");
+        }
+        serviceResponse.Data = _mapper.Map<RoleDto>(dbContext);
+        return serviceResponse;
+    }
+
     public async Task<ServiceResponse<RoleDto>> GetRoleByID(int id)
     {
         var serviceResponse = new ServiceResponse<RoleDto>();

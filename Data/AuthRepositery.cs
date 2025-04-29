@@ -72,6 +72,23 @@ public class AuthRepositery : IAuthRepositery
         }
         return response;
     }
+    public async Task<ServiceResponse<string>> IamLogin(string nationalId)
+    {
+        var _random = new Random();
+        var response = new ServiceResponse<string>();
+        var user = await _context.PortalUser.Include(u => u.PersonalImage).Include(u => u.Entity).Include(u => u.Role).Include(u => u.Department).FirstOrDefaultAsync(u => u.NationalId.ToLower().Equals(nationalId.ToLower()));
+        if (user is null)
+        {
+            response.Success = false;
+            response.Message = "User Not Found... ";
+        }
+        else
+        {
+            response.Data = CreateToken(user);
+            await _context.SaveChangesAsync();
+        }
+        return response;
+    }
     public async Task<ServiceResponse<string>> PersonLogin(string nationalId)
     {
         var _random = new Random();
@@ -128,6 +145,43 @@ public class AuthRepositery : IAuthRepositery
         return response;
     }
 
+    public async Task<ServiceResponse<string>> IamRegister(InsertPortalUserDto userDto)
+    {
+        var response = new ServiceResponse<string>();
+        if (await UserExists(userDto.Username))
+        {
+            response.Success = false;
+            response.Message = "User Already Exists...";
+        }
+        else
+        {
+            if (userDto.PersonalImgId == 0 || userDto.PersonalImgId == null)
+            {
+                CreatePasswordHash(userDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+                var portalDto = _mapper.Map<InsertPortalUserNoPersonalImgDto>(userDto);
+                var user = _mapper.Map<PortalUser>(portalDto);
+                user.PasswordSalt = passwordSalt;
+                user.PasswordHash = passwordHash;
+
+                _context.PortalUser.Add(user);
+                await _context.SaveChangesAsync();
+                response.Data = CreateToken(user);
+            }
+            else
+            {
+                CreatePasswordHash(userDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+                var user = _mapper.Map<PortalUser>(userDto);
+                user.PasswordSalt = passwordSalt;
+                user.PasswordHash = passwordHash;
+
+                _context.PortalUser.Add(user);
+                await _context.SaveChangesAsync();
+                response.Data = CreateToken(user);
+            }
+        }
+        return response;
+    }
+
     public async Task<bool> UserExists(string username)
     {
         if (await _context.PortalUser.AnyAsync(u => u.Username.ToLower() == username.ToLower()))
@@ -161,6 +215,7 @@ public class AuthRepositery : IAuthRepositery
                 new Claim("UserFullName",user.UserFullName.ToString()),
                 new Claim("NationalId",user.NationalId),
                 new Claim("PhoneNumber",user.PhoneNumber),
+                new Claim("PersonalImgId",user.PersonalImgId.ToString()),
                 new Claim("Code",user.Code),
                 new Claim("UserType",user.UserType.ToString()),
                 new Claim("EntityID",user.EntityId.ToString()),
@@ -289,6 +344,14 @@ public class AuthRepositery : IAuthRepositery
     {
         var serviceResponse = new ServiceResponse<PortalUserDto>();
         var dbContext = await _context.PortalUser.Include(u => u.PersonalImage).Include(e => e.Entity).Include(r => r.Role).Include(d => d.Department).FirstOrDefaultAsync(u => u.Id == id && u.EntityId == u.Department.EntityId);
+
+        serviceResponse.Data = _mapper.Map<PortalUserDto>(dbContext);
+        return serviceResponse;
+    }
+    public async Task<ServiceResponse<PortalUserDto>> GetUserByNationalId(string id)
+    {
+        var serviceResponse = new ServiceResponse<PortalUserDto>();
+        var dbContext = await _context.PortalUser.Include(u => u.PersonalImage).Include(e => e.Entity).Include(r => r.Role).Include(d => d.Department).FirstOrDefaultAsync(u => u.NationalId == id && u.EntityId == u.Department.EntityId);
 
         serviceResponse.Data = _mapper.Map<PortalUserDto>(dbContext);
         return serviceResponse;
