@@ -33,6 +33,14 @@ namespace ClinicApi.Controllers
             // await _auditService.PostAudit($"View Single Role By Id With Id Number '{id}' For User");
             return Ok(await _roleService.GetRoleByID(id));
         }
+        [HttpGet]
+        [Route("GetRoleByEngName")]
+        [AllowAnonymous]
+        public async Task<ActionResult<List<RoleDto>>> GetRoleByEngName(string id)
+        {
+            // await _auditService.PostAudit($"View Single Role By Id With Id Number '{id}' For User");
+            return Ok(await _roleService.GetRoleByEngName(id));
+        }
         [HttpPost]
         public async Task<ActionResult<List<RoleDto>>> AddnewRole(RoleDto newRole)
         {
