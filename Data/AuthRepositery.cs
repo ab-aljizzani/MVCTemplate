@@ -209,6 +209,7 @@ public class AuthRepositery : IAuthRepositery
     private string CreateToken(PortalUser user)
     {
         var claims = new List<Claim>{
+                // new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
                 new Claim("PortalUserId",user.Id.ToString()),
                 new Claim("Username",user.Username),
