@@ -59,7 +59,7 @@ namespace ClinicApi.Controllers
         }
         [HttpPost]
         [Route("EditIsActive")]
-        public async Task<ActionResult<GetDoctorAvailbleTimeDto>> UpdateIsActive(UpdateDoctorIsActive updateTime)
+        public async Task<ActionResult<List<GetDoctorAvailbleTimeDto>>> UpdateIsActive(UpdateDoctorIsActive updateTime)
         {
             await _auditService.PostAudit($"Update DoctorAvailbleTime with Id '{updateTime.Id + " Change IsActive To " + updateTime.IsActive}' By User ");
             var response = await _doctorAvailbleTimeService.UpdateIsActive(updateTime);

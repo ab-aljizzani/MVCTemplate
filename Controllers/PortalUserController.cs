@@ -64,7 +64,7 @@ namespace ClinicApi.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<ServiceResponse<int>>> Login(LoginDto request)
         {
-            var response = await _authRepo.Login(request.Username, request.Password);
+            var response = await _authRepo.Login(request.Username, request.UserPass);
             if (!response.Success)
             {
                 return BadRequest(response);
