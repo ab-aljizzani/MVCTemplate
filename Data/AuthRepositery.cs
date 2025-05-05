@@ -165,7 +165,8 @@ public class AuthRepositery : IAuthRepositery
 
                 _context.PortalUser.Add(user);
                 await _context.SaveChangesAsync();
-                response.Data = CreateToken(user);
+                var getUser = await _context.PortalUser.Include(u => u.PersonalImage).Include(u => u.Entity).Include(u => u.Role).Include(u => u.Department).FirstOrDefaultAsync(u => u.NationalId.ToLower().Equals(user.NationalId.ToLower()));
+                response.Data = CreateToken(getUser);
             }
             else
             {
@@ -176,7 +177,8 @@ public class AuthRepositery : IAuthRepositery
 
                 _context.PortalUser.Add(user);
                 await _context.SaveChangesAsync();
-                response.Data = CreateToken(user);
+                var getUser = await _context.PortalUser.Include(u => u.PersonalImage).Include(u => u.Entity).Include(u => u.Role).Include(u => u.Department).FirstOrDefaultAsync(u => u.NationalId.ToLower().Equals(user.NationalId.ToLower()));
+                response.Data = CreateToken(getUser);
             }
         }
         return response;
@@ -230,6 +232,7 @@ public class AuthRepositery : IAuthRepositery
                 new Claim("PasswordExpire",user.PasswordExpires.ToString()),
                 new Claim("IsFirstLogin",user.IsFirstLogin.ToString()),
                 new Claim("Status",user.Status),
+                new Claim("image",user.EmpIamImgUrl)
             };
         var appSettingsToken = _configuration.GetSection("AppSettings:Token").Value;
         if (appSettingsToken is null)

@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using ClinicApi.Models.Entity;
 using ClinicApi.Models.Role;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ public class PortalUser
     public bool IsFirstLogin { get; set; } = false;
     public int? PersonalImgId { get; set; }
     public Models.PersonalImagesModel.PersonalImg? PersonalImage { get; set; }
+    public string EmpIamImgUrl { get; set; } = string.Empty;
     public string DateOfBirth { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
     public string UserType { get; set; } = string.Empty;

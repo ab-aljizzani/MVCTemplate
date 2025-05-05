@@ -33,6 +33,7 @@ public class InsertPortalUserDto
     [EmailAddress]
     public string Email { get; set; } = string.Empty;
     public int PersonalImgId { get; set; }
+    public string EmpIamImgUrl { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إدخال تاريخ الميلاد")]
     [Display(Name = "تاريخ الميلاد")]
     public string DateOfBirth { get; set; } = string.Empty;

@@ -37,6 +37,7 @@ public class InsertPortalUserNoPersonalImgDto
     public string UserType { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إدخال رقم الجوال")]
     [Display(Name = "رقم الجوال")]
+    public string EmpIamImgUrl { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
     public string Code { get; set; } = string.Empty;
     public bool IsFirstLogin { get; set; } = false;
