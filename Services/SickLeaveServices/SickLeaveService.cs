@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.SickLeaveDto.Get;
@@ -7,6 +8,7 @@ using ClinicApi.Dtos.SickLeaveDto.Update;
 using ClinicApi.Models.Reponse;
 using ClinicApi.Models.SickLeaveModel;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ClinicApi.Services.SickLeaveServices;
 
@@ -90,6 +92,10 @@ public class SickLeaveService : ISickLeaveService
         try
         {
             var sickLeave = await _context.SickLeave.FirstOrDefaultAsync(e => e.Id == updateSickLeave.Id);
+            var OldData = await _context.SickLeave.FirstOrDefaultAsync(e => e.Id == updateSickLeave.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (sickLeave is null)
             {
                 throw new Exception($"The Id '{updateSickLeave.Id}'Is Not Founde...");

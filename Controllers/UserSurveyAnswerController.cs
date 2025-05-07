@@ -52,15 +52,15 @@ namespace ClinicApi.Controllers
         [Route("AddnewUserSurveyNoPortal")]
         public async Task<ActionResult<List<InsertUserSurveyAnswerNoPortalDto>>> AddnewUserSurveyNoPortal(InsertUserSurveyAnswerNoPortalDto newUserSurvey)
         {
-            await _auditService.PostAuditWuthNoToken($"Insert UserSurveyAnswer For PersonId '{newUserSurvey.PersonId + " With AnswerId " + newUserSurvey.SurveyAnswerId + "For QuesId " + newUserSurvey.SurveyQuestionId}'  ");
+            await _auditService.PostAuditWuthNoToken($"Insert UserSurveyAnswer For PersonId '{newUserSurvey.PersonId + " With AnswerId " + newUserSurvey.SurveyAnswerId + "For QuesId " + newUserSurvey.SurveyQuestionId}'  ", newUserSurvey.PersonId.ToString());
             return Ok(await _surveyService.AddNewUserSurveyAnswerNoPortal(newUserSurvey));
         }
         [HttpPost]
         [Route("EditUserSurveyAnswer")]
         public async Task<ActionResult<UpdateUserSurveyAnswerDto>> UpdateUserSurvey(UpdateUserSurveyAnswerDto updateUserSurvey)
         {
-            await _auditService.PostAudit($"Update UserSurveyAnswer With Id '{updateUserSurvey.Id + " For PersonId " + updateUserSurvey.PersonId + " To AnsId " + updateUserSurvey.SurveyAnswerId + " For QuesId " + updateUserSurvey.SurveyQuestionId}' By User ");
             var response = await _surveyService.UpdateUserSurveyAnswer(updateUserSurvey);
+            await _auditService.PutAudit($"Update UserSurveyAnswer With Id '{updateUserSurvey.Id + " For PersonId " + updateUserSurvey.PersonId + " To AnsId " + updateUserSurvey.SurveyAnswerId + " For QuesId " + updateUserSurvey.SurveyQuestionId}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

@@ -51,8 +51,8 @@ namespace ClinicApi.Controllers
         [Route("EditTime")]
         public async Task<ActionResult<GetDoctorAvailbleTimeDto>> UpdateTime(UpdateDoctorAvailbleTimeDto updateTime)
         {
-            await _auditService.PostAudit($"Update DoctorAvailbleTime with Id '{updateTime.Id + " To StartEndDate " + updateTime.StartDate + ' ' + updateTime.EndDate}' By User ");
             var response = await _doctorAvailbleTimeService.UpdateTime(updateTime);
+            await _auditService.PutAudit($"Update DoctorAvailbleTime with Id '{updateTime.Id + " To StartEndDate " + updateTime.StartDate + ' ' + updateTime.EndDate}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
@@ -61,8 +61,8 @@ namespace ClinicApi.Controllers
         [Route("EditIsActive")]
         public async Task<ActionResult<List<GetDoctorAvailbleTimeDto>>> UpdateIsActive(UpdateDoctorIsActive updateTime)
         {
-            await _auditService.PostAudit($"Update DoctorAvailbleTime with Id '{updateTime.Id + " Change IsActive To " + updateTime.IsActive}' By User ");
             var response = await _doctorAvailbleTimeService.UpdateIsActive(updateTime);
+            await _auditService.PutAudit($"Update DoctorAvailbleTime with Id '{updateTime.Id + " Change IsActive To " + updateTime.IsActive}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

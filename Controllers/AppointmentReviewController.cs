@@ -49,8 +49,8 @@ namespace ClinicApi.Controllers
         [Route("EditAppointmentReview")]
         public async Task<ActionResult<GetAppointmentReviewDto>> UpdateAppointmentReview(UpdateAppointmentReview_Dto updateAppointment)
         {
-            await _auditService.PostAudit($"Update Appointment Review with Id '{updateAppointment.Id + " To ApponitmentReview " + updateAppointment.Review}' By User ");
             var response = await _appointmentReview.UpdateAppointmentReview(updateAppointment);
+            await _auditService.PutAudit($"Update Appointment Review with Id '{updateAppointment.Id + " To ApponitmentReview " + updateAppointment.Review}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

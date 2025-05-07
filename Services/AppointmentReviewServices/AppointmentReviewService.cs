@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.ApoointmentReviewDto.Get;
@@ -7,6 +8,7 @@ using ClinicApi.Dtos.ApoointmentReviewDto.Update;
 using ClinicApi.Models.AppintmentReviewModel;
 using ClinicApi.Models.Reponse;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ClinicApi.Services.AppointmentReviewServices;
 
@@ -91,6 +93,10 @@ public class AppointmentReviewService : IAppointmentReviewService
         try
         {
             var appointmentReview = await _context.AppointmentReview.FirstOrDefaultAsync(e => e.Id == updateAppointmentReview.Id);
+            var OldData = await _context.AppointmentReview.FirstOrDefaultAsync(e => e.Id == updateAppointmentReview.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (appointmentReview is null)
             {
                 throw new Exception($"The Id '{updateAppointmentReview.Id}'Is Not Founde...");

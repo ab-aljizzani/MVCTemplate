@@ -44,8 +44,8 @@ namespace ClinicApi.Controllers
         [Route("EditRiskLevel")]
         public async Task<ActionResult<GetRiskLevelDto>> UpdateRiskLevel(UpdateRiskLevelDto updateRiskLevel)
         {
-            await _auditService.PostAudit($"Update RiskLevel For '{updateRiskLevel.Id + " To " + updateRiskLevel.Risk}' By User ");
             var response = await _riskLevel.UpdateRisk(updateRiskLevel);
+            await _auditService.PutAudit($"Update RiskLevel For '{updateRiskLevel.Id + " To " + updateRiskLevel.Risk}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

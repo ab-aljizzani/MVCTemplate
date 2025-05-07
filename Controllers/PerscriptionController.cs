@@ -51,8 +51,8 @@ namespace ClinicApi.Controllers
         [Route("EditPerscription")]
         public async Task<ActionResult<AppointmentStatusDto>> UpdatePerscription(UpdatePerscriptionDto updatePerscriptionDto)
         {
-            await _auditService.PostAudit($"Update Perscription with Id '{updatePerscriptionDto.Id + " PerscriptionName " + updatePerscriptionDto.PerscriptionName} By User ");
             var response = await _appointmentService.UpdatePerscrition(updatePerscriptionDto);
+            await _auditService.PutAudit($"Update Perscription with Id '{updatePerscriptionDto.Id + " PerscriptionName " + updatePerscriptionDto.PerscriptionName} By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

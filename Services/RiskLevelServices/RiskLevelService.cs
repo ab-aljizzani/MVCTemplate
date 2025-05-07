@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.RiskLevelDto.Get;
@@ -7,6 +8,7 @@ using ClinicApi.Dtos.RiskLevelDto.Update;
 using ClinicApi.Models.Reponse;
 using ClinicApi.Models.RiskLevelModel;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ClinicApi.Services.RiskLevelServices;
 
@@ -78,6 +80,10 @@ public class RiskLevelService : IRiskLevelService
         try
         {
             var risk = await _context.RiskLevel.FirstOrDefaultAsync(e => e.Id == updateRisk.Id);
+            var OldData = await _context.RiskLevel.FirstOrDefaultAsync(e => e.Id == updateRisk.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (risk is null)
             {
                 throw new Exception($"The Id '{updateRisk.Id}'Is Not Founde...");

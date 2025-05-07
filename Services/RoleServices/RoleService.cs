@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.RoleDto;
@@ -6,6 +7,7 @@ using ClinicApi.Dtos.RoleDto.Update;
 using ClinicApi.Models.Reponse;
 using ClinicApi.Models.Role;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ClinicApi.Services.RoleServices;
 
@@ -89,6 +91,10 @@ public class RoleService : IRoleService
         try
         {
             var role = await _context.Role.FirstOrDefaultAsync(e => e.Id == updateRole.Id);
+            var OldData = await _context.Role.FirstOrDefaultAsync(e => e.Id == updateRole.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (role is null)
             {
                 throw new Exception($"The Id '{updateRole.Id}'Is Not Founde...");

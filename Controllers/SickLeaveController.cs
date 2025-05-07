@@ -50,8 +50,8 @@ namespace ClinicApi.Controllers
         [Route("EditSickLeave")]
         public async Task<ActionResult<GetSickLeaveDto>> UpdateSickLeave(UpdateSickLeaveDto updateSickLeave)
         {
-            await _auditService.PostAudit($"Update SickLeave For '{updateSickLeave.Id + " To " + updateSickLeave.StartDate}' By User ");
             var response = await _sickLeave.UpdateSickLeave(updateSickLeave);
+            await _auditService.PutAudit($"Update SickLeave For '{updateSickLeave.Id + " To " + updateSickLeave.StartDate}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

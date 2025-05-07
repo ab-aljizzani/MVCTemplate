@@ -1,10 +1,12 @@
 using System;
+using System.Text;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.PersonModelDto;
 using ClinicApi.Models.PersonModel;
 using ClinicApi.Models.Reponse;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ClinicApi.Services.PersonServices;
 
@@ -124,6 +126,10 @@ public class PersonService : IPersonService
         try
         {
             var person = await _context.Person.FirstOrDefaultAsync(z => z.Id == updatePerson.Id);
+            var OldData = await _context.Person.FirstOrDefaultAsync(e => e.Id == updatePerson.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (person is null)
             {
                 throw new Exception($"The Id '{updatePerson.Id}'Is Not Founde...");

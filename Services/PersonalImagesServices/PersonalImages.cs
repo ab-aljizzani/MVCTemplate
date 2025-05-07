@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Data.PersonalImagesModelDto;
@@ -6,6 +7,7 @@ using ClinicApi.Dtos.PersonalImagesModelDto;
 using ClinicApi.Models.PersonalImagesModel;
 using ClinicApi.Models.Reponse;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 
 namespace ClinicApi.Services.PersonalImagesServices;
@@ -128,6 +130,10 @@ public class PersonalImages : IPersonalImages
         try
         {
             var personalImg = await _context.PersonalImg.FirstOrDefaultAsync(z => z.Id == updatePersonalImages.Id);
+            var OldData = await _context.PersonalImg.FirstOrDefaultAsync(e => e.Id == updatePersonalImages.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (personalImg is null)
             {
                 throw new Exception($"The Id '{updatePersonalImages.Id}'Is Not Founde...");

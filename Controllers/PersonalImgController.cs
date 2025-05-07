@@ -43,8 +43,8 @@ namespace ClinicApi.Controllers
         [Route("EditPersonalImg")]
         public async Task<ActionResult<PersonalImgDto>> UpdatePersonalImg(UpdatePersonalImgDto updatePersonalImg)
         {
-            await _auditService.PostAudit($"Update PersonalImg '{updatePersonalImg.Id}' By User ");
             var response = await _personalImages.UpdatePersonalImages(updatePersonalImg);
+            await _auditService.PutAudit($"Update PersonalImg '{updatePersonalImg.Id}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

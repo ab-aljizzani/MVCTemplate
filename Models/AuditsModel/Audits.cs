@@ -11,6 +11,8 @@ public class Audits
     public string BaseUrl { get; set; } = string.Empty;
     public string EndPoint { get; set; } = string.Empty;
     public string AuditDesc { get; set; } = string.Empty;
+    public string AuditOldData { get; set; } = string.Empty;
+    public string TableName { get; set; } = string.Empty;
     public DateTime AuditTime { get; set; } = DateTime.Now;
     public string AuditIp { get; set; } = string.Empty;
 }

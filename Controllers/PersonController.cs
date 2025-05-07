@@ -47,7 +47,7 @@ namespace ClinicApi.Controllers
         [Route("GetPersonsByNationalId")]
         public async Task<ActionResult<string>> GetPersonsByNationalId(string id)
         {
-            await _auditService.PostAuditWuthNoToken($"View Single Person By National Id With National Id Number '{id}'");
+            await _auditService.PostAuditWuthNoToken($"View Single Person By National Id With National Id Number '{id}'", id);
             return Ok(await _personSerice.GetPersonByNationalId(id));
         }
         [HttpGet]
@@ -71,7 +71,8 @@ namespace ClinicApi.Controllers
         public async Task<ActionResult<UpdatePersonDto>> UpdatePerson(UpdatePersonDto updatePerson)
         {
             var person = JsonConvert.SerializeObject(updatePerson);
-            await _auditService.PostAudit($"Update Person '  {person}  ' By User ");
+            var response = await _personSerice.UpdatePerson(updatePerson);
+            await _auditService.PutAudit($"Update Person '  {person}  ' By User ", response.OldData);
             // var userEntity = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "EntityID");
             // var role = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "Role");
             // if (role.Value.ToString() != "SuperAdmin" && role.Value.ToString() != "PortalAdmin")
@@ -79,7 +80,6 @@ namespace ClinicApi.Controllers
             // if (int.Parse(userEntity.Value.ToString()) != updatePerson.EntityId)
             //     return BadRequest("Person Entity Must Match With Your Entity");
             // }
-            var response = await _personSerice.UpdatePerson(updatePerson);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

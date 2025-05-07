@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj": {}
+    "c:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj": {
+    "c:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj",
+        "projectUniqueName": "c:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj",
         "projectName": "ClinicApi",
-        "projectPath": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj",
+        "projectPath": "c:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj",
         "packagesPath": "C:\\Users\\abalj\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\obj\\",
+        "outputPath": "c:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

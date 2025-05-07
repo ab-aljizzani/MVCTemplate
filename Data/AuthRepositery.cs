@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using AutoMapper;
 using ClinicApi.Dtos.DashboardUserDto;
 using ClinicApi.Dtos.DashboardUserDto.Insert;
@@ -13,6 +14,7 @@ using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.Reponse;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace ClinicApi.Data;
 
@@ -393,6 +395,10 @@ public class AuthRepositery : IAuthRepositery
         try
         {
             var portalUser = await _context.PortalUser.FirstOrDefaultAsync(z => z.Id == passwordExpiredDto.Id);
+            var OldData = await _context.PortalUser.FirstOrDefaultAsync(e => e.Id == passwordExpiredDto.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (portalUser is null)
             {
                 throw new Exception($"The Id '{passwordExpiredDto.Id}'Is Not Founde...");
@@ -428,6 +434,10 @@ public class AuthRepositery : IAuthRepositery
         try
         {
             var portalUser = await _context.PortalUser.FirstOrDefaultAsync(z => z.Id == passwordInitialDto.Id);
+            var OldData = await _context.PortalUser.FirstOrDefaultAsync(e => e.Id == passwordInitialDto.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (portalUser is null)
             {
                 throw new Exception($"The Id '{passwordInitialDto.Id}'Is Not Founde...");
@@ -463,6 +473,10 @@ public class AuthRepositery : IAuthRepositery
         try
         {
             var portalUser = await _context.PortalUser.FirstOrDefaultAsync(z => z.Id == updatePortalUser.Id);
+            var OldData = await _context.PortalUser.FirstOrDefaultAsync(e => e.Id == updatePortalUser.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (portalUser is null)
             {
                 throw new Exception($"The Id '{updatePortalUser.Id}'Is Not Founde...");
@@ -708,6 +722,10 @@ public class AuthRepositery : IAuthRepositery
         try
         {
             var portalUser = await _context.PortalUser.FirstOrDefaultAsync(z => z.Id == updatePortalUser.Id);
+            var OldData = await _context.PortalUser.FirstOrDefaultAsync(e => e.Id == updatePortalUser.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (portalUser is null)
             {
                 throw new Exception($"The Id '{updatePortalUser.Id}'Is Not Founde...");

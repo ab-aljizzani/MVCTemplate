@@ -51,8 +51,9 @@ namespace ClinicApi.Controllers
         [Route("EditAppointment")]
         public async Task<ActionResult<AppointmentDto>> UpdateAppointment(UpdateAppointmentDto updateAppointment)
         {
-            await _auditService.PostAudit($"Update Appointment with Id '{updateAppointment.Id + " To ApponitmentDate " + updateAppointment.ApponitmentDate + " And StartTime" + updateAppointment.AppointmentStartTime + " And EndTime " + updateAppointment.AppointmentEndTime}' By User ");
             var response = await _appointmentService.UpdateAppointment(updateAppointment);
+            // await _auditService.PostAudit($"Update Appointment with Id '{updateAppointment.Id + " To ApponitmentDate " + updateAppointment.ApponitmentDate + " And StartTime" + updateAppointment.AppointmentStartTime + " And EndTime " + updateAppointment.AppointmentEndTime}' By User ");
+            await _auditService.PutAudit($"Update Appointment with Id '{updateAppointment.Id + " To ApponitmentDate " + updateAppointment.ApponitmentDate + " And StartTime" + updateAppointment.AppointmentStartTime + " And EndTime " + updateAppointment.AppointmentEndTime}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
@@ -62,8 +63,8 @@ namespace ClinicApi.Controllers
         [Route("EditIsAppIsSurvInserted")]
         public async Task<ActionResult<AppointmentDto>> EditIsAppIsSurvInserted(UpdateAppointmentIsSurveyInsertedDto updateAppointment)
         {
-            await _auditService.PostAuditWuthNoToken($"Update Appointment IsSurvInserted with Appointment Id '{updateAppointment.Id + " To IsSurvInserted " + updateAppointment.IsSurveyInserted}'");
             var response = await _appointmentService.UpdateAppointmentIsSurvInserted(updateAppointment);
+            await _auditService.PutAuditWithNoToken($"Update Appointment IsSurvInserted with Appointment Id '{updateAppointment.Id + " To IsSurvInserted " + updateAppointment.IsSurveyInserted}'", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
@@ -72,8 +73,8 @@ namespace ClinicApi.Controllers
         [Route("EditIsPersonShowup")]
         public async Task<ActionResult<AppointmentDto>> EditIsPersonShowup(UpdateIsPersonShowup updateAppointment)
         {
-            await _auditService.PostAudit($"Update Appointment IsPersonShowUp with Appointment Id '{updateAppointment.Id + " To IsPersonShowUp " + updateAppointment.IsPersonShowUp}' By User ");
             var response = await _appointmentService.UpdateIsPersonShowUp(updateAppointment);
+            await _auditService.PutAudit($"Update Appointment IsPersonShowUp with Appointment Id '{updateAppointment.Id + " To IsPersonShowUp " + updateAppointment.IsPersonShowUp}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
@@ -82,8 +83,8 @@ namespace ClinicApi.Controllers
         [Route("EditAppointmentReview")]
         public async Task<ActionResult<AppointmentDto>> EditAppointmentReview(UpdateAppointmentReviewDto updateAppointment)
         {
-            await _auditService.PostAudit($"Update Appointment Review with Appointment Id '{updateAppointment.Id}' By User ");
             var response = await _appointmentService.UpdateAppointmentReview(updateAppointment);
+            await _auditService.PutAudit($"Update Appointment Review with Appointment Id '{updateAppointment.Id}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
@@ -92,8 +93,8 @@ namespace ClinicApi.Controllers
         [Route("EditAppointmentDoctorReview")]
         public async Task<ActionResult<AppointmentDto>> EditAppointmentDoctorReview(UpdateAppointmentDoctorReviewDto updateAppointment)
         {
-            await _auditService.PostAudit($"Update Appointment Doctor Review with Appointment Id '{updateAppointment.Id + " To Review " + updateAppointment.AppointmentDoctorReview}' By User ");
             var response = await _appointmentService.UpdateAppointmentDoctorReview(updateAppointment);
+            await _auditService.PutAudit($"Update Appointment Doctor Review with Appointment Id '{updateAppointment.Id + " To Review " + updateAppointment.AppointmentDoctorReview}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
@@ -102,8 +103,8 @@ namespace ClinicApi.Controllers
         [Route("EditSurvTypeIdByReqId")]
         public async Task<ActionResult<AppointmentDto>> EditSurvTypeIdByReqId(UpdateAppointmentSurveyTypeIdDto updateAppointment)
         {
-            await _auditService.PostAudit($"Set Appointment SurveyTypeId with Appointment Id '{updateAppointment.Id + " To SurveyTypeId " + updateAppointment.SurveyTypeId}' By User ");
             var response = await _appointmentService.UpdateSurvTypeIdByReqId(updateAppointment);
+            await _auditService.PutAudit($"Set Appointment SurveyTypeId with Appointment Id '{updateAppointment.Id + " To SurveyTypeId " + updateAppointment.SurveyTypeId}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

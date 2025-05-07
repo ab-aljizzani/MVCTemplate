@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.SurveyDto.Get;
@@ -8,6 +9,7 @@ using ClinicApi.Models.Reponse;
 using ClinicApi.Models.SurveyModel;
 using ClinicApi.ViewModel.Survey;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ClinicApi.Services.Survey;
 
@@ -400,6 +402,10 @@ public class SurveyService : ISurveyService
         try
         {
             var survey = await _context.SurveyType.FirstOrDefaultAsync(z => z.Id == updateSurvey.Id);
+            var OldData = await _context.SurveyType.FirstOrDefaultAsync(e => e.Id == updateSurvey.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (survey is null)
             {
                 throw new Exception($"The Id '{updateSurvey.Id}'Is Not Founde...");
@@ -422,6 +428,10 @@ public class SurveyService : ISurveyService
         try
         {
             var surveyAnswer = await _context.SurveyAnswer.FirstOrDefaultAsync(z => z.Id == updateSurveyAnswer.Id);
+            var OldData = await _context.SurveyAnswer.FirstOrDefaultAsync(e => e.Id == updateSurveyAnswer.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (surveyAnswer is null)
             {
                 throw new Exception($"The Id '{updateSurveyAnswer.Id}'Is Not Founde...");
@@ -444,6 +454,10 @@ public class SurveyService : ISurveyService
         try
         {
             var surveyAnswerType = await _context.SurveyAnswerType.FirstOrDefaultAsync(z => z.Id == updateSurveyAnswerType.Id);
+            var OldData = await _context.SurveyAnswerType.FirstOrDefaultAsync(e => e.Id == updateSurveyAnswerType.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (surveyAnswerType is null)
             {
                 throw new Exception($"The Id '{updateSurveyAnswerType.Id}'Is Not Founde...");
@@ -466,6 +480,10 @@ public class SurveyService : ISurveyService
         try
         {
             var surveyQuestion = await _context.SurveyQuestion.FirstOrDefaultAsync(z => z.Id == updateSurveyQuestion.Id);
+            var OldData = await _context.SurveyQuestion.FirstOrDefaultAsync(e => e.Id == updateSurveyQuestion.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (surveyQuestion is null)
             {
                 throw new Exception($"The Id '{updateSurveyQuestion.Id}'Is Not Founde...");
@@ -488,6 +506,10 @@ public class SurveyService : ISurveyService
         try
         {
             var userSurveyAnswer = await _context.UserSurveyAnswer.FirstOrDefaultAsync(z => z.Id == updateUserSurveyAnswer.Id);
+            var OldData = await _context.UserSurveyAnswer.FirstOrDefaultAsync(e => e.Id == updateUserSurveyAnswer.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (userSurveyAnswer is null)
             {
                 throw new Exception($"The Id '{updateUserSurveyAnswer.Id}'Is Not Founde...");
@@ -545,6 +567,10 @@ public class SurveyService : ISurveyService
         try
         {
             var userSurveyList = await _context.UserSurveyList.FirstOrDefaultAsync(z => z.Id == updateSurveyList.Id);
+            var OldData = await _context.UserSurveyList.FirstOrDefaultAsync(e => e.Id == updateSurveyList.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (userSurveyList is null)
             {
                 throw new Exception($"The Id '{updateSurveyList.Id}'Is Not Founde...");
@@ -589,6 +615,10 @@ public class SurveyService : ISurveyService
         try
         {
             var userSurveyList = await _context.UserSurveyList.FirstOrDefaultAsync(z => z.Id == updateSurveyList.Id);
+            var OldData = await _context.UserSurveyList.FirstOrDefaultAsync(e => e.Id == updateSurveyList.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (userSurveyList is null)
             {
                 throw new Exception($"The Id '{updateSurveyList.Id}'Is Not Founde...");
@@ -643,6 +673,10 @@ public class SurveyService : ISurveyService
         try
         {
             var userSurveyList = await _context.UserSurveyList.FirstOrDefaultAsync(z => z.Id == updateSurvey.Id);
+            var OldData = await _context.UserSurveyList.FirstOrDefaultAsync(e => e.Id == updateSurvey.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (userSurveyList is null)
             {
                 throw new Exception($"The Id '{updateSurvey.Id}'Is Not Founde...");
