@@ -12,6 +12,7 @@ public class GetCustomRequestDto
     public int RequestStatusId { get; set; }
     public int RiskLevelId { get; set; }
     public string Status { get; set; } = string.Empty;
+    public string BadgeColor { get; set; } = string.Empty;
     public string Type { get; set; } = string.Empty;
     public string AppsentReason { get; set; } = string.Empty;
     public string ApponitmentDate { get; set; } = string.Empty;

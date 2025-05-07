@@ -10,4 +10,5 @@ namespace ClinicApi.Services.Seed;
 public interface ISeedService
 {
     Task<ServiceResponse<string>> SeedAll();
+    Task<ServiceResponse<string>> DeleteAll();
 }

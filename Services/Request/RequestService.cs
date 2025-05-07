@@ -153,6 +153,7 @@ public class RequestService : IRequestService
             r.PersonId,
             r.Appointment.RiskLevelId,
             r.RequestStatus.Status,
+            r.RequestStatus.BadgeColor,
             r.RequestType.Type,
             r.AppsentReason,
             r.Appointment.ApponitmentDate,

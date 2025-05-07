@@ -64,7 +64,7 @@ public class AppointmentReviewService : IAppointmentReviewService
     {
         var serviceResponse = new ServiceResponse<List<object>>();
         // var dbContext = await _context.AppointmentReview.Where(e => e.AppointmentId == id).Include(e => e.PortalUser).ToListAsync();
-        var dbContext = await _context.AppointmentReview.Where(e => e.AppointmentId == id && e.PortalUserId == e.PortalUser.Id && e.PortalUser.RoleId == e.PortalUser.Role.Id).Select(s => new { s.Review, s.ReviewDate, s.PortalUser.UserFullName, s.PortalUser.Role.RoleName }).ToListAsync();
+        var dbContext = await _context.AppointmentReview.Where(e => e.AppointmentId == id && e.PortalUserId == e.PortalUser.Id && e.PortalUser.RoleId == e.PortalUser.Role.Id).Select(s => new { s.Review, s.ReviewDate, s.PortalUser.UserFullName, s.PortalUser.Role.RoleName, s.PortalUser.Role.RoleArabName }).ToListAsync();
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
