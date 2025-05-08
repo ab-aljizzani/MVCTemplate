@@ -30,7 +30,7 @@ namespace ClinicApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ZoneDto>> GetSingle(int id)
         {
-            // await _auditService.PostAudit($"View Single Zone By Id With Id Number '{id}' For User");
+            await _auditService.PostAudit($"View Single Zone By Id With Id Number '{id}' For User");
             return Ok(await _zoneSerice.GetZoneByID(id));
         }
         [HttpPost]
@@ -43,8 +43,8 @@ namespace ClinicApi.Controllers
         [Route("EditZone")]
         public async Task<ActionResult<ZoneDto>> UpdateZone(UpdateZoneDto updateZone)
         {
-            await _auditService.PostAudit($"Update Zone For '{updateZone.Id}' By User ");
             var response = await _zoneSerice.UpdateZone(updateZone);
+            await _auditService.PutAudit($"Update Zone For '{updateZone.Id}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

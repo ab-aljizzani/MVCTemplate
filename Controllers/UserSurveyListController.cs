@@ -67,8 +67,8 @@ namespace ClinicApi.Controllers
         [Route("EditUserSurveyList")]
         public async Task<ActionResult<UpdateUserSurveyListDto>> UpdateUserSurveyList(UpdateUserSurveyListDto updateSurvey)
         {
-            await _auditService.PostAudit($"Update UserSurveyList For '{updateSurvey}' By User ");
             var response = await _surveyService.UpdateUserSurveyList(updateSurvey);
+            await _auditService.PutAudit($"Update UserSurveyList For '{updateSurvey}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
@@ -77,8 +77,8 @@ namespace ClinicApi.Controllers
         [Route("EditUserSurveyListScoreAndInserted")]
         public async Task<ActionResult<UpdateUserSurveyListScoreAndInserted>> EditUserSurveyListScoreAndInserted(UpdateUserSurveyListScoreAndInserted updateSurvey)
         {
-            await _auditService.PostAudit($"Update UserSurveyList For '{updateSurvey}' By User ");
             var response = await _surveyService.UpdateUserSurveyListScoreAndInserted(updateSurvey);
+            await _auditService.PutAudit($"Update UserSurveyList For '{updateSurvey}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
@@ -87,8 +87,8 @@ namespace ClinicApi.Controllers
         [Route("EditUserSurveyListPladgeApproved")]
         public async Task<ActionResult<UpdateUserSurveyListPladgeApproved>> EditUserSurveyListPladgeApproved(UpdateUserSurveyListPladgeApproved updateSurvey)
         {
-            await _auditService.PostAudit($"Update UserSurveyListPladgeApproved For '{updateSurvey}' By User ");
             var response = await _surveyService.UpdateUserSurveyListPladgeApproved(updateSurvey);
+            await _auditService.PutAudit($"Update UserSurveyListPladgeApproved For '{updateSurvey}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

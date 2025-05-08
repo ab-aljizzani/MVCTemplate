@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.DoctorAvailbleTimeDto;
@@ -7,6 +8,7 @@ using ClinicApi.Dtos.DoctorAvailbleTimeDto.Update;
 using ClinicApi.Models.DoctorAvailbleTimeModel;
 using ClinicApi.Models.Reponse;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ClinicApi.Services.DoctorAvailbleTimeServices;
 
@@ -90,6 +92,10 @@ public class DoctorAvailbleTimeService : IDoctorAvailbleTimeService
         try
         {
             var time = await _context.DoctorAvailbleTime.FirstOrDefaultAsync(e => e.Id == updateTime.Id);
+            var OldData = await _context.DoctorAvailbleTime.FirstOrDefaultAsync(e => e.Id == updateTime.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (time is null)
             {
                 throw new Exception($"The Id '{updateTime.Id}'Is Not Founde...");
@@ -111,6 +117,10 @@ public class DoctorAvailbleTimeService : IDoctorAvailbleTimeService
         try
         {
             var time = await _context.DoctorAvailbleTime.FirstOrDefaultAsync(e => e.Id == updateTime.Id);
+            var OldData = await _context.DoctorAvailbleTime.FirstOrDefaultAsync(e => e.Id == updateTime.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (time is null)
             {
                 throw new Exception($"The Id '{updateTime.Id}'Is Not Founde...");

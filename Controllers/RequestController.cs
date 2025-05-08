@@ -39,7 +39,7 @@ namespace ClinicApi.Controllers
         [Route("GetByPersonId")]
         public async Task<ActionResult<GetRequestDto>> GetByPersonId(int id)
         {
-            await _auditService.PostAuditWuthNoToken($"View Single Request By PersonId With PersonId Number '{id}'");
+            await _auditService.PostAuditWuthNoToken($"View Single Request By PersonId With PersonId Number '{id}'", id.ToString());
             return Ok(await _requestService.GetRequestByPersonId(id));
         }
         [AllowAnonymous]
@@ -47,7 +47,7 @@ namespace ClinicApi.Controllers
         [Route("GetRequestByPersonIdAndReqId")]
         public async Task<ActionResult<GetRequestDto>> GetRequestByPersonIdAndReqId(int id, int reqId)
         {
-            await _auditService.PostAuditWuthNoToken($"View Single Request By PersonId And RequestId With Id's Numbera '{id + " " + reqId}'");
+            await _auditService.PostAuditWuthNoToken($"View Single Request By PersonId And RequestId With Id's Numbera '{id + " " + reqId}'", id.ToString());
             return Ok(await _requestService.GetRequestByPersonIdAndReqId(id, reqId));
         }
         [HttpPost]
@@ -60,8 +60,8 @@ namespace ClinicApi.Controllers
         [Route("EditRequest")]
         public async Task<ActionResult<UpdateRequestDto>> UpdateRequest(UpdateRequestDto updateRequest)
         {
-            await _auditService.PostAudit($"Update Request With ReqId '{updateRequest.Id + " To RequestStatusId " + updateRequest.RequestStatusId}' By User ");
             var response = await _requestService.UpdateRequest(updateRequest);
+            await _auditService.PutAudit($"Update Request With ReqId '{updateRequest.Id + " To RequestStatusId " + updateRequest.RequestStatusId}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
@@ -70,8 +70,8 @@ namespace ClinicApi.Controllers
         [Route("UpdateAppsentReason")]
         public async Task<ActionResult<UpdateRequestAppsentReasonDto>> UpdateRequestAppsentReason(UpdateRequestAppsentReasonDto updateRequest)
         {
-            await _auditService.PostAudit($"Update AppsentReason With ReqId '{updateRequest.Id + " To " + updateRequest.AppsentReason}' By User ");
             var response = await _requestService.UpdateRequestAppsentReason(updateRequest);
+            await _auditService.PutAudit($"Update AppsentReason With ReqId '{updateRequest.Id + " To " + updateRequest.AppsentReason}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
@@ -80,8 +80,8 @@ namespace ClinicApi.Controllers
         [Route("UpdateReqStatusId")]
         public async Task<ActionResult<UpdateRequestStatusIdDto>> UpdateReqStatusId(UpdateRequestStatusIdDto updateRequest)
         {
-            await _auditService.PostAudit($"Update UpdateReqStatusId With ReqId '{updateRequest.Id + " And reqStatusId To" + updateRequest.RequestStatusId}' By User ");
             var response = await _requestService.UpdateRequestStatusId(updateRequest);
+            await _auditService.PutAudit($"Update UpdateReqStatusId With ReqId '{updateRequest.Id + " And reqStatusId To" + updateRequest.RequestStatusId}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
@@ -90,8 +90,8 @@ namespace ClinicApi.Controllers
         [Route("UpdateReqSurveyInserted")]
         public async Task<ActionResult<UpdateRequestStatusIdDto>> UpdateReqSurveyInserted(UpdateRequestSurveyInsertedDto updateRequest)
         {
-            await _auditService.PostAudit($"Update UpdateReqSurveyInserted With ReqId '{updateRequest.Id + " And reqSurveyInserted To" + updateRequest.IsSurveyInserted}' By User ");
             var response = await _requestService.UpdateRequesIsSurveyInserted(updateRequest);
+            await _auditService.PutAudit($"Update UpdateReqSurveyInserted With ReqId '{updateRequest.Id + " And reqSurveyInserted To" + updateRequest.IsSurveyInserted}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
@@ -100,8 +100,8 @@ namespace ClinicApi.Controllers
         [Route("UpdateReqAppointmentId")]
         public async Task<ActionResult<UpdateReqAppointmentIdDto>> UpdateReqAppointmentId(UpdateReqAppointmentIdDto updateRequest)
         {
-            await _auditService.PostAudit($"Update UpdateReqAppointmentId With ReqId '{updateRequest.Id + " And AppointmentId To" + updateRequest.AppointmentId}' By User ");
             var response = await _requestService.UpdateReqAppointmentId(updateRequest);
+            await _auditService.PutAudit($"Update UpdateReqAppointmentId With ReqId '{updateRequest.Id + " And AppointmentId To" + updateRequest.AppointmentId}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

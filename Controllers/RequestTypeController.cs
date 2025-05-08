@@ -44,8 +44,8 @@ namespace ClinicApi.Controllers
         [Route("EditRequestType")]
         public async Task<ActionResult<UpdateRequestTypeDto>> UpdateRequestType(UpdateRequestTypeDto updateRequest)
         {
-            await _auditService.PostAudit($"Update RequestType For '{updateRequest.Type}' By User ");
             var response = await _requestService.UpdateRequestType(updateRequest);
+            await _auditService.PutAudit($"Update RequestType For '{updateRequest.Type}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

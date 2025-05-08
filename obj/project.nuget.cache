@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "zSek8sv6+pY=",
   "success": true,
   "projectFilePath": "C:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\ClinicApi.csproj",
+=======
+  "dgSpecHash": "0j0u/hvVhaY=",
+  "success": true,
+  "projectFilePath": "c:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj",
+>>>>>>> d2019757b6a2cdf30b8b7e2191abc7c7583028ac
   "expectedPackageFiles": [
     "C:\\Users\\557657\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\557657\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",

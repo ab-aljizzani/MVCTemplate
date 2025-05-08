@@ -29,7 +29,7 @@ namespace ClinicApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GetEntityDto>> GetSingle(int id)
         {
-            // await _auditService.PostAudit("View Single Entity By Id For User");
+            await _auditService.PostAudit($"View Single Entity By Id '{id}' For User");
             return Ok(await _entityService.GetEntityByID(id));
         }
         [HttpPost]
@@ -42,8 +42,9 @@ namespace ClinicApi.Controllers
         [Route("EditEntity")]
         public async Task<ActionResult<GetEntityDto>> UpdateEntity(UpdateEntityDto updateEntity)
         {
-            await _auditService.PostAudit($"Update Entity With Id '{updateEntity.Id + " To " + updateEntity.EntityName}' By User ");
             var response = await _entityService.UpdateEntity(updateEntity);
+            // await _auditService.PostAudit($"Update Entity With Id '{updateEntity.Id + " To " + updateEntity.EntityName}' By User ");
+            await _auditService.PutAudit($"Update Entity With Id '{updateEntity.Id + " To " + updateEntity.EntityName}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

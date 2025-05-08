@@ -69,7 +69,7 @@ namespace ClinicApi.Controllers
             {
                 return BadRequest(response);
             }
-            await _auditService.PostAuditWuthNoToken($"User With NatuinalId Num '{request.Username}' is LoggedIn");
+            await _auditService.PostAuditWuthNoToken($"User With NatuinalId Num '{request.Username}' is LoggedIn", request.Username);
             return Ok(response.Data);
         }
         [AllowAnonymous]
@@ -81,7 +81,7 @@ namespace ClinicApi.Controllers
             {
                 return BadRequest(response);
             }
-            await _auditService.PostAuditWuthNoToken($"User With NatuinalId Num '{request.Username}' is LoggedIn");
+            await _auditService.PostAuditWuthNoToken($"User With NatuinalId Num '{request.Username}' is LoggedIn", request.Username);
             return Ok(response.Data);
         }
         [AllowAnonymous]
@@ -93,14 +93,14 @@ namespace ClinicApi.Controllers
             {
                 return BadRequest(response);
             }
-            await _auditService.PostAuditWuthNoToken($"User With NatuinalId Num '{request.Username}' is LoggedIn");
+            await _auditService.PostAuditWuthNoToken($"User With NatuinalId Num '{request.Username}' is LoggedIn", request.Username);
             return Ok(response.Data);
         }
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult<ServiceResponse<int>>> Register(InsertPortalUserDto request)
         {
-            // await _auditService.PostAudit($"Insert PortalUser '{request.Id + " With NationalId " + request.NationalId}' By User ");
+            await _auditService.PostAudit($"Insert PortalUser '{request.Id + " With NationalId " + request.NationalId}' By User ");
             // var user = _mapper.Map<PortalUser>(request);
             var response = await _authRepo.Register(request, request.Password);
             if (!response.Success)
@@ -114,7 +114,7 @@ namespace ClinicApi.Controllers
         [Route("IamRegister")]
         public async Task<ActionResult<ServiceResponse<int>>> IamRegister(InsertPortalUserDto request)
         {
-            // await _auditService.PostAudit($"Insert PortalUser '{request.Id + " With NationalId " + request.NationalId}' By User ");
+            await _auditService.PostAuditWuthNoToken($"Insert PortalUser '{request.Id + " With NationalId " + request.NationalId}' By User ", request.NationalId);
             // var user = _mapper.Map<PortalUser>(request);
             var response = await _authRepo.IamRegister(request);
             if (!response.Success)
@@ -127,8 +127,8 @@ namespace ClinicApi.Controllers
         [Route("EditPassword")]
         public async Task<ActionResult<UpdatePortalUserDto>> UpdatePortalUser(UpdatePortalUserDto updatePortalUser)
         {
-            await _auditService.PostAudit("Update PortalUser Password By User ");
             var response = await _authRepo.UpdatePortalUser(updatePortalUser);
+            await _auditService.PutAudit("Update PortalUser Password By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
@@ -167,8 +167,8 @@ namespace ClinicApi.Controllers
         [Route("UpdateUserRole")]
         public async Task<ActionResult<UpdatePortalUserRoleDto>> UpdateUserRole(UpdatePortalUserRoleDto updatePortalUserRole)
         {
-            await _auditService.PostAudit($"Update PortalUser Role With PortalUserId '{updatePortalUserRole.Id + " To RoleId " + updatePortalUserRole.RoleId}' By User ");
             var response = await _authRepo.UpdateUserRole(updatePortalUserRole);
+            await _auditService.PutAudit($"Update PortalUser Role With PortalUserId '{updatePortalUserRole.Id + " To RoleId " + updatePortalUserRole.RoleId}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

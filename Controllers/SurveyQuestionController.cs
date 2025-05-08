@@ -40,7 +40,7 @@ namespace ClinicApi.Controllers
         [Route("GetSurveyBySurvTypeId")]
         public async Task<ActionResult<List<GetSurveyQesAnswerDto>>> GetSurveyBySurvTypeId(int id)
         {
-            await _auditService.PostAuditWuthNoToken($"View All SurveyQuestion By SurveyTypeId With SurveyTypeId Number '{id}'");
+            await _auditService.PostAuditWuthNoToken($"View All SurveyQuestion By SurveyTypeId With SurveyTypeId Number '{id}'", id.ToString());
             return Ok(await _surveyService.GetSurveyQuestionBySurvTypeId(id));
         }
         [HttpGet]
@@ -60,8 +60,8 @@ namespace ClinicApi.Controllers
         [Route("EditSurveyQuestion")]
         public async Task<ActionResult<UpdateSurveyQuestionDto>> UpdateSurveyQuestion(UpdateSurveyQuestionDto updateSurveyQuestion)
         {
-            await _auditService.PostAudit($"Update SurveyQuestion For '{updateSurveyQuestion.Id + " To Ques " + updateSurveyQuestion.Question}' By User ");
             var response = await _surveyService.UpdateSurveyQuestion(updateSurveyQuestion);
+            await _auditService.PutAudit($"Update SurveyQuestion For '{updateSurveyQuestion.Id + " To Ques " + updateSurveyQuestion.Question}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

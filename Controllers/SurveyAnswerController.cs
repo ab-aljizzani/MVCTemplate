@@ -46,7 +46,7 @@ namespace ClinicApi.Controllers
         [Route("GetSurveyAnswerPointByID")]
         public async Task<ActionResult<List<GetSurveyAnswerDto>>> GetSurveyAnswerPointByID(int id)
         {
-            await _auditService.PostAuditWuthNoToken($"View Single SurveyAnswerPoints By AnswerId With Id Number '{id}' ");
+            await _auditService.PostAuditWuthNoToken($"View Single SurveyAnswerPoints By AnswerId With Id Number '{id}' ", id.ToString());
             return Ok(await _surveyService.GetSurveyAnswerPointByID(id));
         }
         [HttpPost]
@@ -59,8 +59,8 @@ namespace ClinicApi.Controllers
         [Route("Edit/SurveyAnswer")]
         public async Task<ActionResult<UpdateSurveyAnswerDto>> UpdateSurveyAnswer(UpdateSurveyAnswerDto updateSurveyAnswer)
         {
-            await _auditService.PostAudit($"Update SurveyAnswer For '{updateSurveyAnswer.Id + " To Answer " + updateSurveyAnswer.Answer}' By User ");
             var response = await _surveyService.UpdateSurveyAnswer(updateSurveyAnswer);
+            await _auditService.PutAudit($"Update SurveyAnswer For '{updateSurveyAnswer.Id + " To Answer " + updateSurveyAnswer.Answer}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

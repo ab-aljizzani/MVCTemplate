@@ -38,14 +38,14 @@ namespace ClinicApi.Controllers
         public async Task<ActionResult<List<DepartmentDto>>> GetDeptEntity()
         {
 
-            // await _auditService.PostAudit("View All Department By EntityId For User");
+            await _auditService.PostAudit($"View All Department By EntityId With Id For User");
             return Ok(await _entityService.GetDeptEntity());
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<DepartmentDto>> GetSingle(int id)
         {
 
-            await _auditService.PostAudit("View Single Department By Id For User");
+            await _auditService.PostAudit($"View Single Department By Id With id Number '{id}' For User");
             return Ok(await _entityService.GetDepartmentByID(id));
         }
         [HttpGet]
@@ -78,8 +78,8 @@ namespace ClinicApi.Controllers
         [Route("EditDept")]
         public async Task<ActionResult<GetEntityDto>> UpdateDepartment(UpdateDepartmentDot updateDepartment)
         {
-            await _auditService.PostAudit($"Update Department With Id '{updateDepartment.Id}' To '{updateDepartment.DepartmentName}' By User ");
             var response = await _entityService.UpdateDepartment(updateDepartment);
+            await _auditService.PutAudit($"Update Department With Id '{updateDepartment.Id}' To '{updateDepartment.DepartmentName}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

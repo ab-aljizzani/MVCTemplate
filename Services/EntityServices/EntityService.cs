@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Security.Claims;
+using System.Text;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.Entity;
@@ -13,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.JsonWebTokens;
+using Newtonsoft.Json;
 
 namespace ClinicApi.Services.Entity;
 
@@ -189,6 +191,10 @@ public class EntityService : IEntityService
         try
         {
             var department = await _context.Department.FirstOrDefaultAsync(e => e.Id == updateDepartment.Id);
+            var OldData = await _context.Department.FirstOrDefaultAsync(e => e.Id == updateDepartment.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (department is null)
             {
                 throw new Exception($"The Id '{updateDepartment.Id}'Is Not Founde...");
@@ -211,6 +217,10 @@ public class EntityService : IEntityService
         try
         {
             var entity = await _context.Entity.FirstOrDefaultAsync(e => e.Id == updateEnityt.Id);
+            var OldData = await _context.Entity.FirstOrDefaultAsync(e => e.Id == updateEnityt.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (entity is null)
             {
                 throw new Exception($"The Id '{updateEnityt.Id}'Is Not Founde...");

@@ -30,7 +30,7 @@ namespace ClinicApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<List<RoleDto>>> GetRoleById(int id)
         {
-            // await _auditService.PostAudit($"View Single Role By Id With Id Number '{id}' For User");
+            await _auditService.PostAudit($"View Single Role By Id With Id Number '{id}' For User");
             return Ok(await _roleService.GetRoleByID(id));
         }
         [HttpGet]
@@ -38,7 +38,7 @@ namespace ClinicApi.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<List<RoleDto>>> GetRoleByEngName(string id)
         {
-            // await _auditService.PostAudit($"View Single Role By Id With Id Number '{id}' For User");
+            await _auditService.PostAudit($"View Single Role By Name With Name '{id}' For User");
             return Ok(await _roleService.GetRoleByEngName(id));
         }
         [HttpPost]
@@ -51,8 +51,8 @@ namespace ClinicApi.Controllers
         [Route("EditRole")]
         public async Task<ActionResult<UpdateRoleDto>> UpdateRole(UpdateRoleDto updateRole)
         {
-            await _auditService.PostAudit($"Update Role For '{updateRole.Id + " To " + updateRole.RoleName}' By User ");
             var response = await _roleService.UpdateRole(updateRole);
+            await _auditService.PutAudit($"Update Role For '{updateRole.Id + " To " + updateRole.RoleName}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

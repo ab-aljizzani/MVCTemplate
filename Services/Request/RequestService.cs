@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.RequestDto.Get;
@@ -6,6 +7,7 @@ using ClinicApi.Dtos.RequestDto.Insert;
 using ClinicApi.Dtos.RequestDto.Update;
 using ClinicApi.Models.Reponse;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ClinicApi.Services.Request;
 
@@ -153,6 +155,7 @@ public class RequestService : IRequestService
             r.PersonId,
             r.Appointment.RiskLevelId,
             r.RequestStatus.Status,
+            r.RequestStatus.BadgeColor,
             r.RequestType.Type,
             r.AppsentReason,
             r.Appointment.ApponitmentDate,
@@ -235,6 +238,10 @@ public class RequestService : IRequestService
         try
         {
             var requestAppointmentId = await _context.Request.FirstOrDefaultAsync(z => z.Id == updateRequest.Id);
+            var OldData = await _context.Request.FirstOrDefaultAsync(e => e.Id == updateRequest.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (requestAppointmentId is null)
             {
                 throw new Exception($"The Id '{updateRequest.Id}'Is Not Founde...");
@@ -257,6 +264,10 @@ public class RequestService : IRequestService
         try
         {
             var requestSurveyInserted = await _context.Request.FirstOrDefaultAsync(z => z.Id == updateRequest.Id);
+            var OldData = await _context.Request.FirstOrDefaultAsync(e => e.Id == updateRequest.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (requestSurveyInserted is null)
             {
                 throw new Exception($"The Id '{updateRequest.Id}'Is Not Founde...");
@@ -279,6 +290,10 @@ public class RequestService : IRequestService
         try
         {
             var request = await _context.Request.FirstOrDefaultAsync(z => z.Id == updateRequest.Id);
+            var OldData = await _context.Entity.FirstOrDefaultAsync(e => e.Id == updateRequest.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (request is null)
             {
                 throw new Exception($"The Id '{updateRequest.Id}'Is Not Founde...");
@@ -301,6 +316,10 @@ public class RequestService : IRequestService
         try
         {
             var request = await _context.Request.FirstOrDefaultAsync(z => z.Id == updateRequest.Id);
+            var OldData = await _context.Request.FirstOrDefaultAsync(e => e.Id == updateRequest.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (request is null)
             {
                 throw new Exception($"The Id '{updateRequest.Id}'Is Not Founde...");
@@ -323,6 +342,10 @@ public class RequestService : IRequestService
         try
         {
             var requestStatus = await _context.RequestStatus.FirstOrDefaultAsync(z => z.Id == updateRequestStatus.Id);
+            var OldData = await _context.RequestStatus.FirstOrDefaultAsync(e => e.Id == updateRequestStatus.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (requestStatus is null)
             {
                 throw new Exception($"The Id '{updateRequestStatus.Id}'Is Not Founde...");
@@ -345,6 +368,10 @@ public class RequestService : IRequestService
         try
         {
             var requestType = await _context.Request.FirstOrDefaultAsync(z => z.Id == updateRequest.Id);
+            var OldData = await _context.Request.FirstOrDefaultAsync(e => e.Id == updateRequest.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (requestType is null)
             {
                 throw new Exception($"The Id '{updateRequest.Id}'Is Not Founde...");
@@ -367,6 +394,10 @@ public class RequestService : IRequestService
         try
         {
             var requestType = await _context.RequestType.FirstOrDefaultAsync(z => z.Id == updateRequestType.Id);
+            var OldData = await _context.RequestType.FirstOrDefaultAsync(e => e.Id == updateRequestType.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (requestType is null)
             {
                 throw new Exception($"The Id '{updateRequestType.Id}'Is Not Founde...");

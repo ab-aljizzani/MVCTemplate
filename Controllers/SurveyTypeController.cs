@@ -44,8 +44,8 @@ namespace ClinicApi.Controllers
         [Route("EditSurveyType")]
         public async Task<ActionResult<UpdateSurveyTypeDto>> UpdateSurvey(UpdateSurveyTypeDto updateSurvey)
         {
-            await _auditService.PostAudit($"Update SurveyType For '{updateSurvey}' By User ");
             var response = await _surveyService.UpdateSurvey(updateSurvey);
+            await _auditService.PutAudit($"Update SurveyType For '{updateSurvey}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.AppointmentDto.Get;
@@ -7,6 +8,7 @@ using ClinicApi.Dtos.AppointmentDto.Update;
 using ClinicApi.Models.AppointmentModel;
 using ClinicApi.Models.Reponse;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ClinicApi.Services.AppointmentServices;
 
@@ -206,6 +208,10 @@ public class AppointmentService : IAppointmentService
         try
         {
             var appointment = await _context.Appointment.FirstOrDefaultAsync(e => e.Id == updateAppointment.Id);
+            var OldData = await _context.Appointment.FirstOrDefaultAsync(e => e.Id == updateAppointment.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (appointment is null)
             {
                 throw new Exception($"The Id '{updateAppointment.Id}'Is Not Founde...");
@@ -228,6 +234,10 @@ public class AppointmentService : IAppointmentService
         try
         {
             var appointment = await _context.Appointment.FirstOrDefaultAsync(e => e.Id == updateAppointment.Id);
+            var OldData = await _context.Appointment.FirstOrDefaultAsync(e => e.Id == updateAppointment.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (appointment is null)
             {
                 throw new Exception($"The Id '{updateAppointment.Id}'Is Not Founde...");
@@ -250,6 +260,10 @@ public class AppointmentService : IAppointmentService
         try
         {
             var appointment = await _context.Appointment.FirstOrDefaultAsync(e => e.Id == updateAppointment.Id);
+            var OldData = await _context.Appointment.FirstOrDefaultAsync(e => e.Id == updateAppointment.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (appointment is null)
             {
                 throw new Exception($"The Id '{updateAppointment.Id}'Is Not Founde...");
@@ -272,6 +286,10 @@ public class AppointmentService : IAppointmentService
         try
         {
             var appointment = await _context.Appointment.FirstOrDefaultAsync(e => e.Id == updateAppointment.Id);
+            var OldData = await _context.Appointment.FirstOrDefaultAsync(e => e.Id == updateAppointment.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (appointment is null)
             {
                 throw new Exception($"The Id '{updateAppointment.Id}'Is Not Founde...");
@@ -294,6 +312,10 @@ public class AppointmentService : IAppointmentService
         try
         {
             var appointmentStatus = await _context.AppointmentStatus.FirstOrDefaultAsync(e => e.Id == updateAppointmentStatus.Id);
+            var OldData = await _context.AppointmentStatus.FirstOrDefaultAsync(e => e.Id == updateAppointmentStatus.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (appointmentStatus is null)
             {
                 throw new Exception($"The Id '{updateAppointmentStatus.Id}'Is Not Founde...");
@@ -316,6 +338,10 @@ public class AppointmentService : IAppointmentService
         try
         {
             var appointment = await _context.Appointment.FirstOrDefaultAsync(e => e.Id == updateAppointment.Id);
+            var OldData = await _context.Appointment.FirstOrDefaultAsync(e => e.Id == updateAppointment.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (appointment is null)
             {
                 throw new Exception($"The Id '{updateAppointment.Id}'Is Not Founde...");
@@ -338,6 +364,10 @@ public class AppointmentService : IAppointmentService
         try
         {
             var perscrition = await _context.Perscription.FirstOrDefaultAsync(e => e.Id == updatePerscrition.Id);
+            var OldData = await _context.Perscription.FirstOrDefaultAsync(e => e.Id == updatePerscrition.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (perscrition is null)
             {
                 throw new Exception($"The Id '{updatePerscrition.Id}'Is Not Founde...");
@@ -360,6 +390,10 @@ public class AppointmentService : IAppointmentService
         try
         {
             var appointment = await _context.Appointment.FirstOrDefaultAsync(e => e.Id == updateAppointment.Id);
+            var OldData = await _context.Appointment.FirstOrDefaultAsync(e => e.Id == updateAppointment.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (appointment is null)
             {
                 throw new Exception($"The Id '{updateAppointment.Id}'Is Not Founde...");

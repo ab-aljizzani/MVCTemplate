@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.ZoneModelDto;
@@ -6,6 +7,7 @@ using ClinicApi.Dtos.ZoneModelDto.Update;
 using ClinicApi.Models.Reponse;
 using ClinicApi.Models.ZoneModel;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ClinicApi.Services.ZoneServices;
 
@@ -80,6 +82,10 @@ public class ZoneService : IZoneSerice
         try
         {
             var zone = await _context.Zone.FirstOrDefaultAsync(z => z.Id == updateZone.Id);
+            var OldData = await _context.Zone.FirstOrDefaultAsync(e => e.Id == updateZone.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (zone is null)
             {
                 throw new Exception($"The Id '{updateZone.Id}'Is Not Founde...");

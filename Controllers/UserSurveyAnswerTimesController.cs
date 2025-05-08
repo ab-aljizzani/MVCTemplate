@@ -37,7 +37,7 @@ namespace ClinicApi.Controllers
         [HttpPost]
         public async Task<ActionResult<List<GetUserSurveyAnswerTimeDto>>> AddnewUserSurvey(InsertUserSurveyAnswerTimeDto newUserSurveyTimes)
         {
-            await _auditService.PostAuditWuthNoToken($"Insert UserSurveyAnswer For Appointment '{newUserSurveyTimes.AppointmentId + " With AnswerId " + newUserSurveyTimes.SurveyAnswerId + "For QuesId " + newUserSurveyTimes.SurveyQuestionId}' ");
+            await _auditService.PostAuditWuthNoToken($"Insert UserSurveyAnswer For Appointment '{newUserSurveyTimes.AppointmentId + " With AnswerId " + newUserSurveyTimes.SurveyAnswerId + "For QuesId " + newUserSurveyTimes.SurveyQuestionId}' ", newUserSurveyTimes.RequestId.ToString());
             return Ok(await _surveyService.AddNewUserSurveyAnswerTime(newUserSurveyTimes));
         }
     }

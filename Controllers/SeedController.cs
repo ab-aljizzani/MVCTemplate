@@ -20,5 +20,11 @@ namespace ClinicApi.Controllers
         {
             return Ok(await _seedService.SeedAll());
         }
+        [HttpPost]
+        [Route("DeleteAll")]
+        public async Task<ActionResult<string>> DeleteSeed()
+        {
+            return Ok(await _seedService.DeleteAll());
+        }
     }
 }
