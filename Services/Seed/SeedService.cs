@@ -282,7 +282,8 @@ public class SeedService : ISeedService
         newRiskLevel.Add(new InsertRiskLevelDto { Risk = "عالي" });
 
 
-        InsertPortalUserDto newPortalUser = new InsertPortalUserDto()
+        List<InsertPortalUserDto> newPortalUser = new List<InsertPortalUserDto>();
+        newPortalUser.Add(new InsertPortalUserDto
         {
             Username = "1083622900",
             NationalId = "1083622900",
@@ -305,16 +306,42 @@ public class SeedService : ISeedService
             RoleId = 1,
             EmpIamImgUrl = "",
             IsFirstLogin = false
-        };
+        });
+        newPortalUser.Add(new InsertPortalUserDto
+        {
+            Username = "1234567890",
+            NationalId = "1234567890",
+            Password = "Aa@123456#",
+            ConfirmPassword = "Aa@123456#",
+            UserFullName = "Test Test Test",
+            Email = "b@b.com",
+            Code = "0000",
+            PhoneNumber = "0555555555",
+            DateOfBirth = "01/02/1990",
+            UserType = "رئيسي",
+            LoginAttemp = 0,
+            LastLogin = DateTime.Now.ToString(),
+            CreatedDate = DateTime.Now.ToString(),
+            PasswordExpires = false,
+            Status = "Active",
+            PersonalImgId = 1,
+            EntityId = 1,
+            DepartmentId = 1,
+            RoleId = 1,
+            EmpIamImgUrl = "",
+            IsFirstLogin = false
+        });
 
 
 
-        CreatePasswordHash(newPortalUser.Password, out byte[] passwordHash, out byte[] passwordSalt);
-        var user = _mapper.Map<PortalUser>(newPortalUser);
-        user.PasswordSalt = passwordSalt;
-        user.PasswordHash = passwordHash;
-
-        _context.PortalUser.Add(user);
+        foreach (var item in newPortalUser)
+        {
+            CreatePasswordHash(item.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            var user = _mapper.Map<PortalUser>(item);
+            user.PasswordSalt = passwordSalt;
+            user.PasswordHash = passwordHash;
+            _context.PortalUser.Add(user);
+        }
 
         foreach (var item in newRequestType)
         {
