@@ -6383,11 +6383,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\ClinicApi.csproj",
+      "projectUniqueName": "c:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\ClinicApi.csproj",
       "projectName": "ClinicApi",
-      "projectPath": "C:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\ClinicApi.csproj",
+      "projectPath": "c:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\ClinicApi.csproj",
       "packagesPath": "C:\\Users\\557657\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\obj\\",
+      "outputPath": "c:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6517,6 +6517,12 @@
     }
   },
   "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file c:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    },
     {
       "code": "NU1902",
       "level": "Warning",

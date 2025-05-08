@@ -1,31 +1,17 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "C:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\ClinicApi.csproj": {}
+    "c:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\ClinicApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\ClinicApi.csproj": {
+    "c:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\ClinicApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\ClinicApi.csproj",
+        "projectUniqueName": "c:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\ClinicApi.csproj",
         "projectName": "ClinicApi",
-        "projectPath": "C:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\ClinicApi.csproj",
+        "projectPath": "c:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\ClinicApi.csproj",
         "packagesPath": "C:\\Users\\557657\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\obj\\",
-=======
-    "c:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj": {}
-  },
-  "projects": {
-    "c:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "c:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj",
-        "projectName": "ClinicApi",
-        "projectPath": "c:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj",
-        "packagesPath": "C:\\Users\\abalj\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\obj\\",
->>>>>>> d2019757b6a2cdf30b8b7e2191abc7c7583028ac
+        "outputPath": "c:\\Users\\557657\\Desktop\\GitRep\\ClinicApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

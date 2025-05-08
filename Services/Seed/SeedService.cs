@@ -314,7 +314,7 @@ public class SeedService : ISeedService
             Password = "Aa@123456#",
             ConfirmPassword = "Aa@123456#",
             UserFullName = "Test Test Test",
-            Email = "b@b.com",
+            Email = "bb@b.com",
             Code = "0000",
             PhoneNumber = "0555555555",
             DateOfBirth = "01/02/1990",
@@ -333,6 +333,21 @@ public class SeedService : ISeedService
         });
 
 
+        // foreach (var item in newEntity)
+        // {
+        //     var entity = _mapper.Map<Models.Entity.Entity>(item);
+        //     _context.Entity.Add(entity);
+        // }
+        foreach (var item in newDept)
+        {
+            var dept = _mapper.Map<Models.Entity.Department>(item);
+            _context.Department.Add(dept);
+        }
+        foreach (var item in newRequestType)
+        {
+            var requestType = _mapper.Map<Models.RequestTypeModel.RequestType>(item);
+            _context.RequestType.Add(requestType);
+        }
 
         foreach (var item in newPortalUser)
         {
@@ -343,11 +358,6 @@ public class SeedService : ISeedService
             _context.PortalUser.Add(user);
         }
 
-        foreach (var item in newRequestType)
-        {
-            var requestType = _mapper.Map<Models.RequestTypeModel.RequestType>(item);
-            _context.RequestType.Add(requestType);
-        }
 
         foreach (var item in newRequestStatus)
         {
@@ -361,17 +371,7 @@ public class SeedService : ISeedService
             _context.Role.Add(role);
         }
 
-        foreach (var item in newEntity)
-        {
-            var entity = _mapper.Map<Models.Entity.Entity>(item);
-            _context.Entity.Add(entity);
-        }
 
-        foreach (var item in newDept)
-        {
-            var dept = _mapper.Map<Models.Entity.Department>(item);
-            _context.Department.Add(dept);
-        }
 
         foreach (var item in newZone)
         {
