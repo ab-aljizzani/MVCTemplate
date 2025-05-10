@@ -57,4 +57,5 @@ public class PortalUserDto
     public string CreatedDate { get; set; } = string.Empty;
     public bool PasswordExpires { get; set; }
     public string Status { get; set; } = string.Empty;
+    public bool IsFromShamel { get; set; } = false;
 }

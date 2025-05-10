@@ -54,10 +54,22 @@ public class SickLeaveService : ISickLeaveService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<List<object>>> GetAllCustomSickLeave()
+    {
+        var serviceResponse = new ServiceResponse<List<object>>();
+        var dbContext = await _context.SickLeave.Where(e => e.PortalUserId == e.PortalUser.Id && e.PortalUser.RoleId == e.PortalUser.Role.Id).Select(e => new { e.AppointmentId, e.StartDate, e.CreateDate, e.NumberOfDays, e.PortalUser.UserFullName, e.PortalUser.Role.RoleArabName, e.IsAddedToSehaty, e.SehatyAddedEmp }).ToListAsync();
+        if (dbContext is null)
+        {
+            throw new Exception($"Not Founde...");
+        }
+        serviceResponse.Data = dbContext.Select(e => _mapper.Map<object>(e)).ToList();
+        return serviceResponse;
+    }
+
     public async Task<ServiceResponse<List<GetSickLeaveDto>>> GetAllSickLeave()
     {
         var serviceResponse = new ServiceResponse<List<GetSickLeaveDto>>();
-        var dbContext = await _context.SickLeave.ToListAsync();
+        var dbContext = await _context.SickLeave.Include(s => s.PortalUser).ToListAsync();
         serviceResponse.Data = dbContext.Select(e => _mapper.Map<GetSickLeaveDto>(e)).ToList();
         return serviceResponse;
     }
@@ -65,7 +77,7 @@ public class SickLeaveService : ISickLeaveService
     public async Task<ServiceResponse<List<object>>> GetSickLeaveByAppointmentID(int id)
     {
         var serviceResponse = new ServiceResponse<List<object>>();
-        var dbContext = await _context.SickLeave.Where(e => e.AppointmentId == id && e.PortalUserId == e.PortalUser.Id && e.PortalUser.RoleId == e.PortalUser.Role.Id).Select(e => new { e.AppointmentId, e.StartDate, e.CreateDate, e.NumberOfDays, e.PortalUser.UserFullName, e.PortalUser.Role.RoleArabName }).ToListAsync();
+        var dbContext = await _context.SickLeave.Where(e => e.AppointmentId == id && e.PortalUserId == e.PortalUser.Id && e.PortalUser.RoleId == e.PortalUser.Role.Id).Select(e => new { e.AppointmentId, e.StartDate, e.CreateDate, e.NumberOfDays, e.PortalUser.UserFullName, e.PortalUser.Role.RoleArabName, e.IsAddedToSehaty, e.SehatyAddedEmp }).ToListAsync();
         if (dbContext is null)
         {
             throw new Exception($"The Id '{id}'Is Not Founde...");
@@ -87,6 +99,32 @@ public class SickLeaveService : ISickLeaveService
     }
 
     public async Task<ServiceResponse<GetSickLeaveDto>> UpdateSickLeave(UpdateSickLeaveDto updateSickLeave)
+    {
+        var serviceResponse = new ServiceResponse<GetSickLeaveDto>();
+        try
+        {
+            var sickLeave = await _context.SickLeave.FirstOrDefaultAsync(e => e.Id == updateSickLeave.Id);
+            var OldData = await _context.SickLeave.FirstOrDefaultAsync(e => e.Id == updateSickLeave.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
+            if (sickLeave is null)
+            {
+                throw new Exception($"The Id '{updateSickLeave.Id}'Is Not Founde...");
+            }
+            _mapper.Map(updateSickLeave, sickLeave);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<GetSickLeaveDto>(sickLeave);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<GetSickLeaveDto>> UpdateSickLeaveSehaty(UpdateSickLeaveSehatyDto updateSickLeave)
     {
         var serviceResponse = new ServiceResponse<GetSickLeaveDto>();
         try

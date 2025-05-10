@@ -240,6 +240,7 @@ public class AutoMapperProfile : Profile
         CreateMap<SickLeave, GetSickLeaveDto>();
         CreateMap<InsertSickLeaveDto, SickLeave>();
         CreateMap<UpdateSickLeaveDto, SickLeave>();
+        CreateMap<UpdateSickLeaveSehatyDto, SickLeave>();
 
         CreateMap<GetAppointmentReviewDto, AppointmentReview>();
         CreateMap<AppointmentReview, GetAppointmentReviewDto>();

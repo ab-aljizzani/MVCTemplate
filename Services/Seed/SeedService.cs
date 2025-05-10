@@ -300,7 +300,8 @@ public class SeedService : ISeedService
             DepartmentId = 1,
             RoleId = 1,
             EmpIamImgUrl = "",
-            IsFirstLogin = false
+            IsFirstLogin = false,
+            IsFromShamel = false
         });
         newPortalUser.Add(new InsertPortalUserNoPersonalImgDto
         {
@@ -323,7 +324,8 @@ public class SeedService : ISeedService
             DepartmentId = 1,
             RoleId = 1,
             EmpIamImgUrl = "",
-            IsFirstLogin = false
+            IsFirstLogin = false,
+            IsFromShamel = false
         });
 
         foreach (var item in newRequestType)

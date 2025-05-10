@@ -27,6 +27,12 @@ namespace ClinicApi.Controllers
             await _auditService.PostAudit("View All SickLeave For User");
             return Ok(await _sickLeave.GetAllSickLeave());
         }
+        [HttpGet("GetAllCustom")]
+        public async Task<ActionResult<List<object>>> GetAllCustomSickLeave()
+        {
+            await _auditService.PostAudit("View All SickLeave For User");
+            return Ok(await _sickLeave.GetAllSickLeave());
+        }
         [HttpGet("{id}")]
         public async Task<ActionResult<List<GetSickLeaveDto>>> GetSickLeaveById(int id)
         {
@@ -52,6 +58,16 @@ namespace ClinicApi.Controllers
         {
             var response = await _sickLeave.UpdateSickLeave(updateSickLeave);
             await _auditService.PutAudit($"Update SickLeave For '{updateSickLeave.Id + " To " + updateSickLeave.StartDate}' By User ", response.OldData);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
+        [HttpPost]
+        [Route("EditSickLeaveSehaty")]
+        public async Task<ActionResult<GetSickLeaveDto>> UpdateSickLeaveSehaty(UpdateSickLeaveSehatyDto updateSickLeave)
+        {
+            var response = await _sickLeave.UpdateSickLeaveSehaty(updateSickLeave);
+            await _auditService.PutAudit($"Update SickLeave For '{updateSickLeave.Id + " To " + updateSickLeave}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);

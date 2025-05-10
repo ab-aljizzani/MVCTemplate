@@ -1,4 +1,5 @@
 using ClinicApi.Data;
+using ClinicApi.Services;
 using ClinicApi.Services.Seed;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -12,21 +13,25 @@ namespace ClinicApi.Controllers
     {
         private readonly ISeedService _seedService;
         private readonly TokenRoles _token;
+        private readonly IAuditService _auditService;
 
-        public SeedController(ISeedService seedService, TokenRoles token)
+        public SeedController(ISeedService seedService, TokenRoles token, IAuditService auditService)
         {
             _seedService = seedService;
             _token = token;
+            _auditService = auditService;
         }
         [HttpPost]
         public async Task<ActionResult<string>> Seed()
         {
+            await _auditService.PostAuditWuthNoToken("Seed All Data In Seed Service", "Seed");
             return Ok(await _seedService.SeedAll());
         }
         [HttpPost]
         [Route("SeedEntityDept")]
         public async Task<ActionResult<string>> SeedEntityDept()
         {
+            await _auditService.PostAuditWuthNoToken("Seed Entity And Department Data In SeedEntityDept Service", "Seed");
             return Ok(await _seedService.SeedEntityDept());
         }
         [HttpPost]
@@ -36,7 +41,10 @@ namespace ClinicApi.Controllers
         {
             var role = _token.GetRoleToken("Role");
             if (role == "SuperAdmin")
+            {
+                await _auditService.PostAuditWuthNoToken("Delete All Data In SeedDelete Service", "Seed");
                 return Ok(await _seedService.DeleteAll());
+            }
             else
                 return NotFound();
         }
