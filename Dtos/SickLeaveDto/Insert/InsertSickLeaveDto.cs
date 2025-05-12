@@ -10,5 +10,8 @@ public class InsertSickLeaveDto
     public string CreateDate { get; set; } = string.Empty;
     public int AppointmentId { get; set; }
     public int PortalUserId { get; set; }
+    public bool IsAddedToSehaty { get; set; }
+    public string SehatyAddedEmp { get; set; } = string.Empty;
+    public string SehatyAddedDate { get; set; } = string.Empty;
 
 }

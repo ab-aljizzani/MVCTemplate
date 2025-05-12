@@ -229,12 +229,7 @@ public class SeedService : ISeedService
         // newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج الإفصاح" });
         // newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج المقياس" });
 
-        List<AddEntityDto> newEntity = new List<AddEntityDto>();
-        newEntity.Add(new AddEntityDto { EntityType = "داخلي", EntityName = "رئاسة الحرس الملكي" });
 
-        List<AddDepartmentDto> newDept = new List<AddDepartmentDto>();
-        newDept.Add(new AddDepartmentDto { DepartmentName = "الاتصالات وتقنية المعلومات", EntityId = 1 });
-        newDept.Add(new AddDepartmentDto { DepartmentName = "الإدارة الطبية", EntityId = 1 });
 
         // List<InsertSurveyQuestionDto> newSurveyQ = new List<InsertSurveyQuestionDto>();
         // newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل تعاني حاليا أو سبق أن عانيت من مشاكل أو اعراض نفسية أو جسدية قد تشكل تهديدا لسلامتك وسلامة الآخرين", SurveyTypeId = 2 });
@@ -282,8 +277,9 @@ public class SeedService : ISeedService
         newRiskLevel.Add(new InsertRiskLevelDto { Risk = "عالي" });
 
 
-        List<InsertPortalUserDto> newPortalUser = new List<InsertPortalUserDto>();
-        newPortalUser.Add(new InsertPortalUserDto
+
+        List<InsertPortalUserNoPersonalImgDto> newPortalUser = new List<InsertPortalUserNoPersonalImgDto>();
+        newPortalUser.Add(new InsertPortalUserNoPersonalImgDto
         {
             Username = "1083622900",
             NationalId = "1083622900",
@@ -300,14 +296,14 @@ public class SeedService : ISeedService
             CreatedDate = DateTime.Now.ToString(),
             PasswordExpires = false,
             Status = "Active",
-            PersonalImgId = 1,
             EntityId = 1,
             DepartmentId = 1,
             RoleId = 1,
             EmpIamImgUrl = "",
-            IsFirstLogin = false
+            IsFirstLogin = false,
+            IsFromShamel = false
         });
-        newPortalUser.Add(new InsertPortalUserDto
+        newPortalUser.Add(new InsertPortalUserNoPersonalImgDto
         {
             Username = "1234567890",
             NationalId = "1234567890",
@@ -324,25 +320,14 @@ public class SeedService : ISeedService
             CreatedDate = DateTime.Now.ToString(),
             PasswordExpires = false,
             Status = "Active",
-            PersonalImgId = 1,
             EntityId = 1,
             DepartmentId = 1,
             RoleId = 1,
             EmpIamImgUrl = "",
-            IsFirstLogin = false
+            IsFirstLogin = false,
+            IsFromShamel = false
         });
 
-
-        // foreach (var item in newEntity)
-        // {
-        //     var entity = _mapper.Map<Models.Entity.Entity>(item);
-        //     _context.Entity.Add(entity);
-        // }
-        foreach (var item in newDept)
-        {
-            var dept = _mapper.Map<Models.Entity.Department>(item);
-            _context.Department.Add(dept);
-        }
         foreach (var item in newRequestType)
         {
             var requestType = _mapper.Map<Models.RequestTypeModel.RequestType>(item);
@@ -370,9 +355,6 @@ public class SeedService : ISeedService
             var role = _mapper.Map<Models.Role.Role>(item);
             _context.Role.Add(role);
         }
-
-
-
         foreach (var item in newZone)
         {
             var zone = _mapper.Map<Models.ZoneModel.Zone>(item);
@@ -420,6 +402,33 @@ public class SeedService : ISeedService
         serviceResponse.Data = "Seed Exicutes Successfuly";
         return serviceResponse;
     }
+
+    public async Task<ServiceResponse<string>> SeedEntityDept()
+    {
+        List<AddEntityDto> newEntity = new List<AddEntityDto>();
+        newEntity.Add(new AddEntityDto { EntityType = "داخلي", EntityName = "رئاسة الحرس الملكي" });
+
+        List<AddDepartmentDto> newDept = new List<AddDepartmentDto>();
+        newDept.Add(new AddDepartmentDto { DepartmentName = "الاتصالات وتقنية المعلومات", EntityId = 1 });
+        newDept.Add(new AddDepartmentDto { DepartmentName = "الإدارة الطبية", EntityId = 1 });
+
+
+        foreach (var item in newEntity)
+        {
+            var entity = _mapper.Map<Models.Entity.Entity>(item);
+            _context.Entity.Add(entity);
+        }
+        foreach (var item in newDept)
+        {
+            var dept = _mapper.Map<Models.Entity.Department>(item);
+            _context.Department.Add(dept);
+        }
+        var serviceResponse = new ServiceResponse<string>();
+        await _context.SaveChangesAsync();
+        serviceResponse.Data = "Seed Exicutes Successfuly";
+        return serviceResponse;
+    }
+
     private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
     {
         using (var hmac = new System.Security.Cryptography.HMACSHA512())

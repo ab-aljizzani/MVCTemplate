@@ -11,4 +11,6 @@ public class GetCustomSickLeaveDto
     public int AppointmentId { get; set; }
     public string UserFullName { get; set; } = string.Empty;
     public string RoleArabName { get; set; } = string.Empty;
+    public bool IsAddedToSehaty { get; set; }
+    public string SehatyAddedEmp { get; set; } = string.Empty;
 }
