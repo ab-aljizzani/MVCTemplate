@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	  <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+     <publishUrl>C:\Users\557657\Documents\GitRep\ClinicApiPublish</publishUrl>
   </PropertyGroup>
 
   <ItemGroup>

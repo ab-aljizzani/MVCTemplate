@@ -75,7 +75,7 @@ public class SeedService : ISeedService
         _context.Database.ExecuteSql(Entity);
         var Entity_reseed = from c in _context.Entity select c;
         _context.Entity.RemoveRange(Entity_reseed);
-        var Entity_ = FormattableStringFactory.Create("DBCC CHECKIDENT('Entity', RESEED, 0)");
+        var Entity_ = FormattableStringFactory.Create("DBCC CHECKIDENT('[Entity]', RESEED, 0)");
         _context.Database.ExecuteSql(Entity_);
         var Entity_check = FormattableStringFactory.Create("ALTER TABLE Entity CHECK CONSTRAINT all");
         _context.Database.ExecuteSql(Entity_check);
@@ -84,7 +84,7 @@ public class SeedService : ISeedService
         _context.Database.ExecuteSql(Department);
         var Department_reseed = from c in _context.Department select c;
         _context.Department.RemoveRange(Department_reseed);
-        var Department_ = FormattableStringFactory.Create("DBCC CHECKIDENT('Department', RESEED, 0)");
+        var Department_ = FormattableStringFactory.Create("DBCC CHECKIDENT('[Department]', RESEED, 0)");
         _context.Database.ExecuteSql(Department_);
         var Department_check = FormattableStringFactory.Create("ALTER TABLE Department CHECK CONSTRAINT all");
         _context.Database.ExecuteSql(Department_check);
