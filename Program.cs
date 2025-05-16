@@ -17,6 +17,7 @@ using ClinicApi.Services.SickLeaveServices;
 using ClinicApi.Services.Survey;
 using ClinicApi.Services.ZoneServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -79,6 +80,10 @@ namespace ClinicApi
             builder.Services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
+
+            //SetUp CorsPolicy 
+
+            builder.Services.AddCors(plc => { plc.AddPolicy("CorsPolicy", policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:1234")); });
             builder.Services.AddHttpContextAccessor();
             var app = builder.Build();
 
@@ -90,7 +95,7 @@ namespace ClinicApi
             }
 
             app.UseAuthorization();
-
+            app.UseCors("CorsPolicy");
 
             app.MapControllers();
 
