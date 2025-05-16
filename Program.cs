@@ -81,9 +81,9 @@ namespace ClinicApi
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
-            //SetUp CorsPolicy 
 
-            builder.Services.AddCors(plc => { plc.AddPolicy("CorsPolicy", policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:1234")); });
+
+            builder.Services.AddCors();
             builder.Services.AddHttpContextAccessor();
             var app = builder.Build();
 
@@ -92,10 +92,17 @@ namespace ClinicApi
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.UseCors(opt => opt.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            }
+            else
+            {
+                var corsConfig = builder.Configuration.GetSection("CorsConfig");
+                var allowedOrigins = corsConfig.GetSection("AllwedOrigins").Get<string[]>();
+                app.UseCors(opt => opt.AllowAnyHeader().AllowAnyMethod().WithOrigins(allowedOrigins));
             }
 
             app.UseAuthorization();
-            app.UseCors("CorsPolicy");
+
 
             app.MapControllers();
 
