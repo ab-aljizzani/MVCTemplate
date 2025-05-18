@@ -29,6 +29,7 @@ namespace ClinicApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            // var ClientAppURL = builder.Configuration.GetSection("ClientAppURL")?.GetChildren()?.Select(x => x.Value)?.ToList();
 
             // Add services to the container.
             builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -80,20 +81,41 @@ namespace ClinicApi
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
             builder.Services.AddHttpContextAccessor();
-            var app = builder.Build();
+
+            //             builder.Services.AddCors(p =>
+            // {
+            //     p.AddPolicy("CORSPolicy", builder =>
+            //     {
+            //         builder.WithOrigins(ClientAppURL.ToArray())
+            //     .WithMethods("POST", "GET")
+            //     .AllowAnyHeader()
+            //     .AllowCredentials();
+            //     });
+            // });
+
+            builder.Services.AddAntiforgery(options =>
+                  {
+                      options.HeaderName = "X-XSRF-TOKEN";
+                      options.Cookie.HttpOnly = true;
+                      //options.Cookie.Domain = ClientAppURL;
+                      options.Cookie.SameSite = SameSiteMode.Strict;
+                      //options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                      options.SuppressXFrameOptionsHeader = false;
+                  });
 
             // Configure the HTTP request pipeline.
+            var app = builder.Build();
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
+
+
             app.UseAuthorization();
-
-
             app.MapControllers();
-
+            // app.UseCors("CORSPolicy");
             app.Run();
         }
     }
