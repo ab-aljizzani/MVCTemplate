@@ -328,6 +328,16 @@ public class SeedService : ISeedService
             IsFromShamel = false
         });
 
+        List<AddDepartmentDto> newDept = new List<AddDepartmentDto>();
+        newDept.Add(new AddDepartmentDto { DepartmentName = "الاتصالات وتقنية المعلومات", EntityId = 1 });
+        newDept.Add(new AddDepartmentDto { DepartmentName = "الإدارة الطبية", EntityId = 1 });
+
+        foreach (var item in newDept)
+        {
+            var dept = _mapper.Map<Models.Entity.Department>(item);
+            _context.Department.Add(dept);
+        }
+
         foreach (var item in newRequestType)
         {
             var requestType = _mapper.Map<Models.RequestTypeModel.RequestType>(item);
@@ -398,6 +408,7 @@ public class SeedService : ISeedService
         //     _context.Appointment.Add(appointment);
         // }
 
+
         await _context.SaveChangesAsync();
         serviceResponse.Data = "Seed Exicutes Successfuly";
         return serviceResponse;
@@ -408,9 +419,6 @@ public class SeedService : ISeedService
         List<AddEntityDto> newEntity = new List<AddEntityDto>();
         newEntity.Add(new AddEntityDto { EntityType = "داخلي", EntityName = "رئاسة الحرس الملكي" });
 
-        List<AddDepartmentDto> newDept = new List<AddDepartmentDto>();
-        newDept.Add(new AddDepartmentDto { DepartmentName = "الاتصالات وتقنية المعلومات", EntityId = 1 });
-        newDept.Add(new AddDepartmentDto { DepartmentName = "الإدارة الطبية", EntityId = 1 });
 
 
         foreach (var item in newEntity)
@@ -418,11 +426,7 @@ public class SeedService : ISeedService
             var entity = _mapper.Map<Models.Entity.Entity>(item);
             _context.Entity.Add(entity);
         }
-        foreach (var item in newDept)
-        {
-            var dept = _mapper.Map<Models.Entity.Department>(item);
-            _context.Department.Add(dept);
-        }
+
         var serviceResponse = new ServiceResponse<string>();
         await _context.SaveChangesAsync();
         serviceResponse.Data = "Seed Exicutes Successfuly";

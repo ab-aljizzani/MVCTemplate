@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\ClinicApi.csproj": {}
+    "c:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\ClinicApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\ClinicApi.csproj": {
+    "c:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\ClinicApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\ClinicApi.csproj",
+        "projectUniqueName": "c:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\ClinicApi.csproj",
         "projectName": "ClinicApi",
-        "projectPath": "C:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\ClinicApi.csproj",
+        "projectPath": "c:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\ClinicApi.csproj",
         "packagesPath": "C:\\Users\\SRG1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\obj\\",
+        "outputPath": "c:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
