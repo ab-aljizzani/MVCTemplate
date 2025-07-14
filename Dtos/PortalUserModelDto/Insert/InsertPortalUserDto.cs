@@ -27,6 +27,7 @@ public class InsertPortalUserDto
     public string NationalId { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إدخال الاسم الكامل")]
     [Display(Name = "الاسم الكامل")]
+    [RegularExpression(@"^[\u0600-\u06FFa-zA-Z\s]+$", ErrorMessage = "الاسم الكامل يجب أن يحتوي على حروف عربية و إنجليزية فقط")]
     public string UserFullName { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إدخال البريد الالكتروني")]
     [Display(Name = "البريد الالكتروني")]

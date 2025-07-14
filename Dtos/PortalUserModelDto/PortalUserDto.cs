@@ -27,7 +27,7 @@ public class PortalUserDto
 
     [Required(ErrorMessage = "الرجاء إدخال الاسم الكامل")]
     [Display(Name = "الاسم الكامل")]
-    [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "الاسم الكامل يجب أن يحتوي على حروف فقط")]
+    [RegularExpression(@"^[\u0600-\u06FFa-zA-Z\s]+$", ErrorMessage = "الاسم الكامل يجب أن يحتوي على حروف فقط")]
     public string UserFullName { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إدخال البريد الالكتروني")]
     [Display(Name = "البريد الالكتروني")]
