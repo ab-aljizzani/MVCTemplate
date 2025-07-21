@@ -224,33 +224,34 @@ public class SeedService : ISeedService
         newZone.Add(new ZoneDto { ZoneName = "الأولى" });
         newZone.Add(new ZoneDto { ZoneName = "الثانية" });
         newZone.Add(new ZoneDto { ZoneName = "الثالثة" });
-        // List<InsertSurveyTypeDto> newSurvey = new List<InsertSurveyTypeDto>();
-        // newSurvey.Add(new InsertSurveyTypeDto { Type = "لم يتم تعيين نموذج" });
-        // newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج الإفصاح" });
-        // newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج المقياس" });
+
+        List<InsertSurveyTypeDto> newSurvey = new List<InsertSurveyTypeDto>();
+        newSurvey.Add(new InsertSurveyTypeDto { Type = "لم يتم تعيين نموذج" });
+        newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج الإفصاح" });
+        newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج المقياس" });
 
 
 
-        // List<InsertSurveyQuestionDto> newSurveyQ = new List<InsertSurveyQuestionDto>();
-        // newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل تعاني حاليا أو سبق أن عانيت من مشاكل أو اعراض نفسية أو جسدية قد تشكل تهديدا لسلامتك وسلامة الآخرين", SurveyTypeId = 2 });
-        // newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل سبق لك أن إستخدمت مواد محظورة بطريقة أثرت سلبا على سلوكك أو تفكيرك", SurveyTypeId = 2 });
-        // newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل سبق لك أن حاولت الإضرار بنفسك أو بغيرك", SurveyTypeId = 2 });
-        // newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل تستخدم حاليا أو سبق أن إستخدمت أدوية نفسية", SurveyTypeId = 2 });
+        List<InsertSurveyQuestionDto> newSurveyQ = new List<InsertSurveyQuestionDto>();
+        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل تعاني حاليا أو سبق أن عانيت من مشاكل أو اعراض نفسية أو جسدية قد تشكل تهديدا لسلامتك وسلامة الآخرين", SurveyTypeId = 2 });
+        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل سبق لك أن إستخدمت مواد محظورة بطريقة أثرت سلبا على سلوكك أو تفكيرك", SurveyTypeId = 2 });
+        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل سبق لك أن حاولت الإضرار بنفسك أو بغيرك", SurveyTypeId = 2 });
+        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل تستخدم حاليا أو سبق أن إستخدمت أدوية نفسية", SurveyTypeId = 2 });
 
-        // List<InsertSurveyAnswerDto> newSurveyA = new List<InsertSurveyAnswerDto>();
-        // newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 1 });
-        // newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 1 });
-        // newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 2 });
-        // newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 2 });
-        // newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 3 });
-        // newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 3 });
-        // newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 4 });
-        // newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 4 });
+        List<InsertSurveyAnswerDto> newSurveyA = new List<InsertSurveyAnswerDto>();
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 1 });
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 1 });
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 2 });
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 2 });
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 3 });
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 3 });
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 4 });
+        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 4 });
 
-        // List<AppointmentStatusDto> newAppointmentStatus = new List<AppointmentStatusDto>();
-        // newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تمت الجدولة", BadgeColor = "badge rounded-pill bg-success mx-auto" });
-        // newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تم الحضور", BadgeColor = "badge rounded-pill bg-primary mx-auto" });
-        // newAppointmentStatus.Add(new AppointmentStatusDto { Status = "لم يحضر", BadgeColor = "badge rounded-pill bg-danger mx-auto" });
+        List<AppointmentStatusDto> newAppointmentStatus = new List<AppointmentStatusDto>();
+        newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تمت الجدولة", BadgeColor = "badge rounded-pill bg-success mx-auto" });
+        newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تم الحضور", BadgeColor = "badge rounded-pill bg-primary mx-auto" });
+        newAppointmentStatus.Add(new AppointmentStatusDto { Status = "لم يحضر", BadgeColor = "badge rounded-pill bg-danger mx-auto" });
 
         List<PerscritionDto> newPerscrition = new List<PerscritionDto>();
         newPerscrition.Add(new PerscritionDto { PerscriptionName = "بدون وصفة طبية" });
@@ -328,75 +329,86 @@ public class SeedService : ISeedService
             IsFromShamel = false
         });
 
-        foreach (var item in newRequestType)
-        {
-            var requestType = _mapper.Map<Models.RequestTypeModel.RequestType>(item);
-            _context.RequestType.Add(requestType);
-        }
+        List<AddDepartmentDto> newDept = new List<AddDepartmentDto>();
+        newDept.Add(new AddDepartmentDto { DepartmentName = "الاتصالات وتقنية المعلومات", EntityId = 1 });
+        newDept.Add(new AddDepartmentDto { DepartmentName = "الإدارة الطبية", EntityId = 1 });
 
-        foreach (var item in newPortalUser)
-        {
-            CreatePasswordHash(item.Password, out byte[] passwordHash, out byte[] passwordSalt);
-            var user = _mapper.Map<PortalUser>(item);
-            user.PasswordSalt = passwordSalt;
-            user.PasswordHash = passwordHash;
-            _context.PortalUser.Add(user);
-        }
-
-
-        foreach (var item in newRequestStatus)
-        {
-            var requestStatus = _mapper.Map<Models.RequestModel.RequestStatus>(item);
-            _context.RequestStatus.Add(requestStatus);
-        }
-
-        foreach (var item in newRole)
-        {
-            var role = _mapper.Map<Models.Role.Role>(item);
-            _context.Role.Add(role);
-        }
-        foreach (var item in newZone)
-        {
-            var zone = _mapper.Map<Models.ZoneModel.Zone>(item);
-            _context.Zone.Add(zone);
-        }
-        foreach (var item in newPerscrition)
-        {
-            var perscription = _mapper.Map<Models.AppointmentModel.Perscription>(item);
-            _context.Perscription.Add(perscription);
-        }
-        foreach (var item in newRiskLevel)
-        {
-            var risk = _mapper.Map<Models.RiskLevelModel.RiskLevel>(item);
-            _context.RiskLevel.Add(risk);
-        }
-        // foreach (var item in newSurveyA)
+        // foreach (var item in newDept)
         // {
-        //     var requestAnswer = _mapper.Map<Models.SurveyModel.SurveyAnswer>(item);
-        //     _context.SurveyAnswer.Add(requestAnswer);
+        //     var dept = _mapper.Map<Models.Entity.Department>(item);
+        //     _context.Department.Add(dept);
         // }
 
-        // foreach (var item in newSurveyQ)
+        // foreach (var item in newRequestType)
         // {
-        //     var requestStatus = _mapper.Map<Models.SurveyModel.SurveyQuestion>(item);
-        //     _context.SurveyQuestion.Add(requestStatus);
+        //     var requestType = _mapper.Map<Models.RequestTypeModel.RequestType>(item);
+        //     _context.RequestType.Add(requestType);
         // }
 
-        // foreach (var item in newSurvey)
+        // foreach (var item in newPortalUser)
         // {
-        //     var survey = _mapper.Map<Models.SurveyModel.SurveyType>(item);
-        //     _context.SurveyType.Add(survey);
+        //     CreatePasswordHash(item.Password, out byte[] passwordHash, out byte[] passwordSalt);
+        //     var user = _mapper.Map<PortalUser>(item);
+        //     user.PasswordSalt = passwordSalt;
+        //     user.PasswordHash = passwordHash;
+        //     _context.PortalUser.Add(user);
         // }
-        // foreach (var item in newAppointmentStatus)
+
+
+        // foreach (var item in newRequestStatus)
         // {
-        //     var status = _mapper.Map<Models.AppointmentModel.AppointmentStatus>(item);
-        //     _context.AppointmentStatus.Add(status);
+        //     var requestStatus = _mapper.Map<Models.RequestModel.RequestStatus>(item);
+        //     _context.RequestStatus.Add(requestStatus);
         // }
+
+        // foreach (var item in newRole)
+        // {
+        //     var role = _mapper.Map<Models.Role.Role>(item);
+        //     _context.Role.Add(role);
+        // }
+        // foreach (var item in newZone)
+        // {
+        //     var zone = _mapper.Map<Models.ZoneModel.Zone>(item);
+        //     _context.Zone.Add(zone);
+        // }
+        // foreach (var item in newPerscrition)
+        // {
+        //     var perscription = _mapper.Map<Models.AppointmentModel.Perscription>(item);
+        //     _context.Perscription.Add(perscription);
+        // }
+        // foreach (var item in newRiskLevel)
+        // {
+        //     var risk = _mapper.Map<Models.RiskLevelModel.RiskLevel>(item);
+        //     _context.RiskLevel.Add(risk);
+        // }
+        foreach (var item in newSurvey)
+        {
+            var survey = _mapper.Map<Models.SurveyModel.SurveyType>(item);
+            _context.SurveyType.Add(survey);
+        }
+        foreach (var item in newSurveyQ)
+        {
+            var requestStatus = _mapper.Map<Models.SurveyModel.SurveyQuestion>(item);
+            _context.SurveyQuestion.Add(requestStatus);
+        }
+        foreach (var item in newSurveyA)
+        {
+            var requestAnswer = _mapper.Map<Models.SurveyModel.SurveyAnswer>(item);
+            _context.SurveyAnswer.Add(requestAnswer);
+        }
+
+
+        foreach (var item in newAppointmentStatus)
+        {
+            var status = _mapper.Map<Models.AppointmentModel.AppointmentStatus>(item);
+            _context.AppointmentStatus.Add(status);
+        }
         // foreach (var item in newAppointment)
         // {
         //     var appointment = _mapper.Map<Models.AppointmentModel.Appointment>(item);
         //     _context.Appointment.Add(appointment);
         // }
+
 
         await _context.SaveChangesAsync();
         serviceResponse.Data = "Seed Exicutes Successfuly";
@@ -408,9 +420,6 @@ public class SeedService : ISeedService
         List<AddEntityDto> newEntity = new List<AddEntityDto>();
         newEntity.Add(new AddEntityDto { EntityType = "داخلي", EntityName = "رئاسة الحرس الملكي" });
 
-        List<AddDepartmentDto> newDept = new List<AddDepartmentDto>();
-        newDept.Add(new AddDepartmentDto { DepartmentName = "الاتصالات وتقنية المعلومات", EntityId = 1 });
-        newDept.Add(new AddDepartmentDto { DepartmentName = "الإدارة الطبية", EntityId = 1 });
 
 
         foreach (var item in newEntity)
@@ -418,11 +427,7 @@ public class SeedService : ISeedService
             var entity = _mapper.Map<Models.Entity.Entity>(item);
             _context.Entity.Add(entity);
         }
-        foreach (var item in newDept)
-        {
-            var dept = _mapper.Map<Models.Entity.Department>(item);
-            _context.Department.Add(dept);
-        }
+
         var serviceResponse = new ServiceResponse<string>();
         await _context.SaveChangesAsync();
         serviceResponse.Data = "Seed Exicutes Successfuly";

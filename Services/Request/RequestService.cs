@@ -120,7 +120,44 @@ public class RequestService : IRequestService
     public async Task<ServiceResponse<List<GetRequestDto>>> GetAllRequest()
     {
         var serviceResponse = new ServiceResponse<List<GetRequestDto>>();
-        var dbContext = await _context.Request.Include(r => r.Person).Include(r => r.RequestStatus).Include(r => r.RequestType).Include(r => r.PortalUser).Include(r => r.Appointment).Include(r => r.SurveyType).ToListAsync();
+        // var dbContext = await _context.Request.Select(r => new { r.Person, r.RequestStatus, r.RequestType, r.Appointment, r.SurveyType ,}).Include(r => r.Person).Include(r => r.RequestStatus).Include(r => r.RequestType).Include(r => r.Appointment).Include(r => r.SurveyType).ToListAsync();
+        var dbContext = await _context.Request
+    .Select(r => new GetRequestDto
+    {
+        Id = r.Id,
+        AppointmentId = r.AppointmentId,
+        PersonId = r.PersonId,
+        RequestStatusId = r.RequestStatusId,
+        RequestTypeId = r.RequestTypeId,
+        PortalUserId = r.PortalUserId,
+        SurveyTypeId = r.SurveyTypeId,
+        AppsentReason = r.AppsentReason,
+        IsSurveyInserted = r.IsSurveyInserted,
+        // Person properties
+        Person = r.Person,
+        // RequestStatus properties
+        RequestStatus = r.RequestStatus,
+        // RequestType properties
+        RequestType = r.RequestType,
+        // PortalUser properties (if needed)
+        UserFullName = r.PortalUser.UserFullName,
+        Email = r.PortalUser.Email,
+        DateOfBirth = r.PortalUser.DateOfBirth,
+        PhoneNumber = r.PortalUser.PhoneNumber,
+        EntityId = r.PortalUser.EntityId,
+        DepartmentId = r.PortalUser.DepartmentId,
+        RoleId = r.PortalUser.RoleId,
+        Status = r.PortalUser.Status,
+        IsFromShamel = r.PortalUser.IsFromShamel,
+
+        // PortalUserName = r.PortalUser.UserFullName,
+        // Appointment properties (if needed)
+        Appointment = r.Appointment,
+        // SurveyType properties (if needed)
+        SurveyType = r.SurveyType
+    })
+    .ToListAsync();
+
         serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetRequestDto>(p)).ToList();
         return serviceResponse;
     }
