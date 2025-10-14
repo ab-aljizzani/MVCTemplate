@@ -10,13 +10,13 @@ namespace ClinicApi.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Appointment_SurveyType_SurveyTypeId",
-                table: "Appointment");
+            // migrationBuilder.DropForeignKey(
+            //     name: "FK_Appointment_SurveyType_SurveyTypeId",
+            //     table: "Appointment");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Request_Appointment_AppointmentId",
-                table: "Request");
+            // migrationBuilder.DropForeignKey(
+            //     name: "FK_Request_Appointment_AppointmentId",
+            //     table: "Request");
 
             migrationBuilder.AlterColumn<int>(
                 name: "AppointmentId",
@@ -38,33 +38,33 @@ namespace ClinicApi.Migrations
                 oldType: "int",
                 oldNullable: true);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Appointment_SurveyType_SurveyTypeId",
-                table: "Appointment",
-                column: "SurveyTypeId",
-                principalTable: "SurveyType",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+            // migrationBuilder.AddForeignKey(
+            //     name: "FK_Appointment_SurveyType_SurveyTypeId",
+            //     table: "Appointment",
+            //     column: "SurveyTypeId",
+            //     principalTable: "SurveyType",
+            //     principalColumn: "Id",
+            //     onDelete: ReferentialAction.Cascade);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Request_Appointment_AppointmentId",
-                table: "Request",
-                column: "AppointmentId",
-                principalTable: "Appointment",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+            // migrationBuilder.AddForeignKey(
+            //     name: "FK_Request_Appointment_AppointmentId",
+            //     table: "Request",
+            //     column: "AppointmentId",
+            //     principalTable: "Appointment",
+            //     principalColumn: "Id",
+            //     onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Appointment_SurveyType_SurveyTypeId",
-                table: "Appointment");
+            // migrationBuilder.DropForeignKey(
+            //     name: "FK_Appointment_SurveyType_SurveyTypeId",
+            //     table: "Appointment");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Request_Appointment_AppointmentId",
-                table: "Request");
+            // migrationBuilder.DropForeignKey(
+            //     name: "FK_Request_Appointment_AppointmentId",
+            //     table: "Request");
 
             migrationBuilder.AlterColumn<int>(
                 name: "AppointmentId",
@@ -82,19 +82,19 @@ namespace ClinicApi.Migrations
                 oldClrType: typeof(int),
                 oldType: "int");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Appointment_SurveyType_SurveyTypeId",
-                table: "Appointment",
-                column: "SurveyTypeId",
-                principalTable: "SurveyType",
-                principalColumn: "Id");
+            // migrationBuilder.AddForeignKey(
+            //     name: "FK_Appointment_SurveyType_SurveyTypeId",
+            //     table: "Appointment",
+            //     column: "SurveyTypeId",
+            //     principalTable: "SurveyType",
+            //     principalColumn: "Id");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Request_Appointment_AppointmentId",
-                table: "Request",
-                column: "AppointmentId",
-                principalTable: "Appointment",
-                principalColumn: "Id");
+            // migrationBuilder.AddForeignKey(
+            //     name: "FK_Request_Appointment_AppointmentId",
+            //     table: "Request",
+            //     column: "AppointmentId",
+            //     principalTable: "Appointment",
+            //     principalColumn: "Id");
         }
     }
 }

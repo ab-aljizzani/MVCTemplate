@@ -22,9 +22,12 @@ public class PortalUserDto
     public string ConfirmPassword { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إدخال رقم الهوية")]
     [Display(Name = "رقم الهوية")]
+    [RegularExpression(@"^\d{10}$", ErrorMessage = "رقم الهوية يجب أن يتكون من 10 أرقام")]
     public string NationalId { get; set; } = string.Empty;
+
     [Required(ErrorMessage = "الرجاء إدخال الاسم الكامل")]
     [Display(Name = "الاسم الكامل")]
+    [RegularExpression(@"^[\u0600-\u06FFa-zA-Z\s]+$", ErrorMessage = "الاسم الكامل يجب أن يحتوي على حروف فقط")]
     public string UserFullName { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إدخال البريد الالكتروني")]
     [Display(Name = "البريد الالكتروني")]
@@ -45,6 +48,7 @@ public class PortalUserDto
     public string UserType { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إدخال رقم الجوال")]
     [Display(Name = "رقم الجوال")]
+    [Phone(ErrorMessage = "الرجاء إدخال رقم جوال صحيح")]
     public string PhoneNumber { get; set; } = string.Empty;
     public Models.Entity.Entity? Entity { get; set; }
     public int EntityId { get; set; }

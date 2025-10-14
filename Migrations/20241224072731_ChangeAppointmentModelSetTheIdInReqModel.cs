@@ -28,7 +28,7 @@ namespace ClinicApi.Migrations
                 column: "AppointmentId",
                 principalTable: "Appointment",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
         }
 
         /// <inheritdoc />
