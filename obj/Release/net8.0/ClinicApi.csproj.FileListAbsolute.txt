@@ -159,7 +159,6 @@ C:\Users\557657\Documents\GitRep\ClinicApi\obj\Release\net8.0\refint\ClinicApi.d
 C:\Users\557657\Documents\GitRep\ClinicApi\obj\Release\net8.0\ClinicApi.pdb
 C:\Users\557657\Documents\GitRep\ClinicApi\obj\Release\net8.0\ClinicApi.genruntimeconfig.cache
 C:\Users\557657\Documents\GitRep\ClinicApi\obj\Release\net8.0\ref\ClinicApi.dll
-C:\Users\557657\Documents\GitRep\ClinicApi\obj\Release\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\557657\Desktop\GitRep\ClinicApi\bin\Release\net8.0\appsettings.Development.json
 C:\Users\557657\Desktop\GitRep\ClinicApi\bin\Release\net8.0\appsettings.json
 C:\Users\557657\Desktop\GitRep\ClinicApi\bin\Release\net8.0\ClinicApi.staticwebassets.endpoints.json

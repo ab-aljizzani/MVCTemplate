@@ -189,6 +189,38 @@ public class SeedService : ISeedService
         var fsss8 = FormattableStringFactory.Create("ALTER TABLE UserSurveyList CHECK CONSTRAINT all");
         _context.Database.ExecuteSql(fsss8);
 
+        var fss9 = FormattableStringFactory.Create("ALTER TABLE SurveyType NOCHECK CONSTRAINT all");
+        _context.Database.ExecuteSql(fss9);
+        var all9 = from c in _context.SurveyType select c;
+        _context.SurveyType.RemoveRange(all9);
+        var fs9 = FormattableStringFactory.Create("DBCC CHECKIDENT('SurveyType', RESEED, 0)");
+        _context.Database.ExecuteSql(fs9);
+        var fsss9 = FormattableStringFactory.Create("ALTER TABLE SurveyType CHECK CONSTRAINT all");
+        _context.Database.ExecuteSql(fsss9);
+
+        var fss10 = FormattableStringFactory.Create("ALTER TABLE SurveyQuestion NOCHECK CONSTRAINT all");
+        _context.Database.ExecuteSql(fss10);
+        // var all10 = from c in _context.SurveyQuestion select c;
+        // _context.SurveyQuestion.RemoveRange(all10);
+        var fs10 = FormattableStringFactory.Create("DBCC CHECKIDENT('SurveyQuestion', RESEED, 0)");
+        _context.Database.ExecuteSql(fs10);
+        var fs110 = FormattableStringFactory.Create("Delete from SurveyQuestion where Id > 33");
+        _context.Database.ExecuteSql(fs110);
+        var fsss10 = FormattableStringFactory.Create("ALTER TABLE SurveyQuestion CHECK CONSTRAINT all");
+        _context.Database.ExecuteSql(fsss10);
+
+
+        var fss11 = FormattableStringFactory.Create("ALTER TABLE SurveyAnswer NOCHECK CONSTRAINT all");
+        _context.Database.ExecuteSql(fss11);
+        // var all11 = from c in _context.SurveyAnswer select c;
+        // _context.SurveyAnswer.RemoveRange(all11);
+        var fs11 = FormattableStringFactory.Create("DBCC CHECKIDENT('SurveyAnswer', RESEED, 0)");
+        _context.Database.ExecuteSql(fs11);
+        var fs111 = FormattableStringFactory.Create("Delete from SurveyAnswer where Id > 153");
+        _context.Database.ExecuteSql(fs111);
+        var fsss11 = FormattableStringFactory.Create("ALTER TABLE SurveyAnswer CHECK CONSTRAINT all");
+        _context.Database.ExecuteSql(fsss11);
+
         await _context.SaveChangesAsync();
         serviceResponse.Data = "Delete Seed Exicutes Successfuly";
         return serviceResponse;
@@ -226,9 +258,8 @@ public class SeedService : ISeedService
         newZone.Add(new ZoneDto { ZoneName = "الثالثة" });
 
         List<InsertSurveyTypeDto> newSurvey = new List<InsertSurveyTypeDto>();
-        newSurvey.Add(new InsertSurveyTypeDto { Type = "لم يتم تعيين نموذج" });
-        newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج الإفصاح" });
-        newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج المقياس" });
+        newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج الإفصاح", EngType = "Disclosure", TypeRole = "test" });
+        newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج المقياس", EngType = "Scale", TypeRole = "test" });
 
 
 
@@ -333,69 +364,69 @@ public class SeedService : ISeedService
         newDept.Add(new AddDepartmentDto { DepartmentName = "الاتصالات وتقنية المعلومات", EntityId = 1 });
         newDept.Add(new AddDepartmentDto { DepartmentName = "الإدارة الطبية", EntityId = 1 });
 
-        // foreach (var item in newDept)
-        // {
-        //     var dept = _mapper.Map<Models.Entity.Department>(item);
-        //     _context.Department.Add(dept);
-        // }
+        foreach (var item in newDept)
+        {
+            var dept = _mapper.Map<Models.Entity.Department>(item);
+            _context.Department.Add(dept);
+        }
 
-        // foreach (var item in newRequestType)
-        // {
-        //     var requestType = _mapper.Map<Models.RequestTypeModel.RequestType>(item);
-        //     _context.RequestType.Add(requestType);
-        // }
+        foreach (var item in newRequestType)
+        {
+            var requestType = _mapper.Map<Models.RequestTypeModel.RequestType>(item);
+            _context.RequestType.Add(requestType);
+        }
 
-        // foreach (var item in newPortalUser)
-        // {
-        //     CreatePasswordHash(item.Password, out byte[] passwordHash, out byte[] passwordSalt);
-        //     var user = _mapper.Map<PortalUser>(item);
-        //     user.PasswordSalt = passwordSalt;
-        //     user.PasswordHash = passwordHash;
-        //     _context.PortalUser.Add(user);
-        // }
+        foreach (var item in newPortalUser)
+        {
+            CreatePasswordHash(item.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            var user = _mapper.Map<PortalUser>(item);
+            user.PasswordSalt = passwordSalt;
+            user.PasswordHash = passwordHash;
+            _context.PortalUser.Add(user);
+        }
 
 
-        // foreach (var item in newRequestStatus)
-        // {
-        //     var requestStatus = _mapper.Map<Models.RequestModel.RequestStatus>(item);
-        //     _context.RequestStatus.Add(requestStatus);
-        // }
+        foreach (var item in newRequestStatus)
+        {
+            var requestStatus = _mapper.Map<Models.RequestModel.RequestStatus>(item);
+            _context.RequestStatus.Add(requestStatus);
+        }
 
-        // foreach (var item in newRole)
-        // {
-        //     var role = _mapper.Map<Models.Role.Role>(item);
-        //     _context.Role.Add(role);
-        // }
-        // foreach (var item in newZone)
-        // {
-        //     var zone = _mapper.Map<Models.ZoneModel.Zone>(item);
-        //     _context.Zone.Add(zone);
-        // }
-        // foreach (var item in newPerscrition)
-        // {
-        //     var perscription = _mapper.Map<Models.AppointmentModel.Perscription>(item);
-        //     _context.Perscription.Add(perscription);
-        // }
-        // foreach (var item in newRiskLevel)
-        // {
-        //     var risk = _mapper.Map<Models.RiskLevelModel.RiskLevel>(item);
-        //     _context.RiskLevel.Add(risk);
-        // }
+        foreach (var item in newRole)
+        {
+            var role = _mapper.Map<Models.Role.Role>(item);
+            _context.Role.Add(role);
+        }
+        foreach (var item in newZone)
+        {
+            var zone = _mapper.Map<Models.ZoneModel.Zone>(item);
+            _context.Zone.Add(zone);
+        }
+        foreach (var item in newPerscrition)
+        {
+            var perscription = _mapper.Map<Models.AppointmentModel.Perscription>(item);
+            _context.Perscription.Add(perscription);
+        }
+        foreach (var item in newRiskLevel)
+        {
+            var risk = _mapper.Map<Models.RiskLevelModel.RiskLevel>(item);
+            _context.RiskLevel.Add(risk);
+        }
         foreach (var item in newSurvey)
         {
             var survey = _mapper.Map<Models.SurveyModel.SurveyType>(item);
             _context.SurveyType.Add(survey);
         }
-        foreach (var item in newSurveyQ)
-        {
-            var requestStatus = _mapper.Map<Models.SurveyModel.SurveyQuestion>(item);
-            _context.SurveyQuestion.Add(requestStatus);
-        }
-        foreach (var item in newSurveyA)
-        {
-            var requestAnswer = _mapper.Map<Models.SurveyModel.SurveyAnswer>(item);
-            _context.SurveyAnswer.Add(requestAnswer);
-        }
+        // foreach (var item in newSurveyQ)
+        // {
+        //     var requestStatus = _mapper.Map<Models.SurveyModel.SurveyQuestion>(item);
+        //     _context.SurveyQuestion.Add(requestStatus);
+        // }
+        // foreach (var item in newSurveyA)
+        // {
+        //     var requestAnswer = _mapper.Map<Models.SurveyModel.SurveyAnswer>(item);
+        //     _context.SurveyAnswer.Add(requestAnswer);
+        // }
 
 
         foreach (var item in newAppointmentStatus)
@@ -403,11 +434,6 @@ public class SeedService : ISeedService
             var status = _mapper.Map<Models.AppointmentModel.AppointmentStatus>(item);
             _context.AppointmentStatus.Add(status);
         }
-        // foreach (var item in newAppointment)
-        // {
-        //     var appointment = _mapper.Map<Models.AppointmentModel.Appointment>(item);
-        //     _context.Appointment.Add(appointment);
-        // }
 
 
         await _context.SaveChangesAsync();

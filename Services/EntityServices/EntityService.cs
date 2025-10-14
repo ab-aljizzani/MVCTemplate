@@ -237,4 +237,8 @@ public class EntityService : IEntityService
         return serviceResponse;
     }
 
+    public Task<ServiceResponse<GetEntityDto>> DeleteEntity_2(int id)
+    {
+        throw new NotImplementedException();
+    }
 }

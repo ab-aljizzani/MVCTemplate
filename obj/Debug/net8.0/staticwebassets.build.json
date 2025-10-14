@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {
   "Version": 1,
   "Hash": "PxYg4fE+cZrnSpgkZOXjf3akagUPQzrhoePOPPsXuhU=",
@@ -11,6 +10,3 @@
   "Assets": [],
   "Endpoints": []
 }
-=======
-{"Version":1,"Hash":"PxYg4fE+cZrnSpgkZOXjf3akagUPQzrhoePOPPsXuhU=","Source":"ClinicApi","BasePath":"_content/ClinicApi","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
->>>>>>> eab2a2e4cc76d0ed88822bdd8ad0812476bddd3b
