@@ -69,7 +69,7 @@ public class SickLeaveService : ISickLeaveService
     public async Task<ServiceResponse<List<GetSickLeaveDto>>> GetAllSickLeave()
     {
         var serviceResponse = new ServiceResponse<List<GetSickLeaveDto>>();
-        var dbContext = await _context.SickLeave.Include(s => s.PortalUser).ToListAsync();
+        var dbContext = await _context.SickLeave.Include(s => s.PortalUser).Include(p => p.Person).ToListAsync();
         serviceResponse.Data = dbContext.Select(e => _mapper.Map<GetSickLeaveDto>(e)).ToList();
         return serviceResponse;
     }
@@ -129,14 +129,14 @@ public class SickLeaveService : ISickLeaveService
         var serviceResponse = new ServiceResponse<GetSickLeaveDto>();
         try
         {
-            var sickLeave = await _context.SickLeave.FirstOrDefaultAsync(e => e.Id == updateSickLeave.Id);
-            var OldData = await _context.SickLeave.FirstOrDefaultAsync(e => e.Id == updateSickLeave.Id);
+            var sickLeave = await _context.SickLeave.FirstOrDefaultAsync(e => e.AppointmentId == updateSickLeave.AppointmentId);
+            var OldData = await _context.SickLeave.FirstOrDefaultAsync(e => e.AppointmentId == updateSickLeave.AppointmentId);
             var json = JsonConvert.SerializeObject(OldData);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
             serviceResponse.OldData = content.ReadAsStringAsync().Result;
             if (sickLeave is null)
             {
-                throw new Exception($"The Id '{updateSickLeave.Id}'Is Not Founde...");
+                throw new Exception($"The AppointmentId '{updateSickLeave.AppointmentId}'Is Not Founde...");
             }
             _mapper.Map(updateSickLeave, sickLeave);
             await _context.SaveChangesAsync();

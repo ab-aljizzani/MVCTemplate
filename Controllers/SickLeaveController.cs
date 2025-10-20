@@ -67,7 +67,7 @@ namespace ClinicApi.Controllers
         public async Task<ActionResult<GetSickLeaveDto>> UpdateSickLeaveSehaty(UpdateSickLeaveSehatyDto updateSickLeave)
         {
             var response = await _sickLeave.UpdateSickLeaveSehaty(updateSickLeave);
-            await _auditService.PutAudit($"Update SickLeave For '{updateSickLeave.Id + " To " + updateSickLeave}' By User ", response.OldData);
+            await _auditService.PutAudit($"Update SickLeave For '{updateSickLeave.AppointmentId + " To " + updateSickLeave}' By User ", response.OldData);
             if (response.Success == false)
                 return NotFound(response);
             return Ok(response);
