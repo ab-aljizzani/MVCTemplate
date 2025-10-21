@@ -144,6 +144,15 @@ public class SeedService : ISeedService
         var fsss3 = FormattableStringFactory.Create("ALTER TABLE AppointmentReview CHECK CONSTRAINT all");
         _context.Database.ExecuteSql(fsss3);
 
+        var fsss7 = FormattableStringFactory.Create("ALTER TABLE SickLeave NOCHECK CONSTRAINT all");
+        _context.Database.ExecuteSql(fsss7);
+        var all7 = from c in _context.SickLeave select c;
+        _context.SickLeave.RemoveRange(all7);
+        var fs7 = FormattableStringFactory.Create("DBCC CHECKIDENT('SickLeave', RESEED, 0)");
+        _context.Database.ExecuteSql(fs7);
+        var fsss77 = FormattableStringFactory.Create("ALTER TABLE SickLeave CHECK CONSTRAINT all");
+        _context.Database.ExecuteSql(fsss77);
+
         var fss4 = FormattableStringFactory.Create("ALTER TABLE Person NOCHECK CONSTRAINT all");
         _context.Database.ExecuteSql(fss4);
         var all4 = from c in _context.Person select c;
@@ -171,14 +180,6 @@ public class SeedService : ISeedService
         var fsss6 = FormattableStringFactory.Create("ALTER TABLE UserSurveyAnswerTimes CHECK CONSTRAINT all");
         _context.Database.ExecuteSql(fsss6);
 
-        var fsss7 = FormattableStringFactory.Create("ALTER TABLE SickLeave NOCHECK CONSTRAINT all");
-        _context.Database.ExecuteSql(fsss7);
-        var all7 = from c in _context.SickLeave select c;
-        _context.SickLeave.RemoveRange(all7);
-        var fs7 = FormattableStringFactory.Create("DBCC CHECKIDENT('SickLeave', RESEED, 0)");
-        _context.Database.ExecuteSql(fs7);
-        var fsss77 = FormattableStringFactory.Create("ALTER TABLE SickLeave CHECK CONSTRAINT all");
-        _context.Database.ExecuteSql(fsss77);
 
         var fss8 = FormattableStringFactory.Create("ALTER TABLE UserSurveyList NOCHECK CONSTRAINT all");
         _context.Database.ExecuteSql(fss8);
