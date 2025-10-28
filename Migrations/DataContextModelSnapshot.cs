@@ -780,6 +780,9 @@ namespace ClinicApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
                     b.Property<int>("PortalUserId")
                         .HasColumnType("int");
 
@@ -796,6 +799,8 @@ namespace ClinicApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
 
                     b.HasIndex("PortalUserId");
 
@@ -1252,11 +1257,19 @@ namespace ClinicApi.Migrations
 
             modelBuilder.Entity("ClinicApi.Models.SickLeaveModel.SickLeave", b =>
                 {
+                    b.HasOne("ClinicApi.Models.PersonModel.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ClinicApi.Models.PortalUser.PortalUser", "PortalUser")
                         .WithMany()
                         .HasForeignKey("PortalUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Person");
 
                     b.Navigation("PortalUser");
                 });
