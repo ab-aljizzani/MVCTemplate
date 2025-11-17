@@ -1,16 +1,1 @@
-<<<<<<< HEAD
 {"Version":1,"Hash":"PxYg4fE+cZrnSpgkZOXjf3akagUPQzrhoePOPPsXuhU=","Source":"ClinicApi","BasePath":"_content/ClinicApi","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
-=======
-{
-  "Version": 1,
-  "Hash": "PxYg4fE+cZrnSpgkZOXjf3akagUPQzrhoePOPPsXuhU=",
-  "Source": "ClinicApi",
-  "BasePath": "_content/ClinicApi",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
-}
->>>>>>> 6555b1c8001033672ed8b40f556f80365df3715a
