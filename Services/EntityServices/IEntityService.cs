@@ -12,6 +12,7 @@ public interface IEntityService
     Task<ServiceResponse<int>> AddNewEntity(AddEntityDto newEntity);
     Task<ServiceResponse<GetEntityDto>> UpdateEntity(UpdateEntityDto updateEnityt);
     Task<ServiceResponse<GetEntityDto>> DeleteEntity(int id);
+    Task<ServiceResponse<GetEntityDto>> DeleteEntity_2(int id);
 
 
     Task<ServiceResponse<List<DepartmentDto>>> GetAlldepartments();

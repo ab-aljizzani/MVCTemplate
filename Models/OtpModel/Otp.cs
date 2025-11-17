@@ -8,7 +8,9 @@ public class Otp
     // public string NationalId { get; set; } = string.Empty;
     public string mobile { get; set; } = string.Empty;
     public string content { get; set; } = string.Empty;
-    public DateTime SendDateTime { get; set; } = DateTime.Now;
+    public int language { get; set; } = 0;
+    public int otpType { get; set; } = 0;
+    public DateTime SendDateTime { get; set; }
     // public bool IsDeliverd { get; set; } = false;
 
 

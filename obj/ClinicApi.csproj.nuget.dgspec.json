@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj": {}
   },
   "projects": {
@@ -12,12 +13,43 @@
         "projectPath": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj",
         "packagesPath": "C:\\Users\\abalj\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\obj\\",
+=======
+<<<<<<< HEAD
+    "C:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\ClinicApi.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\ClinicApi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\ClinicApi.csproj",
+        "projectName": "ClinicApi",
+        "projectPath": "C:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\ClinicApi.csproj",
+        "packagesPath": "C:\\Users\\SRG1\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\obj\\",
+=======
+    "c:\\Users\\557657\\Documents\\GitRep\\ClinicApi\\ClinicApi.csproj": {}
+  },
+  "projects": {
+    "c:\\Users\\557657\\Documents\\GitRep\\ClinicApi\\ClinicApi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\Users\\557657\\Documents\\GitRep\\ClinicApi\\ClinicApi.csproj",
+        "projectName": "ClinicApi",
+        "projectPath": "c:\\Users\\557657\\Documents\\GitRep\\ClinicApi\\ClinicApi.csproj",
+        "packagesPath": "C:\\Users\\557657\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\557657\\Documents\\GitRep\\ClinicApi\\obj\\",
+>>>>>>> 7c9dbbbead3c27f60a728ca5a7f197ada28a6058
+>>>>>>> 6555b1c8001033672ed8b40f556f80365df3715a
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
+<<<<<<< HEAD
           "C:\\Users\\abalj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "C:\\Users\\557657\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 6555b1c8001033672ed8b40f556f80365df3715a
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +58,10 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+<<<<<<< HEAD
           "C:\\Program Files\\dotnet\\library-packs": {},
+=======
+>>>>>>> 6555b1c8001033672ed8b40f556f80365df3715a
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,9 +78,15 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
+<<<<<<< HEAD
           "auditMode": "direct"
         },
         "SdkAnalysisLevel": "9.0.300"
+=======
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+>>>>>>> 6555b1c8001033672ed8b40f556f80365df3715a
       },
       "frameworks": {
         "net8.0": {
@@ -137,7 +178,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+>>>>>>> 6555b1c8001033672ed8b40f556f80365df3715a
         }
       }
     }
