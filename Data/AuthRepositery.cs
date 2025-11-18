@@ -45,25 +45,25 @@ public class AuthRepositery : IAuthRepositery
             response.Message = "User Not Found... ";
         }
 
-        else if (user.Status == "DisActive")
-        {
-            response.Success = false;
-            response.Message = "User DisActive... ";
-        }
-        else if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-        {
-            response.Success = false;
-            response.Message = "Wrong Password...";
-            user.LoginAttemp = user.LoginAttemp + 1;
-            await _context.SaveChangesAsync();
-            if (user.LoginAttemp >= 4)
-            {
-                response.Success = false;
-                response.Message = _magicString.LoginAttimptMessage;
-                user.Status = "DisActive";
-                await _context.SaveChangesAsync();
-            }
-        }
+        // else if (user.Status == "DisActive")
+        // {
+        //     response.Success = false;
+        //     response.Message = "User DisActive... ";
+        // }
+        // else if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+        // {
+        //     response.Success = false;
+        //     response.Message = "Wrong Password...";
+        //     user.LoginAttemp = user.LoginAttemp + 1;
+        //     await _context.SaveChangesAsync();
+        //     if (user.LoginAttemp >= 4)
+        //     {
+        //         response.Success = false;
+        //         response.Message = _magicString.LoginAttimptMessage;
+        //         user.Status = "DisActive";
+        //         await _context.SaveChangesAsync();
+        //     }
+        // }
         else
         {
             user.Code = _random.Next(0, 9999).ToString("D4");
