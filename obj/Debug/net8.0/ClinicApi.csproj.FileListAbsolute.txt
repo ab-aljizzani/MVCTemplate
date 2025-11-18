@@ -799,6 +799,8 @@ C:\Users\abalj\OneDrive\Desktop\Clinic\ClinicApi\obj\Debug\net8.0\refint\ClinicA
 C:\Users\abalj\OneDrive\Desktop\Clinic\ClinicApi\obj\Debug\net8.0\ClinicApi.pdb
 C:\Users\abalj\OneDrive\Desktop\Clinic\ClinicApi\obj\Debug\net8.0\ClinicApi.genruntimeconfig.cache
 C:\Users\abalj\OneDrive\Desktop\Clinic\ClinicApi\obj\Debug\net8.0\ref\ClinicApi.dll
+=======
+>>>>>>> 7c9dbbbead3c27f60a728ca5a7f197ada28a6058
 C:\Users\SRG1\Documents\GitRepo\ClinicApi\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\SRG1\Documents\GitRepo\ClinicApi\bin\Debug\net8.0\appsettings.json
 C:\Users\SRG1\Documents\GitRepo\ClinicApi\bin\Debug\net8.0\ClinicApi.staticwebassets.endpoints.json
@@ -959,5 +961,3 @@ C:\Users\SRG1\Documents\GitRepo\ClinicApi\obj\Debug\net8.0\refint\ClinicApi.dll
 C:\Users\SRG1\Documents\GitRepo\ClinicApi\obj\Debug\net8.0\ClinicApi.pdb
 C:\Users\SRG1\Documents\GitRepo\ClinicApi\obj\Debug\net8.0\ClinicApi.genruntimeconfig.cache
 C:\Users\SRG1\Documents\GitRepo\ClinicApi\obj\Debug\net8.0\ref\ClinicApi.dll
-=======
->>>>>>> 7c9dbbbead3c27f60a728ca5a7f197ada28a6058
