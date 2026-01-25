@@ -65,7 +65,7 @@ namespace ClinicApi.Controllers
             return Ok(await _entityService.GetDepartmentCountByEntityID(int.Parse(userEntity)));
         }
         [HttpPost]
-        public async Task<ActionResult<List<GetEntityDto>>> AddNewDepartment(AddDepartmentDto newDepartment)
+        public async Task<ActionResult<List<DepartmentDto>>> AddNewDepartment(AddDepartmentDto newDepartment)
         {
 
             await _auditService.PostAudit($"Insert Department '{newDepartment.DepartmentName}' By User ");

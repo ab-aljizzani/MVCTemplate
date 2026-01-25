@@ -20,7 +20,7 @@ public interface IEntityService
     Task<ServiceResponse<List<DepartmentDto>>> GetDepartmentByEntityID(int id);
     Task<ServiceResponse<List<DepartmentDto>>> GetDeptEntity();
     Task<string> GetDepartmentCountByEntityID(int id);
-    Task<ServiceResponse<List<GetEntityDto>>> AddNewDepartment(AddDepartmentDto newDepartment);
+    Task<ServiceResponse<DepartmentDto>> AddNewDepartment(AddDepartmentDto newDepartment);
     Task<ServiceResponse<DepartmentDto>> UpdateDepartment(UpdateDepartmentDot updateDepartment);
     Task<ServiceResponse<GetEntityDto>> DeleteDepartment(int id);
 }

@@ -34,9 +34,9 @@ public class EntityService : IEntityService
     }
 
 
-    public async Task<ServiceResponse<List<GetEntityDto>>> AddNewDepartment(AddDepartmentDto newDepartment)
+    public async Task<ServiceResponse<DepartmentDto>> AddNewDepartment(AddDepartmentDto newDepartment)
     {
-        var serviceResponse = new ServiceResponse<List<GetEntityDto>>();
+        var serviceResponse = new ServiceResponse<DepartmentDto>();
         try
         {
             var entity = await _context.Entity.FirstOrDefaultAsync(d => d.Id == newDepartment.EntityId);
@@ -46,10 +46,23 @@ public class EntityService : IEntityService
                 serviceResponse.Message = "Entity Not Found...";
                 return serviceResponse;
             }
+            if (string.IsNullOrEmpty(newDepartment.DepartmentName))
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = "Department Name Cannot Be Null Or Empty...";
+                return serviceResponse;
+            }
+            if (await _context.Department.AnyAsync(d => d.DepartmentName.ToLower() == newDepartment.DepartmentName.ToLower() && d.EntityId == newDepartment.EntityId))
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = "Department Name Already Exists For This Entity...";
+                return serviceResponse;
+            }
             var department = _mapper.Map<Department>(newDepartment);
             _context.Department.Add(department);
             await _context.SaveChangesAsync();
             serviceResponse.Message = _magicString.InsertSuccess;
+            serviceResponse.Data = _mapper.Map<DepartmentDto>(department);
         }
         catch (Exception ex)
         {
