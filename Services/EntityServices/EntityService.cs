@@ -153,7 +153,6 @@ public class EntityService : IEntityService
     }
 
 
-
     public async Task<ServiceResponse<DepartmentDto>> GetDepartmentByID(int id)
     {
         var serviceResponse = new ServiceResponse<DepartmentDto>();
@@ -253,5 +252,20 @@ public class EntityService : IEntityService
     public Task<ServiceResponse<GetEntityDto>> DeleteEntity_2(int id)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<ServiceResponse<List<DepartmentDto>>> GetDeptByName(string name)
+    {
+        var serviceResponse = new ServiceResponse<List<DepartmentDto>>();
+        if (string.IsNullOrEmpty(name))
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = "Department Name Cannot Be Null Or Empty...";
+            return serviceResponse;
+        }
+        var dbContext = await _context.Department.Where(d => d.EntityId == 1 && d.DepartmentName.ToLower() == name.ToLower()).ToListAsync();
+
+        serviceResponse.Data = dbContext.Select(e => _mapper.Map<DepartmentDto>(e)).ToList();
+        return serviceResponse;
     }
 }

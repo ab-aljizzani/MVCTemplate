@@ -51,6 +51,13 @@ namespace ClinicApi.Controllers
             return Ok(await _personSerice.GetPersonByNationalId(id));
         }
         [HttpGet]
+        [Route("CheckPersonByNationalId")]
+        public async Task<ActionResult<string>> CheckPersonByNationalId(string id)
+        {
+            await _auditService.PostAuditWuthNoToken($"View Single Person By National Id Exist Or Not With National Id Number '{id}'", id);
+            return Ok(await _personSerice.CheckPersonByNationalId(id));
+        }
+        [HttpGet]
         [Route("GetPersonsByEntity")]
         public async Task<ActionResult<List<PersonDto>>> GetPersonsByEntity(int id)
         {

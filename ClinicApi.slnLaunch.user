@@ -8,7 +8,7 @@
         "DebugTarget": "http"
       },
       {
-        "Path": "..\\ClinicPortal\\ClinicPortal.csproj",
+        "Path": "..\\ClinicDashboard\\ClinicDashboard.csproj",
         "Action": "Start",
         "DebugTarget": "http"
       }

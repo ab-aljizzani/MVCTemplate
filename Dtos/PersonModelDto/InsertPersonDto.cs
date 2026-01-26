@@ -42,4 +42,5 @@ public class InsertPersonDto
     [Display(Name = "المرتبة الوظيفية")]
     public string Grade { get; set; } = string.Empty;
     public int? RoleId { get; set; } = 8;
+    public bool IsInternal { get; set; }
 }
