@@ -251,8 +251,10 @@ public class SeedService : ISeedService
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الحضور", StatusOrder = 4, BadgeColor = "badge rounded-pill bg-primary mx-auto" });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "لم يحضر", StatusOrder = 5, BadgeColor = "badge rounded-pill bg-danger mx-auto" });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الانتهاء", StatusOrder = 6, BadgeColor = "badge rounded-pill bg-soft-dark mx-auto" });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "بحاجة لتقييم الطبيب", StatusOrder = 7, BadgeColor = "badge rounded-pill bg-dark mx-auto" });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "إنتظار تقرير العمل", StatusOrder = 8, BadgeColor = "badge rounded-pill bg-dark mx-auto" });
 
-        List<InsertRequestTypeDto> newRequestType = new List<InsertRequestTypeDto>();
+        List<InsertRequestTypeDto> newRequestType = new List<InsertRequestTypeDto>(); 
         newRequestType.Add(new InsertRequestTypeDto { Type = "داخلي من الإدارة", BadgeColor = "badge rounded-pill bg-primary mx-auto" });
         newRequestType.Add(new InsertRequestTypeDto { Type = "خارجي من العيادة", BadgeColor = "badge rounded-pill bg-success mx-auto" });
 
@@ -433,16 +435,16 @@ public class SeedService : ISeedService
             var survey = _mapper.Map<Models.SurveyModel.SurveyType>(item);
             _context.SurveyType.Add(survey);
         }
-        // foreach (var item in newSurveyQ)
-        // {
-        //     var requestStatus = _mapper.Map<Models.SurveyModel.SurveyQuestion>(item);
-        //     _context.SurveyQuestion.Add(requestStatus);
-        // }
-        // foreach (var item in newSurveyA)
-        // {
-        //     var requestAnswer = _mapper.Map<Models.SurveyModel.SurveyAnswer>(item);
-        //     _context.SurveyAnswer.Add(requestAnswer);
-        // }
+        foreach (var item in newSurveyQ)
+        {
+            var requestStatus = _mapper.Map<Models.SurveyModel.SurveyQuestion>(item);
+            _context.SurveyQuestion.Add(requestStatus);
+        }
+        foreach (var item in newSurveyA)
+        {
+            var requestAnswer = _mapper.Map<Models.SurveyModel.SurveyAnswer>(item);
+            _context.SurveyAnswer.Add(requestAnswer);
+        }
 
 
         foreach (var item in newAppointmentStatus)

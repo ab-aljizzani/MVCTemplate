@@ -16,7 +16,8 @@ public interface IRequestService
   Task<ServiceResponse<UpdateRequestDto>> UpdateRequest(UpdateRequestDto updateRequest);
   Task<ServiceResponse<UpdateRequestDto>> UpdateRequestAppsentReason(UpdateRequestAppsentReasonDto updateRequest);
   Task<ServiceResponse<UpdateRequestDto>> UpdateRequestStatusId(UpdateRequestStatusIdDto updateRequest);
-  Task<ServiceResponse<UpdateRequestDto>> UpdateRequesIsSurveyInserted(UpdateRequestSurveyInsertedDto updateRequest);
+    Task<ServiceResponse<UpdateRequestDto>> UpdateRequestShowUp(UpdateRequestShowupDto updateRequest);
+    Task<ServiceResponse<UpdateRequestDto>> UpdateRequesIsSurveyInserted(UpdateRequestSurveyInsertedDto updateRequest);
   Task<ServiceResponse<UpdateRequestDto>> UpdateReqAppointmentId(UpdateReqAppointmentIdDto updateRequest);
   Task<ServiceResponse<GetRequestDto>> DeleteRequest(int id);
 

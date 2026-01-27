@@ -22,7 +22,7 @@ namespace ClinicApi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PersonId = table.Column<int>(type: "int", nullable: false),
                     PortalUserId = table.Column<int>(type: "int", nullable: false),
-                    RequstStatusId = table.Column<int>(type: "int", nullable: false),
+                    RequestStatusId = table.Column<int>(type: "int", nullable: false),
                     SurveyId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

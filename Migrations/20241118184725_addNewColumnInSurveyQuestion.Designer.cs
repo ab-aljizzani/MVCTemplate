@@ -255,7 +255,7 @@ namespace ClinicApi.Migrations
                     b.Property<int>("PortalUserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RequstStatusId")
+                    b.Property<int>("RequestStatusId")
                         .HasColumnType("int");
 
                     b.Property<int>("SurveyId")

@@ -1,47 +1,23 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj": {}
-=======
-<<<<<<< HEAD
-    "C:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\ClinicApi.csproj": {}
-=======
-    "c:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj": {}
->>>>>>> a68546c70f8d00f94a762bdba883382ccd04b375
->>>>>>> ea92188ae7ab542a4701f6b409b369e2852f7e34
+    "C:\\Users\\557657\\Documents\\GitRepo\\ab-aljizzani\\ClinicApi\\ClinicApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj": {
+    "C:\\Users\\557657\\Documents\\GitRepo\\ab-aljizzani\\ClinicApi\\ClinicApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj",
+        "projectUniqueName": "C:\\Users\\557657\\Documents\\GitRepo\\ab-aljizzani\\ClinicApi\\ClinicApi.csproj",
         "projectName": "ClinicApi",
-<<<<<<< HEAD
-        "projectPath": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj",
-        "packagesPath": "C:\\Users\\abalj\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\obj\\",
-=======
-<<<<<<< HEAD
-        "projectPath": "C:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\ClinicApi.csproj",
-        "packagesPath": "C:\\Users\\SRG1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SRG1\\Documents\\GitRepo\\ClinicApi\\obj\\",
-=======
-        "projectPath": "c:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj",
-        "packagesPath": "C:\\Users\\abalj\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\obj\\",
->>>>>>> a68546c70f8d00f94a762bdba883382ccd04b375
->>>>>>> ea92188ae7ab542a4701f6b409b369e2852f7e34
+        "projectPath": "C:\\Users\\557657\\Documents\\GitRepo\\ab-aljizzani\\ClinicApi\\ClinicApi.csproj",
+        "packagesPath": "C:\\Users\\557657\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\557657\\Documents\\GitRepo\\ab-aljizzani\\ClinicApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-<<<<<<< HEAD
-          "C:\\Users\\SRG1\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-          "C:\\Users\\abalj\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> a68546c70f8d00f94a762bdba883382ccd04b375
+          "C:\\Users\\557657\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -49,10 +25,7 @@
           "net8.0"
         ],
         "sources": {
-<<<<<<< HEAD
-=======
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
->>>>>>> a68546c70f8d00f94a762bdba883382ccd04b375
           "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -81,6 +54,10 @@
             "AutoMapper": {
               "target": "Package",
               "version": "[13.0.1, )"
+            },
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.105.0, )"
             },
             "Json.Net": {
               "target": "Package",
@@ -164,11 +141,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
->>>>>>> a68546c70f8d00f94a762bdba883382ccd04b375
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.310/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
