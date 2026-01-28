@@ -34,6 +34,13 @@ namespace ClinicApi.Controllers
             await _auditService.PostAudit($"View Single Request By Id With Id Number '{id}' For User");
             return Ok(await _requestService.GetRequestByID(id));
         }
+        [HttpGet]
+        [Route("GetRequestsStatistics")]
+        public async Task<ActionResult<object>> GetRequestsStatistics()
+        {
+            await _auditService.PostAudit($"View Requests Statistics For User");
+            return Ok(await _requestService.GetRequestsStatistics());
+        }
         [AllowAnonymous]
         [HttpGet]
         [Route("GetByPersonId")]

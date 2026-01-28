@@ -6,6 +6,7 @@ using ClinicApi.Dtos.RequestDto.Get;
 using ClinicApi.Dtos.RequestDto.Insert;
 using ClinicApi.Dtos.RequestDto.Update;
 using ClinicApi.Models.Reponse;
+using ClinicApi.ViewModel.Statistics;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -244,6 +245,109 @@ public class RequestService : IRequestService
         }
         serviceResponse.Data = dbContext.Select(p => _mapper.Map<GetRequestDto>(p)).ToList();
         return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<List<DoctorStatisticsVm>>> GetRequestsStatistics()
+    {
+        var response = new ServiceResponse<List<DoctorStatisticsVm>>();
+
+        try
+        {
+            // Pull requests joined to appointments, then resolve status via RequestStatus.Status
+            var requestRows = await _context.Request
+                .AsNoTracking()
+                .Where(r => r.AppointmentId != null)
+                .Select(r => new
+                {
+                    AppointmentId = r.AppointmentId!.Value,
+                    r.RequestStatusId,
+                    r.LastStatusDate,
+                    r.CreatedDate
+                })
+                .Join(
+                    _context.Appointment.AsNoTracking(),
+                    r => r.AppointmentId,
+                    a => a.Id,
+                    (r, a) => new
+                    {
+                        DoctorId = a.PortalUserId, // doctor comes from Appointment.PortalUserId
+                        r.AppointmentId,
+                        r.RequestStatusId,
+                        r.LastStatusDate,
+                        r.CreatedDate
+                    }
+                )
+                .Join(
+                    _context.RequestStatus.AsNoTracking(),
+                    x => x.RequestStatusId,
+                    rs => rs.Id,
+                    (x, rs) => new
+                    {
+                        x.DoctorId,
+                        x.AppointmentId,
+                        Status = rs.Status,
+                        x.LastStatusDate,
+                        x.CreatedDate
+                    }
+                )
+                .ToListAsync();
+
+            // If multiple Request rows exist per AppointmentId, keep the latest one
+            var latestPerAppointment = requestRows
+                .GroupBy(x => new { x.DoctorId, x.AppointmentId })
+                .Select(g => g
+                    .OrderByDescending(x => x.LastStatusDate ?? x.CreatedDate)
+                    .First()
+                )
+                .ToList();
+
+            // Load doctors that actually appear in the appointment/request set
+            var doctorIds = latestPerAppointment.Select(x => x.DoctorId).Distinct().ToList();
+
+            var doctors = await _context.PortalUser
+                .AsNoTracking()
+                .Where(d => doctorIds.Contains(d.Id))
+                .Include(d => d.Role)
+                .ToListAsync();
+
+            response.Data = doctors.Select(d =>
+            {
+                var docItems = latestPerAppointment
+                    .Where(x => x.DoctorId == d.Id)
+                    .ToList();
+
+                var ids = docItems.Select(x => (int)x.AppointmentId).ToList();
+
+                return new DoctorStatisticsVm
+                {
+                    Id = d.Id,
+                    DoctorName = d.UserFullName,            // PortalUser.UserFullName
+                    DoctorRole = d.Role?.RoleArabName ?? "",    // PortalUser.Role.RoleName
+                    Request = new RequestVm
+                    {
+                        Ids = ids,
+                        AllRequestCount = ids.Count,
+                        RequestStatus = docItems.Select(x => new RequestStatusVm
+                        {
+                            RequestId = (int)x.AppointmentId, // appointments.ids
+                            Status = (string)x.Status         // RequestStatus.Status
+                        }).ToList()
+                    }
+                };
+            }).ToList();
+
+            response.Success = true;
+            response.Message = "Doctor requests statistics";
+            return response;
+        }
+        catch (Exception ex)
+        {
+            response.Success = false;
+            response.Message = ex.Message;
+            response.Data = new List<DoctorStatisticsVm>();
+            return response;
+        }
+
     }
 
     public async Task<ServiceResponse<GetRequestStatusDto>> GetRequestStatusByID(int id)

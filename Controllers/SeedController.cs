@@ -48,5 +48,33 @@ namespace ClinicApi.Controllers
             else
                 return NotFound();
         }
+        [HttpPost]
+        [Authorize]
+        [Route("DeleteDatabaseWithBackup")]
+        public async Task<ActionResult<string>> DeleteDatabaseWithBackup()
+        {
+            var role = _token.GetRoleToken("Role");
+            if (role == "SuperAdmin")
+            {
+                await _auditService.PostAuditWuthNoToken("Delete All Database And Generate Backup File ", "Seed");
+                return Ok(await _seedService.BackupAndDeleteDatabase());
+            }
+            else
+                return NotFound();
+        }
+        [HttpPost]
+        [Authorize]
+        [Route("BackupDatabase")]
+        public async Task<ActionResult<string>> BackupDatabase()
+        {
+            var role = _token.GetRoleToken("Role");
+            if (role == "SuperAdmin")
+            {
+                await _auditService.PostAuditWuthNoToken("Backup Database Service", "Seed");
+                return Ok(await _seedService.BackupDatabaseOnly());
+            }
+            else
+                return NotFound();
+        }
     }
 }

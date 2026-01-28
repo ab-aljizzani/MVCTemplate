@@ -6663,39 +6663,23 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\abalj\\.nuget\\packages\\": {},
-=======
-    "C:\\Users\\557657\\.nuget\\packages\\": {},
->>>>>>> 01a153f5286cd20dc51685125c55cc4d09f9952d
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj",
       "projectName": "ClinicApi",
       "projectPath": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj",
       "packagesPath": "C:\\Users\\abalj\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\obj\\",
-=======
-      "projectUniqueName": "C:\\Users\\557657\\Documents\\GitRepo\\ab-aljizzani\\ClinicApi\\ClinicApi.csproj",
-      "projectName": "ClinicApi",
-      "projectPath": "C:\\Users\\557657\\Documents\\GitRepo\\ab-aljizzani\\ClinicApi\\ClinicApi.csproj",
-      "packagesPath": "C:\\Users\\557657\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\557657\\Documents\\GitRepo\\ab-aljizzani\\ClinicApi\\obj\\",
->>>>>>> 01a153f5286cd20dc51685125c55cc4d09f9952d
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-<<<<<<< HEAD
         "C:\\Users\\abalj\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-        "C:\\Users\\557657\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> 01a153f5286cd20dc51685125c55cc4d09f9952d
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -6819,20 +6803,8 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
-=======
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.310/PortableRuntimeIdentifierGraph.json"
->>>>>>> 01a153f5286cd20dc51685125c55cc4d09f9952d
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0."
-    }
-  ]
+  }
 }
