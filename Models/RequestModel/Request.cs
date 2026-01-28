@@ -11,7 +11,7 @@ public class Request
 {
     public int Id { get; set; }
     public DateTime CreatedDate { get; set; }
-    public DateTime LastStatusDate { get; set; }
+    public DateTime? LastStatusDate { get; set; }
     public int PersonId { get; set; }
     public Person? Person { get; set; }
     public int PortalUserId { get; set; }
@@ -24,7 +24,8 @@ public class Request
     public SurveyType? SurveyType { get; set; }
     public int? AppointmentId { get; set; }
     public Appointment? Appointment { get; set; }
-    public string AppsentReason { get; set; } = string.Empty;
+    public string? AppsentReason { get; set; } = string.Empty;
     public bool IsSurveyInserted { get; set; }
+    public bool? IsPersonShowUp { get; set; }
 
 }

@@ -23,6 +23,12 @@ public class PersonService : IPersonService
     public async Task<ServiceResponse<List<PersonDto>>> AddNewPerson(InsertPersonDto newPerson)
     {
         var serviceResponse = new ServiceResponse<List<PersonDto>>();
+        var checkPerson =await _context.Person.Where(p => p.NationalId == newPerson.NationalId).FirstOrDefaultAsync();
+        if (checkPerson != null) {
+            serviceResponse.Success = false;
+            serviceResponse.Message = "Person Already Exists ...";
+            return serviceResponse;
+        }
         if (newPerson.PersonalImgId == 0 || newPerson?.PersonalImgId == null)
         {
             var personDto = _mapper.Map<InsertPersonNoPersonImgDto>(newPerson);
@@ -38,6 +44,18 @@ public class PersonService : IPersonService
             _context.SaveChanges();
             serviceResponse.Data = await _context.Person.Select(p => _mapper.Map<PersonDto>(p)).ToListAsync();
         }
+        return serviceResponse;
+     }
+
+    public async Task<ServiceResponse<bool>> CheckPersonByNationalId(string id)
+    {
+        var serviceResponse = new ServiceResponse<bool>();
+        var dbContext = await _context.Person.Where(p => p.NationalId == id).Select(p => p.Id).FirstOrDefaultAsync();
+        if (dbContext <= 0)
+        {
+            throw new Exception($"The Id '{id}'Is Not Founde...");
+        }
+        serviceResponse.Data = true;
         return serviceResponse;
     }
 

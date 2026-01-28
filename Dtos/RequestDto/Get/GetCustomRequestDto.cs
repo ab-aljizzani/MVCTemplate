@@ -33,4 +33,5 @@ public class GetCustomRequestDto
     public byte[]? PersonalImage { get; set; }
     public int? PersonalImgId { get; set; }
     public string Risk { get; set; } = string.Empty;
+    public bool IsPersonShowUp { get; set; }
 }

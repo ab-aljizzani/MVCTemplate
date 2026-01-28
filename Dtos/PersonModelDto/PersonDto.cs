@@ -52,4 +52,5 @@ public class PersonDto
     public string Grade { get; set; } = string.Empty;
     public int PersonalImgId { get; set; }
     public PersonalImgDto? PersonalImg { get; set; }
+    public bool IsInternal { get; set; }
 }

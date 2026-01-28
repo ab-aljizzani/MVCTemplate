@@ -87,6 +87,16 @@ namespace ClinicApi.Controllers
             return Ok(response);
         }
         [HttpPost]
+        [Route("UpdateReqShowUp")]
+        public async Task<ActionResult<UpdateRequestStatusIdDto>> UpdateReqShowUp(UpdateRequestShowupDto updateRequest)
+        {
+            var response = await _requestService.UpdateRequestShowUp(updateRequest);
+            await _auditService.PutAudit($"Update UpdateReqShowUp With ReqId '{updateRequest.Id + " And IsPersonShowUp To" + updateRequest.IsPersonShowUp}' By User ", response.OldData);
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
+        [HttpPost]
         [Route("UpdateReqSurveyInserted")]
         public async Task<ActionResult<UpdateRequestStatusIdDto>> UpdateReqSurveyInserted(UpdateRequestSurveyInsertedDto updateRequest)
         {

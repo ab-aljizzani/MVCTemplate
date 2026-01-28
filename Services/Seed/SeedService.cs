@@ -1,9 +1,12 @@
 using System;
+using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using AutoMapper;
 using ClinicApi.Data;
 using ClinicApi.Dtos.AppointmentDto.Get;
 using ClinicApi.Dtos.AppointmentDto.Insert;
+using ClinicApi.Dtos.CountriesDto.Get;
 using ClinicApi.Dtos.Entity;
 using ClinicApi.Dtos.PortalUserModelDto.Insert;
 using ClinicApi.Dtos.RequestDto.Insert;
@@ -14,7 +17,8 @@ using ClinicApi.Dtos.ZoneModelDto;
 using ClinicApi.Models.AuditsModel;
 using ClinicApi.Models.PortalUser;
 using ClinicApi.Models.Reponse;
-using Microsoft.AspNetCore.Http.HttpResults;
+using ClosedXML.Excel;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClinicApi.Services.Seed;
@@ -24,12 +28,14 @@ public class SeedService : ISeedService
     private readonly IMapper _mapper;
     private readonly DataContext _context;
     private readonly IAuthRepositery _auth;
+    private readonly IWebHostEnvironment _env;
 
-    public SeedService(IMapper mapper, DataContext context, IAuthRepositery auth)
+    public SeedService(IMapper mapper, DataContext context, IAuthRepositery auth, IWebHostEnvironment env)
     {
         _auth = auth;
         _mapper = mapper;
         _context = context;
+        _env = env;
     }
     public async Task<ServiceResponse<string>> DeleteAll()
     {
@@ -222,6 +228,15 @@ public class SeedService : ISeedService
         var fsss11 = FormattableStringFactory.Create("ALTER TABLE SurveyAnswer CHECK CONSTRAINT all");
         _context.Database.ExecuteSql(fsss11);
 
+        var fss12 = FormattableStringFactory.Create("ALTER TABLE Countries NOCHECK CONSTRAINT all");
+        _context.Database.ExecuteSql(fss12);
+        var all12 = from c in _context.SurveyType select c;
+        _context.SurveyType.RemoveRange(all9);
+        var fs12 = FormattableStringFactory.Create("DBCC CHECKIDENT('Countries', RESEED, 0)");
+        _context.Database.ExecuteSql(fs12);
+        var fsss12 = FormattableStringFactory.Create("ALTER TABLE Countries CHECK CONSTRAINT all");
+        _context.Database.ExecuteSql(fsss12);
+
         await _context.SaveChangesAsync();
         serviceResponse.Data = "Delete Seed Exicutes Successfuly";
         return serviceResponse;
@@ -236,8 +251,10 @@ public class SeedService : ISeedService
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الحضور", StatusOrder = 4, BadgeColor = "badge rounded-pill bg-primary mx-auto" });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "لم يحضر", StatusOrder = 5, BadgeColor = "badge rounded-pill bg-danger mx-auto" });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم الانتهاء", StatusOrder = 6, BadgeColor = "badge rounded-pill bg-soft-dark mx-auto" });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "بحاجة لتقييم الطبيب", StatusOrder = 7, BadgeColor = "badge rounded-pill bg-dark mx-auto" });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "إنتظار تقرير العمل", StatusOrder = 8, BadgeColor = "badge rounded-pill bg-dark mx-auto" });
 
-        List<InsertRequestTypeDto> newRequestType = new List<InsertRequestTypeDto>();
+        List<InsertRequestTypeDto> newRequestType = new List<InsertRequestTypeDto>(); 
         newRequestType.Add(new InsertRequestTypeDto { Type = "داخلي من الإدارة", BadgeColor = "badge rounded-pill bg-primary mx-auto" });
         newRequestType.Add(new InsertRequestTypeDto { Type = "خارجي من العيادة", BadgeColor = "badge rounded-pill bg-success mx-auto" });
 
@@ -418,16 +435,16 @@ public class SeedService : ISeedService
             var survey = _mapper.Map<Models.SurveyModel.SurveyType>(item);
             _context.SurveyType.Add(survey);
         }
-        // foreach (var item in newSurveyQ)
-        // {
-        //     var requestStatus = _mapper.Map<Models.SurveyModel.SurveyQuestion>(item);
-        //     _context.SurveyQuestion.Add(requestStatus);
-        // }
-        // foreach (var item in newSurveyA)
-        // {
-        //     var requestAnswer = _mapper.Map<Models.SurveyModel.SurveyAnswer>(item);
-        //     _context.SurveyAnswer.Add(requestAnswer);
-        // }
+        foreach (var item in newSurveyQ)
+        {
+            var requestStatus = _mapper.Map<Models.SurveyModel.SurveyQuestion>(item);
+            _context.SurveyQuestion.Add(requestStatus);
+        }
+        foreach (var item in newSurveyA)
+        {
+            var requestAnswer = _mapper.Map<Models.SurveyModel.SurveyAnswer>(item);
+            _context.SurveyAnswer.Add(requestAnswer);
+        }
 
 
         foreach (var item in newAppointmentStatus)
@@ -455,10 +472,69 @@ public class SeedService : ISeedService
             _context.Entity.Add(entity);
         }
 
+        await SeedCuntriesFromExcel();
         var serviceResponse = new ServiceResponse<string>();
         await _context.SaveChangesAsync();
         serviceResponse.Data = "Seed Exicutes Successfuly";
         return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<string>> SeedCuntriesFromExcel()
+    {
+        // Excel file path (adjust name as needed)
+        var excelPath = Path.Combine(_env.ContentRootPath, "Cuntries.xlsx");
+        if (!File.Exists(excelPath))
+            throw new FileNotFoundException($"Countries Excel file not found at: {excelPath}");
+
+        var newCountry = new List<GetCountrieDto>();
+
+        using (var workbook = new XLWorkbook(excelPath))
+        {
+            var ws = workbook.Worksheets.First();
+
+            var headerRow = ws.FirstRowUsed();
+            if (headerRow is null)
+                return new ServiceResponse<string> { Data = "Excel sheet is empty." };
+
+            var usedRange = ws.RangeUsed();
+            if (usedRange is null)
+                return new ServiceResponse<string> { Data = "Excel sheet is empty." };
+
+            // Find a column named "Country" (case-insensitive). If not found, use first column.
+            var headerCells = headerRow.CellsUsed().ToList();
+            var countryColIndex =
+                headerCells.FirstOrDefault(c => string.Equals(c.GetString().Trim(), "Country", StringComparison.OrdinalIgnoreCase))
+                    ?.Address.ColumnNumber
+                ?? headerCells.First().Address.ColumnNumber;
+
+            foreach (var row in usedRange.RowsUsed().Skip(1)) // skip header
+            {
+                var countryName = row.Cell(countryColIndex).GetString().Trim();
+                if (string.IsNullOrWhiteSpace(countryName))
+                    continue;
+
+                newCountry.Add(new GetCountrieDto { Country = countryName });
+            }
+        }
+
+        // Optional: avoid duplicates (DB side)
+        var existing = await _context.Countries
+            .Select(c => c.Country)
+            .ToListAsync();
+
+        var existingSet = existing
+            .Select(c => c.Trim())
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var dto in newCountry.Where(c => !existingSet.Contains(c.Country.Trim())))
+        {
+            var entity = _mapper.Map<Models.CountriesModel.Countries>(dto);
+            _context.Countries.Add(entity);
+        }
+
+        await _context.SaveChangesAsync();
+
+        return new ServiceResponse<string> { Data = $"Seeded {newCountry.Count} countries from Excel." };
     }
 
     private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

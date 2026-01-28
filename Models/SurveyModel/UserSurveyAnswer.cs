@@ -18,5 +18,5 @@ public class UserSurveyAnswer
     public SurveyAnswer? surveyAnswer { get; set; }
     public string CalculatedAnswerPoint { get; set; } = string.Empty;
     public int SurveyTypeId { get; set; }
-    public string Note { get; set; } = string.Empty;
+    public string? Note { get; set; } = string.Empty;
 }

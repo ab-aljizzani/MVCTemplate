@@ -194,6 +194,7 @@ public class RequestService : IRequestService
             r.RequestStatus.Status,
             r.RequestStatus.BadgeColor,
             r.RequestType.Type,
+            r.IsPersonShowUp,
             r.AppsentReason,
             r.Appointment.ApponitmentDate,
             r.Appointment.AppointmentDay,
@@ -364,6 +365,32 @@ public class RequestService : IRequestService
             _mapper.Map(updateRequest, request);
             await _context.SaveChangesAsync();
             serviceResponse.Data = _mapper.Map<UpdateRequestDto>(request);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
+
+    public async Task<ServiceResponse<UpdateRequestDto>> UpdateRequestShowUp(UpdateRequestShowupDto updateRequest)
+    {
+        var serviceResponse = new ServiceResponse<UpdateRequestDto>();
+        try
+        {
+            var requestType = await _context.Request.FirstOrDefaultAsync(z => z.Id == updateRequest.Id);
+            var OldData = await _context.Request.FirstOrDefaultAsync(e => e.Id == updateRequest.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
+            if (requestType is null)
+            {
+                throw new Exception($"The Id '{updateRequest.Id}'Is Not Founde...");
+            }
+            _mapper.Map(updateRequest, requestType);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<UpdateRequestDto>(requestType);
         }
         catch (Exception ex)
         {

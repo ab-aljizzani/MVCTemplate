@@ -10,11 +10,6 @@ namespace ClinicApi.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "RequestStatusId",
-                table: "Request",
-                type: "int",
-                nullable: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Request_PersonId",
@@ -25,11 +20,6 @@ namespace ClinicApi.Migrations
                 name: "IX_Request_PortalUserId",
                 table: "Request",
                 column: "PortalUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Request_RequestStatusId",
-                table: "Request",
-                column: "RequestStatusId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Request_Person_PersonId",
@@ -46,13 +36,6 @@ namespace ClinicApi.Migrations
                 principalTable: "PortalUser",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Request_RequestStatus_RequestStatusId",
-                table: "Request",
-                column: "RequestStatusId",
-                principalTable: "RequestStatus",
-                principalColumn: "Id");
         }
 
         /// <inheritdoc />
@@ -66,10 +49,6 @@ namespace ClinicApi.Migrations
                 name: "FK_Request_PortalUser_PortalUserId",
                 table: "Request");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Request_RequestStatus_RequestStatusId",
-                table: "Request");
-
             migrationBuilder.DropIndex(
                 name: "IX_Request_PersonId",
                 table: "Request");
@@ -78,13 +57,6 @@ namespace ClinicApi.Migrations
                 name: "IX_Request_PortalUserId",
                 table: "Request");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Request_RequestStatusId",
-                table: "Request");
-
-            migrationBuilder.DropColumn(
-                name: "RequestStatusId",
-                table: "Request");
         }
     }
 }
