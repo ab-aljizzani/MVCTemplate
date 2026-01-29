@@ -39,6 +39,7 @@ public class SeedService : ISeedService
     }
     public async Task<ServiceResponse<string>> DeleteAll()
     {
+        await BackupDatabaseOnly();
         var serviceResponse = new ServiceResponse<string>();
 
         var PortalUser = FormattableStringFactory.Create("ALTER TABLE PortalUser NOCHECK CONSTRAINT all");
@@ -207,11 +208,11 @@ public class SeedService : ISeedService
 
         var fss10 = FormattableStringFactory.Create("ALTER TABLE SurveyQuestion NOCHECK CONSTRAINT all");
         _context.Database.ExecuteSql(fss10);
-        // var all10 = from c in _context.SurveyQuestion select c;
-        // _context.SurveyQuestion.RemoveRange(all10);
+        var all10 = from c in _context.SurveyQuestion select c;
+        _context.SurveyQuestion.RemoveRange(all10);
         var fs10 = FormattableStringFactory.Create("DBCC CHECKIDENT('SurveyQuestion', RESEED, 0)");
         _context.Database.ExecuteSql(fs10);
-        var fs110 = FormattableStringFactory.Create("Delete from SurveyQuestion where Id > 33");
+        var fs110 = FormattableStringFactory.Create("Delete from SurveyQuestion ");
         _context.Database.ExecuteSql(fs110);
         var fsss10 = FormattableStringFactory.Create("ALTER TABLE SurveyQuestion CHECK CONSTRAINT all");
         _context.Database.ExecuteSql(fsss10);
@@ -219,11 +220,11 @@ public class SeedService : ISeedService
 
         var fss11 = FormattableStringFactory.Create("ALTER TABLE SurveyAnswer NOCHECK CONSTRAINT all");
         _context.Database.ExecuteSql(fss11);
-        // var all11 = from c in _context.SurveyAnswer select c;
-        // _context.SurveyAnswer.RemoveRange(all11);
+        var all11 = from c in _context.SurveyAnswer select c;
+        _context.SurveyAnswer.RemoveRange(all11);
         var fs11 = FormattableStringFactory.Create("DBCC CHECKIDENT('SurveyAnswer', RESEED, 0)");
         _context.Database.ExecuteSql(fs11);
-        var fs111 = FormattableStringFactory.Create("Delete from SurveyAnswer where Id > 153");
+        var fs111 = FormattableStringFactory.Create("Delete from SurveyAnswer");
         _context.Database.ExecuteSql(fs111);
         var fsss11 = FormattableStringFactory.Create("ALTER TABLE SurveyAnswer CHECK CONSTRAINT all");
         _context.Database.ExecuteSql(fsss11);
@@ -271,31 +272,10 @@ public class SeedService : ISeedService
         newRole.Add(new RoleDto { RoleName = "Specialist", RoleArabName = "اخصائي", Roletype = "Dash" });
 
         List<ZoneDto> newZone = new List<ZoneDto>();
-        newZone.Add(new ZoneDto { ZoneName = "الأولى" });
-        newZone.Add(new ZoneDto { ZoneName = "الثانية" });
-        newZone.Add(new ZoneDto { ZoneName = "الثالثة" });
+        newZone.Add(new ZoneDto { ZoneName = "قريب" });
+        newZone.Add(new ZoneDto { ZoneName = "متوسط" });
+        newZone.Add(new ZoneDto { ZoneName = "بعيد" });
 
-        List<InsertSurveyTypeDto> newSurvey = new List<InsertSurveyTypeDto>();
-        newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج الإفصاح", EngType = "Disclosure", TypeRole = "test" });
-        newSurvey.Add(new InsertSurveyTypeDto { Type = "نموذج المقياس", EngType = "Scale", TypeRole = "test" });
-
-
-
-        List<InsertSurveyQuestionDto> newSurveyQ = new List<InsertSurveyQuestionDto>();
-        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل تعاني حاليا أو سبق أن عانيت من مشاكل أو اعراض نفسية أو جسدية قد تشكل تهديدا لسلامتك وسلامة الآخرين", SurveyTypeId = 2 });
-        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل سبق لك أن إستخدمت مواد محظورة بطريقة أثرت سلبا على سلوكك أو تفكيرك", SurveyTypeId = 2 });
-        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل سبق لك أن حاولت الإضرار بنفسك أو بغيرك", SurveyTypeId = 2 });
-        newSurveyQ.Add(new InsertSurveyQuestionDto { Question = "هل تستخدم حاليا أو سبق أن إستخدمت أدوية نفسية", SurveyTypeId = 2 });
-
-        List<InsertSurveyAnswerDto> newSurveyA = new List<InsertSurveyAnswerDto>();
-        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 1 });
-        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 1 });
-        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 2 });
-        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 2 });
-        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 3 });
-        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 3 });
-        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "نعم", SurveyQuestionId = 4 });
-        newSurveyA.Add(new InsertSurveyAnswerDto { Answer = "لا", SurveyQuestionId = 4 });
 
         List<AppointmentStatusDto> newAppointmentStatus = new List<AppointmentStatusDto>();
         newAppointmentStatus.Add(new AppointmentStatusDto { Status = "تمت الجدولة", BadgeColor = "badge rounded-pill bg-success mx-auto" });
@@ -430,22 +410,6 @@ public class SeedService : ISeedService
             var risk = _mapper.Map<Models.RiskLevelModel.RiskLevel>(item);
             _context.RiskLevel.Add(risk);
         }
-        foreach (var item in newSurvey)
-        {
-            var survey = _mapper.Map<Models.SurveyModel.SurveyType>(item);
-            _context.SurveyType.Add(survey);
-        }
-        foreach (var item in newSurveyQ)
-        {
-            var requestStatus = _mapper.Map<Models.SurveyModel.SurveyQuestion>(item);
-            _context.SurveyQuestion.Add(requestStatus);
-        }
-        foreach (var item in newSurveyA)
-        {
-            var requestAnswer = _mapper.Map<Models.SurveyModel.SurveyAnswer>(item);
-            _context.SurveyAnswer.Add(requestAnswer);
-        }
-
 
         foreach (var item in newAppointmentStatus)
         {
@@ -473,6 +437,7 @@ public class SeedService : ISeedService
         }
 
         await SeedCuntriesFromExcel();
+        await SeedSurveysFromExcel();
         var serviceResponse = new ServiceResponse<string>();
         await _context.SaveChangesAsync();
         serviceResponse.Data = "Seed Exicutes Successfuly";
@@ -544,5 +509,275 @@ public class SeedService : ISeedService
             passwordSalt = hmac.Key;
             passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
         }
+    }
+
+    public async Task<ServiceResponse<string>> BackupAndDeleteDatabase(string backupFileName = null)
+    {
+        var serviceResponse = new ServiceResponse<string>();
+
+        try
+        {
+            // Get database name from connection string
+            var connectionString = _context.Database.GetConnectionString();
+            var databaseName = GetDatabaseNameFromConnectionString(connectionString);
+
+            if (string.IsNullOrEmpty(databaseName))
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = "Could not extract database name from connection string";
+                return serviceResponse;
+            }
+
+            // Generate backup file name with timestamp if not provided
+            if (string.IsNullOrEmpty(backupFileName))
+            {
+                backupFileName = $"{databaseName}_Backup_{DateTime.Now:yyyyMMdd_HHmmss}.bak";
+            }
+
+            // Default backup path (SQL Server default backup directory)
+            var backupPath = Path.Combine(@"C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup", backupFileName);
+
+            // Create backup
+            var backupQuery = $"BACKUP DATABASE [{databaseName}] TO DISK = '{backupPath}' WITH FORMAT, INIT, NAME = '{databaseName}-Full Database Backup', SKIP, NOREWIND, NOUNLOAD, STATS = 10";
+            await _context.Database.ExecuteSqlRawAsync(backupQuery);
+
+            serviceResponse.Message = $"Database backup created successfully at: {backupPath}";
+
+            // Set database to single user mode to close all connections
+            var singleUserQuery = $"ALTER DATABASE [{databaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE";
+            await _context.Database.ExecuteSqlRawAsync(singleUserQuery);
+
+            // Close the current connection from this context
+            await _context.Database.CloseConnectionAsync();
+
+            // Build a new connection string to the master database
+            var masterConnectionString = ChangeDatabaseInConnectionString(connectionString, "master");
+
+            // Drop the database using a new connection to master
+            using (var sqlConnection = new Microsoft.Data.SqlClient.SqlConnection(masterConnectionString))
+            {
+                await sqlConnection.OpenAsync();
+                using (var command = sqlConnection.CreateCommand())
+                {
+                    command.CommandText = $"DROP DATABASE [{databaseName}]";
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
+
+            serviceResponse.Data = $"Database '{databaseName}' has been backed up and deleted successfully";
+            serviceResponse.Message += $"\nDatabase '{databaseName}' deleted successfully";
+            serviceResponse.Success = true;
+        }
+        catch (Exception ex)
+        {
+            var connectionString = _context.Database.GetConnectionString();
+            var databaseName = GetDatabaseNameFromConnectionString(connectionString);
+            var singleUserQuery = $"ALTER DATABASE [{databaseName}] SET MULTI_USER";
+            await _context.Database.ExecuteSqlRawAsync(singleUserQuery);
+            serviceResponse.Success = false;
+            serviceResponse.Message = $"Error during backup and delete operation: {ex.Message}";
+            serviceResponse.Data = ex.StackTrace;
+        }
+
+        return serviceResponse;
+    }
+
+    private string ChangeDatabaseInConnectionString(string connectionString, string newDatabase)
+    {
+        var builder = new Microsoft.Data.SqlClient.SqlConnectionStringBuilder(connectionString);
+        builder.InitialCatalog = newDatabase;
+        return builder.ConnectionString;
+    }
+
+    public async Task<ServiceResponse<string>> BackupDatabaseOnly(string backupFileName = null)
+    {
+        var serviceResponse = new ServiceResponse<string>();
+        
+        try
+        {
+            // Get database name from connection string
+            var connectionString = _context.Database.GetConnectionString();
+            var databaseName = GetDatabaseNameFromConnectionString(connectionString);
+            
+            if (string.IsNullOrEmpty(databaseName))
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = "Could not extract database name from connection string";
+                return serviceResponse;
+            }
+
+            // Generate backup file name with timestamp if not provided
+            if (string.IsNullOrEmpty(backupFileName))
+            {
+                backupFileName = $"{databaseName}_Backup_{DateTime.Now:yyyyMMdd_HHmmss}.bak";
+            }
+
+            // Default backup path (SQL Server default backup directory)
+            var backupPath = Path.Combine(@"C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup", backupFileName);
+            
+            // Create backup
+            var backupQuery = FormattableStringFactory.Create($"BACKUP DATABASE [{databaseName}] TO DISK = '{backupPath}' WITH FORMAT, INIT, NAME = '{databaseName}-Full Database Backup', SKIP, NOREWIND, NOUNLOAD, STATS = 10");
+            await _context.Database.ExecuteSqlAsync(backupQuery);
+            
+            serviceResponse.Success = true;
+            serviceResponse.Data = backupPath;
+            serviceResponse.Message = $"Database backup created successfully at: {backupPath}";
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = $"Error during backup operation: {ex.Message}";
+            serviceResponse.Data = ex.StackTrace;
+        }
+
+        return serviceResponse;
+    }
+
+    private string GetDatabaseNameFromConnectionString(string connectionString)
+    {
+        try
+        {
+            var parts = connectionString.Split(';');
+            var dbPart = parts.FirstOrDefault(p => p.Trim().StartsWith("Database=", StringComparison.OrdinalIgnoreCase) 
+                                            || p.Trim().StartsWith("Initial Catalog=", StringComparison.OrdinalIgnoreCase));
+            
+            if (dbPart != null)
+            {
+                return dbPart.Split('=')[1].Trim();
+            }
+        }
+        catch { }
+        
+        return null;
+    }
+
+    public async Task<ServiceResponse<string>> SeedSurveysFromExcel()
+    {
+        var excelPath = Path.Combine(_env.ContentRootPath, "Surveys.xlsx");
+        if (!File.Exists(excelPath))
+            throw new FileNotFoundException($"Surveys Excel file not found at: {excelPath}");
+
+        var newSurveyTypes = new List<InsertSurveyTypeDto>();
+        var newSurveyQuestions = new List<InsertSurveyQuestionDto>();
+        var newSurveyAnswers = new List<InsertSurveyAnswerDto>();
+
+        using (var workbook = new XLWorkbook(excelPath))
+        {
+            // Sheet: Types -> SurveyType
+            var typesSheet = workbook.Worksheets.FirstOrDefault(ws => ws.Name.Equals("Types", StringComparison.OrdinalIgnoreCase));
+            if (typesSheet != null)
+            {
+                var usedRange = typesSheet.RangeUsed();
+                if (usedRange != null)
+                {
+                    var header = usedRange.FirstRowUsed();
+                    var headers = header.Cells().Select((c, i) => new { Name = c.GetString().Trim(), Index = i + 1 }).ToList();
+
+                    int typeCol = headers.FirstOrDefault(h => h.Name.Equals("Type", StringComparison.OrdinalIgnoreCase))?.Index ?? 1;
+                    int engTypeCol = headers.FirstOrDefault(h => h.Name.Equals("EngType", StringComparison.OrdinalIgnoreCase))?.Index ?? -1;
+                    int typeRoleCol = headers.FirstOrDefault(h => h.Name.Equals("TypeRole", StringComparison.OrdinalIgnoreCase))?.Index ?? -1;
+
+                    foreach (var row in usedRange.RowsUsed().Skip(1))
+                    {
+                        var dto = new InsertSurveyTypeDto
+                        {
+                            Type = row.Cell(typeCol).GetString().Trim(),
+                            EngType = engTypeCol > 0 ? row.Cell(engTypeCol).GetString().Trim() : null,
+                            TypeRole = typeRoleCol > 0 ? row.Cell(typeRoleCol).GetString().Trim() : null
+                        };
+                        if (!string.IsNullOrWhiteSpace(dto.Type))
+                            newSurveyTypes.Add(dto);
+                    }
+                }
+            }
+
+            // Sheet: Questions -> SurveyQuestion
+            var questionsSheet = workbook.Worksheets.FirstOrDefault(ws => ws.Name.Equals("Questions", StringComparison.OrdinalIgnoreCase));
+            if (questionsSheet != null)
+            {
+                var usedRange = questionsSheet.RangeUsed();
+                if (usedRange != null)
+                {
+                    var header = usedRange.FirstRowUsed();
+                    var headers = header.Cells().Select((c, i) => new { Name = c.GetString().Trim(), Index = i + 1 }).ToList();
+
+                    int questionCol = headers.FirstOrDefault(h => h.Name.Equals("Question", StringComparison.OrdinalIgnoreCase))?.Index ?? 1;
+                    int surveyTypeIdCol = headers.FirstOrDefault(h => h.Name.Equals("SurveyTypeId", StringComparison.OrdinalIgnoreCase))?.Index ?? -1;
+                    int questionEngCol = headers.FirstOrDefault(h => h.Name.Equals("QuestionEng", StringComparison.OrdinalIgnoreCase))?.Index ?? -1;
+                    int orderCol = headers.FirstOrDefault(h => h.Name.Equals("QuestionOrderNumber", StringComparison.OrdinalIgnoreCase))?.Index ?? -1;
+
+                    foreach (var row in usedRange.RowsUsed().Skip(1))
+                    {
+                        var dto = new InsertSurveyQuestionDto
+                        {
+                            Question = row.Cell(questionCol).GetString().Trim(),
+                            SurveyTypeId = surveyTypeIdCol > 0 ? row.Cell(surveyTypeIdCol).GetValue<int>() : 0,
+                            QuestionEng = questionEngCol > 0 ? row.Cell(questionEngCol).GetString().Trim() : null,
+                            QuestionOrderNumber = orderCol > 0 ? row.Cell(orderCol).GetValue<int>().ToString() : ""
+                        };
+                        if (!string.IsNullOrWhiteSpace(dto.Question))
+                            newSurveyQuestions.Add(dto);
+                    }
+                }
+            }
+
+            // Sheet: Answers -> SurveyAnswer
+            var answersSheet = workbook.Worksheets.FirstOrDefault(ws => ws.Name.Equals("Answers", StringComparison.OrdinalIgnoreCase));
+            if (answersSheet != null)
+            {
+                var usedRange = answersSheet.RangeUsed();
+                if (usedRange != null)
+                {
+                    var header = usedRange.FirstRowUsed();
+                    var headers = header.Cells().Select((c, i) => new { Name = c.GetString().Trim(), Index = i + 1 }).ToList();
+
+                    int answerCol = headers.FirstOrDefault(h => h.Name.Equals("Answer", StringComparison.OrdinalIgnoreCase))?.Index ?? 1;
+                    int surveyQuestionIdCol = headers.FirstOrDefault(h => h.Name.Equals("SurveyQuestionId", StringComparison.OrdinalIgnoreCase))?.Index ?? -1;
+                    int answerPointCol = headers.FirstOrDefault(h => h.Name.Equals("AnswerPoint", StringComparison.OrdinalIgnoreCase))?.Index ?? -1;
+                    int answerEngCol = headers.FirstOrDefault(h => h.Name.Equals("AnswerEng", StringComparison.OrdinalIgnoreCase))?.Index ?? -1;
+
+                    foreach (var row in usedRange.RowsUsed().Skip(1))
+                    {
+                        var dto = new InsertSurveyAnswerDto
+                        {
+                            Answer = row.Cell(answerCol).GetString().Trim(),
+                            SurveyQuestionId = surveyQuestionIdCol > 0 ? row.Cell(surveyQuestionIdCol).GetValue<int>() : 0,
+                            AnswerPoint = answerPointCol > 0 ? row.Cell(answerPointCol).GetValue<int>().ToString().ToString() : "",
+                            AnswerEng = answerEngCol > 0 ? row.Cell(answerEngCol).GetString().Trim() : null
+                        };
+                        if (!string.IsNullOrWhiteSpace(dto.Answer))
+                            newSurveyAnswers.Add(dto);
+                    }
+                }
+            }
+        }
+
+        // Insert SurveyTypes
+        foreach (var dto in newSurveyTypes)
+        {
+            var entity = _mapper.Map<Models.SurveyModel.SurveyType>(dto);
+            _context.SurveyType.Add(entity);
+        }
+
+        // Insert SurveyQuestions
+        foreach (var dto in newSurveyQuestions)
+        {
+            var entity = _mapper.Map<Models.SurveyModel.SurveyQuestion>(dto);
+            _context.SurveyQuestion.Add(entity);
+        }
+
+        // Insert SurveyAnswers
+        foreach (var dto in newSurveyAnswers)
+        {
+            var entity = _mapper.Map<Models.SurveyModel.SurveyAnswer>(dto);
+            _context.SurveyAnswer.Add(entity);
+        }
+
+        await _context.SaveChangesAsync();
+
+        return new ServiceResponse<string>
+        {
+            Data = $"Seeded {newSurveyTypes.Count} survey types, {newSurveyQuestions.Count} questions, {newSurveyAnswers.Count} answers from Excel."
+        };
     }
 }

@@ -1,8 +1,9 @@
-using System;
 using ClinicApi.Dtos.RequestDto.Get;
 using ClinicApi.Dtos.RequestDto.Insert;
 using ClinicApi.Dtos.RequestDto.Update;
 using ClinicApi.Models.Reponse;
+using ClinicApi.ViewModel.Statistics;
+using System;
 
 namespace ClinicApi.Services.Request;
 
@@ -20,8 +21,9 @@ public interface IRequestService
     Task<ServiceResponse<UpdateRequestDto>> UpdateRequesIsSurveyInserted(UpdateRequestSurveyInsertedDto updateRequest);
   Task<ServiceResponse<UpdateRequestDto>> UpdateReqAppointmentId(UpdateReqAppointmentIdDto updateRequest);
   Task<ServiceResponse<GetRequestDto>> DeleteRequest(int id);
+    Task<ServiceResponse<List<DoctorStatisticsVm>>> GetRequestsStatistics();
 
-  Task<ServiceResponse<List<GetRequestStatusDto>>> GetAllRequestStatus();
+    Task<ServiceResponse<List<GetRequestStatusDto>>> GetAllRequestStatus();
   Task<ServiceResponse<GetRequestStatusDto>> GetRequestStatusByID(int id);
   Task<ServiceResponse<List<GetRequestStatusDto>>> AddNewRequestStatus(InsertRequestStatusDto newRequestStatus);
   Task<ServiceResponse<UpdateRequestStatusDto>> UpdateRequestStatus(UpdateRequestStatusDto updateRequestStatus);
