@@ -357,6 +357,54 @@ public class SeedService : ISeedService
             IsFirstLogin = false,
             IsFromShamel = false
         });
+        newPortalUser.Add(new InsertPortalUserNoPersonalImgDto
+        {
+            Username = "1234567891",
+            NationalId = "1234567891",
+            Password = "Aa@123456#",
+            ConfirmPassword = "Aa@123456#",
+            UserFullName = "Test Test Test",
+            Email = "bbb@b.com",
+            Code = "0000",
+            PhoneNumber = "0555555555",
+            DateOfBirth = "01/02/1990",
+            UserType = "رئيسي",
+            LoginAttemp = 0,
+            LastLogin = DateTime.Now.ToString(),
+            CreatedDate = DateTime.Now.ToString(),
+            PasswordExpires = false,
+            Status = "Active",
+            EntityId = 1,
+            DepartmentId = 1,
+            RoleId = 7,
+            EmpIamImgUrl = "",
+            IsFirstLogin = false,
+            IsFromShamel = false
+        });
+        newPortalUser.Add(new InsertPortalUserNoPersonalImgDto
+        {
+            Username = "1234567892",
+            NationalId = "1234567892",
+            Password = "Aa@123456#",
+            ConfirmPassword = "Aa@123456#",
+            UserFullName = "Test Test Test",
+            Email = "bbbb@b.com",
+            Code = "0000",
+            PhoneNumber = "0555555555",
+            DateOfBirth = "01/02/1990",
+            UserType = "رئيسي",
+            LoginAttemp = 0,
+            LastLogin = DateTime.Now.ToString(),
+            CreatedDate = DateTime.Now.ToString(),
+            PasswordExpires = false,
+            Status = "Active",
+            EntityId = 1,
+            DepartmentId = 1,
+            RoleId = 9,
+            EmpIamImgUrl = "",
+            IsFirstLogin = false,
+            IsFromShamel = false
+        });
 
         List<AddDepartmentDto> newDept = new List<AddDepartmentDto>();
         newDept.Add(new AddDepartmentDto { DepartmentName = "الاتصالات وتقنية المعلومات", EntityId = 1 });
@@ -613,7 +661,7 @@ public class SeedService : ISeedService
             }
 
             // Default backup path (SQL Server default backup directory)
-            var backupPath = Path.Combine(@"C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup", backupFileName);
+            var backupPath = Path.Combine(@"C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\Backup", backupFileName);
             
             // Create backup
             var backupQuery = FormattableStringFactory.Create($"BACKUP DATABASE [{databaseName}] TO DISK = '{backupPath}' WITH FORMAT, INIT, NAME = '{databaseName}-Full Database Backup', SKIP, NOREWIND, NOUNLOAD, STATS = 10");
