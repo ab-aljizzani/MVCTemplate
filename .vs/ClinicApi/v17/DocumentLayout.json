@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{133550DD-230C-4167-A2B2-43B7C17F5C7C}|ClinicApi.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicapi\\services\\seed\\seedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{133550DD-230C-4167-A2B2-43B7C17F5C7C}|ClinicApi.csproj|solutionrelative:services\\seed\\seedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}|..\\ClinicDashboard\\ClinicDashboard.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicdashboard\\views\\home\\doctorstatistics.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
@@ -26,11 +30,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "SeedService.cs",
+              "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\Services\\Seed\\SeedService.cs",
+              "RelativeDocumentMoniker": "Services\\Seed\\SeedService.cs",
+              "ToolTip": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\Services\\Seed\\SeedService.cs",
+              "RelativeToolTip": "Services\\Seed\\SeedService.cs",
+              "ViewState": "AgIAAFoCAAAAAAAAAAApwGcCAABsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-28T18:57:39.824Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "..\\ClinicDashboard\\Views\\Home\\Index.cshtml",
@@ -43,7 +60,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "RequestService.cs",
               "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\Services\\Request\\RequestService.cs",
               "RelativeDocumentMoniker": "Services\\Request\\RequestService.cs",
@@ -56,7 +73,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "DeptController.cs",
               "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Controllers\\DeptController.cs",
               "RelativeDocumentMoniker": "..\\ClinicDashboard\\Controllers\\DeptController.cs",
@@ -69,7 +86,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "..\\ClinicDashboard\\Controllers\\HomeController.cs",
@@ -82,7 +99,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "DoctorStatistics.cshtml",
               "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Views\\Home\\DoctorStatistics.cshtml",
               "RelativeDocumentMoniker": "..\\ClinicDashboard\\Views\\Home\\DoctorStatistics.cshtml",

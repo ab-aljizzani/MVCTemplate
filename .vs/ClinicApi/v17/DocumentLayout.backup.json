@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{133550DD-230C-4167-A2B2-43B7C17F5C7C}|ClinicApi.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicapi\\services\\request\\requestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{133550DD-230C-4167-A2B2-43B7C17F5C7C}|ClinicApi.csproj|solutionrelative:services\\request\\requestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}|..\\ClinicDashboard\\ClinicDashboard.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicdashboard\\views\\home\\doctorstatistics.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}|..\\ClinicDashboard\\ClinicDashboard.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicdashboard\\views\\home\\doctorstatistics.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{133550DD-230C-4167-A2B2-43B7C17F5C7C}|ClinicApi.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicapi\\services\\request\\requestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{133550DD-230C-4167-A2B2-43B7C17F5C7C}|ClinicApi.csproj|solutionrelative:services\\request\\requestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}|..\\ClinicDashboard\\ClinicDashboard.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicdashboard\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
@@ -43,7 +43,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "RequestService.cs",
               "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\Services\\Request\\RequestService.cs",
               "RelativeDocumentMoniker": "Services\\Request\\RequestService.cs",
@@ -82,13 +82,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "DoctorStatistics.cshtml",
               "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Views\\Home\\DoctorStatistics.cshtml",
               "RelativeDocumentMoniker": "..\\ClinicDashboard\\Views\\Home\\DoctorStatistics.cshtml",
               "ToolTip": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Views\\Home\\DoctorStatistics.cshtml",
               "RelativeToolTip": "..\\ClinicDashboard\\Views\\Home\\DoctorStatistics.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABCAAAAAAAAAA==",
+              "ViewState": "AgIAAKoAAAAAAAAAAAAAAK8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-01-28T18:41:35.806Z",
               "EditorCaption": ""
