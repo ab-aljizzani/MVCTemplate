@@ -27,5 +27,8 @@ public class Request
     public string? AppsentReason { get; set; } = string.Empty;
     public bool IsSurveyInserted { get; set; }
     public bool? IsPersonShowUp { get; set; }
+    public bool isEmergency { get; set; }
+    public string? ReqStatusNote { get; set; } 
+
 
 }

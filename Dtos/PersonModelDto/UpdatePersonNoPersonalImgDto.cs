@@ -18,4 +18,5 @@ public class UpdatePersonNoPersonalImgDto
     public string NationalIdType { get; set; } = string.Empty;
     public string JobTitle { get; set; } = string.Empty;
     public string Grade { get; set; } = string.Empty;
+    public bool IsImportant { get; set; }
 }
