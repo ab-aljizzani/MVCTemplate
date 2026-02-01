@@ -600,7 +600,7 @@ public class SeedService : ISeedService
             }
 
             // Default backup path (SQL Server default backup directory)
-            var backupPath = Path.Combine(@"C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup", backupFileName);
+            var backupPath = Path.Combine(@"D:\MSSQL13.MSSQLSERVER\MSSQL\Backup", backupFileName);
 
             // Create backup
             var backupQuery = $"BACKUP DATABASE [{databaseName}] TO DISK = '{backupPath}' WITH FORMAT, INIT, NAME = '{databaseName}-Full Database Backup', SKIP, NOREWIND, NOUNLOAD, STATS = 10";
@@ -678,7 +678,7 @@ public class SeedService : ISeedService
             }
 
             // Default backup path (SQL Server default backup directory)
-            var backupPath = Path.Combine(@"C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\Backup", backupFileName);
+            var backupPath = Path.Combine(@"D:\MSSQL13.MSSQLSERVER\MSSQL\Backup", backupFileName);
 
             // Create backup
             var backupQuery = FormattableStringFactory.Create($"BACKUP DATABASE [{databaseName}] TO DISK = '{backupPath}' WITH FORMAT, INIT, NAME = '{databaseName}-Full Database Backup', SKIP, NOREWIND, NOUNLOAD, STATS = 10");
