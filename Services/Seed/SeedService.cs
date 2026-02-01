@@ -29,16 +29,21 @@ public class SeedService : ISeedService
     private readonly DataContext _context;
     private readonly IAuthRepositery _auth;
     private readonly IWebHostEnvironment _env;
+    private readonly IConfiguration _config;
 
-    public SeedService(IMapper mapper, DataContext context, IAuthRepositery auth, IWebHostEnvironment env)
+    public SeedService(IMapper mapper, DataContext context, IAuthRepositery auth, IWebHostEnvironment env, IConfiguration config)
     {
         _auth = auth;
         _mapper = mapper;
         _context = context;
         _env = env;
+        _config = config;
     }
     public async Task<ServiceResponse<string>> DeleteAll()
     {
+        if (!_config.GetValue<bool>("Seed:Enabled"))
+            return new ServiceResponse<string> { Success = false, Message = "Seeding is disabled (Seed:Enabled=false)." };
+
         await BackupDatabaseOnly();
         var serviceResponse = new ServiceResponse<string>();
 
@@ -244,6 +249,8 @@ public class SeedService : ISeedService
     }
     public async Task<ServiceResponse<string>> SeedAll()
     {
+        if (!_config.GetValue<bool>("Seed:Enabled"))
+            return new ServiceResponse<string> { Success = false, Message = "Seeding is disabled (Seed:Enabled=false)." };
         var serviceResponse = new ServiceResponse<string>();
         List<InsertRequestStatusDto> newRequestStatus = new List<InsertRequestStatusDto>();
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "انتظار الموافقة", StatusOrder = 1, BadgeColor = "badge rounded-pill bg-dark mx-auto" });
@@ -256,7 +263,7 @@ public class SeedService : ISeedService
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "إنتظار تقرير العمل", StatusOrder = 8, BadgeColor = "badge rounded-pill bg-dark mx-auto" });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم وصول تقرير العمل", StatusOrder = 9, BadgeColor = "badge rounded-pill bg-dark mx-auto" });
 
-        List<InsertRequestTypeDto> newRequestType = new List<InsertRequestTypeDto>(); 
+        List<InsertRequestTypeDto> newRequestType = new List<InsertRequestTypeDto>();
         newRequestType.Add(new InsertRequestTypeDto { Type = "داخلي من الإدارة", BadgeColor = "badge rounded-pill bg-primary mx-auto" });
         newRequestType.Add(new InsertRequestTypeDto { Type = "خارجي من العيادة", BadgeColor = "badge rounded-pill bg-success mx-auto" });
 
@@ -474,6 +481,9 @@ public class SeedService : ISeedService
 
     public async Task<ServiceResponse<string>> SeedEntityDept()
     {
+        if (!_config.GetValue<bool>("Seed:Enabled"))
+            return new ServiceResponse<string> { Success = false, Message = "Seeding is disabled (Seed:Enabled=false)." };
+
         List<AddEntityDto> newEntity = new List<AddEntityDto>();
         newEntity.Add(new AddEntityDto { EntityType = "داخلي", EntityName = "رئاسة الحرس الملكي" });
 
@@ -498,7 +508,13 @@ public class SeedService : ISeedService
         // Excel file path (adjust name as needed)
         var excelPath = Path.Combine(_env.ContentRootPath, "Cuntries.xlsx");
         if (!File.Exists(excelPath))
+        {
+            excelPath = Path.Combine(_env.WebRootPath, "Cuntries.xlsx");
+        }
+        else
+        {
             throw new FileNotFoundException($"Countries Excel file not found at: {excelPath}");
+        }
 
         var newCountry = new List<GetCountrieDto>();
 
@@ -641,13 +657,13 @@ public class SeedService : ISeedService
     public async Task<ServiceResponse<string>> BackupDatabaseOnly(string backupFileName = null)
     {
         var serviceResponse = new ServiceResponse<string>();
-        
+
         try
         {
             // Get database name from connection string
             var connectionString = _context.Database.GetConnectionString();
             var databaseName = GetDatabaseNameFromConnectionString(connectionString);
-            
+
             if (string.IsNullOrEmpty(databaseName))
             {
                 serviceResponse.Success = false;
@@ -663,11 +679,11 @@ public class SeedService : ISeedService
 
             // Default backup path (SQL Server default backup directory)
             var backupPath = Path.Combine(@"C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\Backup", backupFileName);
-            
+
             // Create backup
             var backupQuery = FormattableStringFactory.Create($"BACKUP DATABASE [{databaseName}] TO DISK = '{backupPath}' WITH FORMAT, INIT, NAME = '{databaseName}-Full Database Backup', SKIP, NOREWIND, NOUNLOAD, STATS = 10");
             await _context.Database.ExecuteSqlAsync(backupQuery);
-            
+
             serviceResponse.Success = true;
             serviceResponse.Data = backupPath;
             serviceResponse.Message = $"Database backup created successfully at: {backupPath}";
@@ -687,16 +703,16 @@ public class SeedService : ISeedService
         try
         {
             var parts = connectionString.Split(';');
-            var dbPart = parts.FirstOrDefault(p => p.Trim().StartsWith("Database=", StringComparison.OrdinalIgnoreCase) 
+            var dbPart = parts.FirstOrDefault(p => p.Trim().StartsWith("Database=", StringComparison.OrdinalIgnoreCase)
                                             || p.Trim().StartsWith("Initial Catalog=", StringComparison.OrdinalIgnoreCase));
-            
+
             if (dbPart != null)
             {
                 return dbPart.Split('=')[1].Trim();
             }
         }
         catch { }
-        
+
         return null;
     }
 
@@ -704,7 +720,13 @@ public class SeedService : ISeedService
     {
         var excelPath = Path.Combine(_env.ContentRootPath, "Surveys.xlsx");
         if (!File.Exists(excelPath))
+        {
+            excelPath = Path.Combine(_env.WebRootPath, "Surveys.xlsx");
+        }
+        else
+        {
             throw new FileNotFoundException($"Surveys Excel file not found at: {excelPath}");
+        }
 
         var newSurveyTypes = new List<InsertSurveyTypeDto>();
         var newSurveyQuestions = new List<InsertSurveyQuestionDto>();

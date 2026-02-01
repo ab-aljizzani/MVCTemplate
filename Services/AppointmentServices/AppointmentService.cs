@@ -280,6 +280,56 @@ public class AppointmentService : IAppointmentService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<AppointmentDto>> UpdateAppointmentPortalId(UpdateAppointmentPortalUserIdDto updateAppointment)
+    {
+        var serviceResponse = new ServiceResponse<AppointmentDto>();
+
+        try
+        {
+            var OldData = await _context.Appointment.FirstOrDefaultAsync(e => e.PortalUserId == updateAppointment.FromPortalUserId);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
+
+            var fromPortalUserId = updateAppointment.FromPortalUserId;
+            var toPortalUserId = updateAppointment.ToPortalUserId;
+
+            if (fromPortalUserId <= 0 || toPortalUserId <= 0)
+                throw new Exception("FromPortalUserId and ToPortalUserId are required.");
+
+            // RequestStatusId is on Request, linked to Appointment by AppointmentId.
+            // Filter appointments by assigned portal user AND request status != 5.
+            var appointments = await _context.Appointment
+                .Join(
+                    _context.Request,
+                    a => a.Id,
+                    r => r.AppointmentId,
+                    (a, r) => new { Appointment = a, Request = r }
+                )
+                .Where(x => x.Appointment.PortalUserId == fromPortalUserId && x.Request.RequestStatusId != 5)
+                .Select(x => x.Appointment)
+                .Distinct()
+                .ToListAsync();
+
+            if (appointments.Count == 0)
+                throw new Exception("No appointments found to update.");
+
+            foreach (var appointment in appointments)
+                appointment.PortalUserId = toPortalUserId;
+
+            await _context.SaveChangesAsync();
+
+            serviceResponse.Data = _mapper.Map<AppointmentDto>(appointments[0]);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+
+        return serviceResponse;
+    }
+
     public async Task<ServiceResponse<AppointmentDto>> UpdateAppointmentReview(UpdateAppointmentReviewDto updateAppointment)
     {
         var serviceResponse = new ServiceResponse<AppointmentDto>();

@@ -141,7 +141,7 @@ public class RequestService : IRequestService
         // RequestType properties
         RequestType = r.RequestType,
         // PortalUser properties (if needed)
-        UserFullName = r.PortalUser.UserFullName,
+        UserFullName = r.Appointment.portalUser.UserFullName,
         Email = r.PortalUser.Email,
         DateOfBirth = r.PortalUser.DateOfBirth,
         PhoneNumber = r.PortalUser.PhoneNumber,

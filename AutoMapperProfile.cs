@@ -117,6 +117,7 @@ public class AutoMapperProfile : Profile
         CreateMap<UpdatePersonDto, UpdatePersonNoPersonalImgDto>();
         CreateMap<UpdatePersonNoPersonalImgDto, UpdatePersonDto>();
         CreateMap<UpdatePersonNoPersonalImgDto, Person>();
+        CreateMap<UpdatePersonIsImportantDto, Person>();
 
         CreateMap<GetRequestDto, Request>();
         CreateMap<InsertRequestDto, Request>();

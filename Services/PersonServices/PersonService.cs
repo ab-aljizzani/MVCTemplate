@@ -176,4 +176,30 @@ public class PersonService : IPersonService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<UpdatePersonDto>> UpdatePersonIsImportant(UpdatePersonIsImportantDto updatePerson)
+    {
+        var serviceResponse = new ServiceResponse<UpdatePersonDto>();
+        try
+        {
+            var person = await _context.Person.FirstOrDefaultAsync(z => z.Id == updatePerson.Id);
+            var OldData = await _context.Person.FirstOrDefaultAsync(e => e.Id == updatePerson.Id);
+            var json = JsonConvert.SerializeObject(OldData);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            serviceResponse.OldData = content.ReadAsStringAsync().Result;
+            if (person is null)
+            {
+                throw new Exception($"The Id '{updatePerson.Id}'Is Not Founde...");
+            }
+            _mapper.Map(updatePerson, person);
+            await _context.SaveChangesAsync();
+            serviceResponse.Data = _mapper.Map<UpdatePersonDto>(person);
+
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
 }

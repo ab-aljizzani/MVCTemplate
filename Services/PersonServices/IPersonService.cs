@@ -14,5 +14,6 @@ public interface IPersonService
     Task<string> GetPersonCountByEntityID(int id);
     Task<ServiceResponse<List<PersonDto>>> AddNewPerson(InsertPersonDto newPerson);
     Task<ServiceResponse<UpdatePersonDto>> UpdatePerson(UpdatePersonDto updatePerson);
+    Task<ServiceResponse<UpdatePersonDto>> UpdatePersonIsImportant(UpdatePersonIsImportantDto updatePerson);
     Task<ServiceResponse<PersonDto>> DeletePerson(int id);
 }

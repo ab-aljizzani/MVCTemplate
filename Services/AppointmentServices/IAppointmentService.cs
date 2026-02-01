@@ -19,6 +19,7 @@ public interface IAppointmentService
     Task<ServiceResponse<AppointmentDto>> UpdateAppointmentReview(UpdateAppointmentReviewDto updateAppointment);
     Task<ServiceResponse<AppointmentDto>> UpdateAppointmentDoctorReview(UpdateAppointmentDoctorReviewDto updateAppointment);
     Task<ServiceResponse<AppointmentDto>> DeleteAppointment(int id);
+    Task<ServiceResponse<AppointmentDto>> UpdateAppointmentPortalId(UpdateAppointmentPortalUserIdDto updateAppointment);
 
     Task<ServiceResponse<List<AppointmentStatusDto>>> GetAllAppointmentStatus();
     Task<ServiceResponse<AppointmentStatusDto>> GetAppointmentStatusByID(int id);

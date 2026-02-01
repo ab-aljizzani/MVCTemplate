@@ -91,6 +91,24 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
+        [HttpPost]
+        [Route("EditPersonIsImportant")]
+        public async Task<ActionResult<UpdatePersonDto>> UpdatePersonIsImportant(UpdatePersonIsImportantDto updatePerson)
+        {
+            var person = JsonConvert.SerializeObject(updatePerson);
+            var response = await _personSerice.UpdatePersonIsImportant(updatePerson);
+            await _auditService.PutAudit($"Update Person IsImportant'  {person}  ' By User ", response.OldData);
+            // var userEntity = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "EntityID");
+            // var role = _tokenRoles.GetRoleToken().FirstOrDefault(g => g.Key == "Role");
+            // if (role.Value.ToString() != "SuperAdmin" && role.Value.ToString() != "PortalAdmin")
+            // {
+            // if (int.Parse(userEntity.Value.ToString()) != updatePerson.EntityId)
+            //     return BadRequest("Person Entity Must Match With Your Entity");
+            // }
+            if (response.Success == false)
+                return NotFound(response);
+            return Ok(response);
+        }
         // [HttpDelete("{id}")]
         // public async Task<ActionResult<PersonDto>> DeletePerson(int id)
         // {
