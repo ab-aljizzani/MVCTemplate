@@ -510,10 +510,10 @@ public class SeedService : ISeedService
         if (!File.Exists(excelPath))
         {
             excelPath = Path.Combine(_env.WebRootPath, "Cuntries.xlsx");
-        }
-        else
-        {
-            throw new FileNotFoundException($"Countries Excel file not found at: {excelPath}");
+            if (!File.Exists(excelPath))
+            {
+                throw new FileNotFoundException($"Countries Excel file not found at: {excelPath}");
+            }
         }
 
         var newCountry = new List<GetCountrieDto>();
@@ -722,10 +722,10 @@ public class SeedService : ISeedService
         if (!File.Exists(excelPath))
         {
             excelPath = Path.Combine(_env.WebRootPath, "Surveys.xlsx");
-        }
-        else
-        {
-            throw new FileNotFoundException($"Surveys Excel file not found at: {excelPath}");
+            if (!File.Exists(excelPath))
+            {
+                throw new FileNotFoundException($"Surveys Excel file not found at: {excelPath}");
+            }
         }
 
         var newSurveyTypes = new List<InsertSurveyTypeDto>();
