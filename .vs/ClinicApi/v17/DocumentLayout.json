@@ -3,20 +3,25 @@
   "WorkspaceRootPath": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}|..\\ClinicDashboard\\ClinicDashboard.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicdashboard\\views\\home\\doctorstatistics.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{3E4CFADE-3B49-4535-96B9-33076B0E99FC}|..\\ClinicPortal\\ClinicPortal.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicportal\\views\\request\\new.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{133550DD-230C-4167-A2B2-43B7C17F5C7C}|ClinicApi.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicapi\\services\\request\\requestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{133550DD-230C-4167-A2B2-43B7C17F5C7C}|ClinicApi.csproj|solutionrelative:services\\request\\requestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3E4CFADE-3B49-4535-96B9-33076B0E99FC}|..\\ClinicPortal\\ClinicPortal.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicportal\\controllers\\requestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}|..\\ClinicDashboard\\ClinicDashboard.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicdashboard\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}|..\\ClinicDashboard\\ClinicDashboard.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicdashboard\\controllers\\requestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}|..\\ClinicDashboard\\ClinicDashboard.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicdashboard\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}|..\\ClinicDashboard\\ClinicDashboard.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicdashboard\\views\\shared\\components\\newrequest\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}|..\\ClinicDashboard\\ClinicDashboard.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicdashboard\\controllers\\deptcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}|..\\ClinicDashboard\\ClinicDashboard.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicdashboard\\views\\appointment\\requestappointmentdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}|..\\ClinicDashboard\\ClinicDashboard.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicdashboard\\views\\person\\new.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA86D9-C60D-46D1-989D-E7F1B1E51683}|..\\ClinicDashboard\\ClinicDashboard.csproj|c:\\users\\abalj\\onedrive\\desktop\\clinic\\clinicdashboard\\controllers\\appointmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,71 +31,97 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "..\\ClinicDashboard\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "..\\ClinicDashboard\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAAAG0AAAApAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "New.cshtml",
+              "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicPortal\\Views\\Request\\New.cshtml",
+              "RelativeDocumentMoniker": "..\\ClinicPortal\\Views\\Request\\New.cshtml",
+              "ToolTip": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicPortal\\Views\\Request\\New.cshtml",
+              "RelativeToolTip": "..\\ClinicPortal\\Views\\Request\\New.cshtml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAC8AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-28T19:30:24.706Z",
+              "WhenOpened": "2026-01-31T19:03:22.766Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RequestService.cs",
-              "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\Services\\Request\\RequestService.cs",
-              "RelativeDocumentMoniker": "Services\\Request\\RequestService.cs",
-              "ToolTip": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\Services\\Request\\RequestService.cs",
-              "RelativeToolTip": "Services\\Request\\RequestService.cs",
-              "ViewState": "AgIAABQBAAAAAAAAAADwvyQBAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-28T18:57:39.871Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DeptController.cs",
-              "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Controllers\\DeptController.cs",
-              "RelativeDocumentMoniker": "..\\ClinicDashboard\\Controllers\\DeptController.cs",
-              "ToolTip": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Controllers\\DeptController.cs",
-              "RelativeToolTip": "..\\ClinicDashboard\\Controllers\\DeptController.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAYwEEAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-28T18:45:33.614Z",
+              "DocumentIndex": 5,
+              "Title": "New.cshtml",
+              "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Views\\Person\\New.cshtml",
+              "RelativeDocumentMoniker": "..\\ClinicDashboard\\Views\\Person\\New.cshtml",
+              "ToolTip": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Views\\Person\\New.cshtml",
+              "RelativeToolTip": "..\\ClinicDashboard\\Views\\Person\\New.cshtml",
+              "ViewState": "AgIAAF8BAAAAAAAAAIAwwHQBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-31T18:44:50.023Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "..\\ClinicDashboard\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "..\\ClinicDashboard\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAcwEcAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-28T18:41:57.88Z",
+              "Title": "Default.cshtml",
+              "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Views\\Shared\\Components\\NewRequest\\Default.cshtml",
+              "RelativeDocumentMoniker": "..\\ClinicDashboard\\Views\\Shared\\Components\\NewRequest\\Default.cshtml",
+              "ToolTip": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Views\\Shared\\Components\\NewRequest\\Default.cshtml",
+              "RelativeToolTip": "..\\ClinicDashboard\\Views\\Shared\\Components\\NewRequest\\Default.cshtml",
+              "ViewState": "AgIAADoAAAAAAAAAAIAwwFQAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-31T18:42:29.738Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DoctorStatistics.cshtml",
-              "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Views\\Home\\DoctorStatistics.cshtml",
-              "RelativeDocumentMoniker": "..\\ClinicDashboard\\Views\\Home\\DoctorStatistics.cshtml",
-              "ToolTip": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Views\\Home\\DoctorStatistics.cshtml",
-              "RelativeToolTip": "..\\ClinicDashboard\\Views\\Home\\DoctorStatistics.cshtml",
-              "ViewState": "AgIAAKoAAAAAAAAAAAAAAK8AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "RequestController.cs",
+              "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Controllers\\RequestController.cs",
+              "RelativeDocumentMoniker": "..\\ClinicDashboard\\Controllers\\RequestController.cs",
+              "ToolTip": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Controllers\\RequestController.cs",
+              "RelativeToolTip": "..\\ClinicDashboard\\Controllers\\RequestController.cs",
+              "ViewState": "AgIAAJUAAAAAAAAAAIAwwKEAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-31T16:43:03.711Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RequestController.cs",
+              "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicPortal\\Controllers\\RequestController.cs",
+              "RelativeDocumentMoniker": "..\\ClinicPortal\\Controllers\\RequestController.cs",
+              "ToolTip": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicPortal\\Controllers\\RequestController.cs",
+              "RelativeToolTip": "..\\ClinicPortal\\Controllers\\RequestController.cs",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAcwFMBAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-31T18:34:00.69Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AppointmentController.cs",
+              "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Controllers\\AppointmentController.cs",
+              "RelativeDocumentMoniker": "..\\ClinicDashboard\\Controllers\\AppointmentController.cs",
+              "ToolTip": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Controllers\\AppointmentController.cs",
+              "RelativeToolTip": "..\\ClinicDashboard\\Controllers\\AppointmentController.cs",
+              "ViewState": "AgIAAHgBAAAAAAAAAAAmwI4BAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-31T16:33:54.726Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RequestAppointmentDetails.cshtml",
+              "DocumentMoniker": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Views\\Appointment\\RequestAppointmentDetails.cshtml",
+              "RelativeDocumentMoniker": "..\\ClinicDashboard\\Views\\Appointment\\RequestAppointmentDetails.cshtml",
+              "ToolTip": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicDashboard\\Views\\Appointment\\RequestAppointmentDetails.cshtml",
+              "RelativeToolTip": "..\\ClinicDashboard\\Views\\Appointment\\RequestAppointmentDetails.cshtml",
+              "ViewState": "AgIAAOoAAAAAAAAAAAAswPMAAABjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-28T18:41:35.806Z",
+              "WhenOpened": "2026-01-31T16:15:58.751Z",
               "EditorCaption": ""
             }
           ]

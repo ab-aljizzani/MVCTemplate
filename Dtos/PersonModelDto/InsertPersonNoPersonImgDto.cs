@@ -17,5 +17,6 @@ public class InsertPersonNoPersonImgDto
     public string JobTitle { get; set; } = string.Empty;
     public string Grade { get; set; } = string.Empty;
     public int? RoleId { get; set; } = 8;
-    public bool IsInternal { get; set; } 
+    public bool IsInternal { get; set; }
+    public bool IsImportant { get; set; }
 }

@@ -53,4 +53,5 @@ public class PersonDto
     public int PersonalImgId { get; set; }
     public PersonalImgDto? PersonalImg { get; set; }
     public bool IsInternal { get; set; }
+    public bool IsImportant { get; set; }
 }

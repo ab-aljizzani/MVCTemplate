@@ -34,4 +34,6 @@ public class GetCustomRequestDto
     public int? PersonalImgId { get; set; }
     public string Risk { get; set; } = string.Empty;
     public bool IsPersonShowUp { get; set; }
+    public bool isEmergency { get; set; }
+    public bool IsImportant { get; set; }
 }

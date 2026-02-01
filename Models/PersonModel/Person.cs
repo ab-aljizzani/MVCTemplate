@@ -27,4 +27,5 @@ public class Person
     public int? RoleId { get; set; }
     public Models.Role.Role? Role { get; set; }
     public bool IsInternal { get; set; }
+    public bool IsImportant { get; set; }
 }

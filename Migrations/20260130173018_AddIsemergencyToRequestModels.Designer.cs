@@ -4,6 +4,7 @@ using ClinicApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20260130173018_AddIsemergencyToRequestModels")]
+    partial class AddIsemergencyToRequestModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -652,9 +655,6 @@ namespace ClinicApi.Migrations
 
                     b.Property<int>("PortalUserId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ReqStatusNote")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RequestStatusId")
                         .HasColumnType("int");

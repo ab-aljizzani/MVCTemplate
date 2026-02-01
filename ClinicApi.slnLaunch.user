@@ -11,6 +11,11 @@
         "Path": "..\\ClinicDashboard\\ClinicDashboard.csproj",
         "Action": "Start",
         "DebugTarget": "http"
+      },
+      {
+        "Path": "..\\ClinicPortal\\ClinicPortal.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
       }
     ]
   }

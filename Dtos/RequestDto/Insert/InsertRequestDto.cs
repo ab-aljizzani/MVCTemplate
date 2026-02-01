@@ -15,4 +15,5 @@ public class InsertRequestDto
     // public int AppointmentId { get; set; }
     public bool IsSurveyInserted { get; set; }
     public bool IsPersonShowUp { get; set; }
+    public bool isEmergency { get; set; }
 }

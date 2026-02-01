@@ -155,7 +155,8 @@ public class RequestService : IRequestService
         // Appointment properties (if needed)
         Appointment = r.Appointment,
         // SurveyType properties (if needed)
-        SurveyType = r.SurveyType
+        SurveyType = r.SurveyType,
+        isEmergency = r.isEmergency
     })
     .ToListAsync();
 
@@ -214,7 +215,9 @@ public class RequestService : IRequestService
             r.Person.DateOfBirth,
             r.Person.Title,
             r.Person.PersonalImg.PersonalImage,
-            r.Person.PersonalImgId
+            r.Person.PersonalImgId,
+            r.Person.IsImportant,
+            r.isEmergency
         }).FirstAsync();
         if (dbContext is null)
         {
@@ -544,6 +547,7 @@ public class RequestService : IRequestService
             {
                 throw new Exception($"The Id '{updateRequest.Id}'Is Not Founde...");
             }
+            updateRequest.ReqStatusNote = requestType.ReqStatusNote +" , "+ updateRequest.ReqStatusNote;
             _mapper.Map(updateRequest, requestType);
             await _context.SaveChangesAsync();
             serviceResponse.Data = _mapper.Map<UpdateRequestDto>(requestType);

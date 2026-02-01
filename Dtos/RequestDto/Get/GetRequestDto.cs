@@ -37,5 +37,6 @@ public class GetRequestDto
     public int RoleId { get; set; }
     public string Status { get; set; } = string.Empty;
     public bool IsFromShamel { get; set; } = false;
+    public bool isEmergency { get; set; }
 
 }
