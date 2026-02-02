@@ -262,6 +262,7 @@ public class SeedService : ISeedService
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "بحاجة لتقييم الطبيب", StatusOrder = 7, BadgeColor = "badge rounded-pill bg-dark mx-auto" });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "إنتظار تقرير العمل", StatusOrder = 8, BadgeColor = "badge rounded-pill bg-dark mx-auto" });
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم وصول تقرير العمل", StatusOrder = 9, BadgeColor = "badge rounded-pill bg-dark mx-auto" });
+        newRequestStatus.Add(new InsertRequestStatusDto { Status = "تم التقييم من الطبيب", StatusOrder = 10, BadgeColor = "badge rounded-pill bg-dark mx-auto" });
 
         List<InsertRequestTypeDto> newRequestType = new List<InsertRequestTypeDto>();
         newRequestType.Add(new InsertRequestTypeDto { Type = "داخلي من الإدارة", BadgeColor = "badge rounded-pill bg-primary mx-auto" });
