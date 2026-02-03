@@ -9,20 +9,20 @@ public class InsertPersonDto
     [Display(Name = "الهوية الوطنية")]
     [RegularExpression(@"^\d{10}$", ErrorMessage = "رقم الهوية الوطنية يجب أن يتكون من 10 أرقام")]
     public string NationalId { get; set; } = string.Empty;
-    [Required(ErrorMessage = "الرجاء إدخال الرتبة")]
-    [Display(Name = "الرتبة")]
-    public string Title { get; set; } = string.Empty;
+    //[Required(ErrorMessage = "الرجاء إدخال الرتبة")]
+    //[Display(Name = "الرتبة")]
+    public string? Title { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إدخال الإسم العربي")]
     [Display(Name = "الإسم العربي")]
     [RegularExpression(@"^[\u0600-\u06FF\s]+$", ErrorMessage = "الإسم العربي يجب أن يحتوي على حروف وأرقام فقط")]
     public string FullArabicName { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إدخال الإسم الإنجليزي")]
     [Display(Name = "الإسم الإنجليزي")]
-    [RegularExpression("^[a-zA-Z0-9_]*$", ErrorMessage = "الإسم الإنجليزي يجب أن يحتوي على حروف وأرقام فقط")]
+    [RegularExpression("^[a-zA-Z0-9_\\s]*$", ErrorMessage = "الإسم الإنجليزي يجب أن يحتوي على حروف وأرقام فقط")]
     public string FullEnglishName { get; set; } = string.Empty;
-    [DisplayFormat(DataFormatString = "{0: MM/dd/yyyy}")]
-    [Required(ErrorMessage = "الرجاء إدخال تاريخ الميلاد")]
-    [Display(Name = "تاريخ الميلاد")]
+    //[DisplayFormat(DataFormatString = "{0: MM/dd/yyyy}")]
+    //[Required(ErrorMessage = "الرجاء إدخال تاريخ الميلاد")]
+    //[Display(Name = "تاريخ الميلاد")]
     public string DateOfBirth { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إدخال رقم الجوال")]
     [Display(Name = "رقم الجوال")]
@@ -40,7 +40,7 @@ public class InsertPersonDto
     public string JobTitle { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إختيار المرتبة الوظيفية ")]
     [Display(Name = "المرتبة الوظيفية")]
-    public string Grade { get; set; } = string.Empty;
+    public string? Grade { get; set; } = string.Empty;
     public int? RoleId { get; set; } = 8;
     public bool IsInternal { get; set; }
     public bool IsImportant { get; set; }
