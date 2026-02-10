@@ -33,10 +33,13 @@ public class GetRequestDto
     public string DateOfBirth { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
     public int EntityId { get; set; }
+    public string EntityName { get; set; }         
     public int DepartmentId { get; set; }
+    public string DeptName { get; set; }
     public int RoleId { get; set; }
     public string Status { get; set; } = string.Empty;
     public bool IsFromShamel { get; set; } = false;
     public bool isEmergency { get; set; }
+    public string RiskLevel { get; set; }
 
 }

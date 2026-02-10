@@ -692,4 +692,40 @@ public class SurveyService : ISurveyService
         }
         return serviceResponse;
     }
+
+    public async Task<ServiceResponse<GetUserSurveyAnswerTimeCountDto>> GetUserSurveyAnswerTimeCountByRequestId(int requestId)
+    {
+        var serviceResponse = new ServiceResponse<GetUserSurveyAnswerTimeCountDto>();
+
+        try
+        {
+            var repeated = await _context.UserSurveyAnswerTimes
+                .AsNoTracking()
+                .Where(x => x.RequestId == requestId && x.SurveyQuestionId > 1)
+                .GroupBy(x => x.SurveyQuestionId)
+                .Where(g => g.Count() > 1)
+                .Select(g => new GetRepeatedSurveyQuestionIdDto
+                {
+                    SurveyQuestionId = g.Key,
+                    RepeatCount = g.Count()
+                })
+                .OrderBy(x => x.SurveyQuestionId)
+                .ToListAsync();
+
+            serviceResponse.Data = new GetUserSurveyAnswerTimeCountDto
+            {
+                RequestId = requestId,
+                Count = repeated.Count,
+                SurveyQuestionIds = repeated.Select(x => x.SurveyQuestionId).ToList(),
+                RepeatedQuestions = repeated
+            };
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+
+        return serviceResponse;
+    }
 }

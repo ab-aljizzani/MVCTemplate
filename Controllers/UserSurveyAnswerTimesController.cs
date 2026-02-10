@@ -33,6 +33,13 @@ namespace ClinicApi.Controllers
             await _auditService.PostAudit($"View UserSurveyAnswerTime By Appointment And Question Id With AppointmentId Number '{id}' and QuestionId Number '{questionId}' For User");
             return Ok(await _surveyService.GetUserSurveyAnswerTimeByAppointId(id, questionId));
         }
+        [HttpGet]
+        [Route("GetUserSurveyAnswerTimeCount")]
+        public async Task<ActionResult<List<GetUserSurveyAnswerTimeDto>>> GetUserSurveyAnswerTimeCount(int requestId)
+        {
+            await _auditService.PostAudit($"View UserSurveyAnswerTime Count By Request Id With RequestId Number '{requestId}' For User");
+            return Ok(await _surveyService.GetUserSurveyAnswerTimeCountByRequestId(requestId));
+        }
         [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<List<GetUserSurveyAnswerTimeDto>>> AddnewUserSurvey(InsertUserSurveyAnswerTimeDto newUserSurveyTimes)

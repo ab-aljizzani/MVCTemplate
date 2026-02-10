@@ -156,7 +156,10 @@ public class RequestService : IRequestService
         Appointment = r.Appointment,
         // SurveyType properties (if needed)
         SurveyType = r.SurveyType,
-        isEmergency = r.isEmergency
+        isEmergency = r.isEmergency,
+        EntityName = r.Person.Entity.EntityName,
+        DeptName = r.Person.Department.DepartmentName,
+        RiskLevel = r.Appointment.RiskLevel.Risk
     })
     .ToListAsync();
 
