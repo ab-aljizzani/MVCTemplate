@@ -6,7 +6,50 @@ namespace ClinicApi.Services.AuthorizeServices
     {
         private readonly Dictionary<Type, List<object>> _rules = new();
 
-        // Register rule
+        public AuthorizeService()
+        {
+            LoadRulesAutomatically();
+        }
+
+        // ---------------------------------------------------------
+        // AUTO DISCOVERY OF RULES
+        // ---------------------------------------------------------
+        private void LoadRulesAutomatically()
+        {
+            var ruleTypes = AppDomain.CurrentDomain
+                .GetAssemblies()
+                .SelectMany(a => a.GetTypes())
+                .Where(t =>
+                    !t.IsAbstract &&
+                    !t.IsInterface &&
+                    t.GetInterfaces().Any(i =>
+                        i.IsGenericType &&
+                        i.GetGenericTypeDefinition() == typeof(IFilterRule<>)
+                    )
+                );
+
+            foreach (var ruleType in ruleTypes)
+            {
+                var instance = Activator.CreateInstance(ruleType);
+
+                var interfaceType = ruleType.GetInterfaces()
+                    .First(i =>
+                        i.IsGenericType &&
+                        i.GetGenericTypeDefinition() == typeof(IFilterRule<>)
+                    );
+
+                var modelType = interfaceType.GetGenericArguments()[0];
+
+                if (!_rules.ContainsKey(modelType))
+                    _rules[modelType] = new List<object>();
+
+                _rules[modelType].Add(instance);
+            }
+        }
+
+        // ---------------------------------------------------------
+        // MANUAL RULE REGISTRATION (OPTIONAL)
+        // ---------------------------------------------------------
         public void AddRule<T>(IFilterRule<T> rule)
         {
             var type = typeof(T);
@@ -17,7 +60,9 @@ namespace ClinicApi.Services.AuthorizeServices
             _rules[type].Add(rule);
         }
 
-        // Apply all rules for a given type
+        // ---------------------------------------------------------
+        // APPLY FILTER RULES
+        // ---------------------------------------------------------
         public IEnumerable<T> Filter<T>(IEnumerable<T> list, string role)
         {
             if (list == null)
@@ -26,13 +71,16 @@ namespace ClinicApi.Services.AuthorizeServices
             var type = typeof(T);
 
             if (!_rules.ContainsKey(type))
-                return list; // No rules → return all
+                return list;
 
             var rules = _rules[type].Cast<IFilterRule<T>>().ToList();
 
             return list.Where(item => rules.All(r => r.Apply(item, role)));
         }
 
+        // ---------------------------------------------------------
+        // AUTHORIZATION LOGIC
+        // ---------------------------------------------------------
         public bool IsAuthorized(
             IAuthorizeModel model,
             string role,
@@ -41,89 +89,40 @@ namespace ClinicApi.Services.AuthorizeServices
             bool? important = null,
             bool? emergency = null,
             bool? owner = null,
-            int? ownerId = null, string reviewRole = null, int? minStatusOrder = null ,string typeRole = null
-
-)
+            int? ownerId = null,
+            string reviewRole = null,
+            int? minStatusOrder = null,
+            string typeRole = null
+        )
         {
-            // STATUS EQUAL
-            //if (statusEqual != null && statusEqual.Length > 0)
-            //    if (!statusEqual.Contains(model.RequestStatusId))
-            //        return false;
-            //if (statusEqual != null && statusEqual.Length > 0)
-            //{
-            //    if (statusEqual.Contains(model.RequestStatusId))
-            //    {
-            //        return true;
-            //    }
-            //    else
-            //        return false;
-            //}
-
-            // STATUS NOT EQUAL
-            //if (statusNotEqual != null && statusNotEqual.Length > 0)
-            //    if (statusNotEqual.Contains(model.RequestStatusId))
-            //        return false;
-
-            //if (statusNotEqual != null && statusNotEqual.Length > 0)
-            //{
-            //    if (statusNotEqual.Contains(model.RequestStatusId))
-            //    {
-            //        return true;
-            //    }
-            //    else
-            //        return false;
-            //}
-
-            // IMPORTANT
-            //if (important.HasValue)
-            //{
-            //    if (important.Value == false)
-            //        return false;
-
-            //    else
-            //        return true;
-            //}
-
-            // EMERGENCY
-            //if (emergency.HasValue)
-            //{
-            //    if (emergency.Value == false)
-            //        return false;
-
-            //    else
-            //        return true;
-            //}
-
             // OWNER CHECK
-            if (owner.HasValue && owner.Value == true)
+            if (owner == true)
             {
-                if (ownerId == null)
-                    return false;
-
-                if (model.PortalUserId != ownerId.Value)
+                if (ownerId == null || model.PortalUserId != ownerId.Value)
                     return false;
             }
+
+            // REVIEW ROLE CHECK
             if (!string.IsNullOrWhiteSpace(reviewRole))
             {
                 if (!string.Equals(model.RoleName, reviewRole, StringComparison.OrdinalIgnoreCase))
                     return false;
             }
-            if (minStatusOrder.HasValue)
-            {
-                if (model.StatusOrder < minStatusOrder.Value)
-                    return false;
-            }
+
+            // STATUS ORDER CHECK
+            if (minStatusOrder.HasValue && model.StatusOrder < minStatusOrder.Value)
+                return false;
+
+            // TYPE ROLE CHECK
             if (!string.IsNullOrWhiteSpace(typeRole))
             {
                 if (!string.Equals(model.TypeRole, typeRole, StringComparison.OrdinalIgnoreCase))
                     return false;
             }
 
-
-
-
             return true;
         }
+
     }
 
 }
