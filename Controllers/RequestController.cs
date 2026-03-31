@@ -51,6 +51,14 @@ namespace ClinicApi.Controllers
         }
         [AllowAnonymous]
         [HttpGet]
+        [Route("GetByPersonNationalId")]
+        public async Task<ActionResult<GetPersonRisckLevelDto>> GetByPersonNationalId(int nationalId)
+        {
+            await _auditService.PostAuditWuthNoToken($"View Single Request By PersonNationalId With NationalId Number '{nationalId}'", nationalId.ToString());
+            return Ok(await _requestService.GetRequestByPersonNationalId(nationalId));
+        }
+        [AllowAnonymous]
+        [HttpGet]
         [Route("GetRequestByPersonIdAndReqId")]
         public async Task<ActionResult<GetRequestDto>> GetRequestByPersonIdAndReqId(int id, int reqId)
         {

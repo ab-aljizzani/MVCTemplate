@@ -12,6 +12,7 @@ public interface IRequestService
   Task<ServiceResponse<List<GetRequestDto>>> GetAllRequest();
   Task<ServiceResponse<object>> GetRequestByID(int id);
   Task<ServiceResponse<List<GetRequestDto>>> GetRequestByPersonId(int id);
+  Task<ServiceResponse<List<GetPersonRisckLevelDto>>> GetRequestByPersonNationalId(int nationalId);
   Task<ServiceResponse<List<GetRequestDto>>> GetRequestByPersonIdAndReqId(int id, int reqId);
   Task<ServiceResponse<int>> AddNewRequest(InsertRequestDto newRequest);
   Task<ServiceResponse<UpdateRequestDto>> UpdateRequest(UpdateRequestDto updateRequest);

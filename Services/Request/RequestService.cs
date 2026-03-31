@@ -253,6 +253,40 @@ public class RequestService : IRequestService
         return serviceResponse;
     }
 
+    public async Task<ServiceResponse<List<GetPersonRisckLevelDto>>> GetRequestByPersonNationalId(int nationalId)
+    {
+        var serviceResponse = new ServiceResponse<List<GetPersonRisckLevelDto>>();
+        try
+        {
+            var nat = nationalId.ToString();
+
+            var list = await _context.Request
+                .AsNoTracking()
+                .Where(r => r.Person != null && r.Person.NationalId == nat)
+                .Select(r => new GetPersonRisckLevelDto
+                {
+                    Id = r.Id,
+                    AppointmentId = r.AppointmentId,
+                    ApponitmentDate = r.Appointment.ApponitmentDate,
+                    RiskLevel = r.Appointment != null && r.Appointment.RiskLevel != null ? r.Appointment.RiskLevel.Risk : string.Empty,
+                })
+                .ToListAsync();
+
+            serviceResponse.Data = list;
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+            serviceResponse.Data = new List<GetPersonRisckLevelDto>();
+        }
+
+        return serviceResponse;
+       
+    }
+
+  
+
     public async Task<ServiceResponse<List<DoctorStatisticsVm>>> GetRequestsStatistics()
     {
         var response = new ServiceResponse<List<DoctorStatisticsVm>>();
