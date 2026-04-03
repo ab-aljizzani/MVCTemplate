@@ -1,11 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using ClinicApi.Data.PersonalImagesModelDto;
-
-
+using ClinicApi.Models.AuthorizeModel;
 
 namespace ClinicApi.Dtos.PersonModelDto;
 
-public class PersonDto
+public class PersonDto : IAuthorizeModel
 {
     public int Id { get; set; }
     [Required(ErrorMessage = "الرجاء إدخال رقم الهوية الوطنية")]
@@ -54,4 +53,15 @@ public class PersonDto
     public PersonalImgDto? PersonalImg { get; set; }
     public bool IsInternal { get; set; }
     public bool IsImportant { get; set; }
+
+    public int RequestStatusId { get; set; }
+
+    public bool isEmergency { get; set; }
+
+    public bool IsPersonShowUp { get; set; }
+
+    public int PortalUserId { get; set; }
+    public string RoleName { get; set; }
+    public int StatusOrder { get; set; }
+    public string TypeRole { get; set; }
 }

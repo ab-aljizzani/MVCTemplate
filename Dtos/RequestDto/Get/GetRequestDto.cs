@@ -1,13 +1,14 @@
-using System;
 using ClinicApi.Models.AppointmentModel;
+using ClinicApi.Models.AuthorizeModel;
 using ClinicApi.Models.PersonModel;
 using ClinicApi.Models.RequestModel;
 using ClinicApi.Models.RequestTypeModel;
 using ClinicApi.Models.SurveyModel;
+using System;
 
 namespace ClinicApi.Dtos.RequestDto.Get;
 
-public class GetRequestDto
+public class GetRequestDto : IAuthorizeModel
 {
     public int Id { get; set; }
     public DateTime CreatedDate { get; set; }
@@ -42,4 +43,12 @@ public class GetRequestDto
     public bool isEmergency { get; set; }
     public string RiskLevel { get; set; }
 
+    public bool IsImportant { get; set; }
+
+    public bool IsPersonShowUp { get; set; }
+
+    public string RoleName { get; set; }
+    public int StatusOrder => RequestStatus.StatusOrder;
+    public string TypeRole { get; set; }
+    int IAuthorizeModel.StatusOrder { get => StatusOrder; set => throw new NotImplementedException(); }
 }

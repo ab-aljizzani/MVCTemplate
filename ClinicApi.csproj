@@ -21,6 +21,7 @@
     <Compile Include="Models\AppointmentModel\AppointmentStatus.cs" />
     <Compile Include="Models\AppointmentModel\Perscription.cs" />
     <Compile Include="Models\AuditsModel\Audits.cs" />
+    <Compile Include="Models\AuthorizeModel\IAuthorizeModel.cs" />
     <Compile Include="Models\CountriesModel\Countries.cs" />
     <Compile Include="Models\DashboarUserModel\DashboardUser.cs" />
     <Compile Include="Models\DoctorAvailbleTimeModel\DoctorAvailbleTime.cs" />

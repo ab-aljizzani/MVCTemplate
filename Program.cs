@@ -4,6 +4,8 @@ using ClinicApi.Services;
 using ClinicApi.Services.AppointmentReviewServices;
 using ClinicApi.Services.AppointmentServices;
 using ClinicApi.Services.AuditServices;
+using ClinicApi.Services.AuthorizeServices;
+using ClinicApi.Services.AuthorizeServices.Rules;
 using ClinicApi.Services.CountriesServices;
 using ClinicApi.Services.DoctorAvailbleTimeServices;
 using ClinicApi.Services.Entity;
@@ -16,6 +18,7 @@ using ClinicApi.Services.Seed;
 using ClinicApi.Services.SickLeaveServices;
 using ClinicApi.Services.Survey;
 using ClinicApi.Services.ZoneServices;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -66,8 +69,20 @@ namespace ClinicApi
             builder.Services.AddScoped<IRiskLevelService, RiskLevelService>();
             builder.Services.AddScoped<ISickLeaveService, SickLeaveService>();
             builder.Services.AddScoped<ICountriesService, CountriesService>();
+            builder.Services.AddScoped<IAuthorizeService, AuthorizeService>();
             builder.Services.AddScoped<MagicString>();
             builder.Services.AddScoped<TokenRoles>();
+            builder.Services.AddSingleton<IAuthorizeService>(sp =>
+            {
+                var service = new AuthorizeService();
+
+                service.AddRule(new EntityExternalOnlyRule());
+                service.AddRule(new DepartmentOfficerRule());
+                service.AddRule(new PortalRolesRule());
+
+                return service;
+            });
+
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters

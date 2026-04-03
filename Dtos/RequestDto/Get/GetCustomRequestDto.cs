@@ -1,9 +1,10 @@
 using System;
+using ClinicApi.Models.AuthorizeModel;
 using ClinicApi.Models.PersonModel;
 
 namespace ClinicApi.Dtos.RequestDto.Get;
 
-public class GetCustomRequestDto
+public class GetCustomRequestDto : IAuthorizeModel
 {
     public int Id { get; set; }
     public int AppointmentId { get; set; }
@@ -35,5 +36,9 @@ public class GetCustomRequestDto
     public string Risk { get; set; } = string.Empty;
     public bool IsPersonShowUp { get; set; }
     public bool isEmergency { get; set; }
+
     public bool IsImportant { get; set; }
+    public string RoleName { get; set; }
+    public int StatusOrder { get; set; }
+    public string TypeRole { get; set; }
 }

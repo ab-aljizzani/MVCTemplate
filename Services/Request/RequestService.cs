@@ -157,6 +157,7 @@ public class RequestService : IRequestService
         // SurveyType properties (if needed)
         SurveyType = r.SurveyType,
         isEmergency = r.isEmergency,
+        
         EntityName = r.Person.Entity.EntityName,
         DeptName = r.Person.Department.DepartmentName,
         RiskLevel = r.Appointment.RiskLevel.Risk
