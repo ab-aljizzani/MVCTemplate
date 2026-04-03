@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20260203100253_ChangeAllowNullinPersonModel")]
+    [Migration("20260403190535_ChangeAllowNullinPersonModel")]
     partial class ChangeAllowNullinPersonModel
     {
         /// <inheritdoc />

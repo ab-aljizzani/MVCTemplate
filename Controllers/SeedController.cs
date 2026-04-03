@@ -24,14 +24,14 @@ namespace ClinicApi.Controllers
         [HttpPost]
         public async Task<ActionResult<string>> Seed()
         {
-            await _auditService.PostAuditWuthNoToken("Seed All Data In Seed Service", "Seed");
+            //await _auditService.PostAuditWuthNoToken("Seed All Data In Seed Service", "Seed");
             return Ok(await _seedService.SeedAll());
         }
         [HttpPost]
         [Route("SeedEntityDept")]
         public async Task<ActionResult<string>> SeedEntityDept()
         {
-            await _auditService.PostAuditWuthNoToken("Seed Entity And Department Data In SeedEntityDept Service", "Seed");
+            //await _auditService.PostAuditWuthNoToken("Seed Entity And Department Data In SeedEntityDept Service", "Seed");
             return Ok(await _seedService.SeedEntityDept());
         }
         [HttpPost]

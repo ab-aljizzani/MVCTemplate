@@ -334,6 +334,7 @@ C:\Users\abalj\OneDrive\Desktop\Clinic\ClinicApi\obj\Debug\net8.0\refint\ClinicA
 C:\Users\abalj\OneDrive\Desktop\Clinic\ClinicApi\obj\Debug\net8.0\ClinicApi.pdb
 C:\Users\abalj\OneDrive\Desktop\Clinic\ClinicApi\obj\Debug\net8.0\ClinicApi.genruntimeconfig.cache
 C:\Users\abalj\OneDrive\Desktop\Clinic\ClinicApi\obj\Debug\net8.0\ref\ClinicApi.dll
-C:\Users\abalj\OneDrive\Desktop\Clinic\ClinicApi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\557657\Documents\GitRepo\ab-aljizzani\ClinicApi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\557657\Documents\GitRepo\ab-aljizzani\ClinicApi\obj\Debug\net8.0\swae.build.ex.cache
+C:\Users\abalj\OneDrive\Desktop\Clinic\ClinicApi\obj\Debug\net8.0\swae.build.ex.cache
+C:\Users\abalj\OneDrive\Desktop\Clinic\ClinicApi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

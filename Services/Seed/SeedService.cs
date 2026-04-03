@@ -20,6 +20,7 @@ using ClinicApi.Models.Reponse;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Stardust.Particles;
 
 namespace ClinicApi.Services.Seed;
 
@@ -251,6 +252,29 @@ public class SeedService : ISeedService
     {
         if (!_config.GetValue<bool>("Seed:Enabled"))
             return new ServiceResponse<string> { Success = false, Message = "Seeding is disabled (Seed:Enabled=false)." };
+
+        // Check if Entity table has data (SeedEntityDept should run first)
+        try
+        {
+            var hasEntities = await _context.Entity.AnyAsync();
+            if (!hasEntities)
+            {
+                return new ServiceResponse<string> 
+                { 
+                    Success = false, 
+                    Message = "Please run SeedEntityDept first to seed the Entity and Department tables." 
+                };
+            }
+        }
+        catch (Exception ex)
+        {
+            return new ServiceResponse<string>
+            {
+                Success = false,
+                Message = $"Entity table doesn't exist or is inaccessible: {ex.Message}. Run SeedEntityDept first."
+            };
+        }
+
         var serviceResponse = new ServiceResponse<string>();
         List<InsertRequestStatusDto> newRequestStatus = new List<InsertRequestStatusDto>();
         newRequestStatus.Add(new InsertRequestStatusDto { Status = "انتظار الموافقة", StatusOrder = 1, BadgeColor = "badge rounded-pill bg-dark mx-auto" });
@@ -485,6 +509,22 @@ public class SeedService : ISeedService
         if (!_config.GetValue<bool>("Seed:Enabled"))
             return new ServiceResponse<string> { Success = false, Message = "Seeding is disabled (Seed:Enabled=false)." };
 
+        // Ensure database exists and apply all pending migrations
+        try
+        {
+            // This will create the database if it doesn't exist and apply all migrations
+            await _context.Database.MigrateAsync();
+        }
+        catch (Exception ex)
+        {
+            return new ServiceResponse<string> 
+            { 
+                Success = false, 
+                Message = $"Failed to create/migrate database: {ex.Message}",
+                Data = "Make sure the SQL Server user has 'dbcreator' role or the database already exists."
+            };
+        }
+
         List<AddEntityDto> newEntity = new List<AddEntityDto>();
         newEntity.Add(new AddEntityDto { EntityType = "داخلي", EntityName = "رئاسة الحرس الملكي" });
 
@@ -600,8 +640,9 @@ public class SeedService : ISeedService
                 backupFileName = $"{databaseName}_Backup_{DateTime.Now:yyyyMMdd_HHmmss}.bak";
             }
 
-            // Default backup path (SQL Server default backup directory)
-            var backupPath = Path.Combine(@"D:\MSSQL13.MSSQLSERVER\MSSQL\Backup", backupFileName);
+            // Get backup path from configuration
+            var backupDirectory = _config.GetValue<string>("Backup:Path") ?? @"D:\MSSQL13.MSSQLSERVER\MSSQL\Backup";
+            var backupPath = Path.Combine(backupDirectory, backupFileName);
 
             // Create backup
             var backupQuery = $"BACKUP DATABASE [{databaseName}] TO DISK = '{backupPath}' WITH FORMAT, INIT, NAME = '{databaseName}-Full Database Backup', SKIP, NOREWIND, NOUNLOAD, STATS = 10";
@@ -609,20 +650,25 @@ public class SeedService : ISeedService
 
             serviceResponse.Message = $"Database backup created successfully at: {backupPath}";
 
-            // Set database to single user mode to close all connections
-            var singleUserQuery = $"ALTER DATABASE [{databaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE";
-            await _context.Database.ExecuteSqlRawAsync(singleUserQuery);
-
             // Close the current connection from this context
             await _context.Database.CloseConnectionAsync();
 
             // Build a new connection string to the master database
             var masterConnectionString = ChangeDatabaseInConnectionString(connectionString, "master");
 
-            // Drop the database using a new connection to master
+            // Use a separate connection to master database to set single user mode and drop the database
             using (var sqlConnection = new Microsoft.Data.SqlClient.SqlConnection(masterConnectionString))
             {
                 await sqlConnection.OpenAsync();
+
+                // Set database to single user mode to close all connections
+                using (var command = sqlConnection.CreateCommand())
+                {
+                    command.CommandText = $"ALTER DATABASE [{databaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE";
+                    await command.ExecuteNonQueryAsync();
+                }
+
+                // Drop the database
                 using (var command = sqlConnection.CreateCommand())
                 {
                     command.CommandText = $"DROP DATABASE [{databaseName}]";
@@ -636,10 +682,28 @@ public class SeedService : ISeedService
         }
         catch (Exception ex)
         {
-            var connectionString = _context.Database.GetConnectionString();
-            var databaseName = GetDatabaseNameFromConnectionString(connectionString);
-            var singleUserQuery = $"ALTER DATABASE [{databaseName}] SET MULTI_USER";
-            await _context.Database.ExecuteSqlRawAsync(singleUserQuery);
+            try
+            {
+                // Try to reset database to multi-user mode in case of error
+                var connectionString = _context.Database.GetConnectionString();
+                var databaseName = GetDatabaseNameFromConnectionString(connectionString);
+                var masterConnectionString = ChangeDatabaseInConnectionString(connectionString, "master");
+
+                using (var sqlConnection = new Microsoft.Data.SqlClient.SqlConnection(masterConnectionString))
+                {
+                    await sqlConnection.OpenAsync();
+                    using (var command = sqlConnection.CreateCommand())
+                    {
+                        command.CommandText = $"ALTER DATABASE [{databaseName}] SET MULTI_USER";
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+            }
+            catch
+            {
+                // Ignore errors during cleanup
+            }
+
             serviceResponse.Success = false;
             serviceResponse.Message = $"Error during backup and delete operation: {ex.Message}";
             serviceResponse.Data = ex.StackTrace;
@@ -678,8 +742,9 @@ public class SeedService : ISeedService
                 backupFileName = $"{databaseName}_Backup_{DateTime.Now:yyyyMMdd_HHmmss}.bak";
             }
 
-            // Default backup path (SQL Server default backup directory)
-            var backupPath = Path.Combine(@"D:\MSSQL13.MSSQLSERVER\MSSQL\Backup", backupFileName);
+            // Get backup path from configuration
+            var backupDirectory = _config.GetValue<string>("Backup:Path") ?? @"D:\MSSQL13.MSSQLSERVER\MSSQL\Backup";
+            var backupPath = Path.Combine(backupDirectory, backupFileName);
 
             // Create backup
             var backupQuery = FormattableStringFactory.Create($"BACKUP DATABASE [{databaseName}] TO DISK = '{backupPath}' WITH FORMAT, INIT, NAME = '{databaseName}-Full Database Backup', SKIP, NOREWIND, NOUNLOAD, STATS = 10");
