@@ -1,8 +1,7 @@
 using System;
-using ClinicApi.Services.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
-namespace ClinicApi.Data;
+namespace MVCTemplate.Data;
 
 public class TokenRoles
 {

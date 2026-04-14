@@ -1,9 +1,9 @@
 using System;
-using ClinicApi.Data;
-using ClinicApi.Models.AuditsModel;
-using ClinicApi.Models.Reponse;
+using MVCTemplate.Data;
+using MVCTemplate.Models.AuditsModel;
+using MVCTemplate.Models.Reponse;
 
-namespace ClinicApi.Services.AuditServices;
+namespace MVCTemplate.Services.AuditServices;
 
 public class AuditService : IAuditService
 {

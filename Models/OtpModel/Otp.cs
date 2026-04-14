@@ -1,6 +1,6 @@
 using System;
 
-namespace ClinicApi.Models.OtpModel;
+namespace MVCTemplate.Models.OtpModel;
 
 public class Otp
 {

@@ -1,4 +1,4 @@
-﻿namespace ClinicApi.Models.AuthorizeModel
+﻿namespace MVCTemplate.Models.AuthorizeModel
 {
     public interface IAuthorizeModel
     {

@@ -1,17 +1,17 @@
 using AutoMapper;
-using ClinicApi.Data;
-using ClinicApi.Dtos.PortalUserDto;
-using ClinicApi.Dtos.PortalUserModelDto;
-using ClinicApi.Dtos.PortalUserModelDto.Insert;
-using ClinicApi.Dtos.PortalUserModelDto.Update;
-using ClinicApi.Models.PortalUser;
-using ClinicApi.Models.Reponse;
-using ClinicApi.Services;
+using MVCTemplate.Data;
+using MVCTemplate.Dtos.PortalUserDto;
+using MVCTemplate.Dtos.PortalUserModelDto;
+using MVCTemplate.Dtos.PortalUserModelDto.Insert;
+using MVCTemplate.Dtos.PortalUserModelDto.Update;
+using MVCTemplate.Models.PortalUser;
+using MVCTemplate.Models.Reponse;
+using MVCTemplate.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ClinicApi.Controllers
+namespace MVCTemplate.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
@@ -33,12 +33,6 @@ namespace ClinicApi.Controllers
         {
             // await _auditService.PostAudit("View All PortalUser For User");
             return Ok(await _authRepo.GetAll());
-        }
-        [HttpGet]
-        [Route("GetAllByEntityId")]
-        public async Task<ActionResult<List<PortalUserDto>>> GetAllByEntityId(int id)
-        {
-            return Ok(await _authRepo.GetAllByEntityId(id));
         }
         [HttpGet]
         [Route("GetAllByUserType")]
@@ -84,18 +78,7 @@ namespace ClinicApi.Controllers
             await _auditService.PostAuditWuthNoToken($"User With NatuinalId Num '{request.Username}' is LoggedIn", request.Username);
             return Ok(response.Data);
         }
-        [AllowAnonymous]
-        [HttpPost("PersonLogin")]
-        public async Task<ActionResult<ServiceResponse<int>>> PersonLogin(PersonLoginDto request)
-        {
-            var response = await _authRepo.PersonLogin(request.Username);
-            if (!response.Success)
-            {
-                return BadRequest(response);
-            }
-            await _auditService.PostAuditWuthNoToken($"User With NatuinalId Num '{request.Username}' is LoggedIn", request.Username);
-            return Ok(response.Data);
-        }
+       
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult<ServiceResponse<int>>> Register(InsertPortalUserDto request)
@@ -133,36 +116,7 @@ namespace ClinicApi.Controllers
                 return NotFound(response);
             return Ok(response);
         }
-        [HttpPost]
-        [Route("PasswordExpire")]
-        public async Task<ActionResult<UpdatePortalUserDto>> PasswordExpire(PasswordExpireUpdateDto updatePortalUserPassword)
-        {
-            await _auditService.PostAudit("Update PortalUser PasswordExpire By User ");
-            var response = await _authRepo.PasswordExpireUpdate(updatePortalUserPassword);
-            if (response.Success == false)
-                return NotFound(response);
-            return Ok(response);
-        }
-        [HttpPost]
-        [Route("PasswordInitial")]
-        public async Task<ActionResult<UpdatePortalUserDto>> PasswordInitial(PasswordInitialDto updatePortalUserPassword)
-        {
-            await _auditService.PostAudit("Update PortalUser PasswordInitial By User ");
-            var response = await _authRepo.PasswordInitialUpdate(updatePortalUserPassword);
-            if (response.Success == false)
-                return NotFound(response);
-            return Ok(response);
-        }
-        [HttpPost]
-        [Route("UpdateUserPhone")]
-        public async Task<ActionResult<UpdatePortalUserDto>> UpdateUserPhone(UpdatePortalUserPhoneDto updatePortalUserPhone)
-        {
-            await _auditService.PostAudit($"Update PortalUser phone With PortalUserId '{updatePortalUserPhone.Id + " To " + updatePortalUserPhone.PhoneNumber}' By User ");
-            var response = await _authRepo.UpdateUserPhone(updatePortalUserPhone);
-            if (response.Success == false)
-                return NotFound(response);
-            return Ok(response);
-        }
+       
         [HttpPost]
         [Route("UpdateUserRole")]
         public async Task<ActionResult<UpdatePortalUserRoleDto>> UpdateUserRole(UpdatePortalUserRoleDto updatePortalUserRole)

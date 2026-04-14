@@ -1,7 +1,7 @@
 using System;
-using ClinicApi.Models.Reponse;
+using MVCTemplate.Models.Reponse;
 
-namespace ClinicApi.Services;
+namespace MVCTemplate.Services;
 
 public interface IAuditService
 {

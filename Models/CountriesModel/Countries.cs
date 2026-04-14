@@ -1,6 +1,6 @@
 using System;
 
-namespace ClinicApi.Models.CountriesModel;
+namespace MVCTemplate.Models.CountriesModel;
 
 public class Countries
 {

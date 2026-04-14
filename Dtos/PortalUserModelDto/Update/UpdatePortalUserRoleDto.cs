@@ -1,6 +1,6 @@
 using System;
 
-namespace ClinicApi.Dtos.PortalUserModelDto.Update;
+namespace MVCTemplate.Dtos.PortalUserModelDto.Update;
 
 public class UpdatePortalUserRoleDto
 {

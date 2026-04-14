@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ClinicApi.Dtos.RoleDto;
+namespace MVCTemplate.Dtos.RoleDto;
 
 public class RoleDto
 {

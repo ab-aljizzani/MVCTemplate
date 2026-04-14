@@ -1,4 +1,4 @@
-﻿namespace ClinicApi.Services.AuthorizeServices
+﻿namespace MVCTemplate.Services.AuthorizeServices
 {
     public interface IFilterRule<T>
     {

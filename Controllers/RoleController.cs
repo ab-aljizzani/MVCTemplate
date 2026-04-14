@@ -1,12 +1,12 @@
-using ClinicApi.Dtos.RoleDto;
-using ClinicApi.Dtos.RoleDto.Update;
-using ClinicApi.Services;
-using ClinicApi.Services.RoleServices;
+using MVCTemplate.Dtos.RoleDto;
+using MVCTemplate.Dtos.RoleDto.Update;
+using MVCTemplate.Services;
+using MVCTemplate.Services.RoleServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ClinicApi.Controllers
+namespace MVCTemplate.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]

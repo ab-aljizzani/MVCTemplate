@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ClinicApi.Dtos.PortalUserModelDto.Insert;
+namespace MVCTemplate.Dtos.PortalUserModelDto.Insert;
 
 public class InsertPortalUserNoPersonalImgDto
 {
@@ -37,12 +37,10 @@ public class InsertPortalUserNoPersonalImgDto
     public string UserType { get; set; } = string.Empty;
     [Required(ErrorMessage = "الرجاء إدخال رقم الجوال")]
     [Display(Name = "رقم الجوال")]
-    public string EmpIamImgUrl { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
+    public string EmpIamImgUrl { get; set; } = string.Empty;
     public string Code { get; set; } = string.Empty;
     public bool IsFirstLogin { get; set; } = false;
-    public int EntityId { get; set; }
-    public int DepartmentId { get; set; }
     public int RoleId { get; set; }
     public int LoginAttemp { get; set; }
     public string LastLogin { get; set; } = string.Empty;

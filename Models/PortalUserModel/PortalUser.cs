@@ -1,11 +1,10 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ClinicApi.Models.Entity;
-using ClinicApi.Models.Role;
+using MVCTemplate.Models.Role;
 using Microsoft.EntityFrameworkCore;
 
-namespace ClinicApi.Models.PortalUser;
+namespace MVCTemplate.Models.PortalUser;
 [Index(nameof(Username), IsUnique = true)]
 [Index(nameof(NationalId), IsUnique = true)]
 [Index(nameof(Email), IsUnique = true)]
@@ -22,16 +21,10 @@ public class PortalUser
     public string Email { get; set; } = string.Empty;
     public string Code { get; set; } = string.Empty;
     public bool IsFirstLogin { get; set; } = false;
-    public int? PersonalImgId { get; set; }
-    public Models.PersonalImagesModel.PersonalImg? PersonalImage { get; set; }
     public string EmpIamImgUrl { get; set; } = string.Empty;
     public string DateOfBirth { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
     public string UserType { get; set; } = string.Empty;
-    public Models.Entity.Entity? Entity { get; set; }
-    public int EntityId { get; set; }
-    public int DepartmentId { get; set; }
-    public Models.Entity.Department? Department { get; set; }
     public int RoleId { get; set; }
     public Models.Role.Role? Role { get; set; }
     public int LoginAttemp { get; set; }

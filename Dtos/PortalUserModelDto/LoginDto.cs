@@ -1,6 +1,6 @@
 using System;
 
-namespace ClinicApi.Dtos.PortalUserDto;
+namespace MVCTemplate.Dtos.PortalUserDto;
 
 public class LoginDto
 {

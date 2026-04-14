@@ -1,15 +1,15 @@
 using System;
 using System.Text;
 using AutoMapper;
-using ClinicApi.Data;
-using ClinicApi.Dtos.RoleDto;
-using ClinicApi.Dtos.RoleDto.Update;
-using ClinicApi.Models.Reponse;
-using ClinicApi.Models.Role;
+using MVCTemplate.Data;
+using MVCTemplate.Dtos.RoleDto;
+using MVCTemplate.Dtos.RoleDto.Update;
+using MVCTemplate.Models.Reponse;
+using MVCTemplate.Models.Role;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
-namespace ClinicApi.Services.RoleServices;
+namespace MVCTemplate.Services.RoleServices;
 
 public class RoleService : IRoleService
 {

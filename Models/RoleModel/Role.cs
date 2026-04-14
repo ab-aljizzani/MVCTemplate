@@ -1,6 +1,6 @@
 using System;
 
-namespace ClinicApi.Models.Role;
+namespace MVCTemplate.Models.Role;
 
 public class Role
 {

@@ -6669,9 +6669,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\abalj\\OneDrive\\المستندات\\GitRepo\\MVCTemplate\\ClinicApi.csproj",
-      "projectName": "ClinicApi",
-      "projectPath": "C:\\Users\\abalj\\OneDrive\\المستندات\\GitRepo\\MVCTemplate\\ClinicApi.csproj",
+      "projectUniqueName": "C:\\Users\\abalj\\OneDrive\\المستندات\\GitRepo\\MVCTemplate\\MVCTemplate.csproj",
+      "projectName": "MVCTemplate",
+      "projectPath": "C:\\Users\\abalj\\OneDrive\\المستندات\\GitRepo\\MVCTemplate\\MVCTemplate.csproj",
       "packagesPath": "C:\\Users\\abalj\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\abalj\\OneDrive\\المستندات\\GitRepo\\MVCTemplate\\obj\\",
       "projectStyle": "PackageReference",

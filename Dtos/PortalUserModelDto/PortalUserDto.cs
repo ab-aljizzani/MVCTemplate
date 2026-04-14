@@ -1,9 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using ClinicApi.Dtos.RoleDto;
-using ClinicApi.Models.Entity;
 
-namespace ClinicApi.Dtos.PortalUserDto;
+namespace MVCTemplate.Dtos.PortalUserDto;
 
 public class PortalUserDto
 {
@@ -38,7 +36,6 @@ public class PortalUserDto
     public int PersonalImgId { get; set; }
     public string Code { get; set; } = string.Empty;
     public bool IsFirstLogin { get; set; } = false;
-    public Models.PersonalImagesModel.PersonalImg? PersonalImage { get; set; }
     [Required(ErrorMessage = "الرجاء إدخال تاريخ الميلاد")]
     [Display(Name = "تاريخ الميلاد")]
     public string DateOfBirth { get; set; } = string.Empty;
@@ -50,10 +47,6 @@ public class PortalUserDto
     [Display(Name = "رقم الجوال")]
     [Phone(ErrorMessage = "الرجاء إدخال رقم جوال صحيح")]
     public string PhoneNumber { get; set; } = string.Empty;
-    public Models.Entity.Entity? Entity { get; set; }
-    public int EntityId { get; set; }
-    public int DepartmentId { get; set; }
-    public Models.Entity.Department? Department { get; set; }
     public int RoleId { get; set; }
     public Models.Role.Role? Role { get; set; }
     public int LoginAttemp { get; set; }

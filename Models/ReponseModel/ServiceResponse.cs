@@ -1,6 +1,6 @@
 using System;
 
-namespace ClinicApi.Models.Reponse;
+namespace MVCTemplate.Models.Reponse;
 
 public class ServiceResponse<T>
 {

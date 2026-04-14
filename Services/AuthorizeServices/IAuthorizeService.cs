@@ -1,6 +1,6 @@
-﻿using ClinicApi.Models.AuthorizeModel;
+﻿using MVCTemplate.Models.AuthorizeModel;
 
-namespace ClinicApi.Services.AuthorizeServices
+namespace MVCTemplate.Services.AuthorizeServices
 {
     public interface IAuthorizeService
     {

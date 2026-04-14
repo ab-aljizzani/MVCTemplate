@@ -1,6 +1,6 @@
 using System;
 
-namespace ClinicApi.Models.AuditsModel;
+namespace MVCTemplate.Models.AuditsModel;
 
 public class Audits
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace ClinicApi.Dtos.CountriesDto.Get;
+namespace MVCTemplate.Dtos.CountriesDto.Get;
 
 public class GetCountrieDto
 {

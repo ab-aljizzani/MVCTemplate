@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ClinicApi.Dtos.PortalUserModelDto;
+namespace MVCTemplate.Dtos.PortalUserModelDto;
 
 public class GetPortalUserDto
 {

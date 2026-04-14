@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ClinicApi.Dtos.PortalUserModelDto.Update;
+namespace MVCTemplate.Dtos.PortalUserModelDto.Update;
 
 public class UpdatePortalUserDto
 {

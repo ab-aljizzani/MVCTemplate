@@ -1,9 +1,9 @@
 using System;
-using ClinicApi.Dtos.RoleDto;
-using ClinicApi.Dtos.RoleDto.Update;
-using ClinicApi.Models.Reponse;
+using MVCTemplate.Dtos.RoleDto;
+using MVCTemplate.Dtos.RoleDto.Update;
+using MVCTemplate.Models.Reponse;
 
-namespace ClinicApi.Services.RoleServices;
+namespace MVCTemplate.Services.RoleServices;
 
 public interface IRoleService
 {

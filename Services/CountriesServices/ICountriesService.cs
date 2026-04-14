@@ -1,8 +1,8 @@
 using System;
-using ClinicApi.Dtos.CountriesDto.Get;
-using ClinicApi.Models.Reponse;
+using MVCTemplate.Dtos.CountriesDto.Get;
+using MVCTemplate.Models.Reponse;
 
-namespace ClinicApi.Services.CountriesServices;
+namespace MVCTemplate.Services.CountriesServices;
 
 public interface ICountriesService
 {

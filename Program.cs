@@ -1,32 +1,19 @@
-
-using ClinicApi.Data;
-using ClinicApi.Services;
-using ClinicApi.Services.AppointmentReviewServices;
-using ClinicApi.Services.AppointmentServices;
-using ClinicApi.Services.AuditServices;
-using ClinicApi.Services.AuthorizeServices;
-using ClinicApi.Services.AuthorizeServices.Rules;
-using ClinicApi.Services.CountriesServices;
-using ClinicApi.Services.DoctorAvailbleTimeServices;
-using ClinicApi.Services.Entity;
-using ClinicApi.Services.PersonalImagesServices;
-using ClinicApi.Services.PersonServices;
-using ClinicApi.Services.Request;
-using ClinicApi.Services.RiskLevelServices;
-using ClinicApi.Services.RoleServices;
-using ClinicApi.Services.Seed;
-using ClinicApi.Services.SickLeaveServices;
-using ClinicApi.Services.Survey;
-using ClinicApi.Services.ZoneServices;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MVCTemplate.Data;
+using MVCTemplate.Services;
+using MVCTemplate.Services.AuditServices;
+using MVCTemplate.Services.AuthorizeServices;
+using MVCTemplate.Services.CountriesServices;
+using MVCTemplate.Services.RoleServices;
+using MVCTemplate.Services.Seed;
 using Swashbuckle.AspNetCore.Filters;
 
-namespace ClinicApi
+namespace MVCTemplate
 {
     public class Program
     {
@@ -52,36 +39,14 @@ namespace ClinicApi
 });
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddAutoMapper(typeof(Program));
-            builder.Services.AddScoped<IEntityService, EntityService>();
+            builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
             builder.Services.AddScoped<IRoleService, RoleService>();
             builder.Services.AddScoped<IAuthRepositery, AuthRepositery>();
-            builder.Services.AddScoped<IZoneSerice, ZoneService>();
-            builder.Services.AddScoped<IPersonalImages, PersonalImages>();
-            builder.Services.AddScoped<IPersonService, PersonService>();
-            builder.Services.AddScoped<IRequestService, RequestService>();
-            builder.Services.AddScoped<ISurveyService, SurveyService>();
             builder.Services.AddScoped<ISeedService, SeedService>();
             builder.Services.AddScoped<IAuditService, AuditService>();
-            builder.Services.AddScoped<IDoctorAvailbleTimeService, DoctorAvailbleTimeService>();
-            builder.Services.AddScoped<IAppointmentService, AppointmentService>();
-            builder.Services.AddScoped<IAppointmentReviewService, AppointmentReviewService>();
-            builder.Services.AddScoped<IRiskLevelService, RiskLevelService>();
-            builder.Services.AddScoped<ISickLeaveService, SickLeaveService>();
             builder.Services.AddScoped<ICountriesService, CountriesService>();
-            builder.Services.AddScoped<IAuthorizeService, AuthorizeService>();
-            builder.Services.AddScoped<MagicString>();
             builder.Services.AddScoped<TokenRoles>();
-            builder.Services.AddSingleton<IAuthorizeService>(sp =>
-            {
-                var service = new AuthorizeService();
-
-                service.AddRule(new EntityExternalOnlyRule());
-                service.AddRule(new DepartmentOfficerRule());
-                service.AddRule(new PortalRolesRule());
-
-                return service;
-            });
+            builder.Services.AddScoped<IAuthorizeService, AuthorizeService>();
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {

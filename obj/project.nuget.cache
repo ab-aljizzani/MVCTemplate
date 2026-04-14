@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xp62n+HU1f0=",
+  "dgSpecHash": "wIESNWoEl2g=",
   "success": true,
-  "projectFilePath": "C:\\Users\\abalj\\OneDrive\\المستندات\\GitRepo\\MVCTemplate\\ClinicApi.csproj",
+  "projectFilePath": "C:\\Users\\abalj\\OneDrive\\المستندات\\GitRepo\\MVCTemplate\\MVCTemplate.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\abalj\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\abalj\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
@@ -132,9 +132,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'AutoMapper' 13.0.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-rvv3-g6hj-g44x",
-      "projectPath": "C:\\Users\\abalj\\OneDrive\\المستندات\\GitRepo\\MVCTemplate\\ClinicApi.csproj",
+      "projectPath": "C:\\Users\\abalj\\OneDrive\\المستندات\\GitRepo\\MVCTemplate\\MVCTemplate.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\abalj\\OneDrive\\المستندات\\GitRepo\\MVCTemplate\\ClinicApi.csproj",
+      "filePath": "C:\\Users\\abalj\\OneDrive\\المستندات\\GitRepo\\MVCTemplate\\MVCTemplate.csproj",
       "libraryId": "AutoMapper",
       "targetGraphs": [
         "net8.0"

@@ -1,11 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ClinicApi.Data.PersonalImagesModelDto;
-using ClinicApi.Dtos.Entity;
-using ClinicApi.Dtos.RoleDto;
+using MVCTemplate.Dtos.RoleDto;
 
-namespace ClinicApi.Dtos.PortalUserModelDto.Insert;
+namespace MVCTemplate.Dtos.PortalUserModelDto.Insert;
 
 public class InsertPortalUserDto
 {

@@ -1,11 +1,11 @@
-using ClinicApi.Dtos.CountriesDto.Get;
-using ClinicApi.Services;
-using ClinicApi.Services.CountriesServices;
+using MVCTemplate.Dtos.CountriesDto.Get;
+using MVCTemplate.Services;
+using MVCTemplate.Services.CountriesServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ClinicApi.Controllers
+namespace MVCTemplate.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

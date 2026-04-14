@@ -1,11 +1,11 @@
 using System;
 using AutoMapper;
-using ClinicApi.Data;
-using ClinicApi.Dtos.CountriesDto.Get;
-using ClinicApi.Models.Reponse;
+using MVCTemplate.Data;
+using MVCTemplate.Dtos.CountriesDto.Get;
+using MVCTemplate.Models.Reponse;
 using Microsoft.EntityFrameworkCore;
 
-namespace ClinicApi.Services.CountriesServices;
+namespace MVCTemplate.Services.CountriesServices;
 
 public class CountriesService : ICountriesService
 {

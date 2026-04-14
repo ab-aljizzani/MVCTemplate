@@ -1,11 +1,11 @@
-using ClinicApi.Data;
-using ClinicApi.Services;
-using ClinicApi.Services.Seed;
+using MVCTemplate.Data;
+using MVCTemplate.Services;
+using MVCTemplate.Services.Seed;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ClinicApi.Controllers
+namespace MVCTemplate.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -27,13 +27,7 @@ namespace ClinicApi.Controllers
             //await _auditService.PostAuditWuthNoToken("Seed All Data In Seed Service", "Seed");
             return Ok(await _seedService.SeedAll());
         }
-        [HttpPost]
-        [Route("SeedEntityDept")]
-        public async Task<ActionResult<string>> SeedEntityDept()
-        {
-            //await _auditService.PostAuditWuthNoToken("Seed Entity And Department Data In SeedEntityDept Service", "Seed");
-            return Ok(await _seedService.SeedEntityDept());
-        }
+       
         [HttpPost]
         [Authorize]
         [Route("DeleteAll")]

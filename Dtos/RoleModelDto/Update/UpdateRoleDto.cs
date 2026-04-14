@@ -1,6 +1,6 @@
 using System;
 
-namespace ClinicApi.Dtos.RoleDto.Update;
+namespace MVCTemplate.Dtos.RoleDto.Update;
 
 public class UpdateRoleDto
 {
