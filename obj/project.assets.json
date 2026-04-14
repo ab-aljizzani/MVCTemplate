@@ -6669,11 +6669,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj",
+      "projectUniqueName": "C:\\Users\\abalj\\OneDrive\\المستندات\\GitRepo\\MVCTemplate\\ClinicApi.csproj",
       "projectName": "ClinicApi",
-      "projectPath": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\ClinicApi.csproj",
+      "projectPath": "C:\\Users\\abalj\\OneDrive\\المستندات\\GitRepo\\MVCTemplate\\ClinicApi.csproj",
       "packagesPath": "C:\\Users\\abalj\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\abalj\\OneDrive\\Desktop\\Clinic\\ClinicApi\\obj\\",
+      "outputPath": "C:\\Users\\abalj\\OneDrive\\المستندات\\GitRepo\\MVCTemplate\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
