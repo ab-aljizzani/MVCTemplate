@@ -66,6 +66,30 @@ dotnet build MyNewApp.sln
 
 Then open the solution in Visual Studio and verify API + Portal startup.
 
+### Git push to your new repo
+After validating build/startup, point each project to your new GitHub repository and push:
+
+```cmd
+cd MVCTemplate
+git remote rename origin template
+git remote add origin https://github.com/<your-org>/MyNewApp.git
+git add .
+git commit -m "Initial project setup from MVCTemplate"
+git push -u origin main
+```
+
+If you keep Portal in a separate repository:
+
+```cmd
+cd ..\MVCTemplatePortal.Generated
+git init
+git add .
+git commit -m "Initial portal setup (v1/v2)"
+git branch -M main
+git remote add origin https://github.com/<your-org>/MyNewAppPortal.git
+git push -u origin main
+```
+
 ## Pull Request Expectations
 
 - Keep architecture consistency with this template.
