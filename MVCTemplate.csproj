@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -12,24 +12,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Dtos\Update\**" />
+    <Compile Remove="Dtos\**" />
     <Compile Remove="Models\**" />
-    <Content Remove="Dtos\Update\**" />
+    <Compile Remove="MVCTemplate.Contracts\**" />
+    <Content Remove="Dtos\**" />
     <Content Remove="Models\**" />
-    <EmbeddedResource Remove="Dtos\Update\**" />
+    <Content Remove="MVCTemplate.Contracts\**" />
+    <EmbeddedResource Remove="Dtos\**" />
     <EmbeddedResource Remove="Models\**" />
-    <None Remove="Dtos\Update\**" />
+    <EmbeddedResource Remove="MVCTemplate.Contracts\**" />
+    <None Remove="Dtos\**" />
     <None Remove="Models\**" />
+    <None Remove="MVCTemplate.Contracts\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Models\AuditsModel\Audits.cs" />
-    <Compile Include="Models\AuthorizeModel\IAuthorizeModel.cs" />
-    <Compile Include="Models\CountriesModel\Countries.cs" />
-    <Compile Include="Models\OtpModel\Otp.cs" />
-    <Compile Include="Models\PortalUserModel\PortalUser.cs" />
-    <Compile Include="Models\ReponseModel\ServiceResponse.cs" />
-    <Compile Include="Models\RoleModel\Role.cs" />
+    <ProjectReference Include="MVCTemplate.Contracts\MVCTemplate.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,6 +56,7 @@
   <ItemGroup>
     <None Include=".git\hooks\pre-commit" />
     <None Include=".git\hooks\pre-commit.sample" />
+    <None Include="MVCTemplate.Contracts\MVCTemplate.Contracts.csproj" />
   </ItemGroup>
 
 </Project>
